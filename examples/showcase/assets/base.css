@@ -1,0 +1,253 @@
+/* ================================================================
+   base.css — design tokens + registered layout skeletons (L01–L13)
+   Canvas contract: 1280x720 px -> 960x540 pt (px * 0.75)
+   Rules: slides may only use classes defined here; colors only via
+   tokens; all text lives in h1/h2/h3/p; decorations on [data-shape].
+   ================================================================ */
+
+:root {
+  /* color tokens — themes override these only */
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --text-1: #16161a;
+  --text-2: #5c5c66;
+  --accent: #0f62fe;
+  --on-accent: #ffffff;
+  --on-image: #ffffff;
+  --hairline: #d8d6cf;
+  --scrim: rgba(10, 10, 14, 0.5);
+
+  /* font tokens */
+  --font-cjk: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-num: 'Helvetica Neue', Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { background: #26262a; }
+
+.slide {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  background: var(--bg);
+  overflow: hidden;
+  font-family: var(--font-cjk);
+  margin: 24px auto;
+}
+
+.slide h1, .slide h2, .slide h3, .slide p { position: absolute; }
+.slide [data-shape], .slide img { position: absolute; }
+
+/* ---------- per-slide dark inversion (rhythm pages: L03/L04/L13) ---------- */
+.slide.is-dark {
+  --bg: #17171b;
+  --surface: #232328;
+  --text-1: #f0efea;
+  --text-2: #9b9ba4;
+  --hairline: #34343b;
+}
+
+/* ---------- shared header (L02, L05–L08, L10–L12, L14) ---------- */
+.sl-title {
+  left: 96px; top: 80px; width: 1000px;
+  font-size: 54px; font-weight: 600; color: var(--text-1);
+}
+.sl-rule {
+  left: 96px; top: 168px;
+  width: 1088px; height: 1px; background: var(--hairline);
+}
+/* optional ghost mega-numeral/word, one per page max ("larger the lighter") */
+.sl-ghost {
+  left: 480px; top: 16px; width: 704px;
+  font-family: var(--font-num);
+  font-size: 280px; font-weight: 200; line-height: 1;
+  text-align: right; color: var(--accent); opacity: 0.07;
+}
+
+/* ---------- L01 cover ---------- */
+.l01-kicker {
+  left: 96px; top: 108px; width: 800px;
+  font-size: 18px; font-weight: 600; letter-spacing: 4px;
+  color: var(--accent);
+}
+.l01-title {
+  left: 96px; top: 212px; width: 1060px;
+  font-size: 100px; font-weight: 600; line-height: 1.2;
+  color: var(--text-1);
+}
+.l01-subtitle {
+  left: 96px; top: 420px; width: 900px;
+  font-size: 30px; line-height: 1.5; color: var(--text-2);
+}
+.l01-rule { left: 96px; top: 604px; width: 200px; height: 4px; background: var(--accent); }
+.l01-meta { left: 96px; top: 632px; width: 700px; font-size: 18px; color: var(--text-2); }
+/* optional right photo band; when used, cap title/subtitle width at 620px inline */
+.l01-photo { left: 832px; top: 0; width: 448px; height: 720px; object-fit: cover; }
+
+/* ---------- L02 agenda ---------- */
+.l02-num {
+  left: 96px; width: 90px;
+  font-family: var(--font-num);
+  font-size: 26px; color: var(--accent);
+}
+.l02-item { left: 208px; width: 880px; font-size: 30px; font-weight: 500; color: var(--text-1); }
+.l02-r1 { top: 224px; } .l02-r2 { top: 312px; } .l02-r3 { top: 400px; }
+.l02-r4 { top: 488px; } .l02-r5 { top: 576px; }
+
+/* ---------- L03 section divider ---------- */
+.l03-num {
+  left: 96px; top: 110px; width: 700px;
+  font-family: var(--font-num);
+  font-size: 220px; font-weight: 200; line-height: 1.1;
+  color: var(--accent);
+}
+.l03-title {
+  left: 96px; top: 396px; width: 1000px;
+  font-size: 72px; font-weight: 600; color: var(--text-1);
+}
+.l03-rule { left: 96px; top: 528px; width: 120px; height: 4px; background: var(--accent); }
+.l03-note { left: 96px; top: 560px; width: 860px; font-size: 20px; line-height: 1.6; color: var(--text-2); }
+
+/* ---------- L04 statement ---------- */
+.l04-text {
+  left: 96px; top: 228px; width: 1088px;
+  font-size: 60px; font-weight: 500; line-height: 1.55;
+  color: var(--text-1);
+}
+.l04-attr { left: 96px; top: 580px; width: 800px; font-size: 20px; color: var(--text-2); }
+
+/* ---------- L05 duo compare ---------- */
+.l05-panel-a { left: 96px;  top: 208px; width: 520px; height: 420px; background: var(--surface); }
+.l05-panel-b { left: 664px; top: 208px; width: 520px; height: 420px; background: var(--surface); }
+.l05-h { width: 440px; top: 248px; font-size: 26px; font-weight: 600; color: var(--accent); }
+.l05-ha { left: 136px; } .l05-hb { left: 704px; }
+.l05-p { width: 440px; font-size: 18px; line-height: 1.7; color: var(--text-1); }
+.l05-a1 { left: 136px; top: 312px; } .l05-a2 { left: 136px; top: 460px; }
+.l05-b1 { left: 704px; top: 312px; } .l05-b2 { left: 704px; top: 460px; }
+
+/* ---------- L06 three points ---------- */
+.l06-num {
+  width: 320px; top: 224px;
+  font-family: var(--font-num);
+  font-size: 22px; color: var(--accent);
+}
+.l06-h { width: 320px; top: 268px; font-size: 24px; font-weight: 600; color: var(--text-1); }
+.l06-p { width: 320px; top: 316px; font-size: 18px; line-height: 1.6; color: var(--text-2); }
+.l06-c1 { left: 96px; } .l06-c2 { left: 480px; } .l06-c3 { left: 864px; }
+
+/* ---------- L07 KPI ---------- */
+.l07-num {
+  top: 240px; width: 320px;
+  font-family: var(--font-num);
+  font-size: 136px; font-weight: 200; line-height: 1.1;
+  color: var(--text-1);
+}
+.l07-num.is-accent { color: var(--accent); }
+.l07-label { top: 420px; width: 320px; font-size: 22px; font-weight: 600; color: var(--text-1); }
+.l07-sub { top: 458px; width: 320px; font-size: 17px; line-height: 1.5; color: var(--text-2); }
+.l07-c1 { left: 96px; } .l07-c2 { left: 480px; } .l07-c3 { left: 864px; }
+.l07-footnote { left: 96px; top: 632px; width: 800px; font-size: 16px; color: var(--text-2); }
+
+/* ---------- L08 timeline ---------- */
+.l08-axis { left: 96px; top: 420px; width: 1088px; height: 2px; background: var(--hairline); }
+.l08-dot { width: 14px; height: 14px; top: 414px; background: var(--accent); border-radius: 50%; }
+.l08-dot1 { left: 149px; } .l08-dot2 { left: 441px; } .l08-dot3 { left: 733px; } .l08-dot4 { left: 1025px; }
+.l08-date {
+  width: 180px; top: 344px; text-align: center;
+  font-family: var(--font-num);
+  font-size: 20px; font-weight: 600; color: var(--accent);
+}
+.l08-d1 { left: 66px; } .l08-d2 { left: 358px; } .l08-d3 { left: 650px; } .l08-d4 { left: 942px; }
+.l08-text { width: 180px; top: 456px; text-align: center; font-size: 18px; line-height: 1.5; color: var(--text-1); }
+.l08-t1 { left: 66px; } .l08-t2 { left: 358px; } .l08-t3 { left: 650px; } .l08-t4 { left: 942px; }
+
+/* ---------- L09 image hero ---------- */
+.l09-img { left: 0; top: 0; width: 1280px; height: 720px; object-fit: cover; }
+.l09-scrim { left: 0; top: 468px; width: 1280px; height: 252px; background: var(--scrim); }
+.l09-title { left: 96px; top: 520px; width: 1088px; font-size: 48px; font-weight: 600; color: var(--on-image); }
+.l09-sub { left: 96px; top: 606px; width: 1000px; font-size: 22px; color: var(--on-image); }
+
+/* ---------- L10 content: body + 3 points ---------- */
+.l10-body { left: 96px; top: 220px; width: 560px; font-size: 24px; line-height: 1.7; color: var(--text-1); }
+.l10-point-title { left: 736px; width: 448px; font-size: 21px; font-weight: 600; color: var(--accent); }
+.l10-point-body { left: 736px; width: 448px; font-size: 18px; line-height: 1.6; color: var(--text-2); }
+.l10-p1t { top: 220px; } .l10-p1b { top: 254px; }
+.l10-p2t { top: 356px; } .l10-p2b { top: 390px; }
+.l10-p3t { top: 492px; } .l10-p3b { top: 526px; }
+
+/* ---------- L11 ledger rows ---------- */
+.l11-label { left: 96px; width: 380px; font-size: 24px; font-weight: 600; color: var(--text-1); }
+.l11-value {
+  left: 520px; width: 320px;
+  font-family: var(--font-num);
+  font-size: 26px; color: var(--accent);
+}
+.l11-note { left: 880px; width: 304px; font-size: 17px; line-height: 1.5; color: var(--text-2); }
+.l11-line { left: 96px; width: 1088px; height: 1px; background: var(--hairline); }
+.l11-r1 { top: 224px; } .l11-r2 { top: 324px; } .l11-r3 { top: 424px; } .l11-r4 { top: 524px; }
+.l11-s1 { top: 292px; } .l11-s2 { top: 392px; } .l11-s3 { top: 492px; } .l11-s4 { top: 592px; }
+
+/* ---------- L12 process steps ---------- */
+.l12-dot { width: 44px; height: 44px; top: 220px; background: var(--accent); border-radius: 50%; }
+.l12-num {
+  width: 44px; top: 229px; text-align: center;
+  font-family: var(--font-num);
+  font-size: 20px; font-weight: 600; color: var(--on-accent);
+}
+.l12-link { top: 240px; width: 212px; height: 2px; background: var(--hairline); }
+.l12-h { width: 240px; top: 296px; font-size: 22px; font-weight: 600; color: var(--text-1); }
+.l12-p { width: 240px; top: 338px; font-size: 17px; line-height: 1.6; color: var(--text-2); }
+.l12-c1 { left: 96px; } .l12-c2 { left: 376px; } .l12-c3 { left: 656px; } .l12-c4 { left: 936px; }
+.l12-k1 { left: 160px; } .l12-k2 { left: 440px; } .l12-k3 { left: 720px; }
+
+/* ---------- L14 text + half image ---------- */
+.l14-body { left: 96px; top: 220px; width: 560px; font-size: 24px; line-height: 1.7; color: var(--text-1); }
+.l14-img { left: 720px; top: 200px; width: 464px; height: 420px; object-fit: cover; }
+.l14-caption { left: 720px; top: 636px; width: 464px; font-size: 16px; color: var(--text-2); }
+
+/* ---------- L13 closing ---------- */
+.l13-title {
+  left: 96px; top: 196px; width: 1088px;
+  font-size: 84px; font-weight: 600; line-height: 1.35;
+  color: var(--text-1);
+}
+.l13-sub { left: 96px; top: 470px; width: 900px; font-size: 26px; line-height: 1.6; color: var(--text-2); }
+.l13-rule { left: 96px; top: 578px; width: 200px; height: 4px; background: var(--accent); }
+.l13-meta { left: 96px; top: 606px; width: 800px; font-size: 18px; color: var(--text-2); }
+
+/* ---------- presentation runtime (added by runtime.js) ---------- */
+/* Letterbox bands take the theme bg so a 16:9 canvas reads as
+   full-screen on 16:10 laptop displays. */
+body.present { overflow: hidden; background: var(--bg); }
+body.present .slide { display: none; position: fixed; left: 50%; top: 50%; margin: 0; transform-origin: 0 0; }
+body.present .slide.is-active { display: block; }
+.deck-hud {
+  position: fixed; right: 16px; bottom: 12px; z-index: 10;
+  font: 13px/1 var(--font-num); color: #9a9aa2;
+  background: rgba(20, 20, 24, 0.55); padding: 6px 10px; border-radius: 4px;
+}
+
+/* speaker notes: presenter console only, never rendered or exported */
+.slide .notes { display: none; }
+
+/* presenter console (?presenter=1, opened with S key) */
+body.presenter-ui { background: #131316; overflow: hidden; }
+body.presenter-ui .slide { display: none; }
+.pc-grid { position: fixed; inset: 0; display: flex; gap: 12px; padding: 12px; }
+.pc-box { position: relative; background: #000; border-radius: 6px; overflow: hidden; }
+.pc-box iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.pc-main { flex: 2.2; }
+.pc-side { flex: 1; display: flex; flex-direction: column; gap: 12px; min-width: 300px; }
+.pc-next { aspect-ratio: 16 / 9; }
+.pc-label {
+  position: absolute; left: 10px; top: 8px; z-index: 2;
+  font: 11px/1 var(--font-num); color: #9a9aa2; letter-spacing: 2px;
+}
+.pc-panel {
+  flex: 1; background: #1d1d22; border-radius: 6px;
+  padding: 16px; overflow: auto; font-family: var(--font-cjk);
+}
+.pc-timer { font: 600 30px/1 var(--font-num); color: #f0efea; }
+.pc-count { font: 13px/1 var(--font-num); color: #9a9aa2; margin: 8px 0 16px; }
+.pc-notes p { font-size: 17px; line-height: 1.7; color: #d5d5cf; margin-bottom: 10px; }

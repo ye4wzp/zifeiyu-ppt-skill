@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Showcase · 十四个版式，一条管线</title>
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/themes/paper.css" id="theme">
+</head>
+<body>
+
+<!-- SLIDES_HERE -->
+
+<section class="slide" data-layout="L01">
+  <p class="l01-kicker">PPT SKILL · SHOWCASE</p>
+  <h1 class="l01-title">十四个版式，一条管线</h1>
+  <p class="l01-subtitle">注册制版式 × Token 主题 × 确定性 PPTX 导出的金样演示</p>
+  <div class="l01-rule" data-shape="rect"></div>
+  <p class="l01-meta">2026-07-16 · Showcase v1 · 兼作全链路回归基准</p>
+</section>
+
+<section class="slide" data-layout="L02">
+  <h2 class="sl-title">目录</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l02-num l02-r1">01</p><p class="l02-item l02-r1">约束系统：注册版式与 Token 主题</p>
+  <p class="l02-num l02-r2">02</p><p class="l02-item l02-r2">叙事版式：陈述、对比、论证</p>
+  <p class="l02-num l02-r3">03</p><p class="l02-item l02-r3">数据版式：KPI 与台账</p>
+  <p class="l02-num l02-r4">04</p><p class="l02-item l02-r4">时间线、流程与图像主视觉</p>
+  <p class="l02-num l02-r5">05</p><p class="l02-item l02-r5">导出链路与质量门</p>
+</section>
+
+<section class="slide is-dark" data-layout="L03">
+  <p class="l03-num">01</p>
+  <h2 class="l03-title">约束系统</h2>
+  <div class="l03-rule" data-shape="rect"></div>
+  <p class="l03-note">所有类名定义于 base.css，幻灯片标记内禁止裸色值与自造类名；换一套主题只换一个文件。</p>
+</section>
+
+<section class="slide" data-layout="L04">
+  <p class="sl-ghost">01</p>
+  <p class="l04-text">生成质量的下限，由约束系统决定，而非模型能力决定。</p>
+  <p class="l04-attr">—— 本项目架构设计的第一条公理</p>
+</section>
+
+<section class="slide" data-layout="L10">
+  <h2 class="sl-title">为什么选择注册制版式</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l10-body">通用的网页到幻灯片翻译需要处理任意结构，脆弱且不可维护。而当每一页都必须声明封闭集合内的版式编号时，导出器面对的是十四个已知结构，每种结构的元素位置在设计阶段就已经确定。约束换来的不只是视觉的稳定，还有导出链路的可靠。</p>
+  <h3 class="l10-point-title l10-p1t">01 · 结构稳定</h3>
+  <p class="l10-point-body l10-p1b">生成端只能复制已注册的骨架并替换内容，禁止发明新的类名，输出不随会话漂移。</p>
+  <h3 class="l10-point-title l10-p2t">02 · 质量可校验</h3>
+  <p class="l10-point-body l10-p2b">溢出、密度、字号、间距全部是量化规则，机器校验不通过就阻断交付。</p>
+  <h3 class="l10-point-title l10-p3t">03 · 导出可确定</h3>
+  <p class="l10-point-body l10-p3b">每个版式对应一个映射函数，坐标按固定比例换算，不做任意结构的猜测。</p>
+</section>
+
+<section class="slide" data-layout="L14">
+  <h2 class="sl-title">图文半幅版式</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l14-body">宣传类内容页优先使用图文半幅：左栏承载一段完整叙述，右侧半幅照片提供真实感。图片经浏览器渲染裁切后原样嵌入 PPTX，两侧取景完全一致。没有合适照片时退回 L10 正文加要点，禁止用装饰图凑数。</p>
+  <img class="l14-img" src="assets/img/hero.png" alt="验证环节封面渲染图示例">
+  <p class="l14-caption">示例图片 · 来源：validation 渲染产物</p>
+</section>
+
+<section class="slide" data-layout="L05">
+  <h2 class="sl-title">两种导出思路</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <div class="l05-panel-a" data-shape="rect"></div>
+  <div class="l05-panel-b" data-shape="rect"></div>
+  <h3 class="l05-h l05-ha">通用翻译</h3>
+  <p class="l05-p l05-a1">处理任意 HTML 结构，读取计算样式反推演示元素。实现复杂，自由结构的转换通过率不足三成。</p>
+  <p class="l05-p l05-a2">每一次布局创新都可能击穿翻译器的假设，维护成本随版式自由度同步增长。</p>
+  <h3 class="l05-h l05-hb">注册制映射</h3>
+  <p class="l05-p l05-b1">每页声明封闭集合内的版式编号，导出器只面对十四个已知结构。</p>
+  <p class="l05-p l05-b2">版式即契约：坐标按固定比例换算，映射结果可预期、可回归测试。</p>
+</section>
+
+<section class="slide" data-layout="L06">
+  <h2 class="sl-title">质量三道门</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l06-num l06-c1">R1–R7</p>
+  <h3 class="l06-h l06-c1">机器校验</h3>
+  <p class="l06-p l06-c1">注册版式、类名白名单、溢出、字号下限全部是量化规则，错误即阻断交付。</p>
+  <p class="l06-num l06-c2">P0–P3</p>
+  <h3 class="l06-h l06-c2">视觉自检</h3>
+  <p class="l06-p l06-c2">渲染截图后按严重度分级检查，P0 与 P1 必须修复后才能进入交付。</p>
+  <p class="l06-num l06-c3">1 : 1</p>
+  <h3 class="l06-h l06-c3">导出验证</h3>
+  <p class="l06-p l06-c3">PPTX 渲染结果与 HTML 截图逐页比对，字体回退导致的偏移逐页确认。</p>
+</section>
+
+<section class="slide" data-layout="L07">
+  <h2 class="sl-title">技术验证的实测结果</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l07-num l07-c1 is-accent">5.0%</p>
+  <p class="l07-label l07-c1">像素差异上限</p>
+  <p class="l07-sub l07-c1">三页实测 1.9%–5.0%，全部为字形级差异</p>
+  <p class="l07-num l07-c2">0</p>
+  <p class="l07-label l07-c2">文字溢出次数</p>
+  <p class="l07-sub l07-c2">二十三个文本元素全部落在版式槽位内</p>
+  <p class="l07-num l07-c3">7</p>
+  <p class="l07-label l07-c3">换行一致行数</p>
+  <p class="l07-sub l07-c3">中文长段落换行点与浏览器完全一致</p>
+  <p class="l07-footnote">数据来源：validation/REPORT.md · 2026-07-16</p>
+</section>
+
+<section class="slide" data-layout="L11">
+  <h2 class="sl-title">画布契约</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l11-label l11-r1">逻辑画布</p>
+  <p class="l11-value l11-r1">1280 × 720 px</p>
+  <p class="l11-note l11-r1">固定像素画布，运行时按窗口缩放，禁用视口单位</p>
+  <div class="l11-line l11-s1" data-shape="rect"></div>
+  <p class="l11-label l11-r2">PPTX 画布</p>
+  <p class="l11-value l11-r2">960 × 540 pt</p>
+  <p class="l11-note l11-r2">与 PowerPoint 十六比九标准画布完全一致</p>
+  <div class="l11-line l11-s2" data-shape="rect"></div>
+  <p class="l11-label l11-r3">坐标换算</p>
+  <p class="l11-value l11-r3">px ÷ 96 = in</p>
+  <p class="l11-note l11-r3">九十六像素每英寸，位置与尺寸同一比例</p>
+  <div class="l11-line l11-s3" data-shape="rect"></div>
+  <p class="l11-label l11-r4">字号换算</p>
+  <p class="l11-value l11-r4">px × 0.75 = pt</p>
+  <p class="l11-note l11-r4">行距与字间距同样按此比例映射为磅值</p>
+  <div class="l11-line l11-s4" data-shape="rect"></div>
+</section>
+
+<section class="slide" data-layout="L08">
+  <h2 class="sl-title">项目推进时间线</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <div class="l08-axis" data-shape="rect"></div>
+  <div class="l08-dot l08-dot1" data-shape="ellipse"></div>
+  <div class="l08-dot l08-dot2" data-shape="ellipse"></div>
+  <div class="l08-dot l08-dot3" data-shape="ellipse"></div>
+  <div class="l08-dot l08-dot4" data-shape="ellipse"></div>
+  <h3 class="l08-date l08-d1">07-15</h3>
+  <p class="l08-text l08-t1">四个标杆项目调研分析</p>
+  <h3 class="l08-date l08-d2">07-16</h3>
+  <p class="l08-text l08-t2">架构定稿：双档位与注册制</p>
+  <h3 class="l08-date l08-d3">07-16</h3>
+  <p class="l08-text l08-t3">PPTX 导出链路验证通过</p>
+  <h3 class="l08-date l08-d4">进行中</h3>
+  <p class="l08-text l08-t4">版式库、校验器与金样构建</p>
+</section>
+
+<section class="slide" data-layout="L12">
+  <h2 class="sl-title">Skill 工作流</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <div class="l12-dot l12-c1" data-shape="ellipse"></div>
+  <p class="l12-num l12-c1">1</p>
+  <div class="l12-link l12-k1" data-shape="rect"></div>
+  <h3 class="l12-h l12-c1">澄清定档</h3>
+  <p class="l12-p l12-c1">一次性问清交付格式、受众与素材，档位选定后不可切换。</p>
+  <div class="l12-dot l12-c2" data-shape="ellipse"></div>
+  <p class="l12-num l12-c2">2</p>
+  <div class="l12-link l12-k2" data-shape="rect"></div>
+  <h3 class="l12-h l12-c2">样张确认</h3>
+  <p class="l12-p l12-c2">先出封面与典型内容页两页样张，确认后才批量生产。</p>
+  <div class="l12-dot l12-c3" data-shape="ellipse"></div>
+  <p class="l12-num l12-c3">3</p>
+  <div class="l12-link l12-k3" data-shape="rect"></div>
+  <h3 class="l12-h l12-c3">批量填充</h3>
+  <p class="l12-p l12-c3">复制注册骨架并只替换内容，每页完成后自查密度。</p>
+  <div class="l12-dot l12-c4" data-shape="ellipse"></div>
+  <p class="l12-num l12-c4">4</p>
+  <h3 class="l12-h l12-c4">校验交付</h3>
+  <p class="l12-p l12-c4">机器校验通过后渲染自检，按档位追加导出物。</p>
+</section>
+
+<section class="slide" data-layout="L09">
+  <img class="l09-img" src="assets/img/hero.png" alt="验证环节封面页的浏览器渲染">
+  <div class="l09-scrim" data-shape="rect"></div>
+  <h2 class="l09-title">HTML 是唯一的源</h2>
+  <p class="l09-sub">PDF、PPTX、PNG 都是同一份源的一键衍生物 · 本页背景即验证环节的真实渲染产物</p>
+</section>
+
+<section class="slide" data-layout="L13">
+  <h1 class="l13-title">约束，是给生成的自由。</h1>
+  <p class="l13-sub">14 个注册版式 · 3 套 Token 主题 · 1 条确定性导出链路</p>
+  <div class="l13-rule" data-shape="rect"></div>
+  <p class="l13-meta">PPT Skill · 2026</p>
+</section>
+
+<script src="assets/runtime.js"></script>
+<script src="assets/enhance.js"></script>
+</body>
+</html>

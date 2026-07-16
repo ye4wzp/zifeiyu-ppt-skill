@@ -1,0 +1,20 @@
+# dependencies
+node_modules/
+
+# private client decks — never commit
+decks/
+
+# dev spike artifacts
+validation/
+
+# generated outputs (regenerable from source)
+**/renders/
+**/renders-pptx/
+**/.export-crops/
+examples/**/deck.pptx
+examples/**/deck.pdf
+examples/**/deck-web.pdf
+examples/**/REGRESSION.txt
+
+# os
+.DS_Store
