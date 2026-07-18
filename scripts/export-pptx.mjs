@@ -56,10 +56,37 @@ const pres = new pptxgen();
 pres.defineLayout({ name: 'W16x9', width: 13.333, height: 7.5 });
 pres.layout = 'W16x9';
 
+const nativeCharts = args.includes('--native-charts');
+
 for (const s of slides) {
   const slide = pres.addSlide();
   slide.background = { color: s.bg.hex };
+  if (s.notes) slide.addNotes(s.notes); // -> PowerPoint speaker notes view
+
+  // --native-charts: L15 bars become a real editable PowerPoint chart
+  let chartEls = new Set();
+  if (nativeCharts && s.layout === 'L15') {
+    const has = (el, c) => el.classes?.some((k) => k.startsWith(c));
+    const labels = s.els.filter((e) => e.kind === 'text' && has(e, 'l15-label'));
+    const vals = s.els.filter((e) => e.kind === 'text' && has(e, 'l15-val'));
+    const bars = s.els.filter((e) => e.kind === 'shape' && has(e, 'l15-bar'));
+    const values = vals.map((e) => parseFloat(e.text.replace(/[^\d.]/g, '')));
+    if (labels.length && labels.length === values.length && values.every(Number.isFinite)) {
+      chartEls = new Set([...labels, ...vals, ...bars]);
+      slide.addChart(pres.ChartType.bar, [{ name: 'data', labels: labels.map((e) => e.text), values }], {
+        x: px2in(96), y: px2in(196), w: px2in(1088), h: px2in(400),
+        barDir: 'bar',
+        chartColors: [bars[0]?.fill.hex || '0f62fe'],
+        valAxisHidden: true,
+        catAxisOrientation: 'maxMin',
+        valGridLine: { style: 'none' }, catGridLine: { style: 'none' },
+        showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.#', dataLabelFontSize: 12, catAxisLabelFontSize: 14,
+      });
+    }
+  }
+
   for (const el of s.els) {
+    if (chartEls.has(el)) continue;
     const box = { x: px2in(el.x), y: px2in(el.y), w: px2in(el.w), h: px2in(el.h) };
     if (el.kind === 'shape') {
       slide.addShape(el.shape === 'ellipse' ? pres.ShapeType.ellipse : pres.ShapeType.rect, {
@@ -68,10 +95,11 @@ for (const s of slides) {
         line: { type: 'none' },
       });
     } else if (el.kind === 'image') {
-      slide.addImage({
-        path: resolve(deckDir, el.src), ...box,
-        sizing: el.fit === 'cover' ? { type: 'cover', w: box.w, h: box.h } : undefined,
-      }); // 'exact': pre-cropped screenshot, box maps 1:1, no sizing needed
+      const sizing =
+        el.fit === 'cover' ? { type: 'cover', w: box.w, h: box.h } :
+        el.fit === 'contain' ? { type: 'contain', w: box.w, h: box.h } : undefined;
+      slide.addImage({ path: resolve(deckDir, el.src), ...box, sizing });
+      // 'exact': pre-cropped screenshot, box maps 1:1, no sizing needed
     } else {
       slide.addText(el.text, {
         ...box,

@@ -64,6 +64,7 @@ Web 档交付 deck 目录（浏览器打开 index.html，方向键翻页，F 全
 node scripts/export-pdf.mjs <deck-dir>                            # 矢量 PDF（两档皆可）
 node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"  # Office 档
 ```
+讲稿自动导出为 PowerPoint 原生备注；L15 条形图加 `--native-charts` 可生成可编辑原生图表（详见 pptx-export.md）。
 导出后必须做第三道门：用演示软件打开 .pptx 与 HTML 渲染图逐页比对（详见 `references/pptx-export.md`）。
 
 ## 版式速查表

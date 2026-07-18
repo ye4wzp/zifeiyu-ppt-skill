@@ -1,4 +1,4 @@
-# 版式注册表（L01–L14）
+# 版式注册表（L01–L16）
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。
 所有骨架已通过校验器与 PPTX 导出双重验证（金样：`examples/showcase/`）。
@@ -220,6 +220,51 @@
   <p class="l14-caption">图片说明 · 来源</p>
 </section>
 ```
+
+## L15 条形对比图（必须真实数据）
+固定 4 行；条宽 = 数值/最大值 × 660px（行内 width，四舍五入到整数）；footnote 必须标注来源与"条长与数值成正比"。少于 4 行删除多余行组。
+```html
+<section class="slide" data-layout="L15">
+  <h2 class="sl-title">页标题</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l15-label l15-r1">条目一</p>
+  <div class="l15-bar l15-b1" data-shape="rect" style="width: 660px;"></div>
+  <p class="l15-val l15-r1">数值</p>
+  <p class="l15-label l15-r2">条目二</p>
+  <div class="l15-bar l15-b2" data-shape="rect" style="width: 430px;"></div>
+  <p class="l15-val l15-r2">数值</p>
+  <p class="l15-label l15-r3">条目三</p>
+  <div class="l15-bar l15-b3" data-shape="rect" style="width: 285px;"></div>
+  <p class="l15-val l15-r3">数值</p>
+  <p class="l15-label l15-r4">条目四</p>
+  <div class="l15-bar l15-b4" data-shape="rect" style="width: 120px;"></div>
+  <p class="l15-val l15-r4">数值</p>
+  <p class="l15-footnote">指标口径 · 数据来源 · 条长与数值成正比</p>
+</section>
+```
+
+## L16 图片网格（2×2）
+四张图统一比例裁切；alt 必填（校验器 R10 强制）；caption 说明排布与来源。
+```html
+<section class="slide" data-layout="L16">
+  <h2 class="sl-title">页标题</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <img class="l16-img l16-i1" src="assets/img/8-a.jpg" alt="描述一">
+  <img class="l16-img l16-i2" src="assets/img/8-b.jpg" alt="描述二">
+  <img class="l16-img l16-i3" src="assets/img/8-c.jpg" alt="描述三">
+  <img class="l16-img l16-i4" src="assets/img/8-d.jpg" alt="描述四">
+  <p class="l16-caption">图片说明 · 来源</p>
+</section>
+```
+
+## 企业槽位（可选，任意版式追加）
+
+```html
+  <p class="sl-page">07</p>                                        <!-- 页码角标 -->
+  <img class="sl-logo" src="assets/img/logo.png" alt="公司 logo">  <!-- 右上 logo，contain 不裁切 -->
+  <img class="l13-qr" src="assets/img/qr.png" alt="联系二维码">     <!-- 仅 L13 结尾页 -->
+```
+页码由生成端按实际页序填写；使用 sl-logo 的页面不要再用 sl-ghost（同区冲突）。
 
 ## L13 结尾
 ```html

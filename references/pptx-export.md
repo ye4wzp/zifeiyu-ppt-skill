@@ -21,6 +21,11 @@ node scripts/export-pptx.mjs <deck-dir> --cjk-font "PingFang SC"
 - 换算契约：坐标 px÷96→英寸；字号/行距/字间距 px×0.75→磅。
 - 字重映射：CSS ≥600 → bold；`Helvetica Neue` ≤300 → face 名 "Helvetica Neue Light"。PPTX 无数值字重。
 
+## 讲稿与图表
+
+- **讲稿自动随行**：`<aside class="notes">` 的文字导出为 PowerPoint 原生备注（备注视图/演示者视图可见），无需任何参数。
+- **图表两种模式**：默认 L15 条形图映射为矩形（与 HTML 逐像素一致）；加 `--native-charts` 则生成**原生可编辑图表**（接收方可双击改数据）。原生模式下图表样式由 PowerPoint 渲染，与 HTML 预览不逐像素一致、几何比对会标红——这是模式特性，按需选择：交付定稿用默认，交付给要继续编辑数据的人用 native。数值从 `.l15-val` 文本解析（"21.5k"→21.5，单位丢失），解析失败自动回退矩形模式。
+
 ## 导出后验证（第三道门，不可跳过）
 
 ```bash

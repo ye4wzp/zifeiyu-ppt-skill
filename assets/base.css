@@ -217,6 +217,37 @@ body { background: #26262a; }
 .l14-img { left: 720px; top: 200px; width: 464px; height: 420px; object-fit: cover; }
 .l14-caption { left: 720px; top: 636px; width: 464px; font-size: 16px; color: var(--text-2); }
 
+/* ---------- L15 h-bar comparison (real data only) ---------- */
+.l15-label {
+  font-family: var(--font-display);
+  left: 96px; width: 240px;
+  font-size: 22px; font-weight: 600; color: var(--text-1);
+}
+.l15-bar { left: 360px; height: 36px; background: var(--accent); }
+.l15-val {
+  left: 1044px; width: 140px; text-align: right;
+  font-family: var(--font-num);
+  font-size: 24px; color: var(--text-1);
+}
+.l15-r1 { top: 226px; } .l15-r2 { top: 322px; } .l15-r3 { top: 418px; } .l15-r4 { top: 514px; }
+.l15-b1 { top: 222px; } .l15-b2 { top: 318px; } .l15-b3 { top: 414px; } .l15-b4 { top: 510px; }
+.l15-footnote { left: 96px; top: 632px; width: 800px; font-size: 16px; color: var(--text-2); }
+
+/* ---------- L16 image grid (2x2) ---------- */
+.l16-img { width: 536px; height: 220px; object-fit: cover; }
+.l16-i1 { left: 96px;  top: 200px; } .l16-i2 { left: 648px; top: 200px; }
+.l16-i3 { left: 96px;  top: 436px; } .l16-i4 { left: 648px; top: 436px; }
+.l16-caption { left: 96px; top: 668px; width: 1088px; font-size: 16px; color: var(--text-2); }
+
+/* ---------- optional corporate slots (any layout) ---------- */
+.sl-page {
+  left: 1120px; top: 668px; width: 64px; text-align: right;
+  font-family: var(--font-num);
+  font-size: 15px; color: var(--text-2);
+}
+.sl-logo { left: 1044px; top: 44px; width: 140px; height: 40px; object-fit: contain; }
+.l13-qr { left: 1020px; top: 396px; width: 164px; height: 164px; object-fit: contain; }
+
 /* ---------- L13 closing ---------- */
 .l13-title {
   font-family: var(--font-display);

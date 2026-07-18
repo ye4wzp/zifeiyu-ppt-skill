@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { deckIndex, measureDeck, CANVAS } from './lib/deck.mjs';
 
-const REGISTERED = new Set(Array.from({ length: 14 }, (_, i) => `L${String(i + 1).padStart(2, '0')}`));
+const REGISTERED = new Set(Array.from({ length: 16 }, (_, i) => `L${String(i + 1).padStart(2, '0')}`));
 const INLINE_ALLOWED = /^(\s*(top|left|width|height|font-size|line-height)\s*:\s*[\d.]+(px|%)\s*;?)*\s*$/;
 
 const args = process.argv.slice(2);
@@ -36,6 +36,10 @@ slides.forEach((s, i) => {
     if (el.x < -2 || el.y < -2 || el.x + el.w > CANVAS.w + 2 || el.y + el.h > CANVAS.h + 2)
       errors.push(`R3 ${at(i, el)}: element exceeds 1280x720 canvas`);
     if (el.kind === 'text' && el.overflowX) errors.push(`R3 ${at(i, el)}: horizontal text overflow`);
+
+    // R10 accessibility: content images must carry non-empty alt
+    if (el.kind === 'image' && !(el.alt || '').trim())
+      errors.push(`R10 ${at(i, el)}: <img src="${(el.src || '').slice(-30)}"> missing alt text`);
 
     if (el.kind !== 'text') continue;
     // R2 class whitelist

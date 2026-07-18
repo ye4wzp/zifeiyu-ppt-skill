@@ -1,0 +1,30 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium-headless-shell
+      - name: Validate golden decks (R1-R10 machine gate)
+        run: |
+          node scripts/validate.mjs examples/showcase
+          node scripts/validate.mjs examples/editorial
+      - name: Render check
+        run: |
+          node scripts/render-png.mjs examples/showcase --out /tmp/renders
+          test -f /tmp/renders/slide-16.png
+      - name: PPTX export smoke
+        run: |
+          node scripts/export-pptx.mjs examples/showcase --out /tmp/deck.pptx
+          test -s /tmp/deck.pptx

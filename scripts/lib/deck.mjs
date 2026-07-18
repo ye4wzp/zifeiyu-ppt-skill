@@ -40,10 +40,10 @@ export async function measureDeck(indexPath) {
         const box = { x: r.left - sr.left, y: r.top - sr.top, w: r.width, h: r.height };
         const opacity = parseFloat(s.opacity);
         if (el.dataset.shape) {
-          return { kind: 'shape', shape: el.dataset.shape, ...box, opacity, fill: parseColor(s.backgroundColor) };
+          return { kind: 'shape', shape: el.dataset.shape, ...box, opacity, fill: parseColor(s.backgroundColor), classes: [...el.classList] };
         }
         if (el.tagName === 'IMG') {
-          return { kind: 'image', ...box, src: el.getAttribute('src'), fit: s.objectFit };
+          return { kind: 'image', ...box, src: el.getAttribute('src'), alt: el.getAttribute('alt') || '', fit: s.objectFit };
         }
         return {
           kind: 'text', tag: el.tagName.toLowerCase(), ...box, opacity,
@@ -64,6 +64,7 @@ export async function measureDeck(indexPath) {
       return {
         layout: slide.dataset.layout || '',
         bg: parseColor(getComputedStyle(slide).backgroundColor),
+        notes: slide.querySelector('.notes')?.textContent.trim() || '',
         els,
       };
     });
