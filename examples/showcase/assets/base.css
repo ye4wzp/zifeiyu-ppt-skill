@@ -20,6 +20,7 @@
   /* font tokens */
   --font-cjk: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
   --font-num: 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,6 +51,7 @@ body { background: #26262a; }
 
 /* ---------- shared header (L02, L05–L08, L10–L12, L14) ---------- */
 .sl-title {
+  font-family: var(--font-display);
   left: 96px; top: 80px; width: 1000px;
   font-size: 54px; font-weight: 600; color: var(--text-1);
 }
@@ -72,6 +74,7 @@ body { background: #26262a; }
   color: var(--accent);
 }
 .l01-title {
+  font-family: var(--font-display);
   left: 96px; top: 212px; width: 1060px;
   font-size: 100px; font-weight: 600; line-height: 1.2;
   color: var(--text-1);
@@ -103,6 +106,7 @@ body { background: #26262a; }
   color: var(--accent);
 }
 .l03-title {
+  font-family: var(--font-display);
   left: 96px; top: 396px; width: 1000px;
   font-size: 72px; font-weight: 600; color: var(--text-1);
 }
@@ -111,6 +115,7 @@ body { background: #26262a; }
 
 /* ---------- L04 statement ---------- */
 .l04-text {
+  font-family: var(--font-display);
   left: 96px; top: 228px; width: 1088px;
   font-size: 60px; font-weight: 500; line-height: 1.55;
   color: var(--text-1);
@@ -120,7 +125,8 @@ body { background: #26262a; }
 /* ---------- L05 duo compare ---------- */
 .l05-panel-a { left: 96px;  top: 208px; width: 520px; height: 420px; background: var(--surface); }
 .l05-panel-b { left: 664px; top: 208px; width: 520px; height: 420px; background: var(--surface); }
-.l05-h { width: 440px; top: 248px; font-size: 26px; font-weight: 600; color: var(--accent); }
+.l05-h {
+  font-family: var(--font-display); width: 440px; top: 248px; font-size: 26px; font-weight: 600; color: var(--accent); }
 .l05-ha { left: 136px; } .l05-hb { left: 704px; }
 .l05-p { width: 440px; font-size: 18px; line-height: 1.7; color: var(--text-1); }
 .l05-a1 { left: 136px; top: 312px; } .l05-a2 { left: 136px; top: 460px; }
@@ -132,7 +138,8 @@ body { background: #26262a; }
   font-family: var(--font-num);
   font-size: 22px; color: var(--accent);
 }
-.l06-h { width: 320px; top: 268px; font-size: 24px; font-weight: 600; color: var(--text-1); }
+.l06-h {
+  font-family: var(--font-display); width: 320px; top: 268px; font-size: 24px; font-weight: 600; color: var(--text-1); }
 .l06-p { width: 320px; top: 316px; font-size: 18px; line-height: 1.6; color: var(--text-2); }
 .l06-c1 { left: 96px; } .l06-c2 { left: 480px; } .l06-c3 { left: 864px; }
 
@@ -165,19 +172,22 @@ body { background: #26262a; }
 /* ---------- L09 image hero ---------- */
 .l09-img { left: 0; top: 0; width: 1280px; height: 720px; object-fit: cover; }
 .l09-scrim { left: 0; top: 468px; width: 1280px; height: 252px; background: var(--scrim); }
-.l09-title { left: 96px; top: 520px; width: 1088px; font-size: 48px; font-weight: 600; color: var(--on-image); }
+.l09-title {
+  font-family: var(--font-display); left: 96px; top: 520px; width: 1088px; font-size: 48px; font-weight: 600; color: var(--on-image); }
 .l09-sub { left: 96px; top: 606px; width: 1000px; font-size: 22px; color: var(--on-image); }
 
 /* ---------- L10 content: body + 3 points ---------- */
 .l10-body { left: 96px; top: 220px; width: 560px; font-size: 24px; line-height: 1.7; color: var(--text-1); }
-.l10-point-title { left: 736px; width: 448px; font-size: 21px; font-weight: 600; color: var(--accent); }
+.l10-point-title {
+  font-family: var(--font-display); left: 736px; width: 448px; font-size: 21px; font-weight: 600; color: var(--accent); }
 .l10-point-body { left: 736px; width: 448px; font-size: 18px; line-height: 1.6; color: var(--text-2); }
 .l10-p1t { top: 220px; } .l10-p1b { top: 254px; }
 .l10-p2t { top: 356px; } .l10-p2b { top: 390px; }
 .l10-p3t { top: 492px; } .l10-p3b { top: 526px; }
 
 /* ---------- L11 ledger rows ---------- */
-.l11-label { left: 96px; width: 380px; font-size: 24px; font-weight: 600; color: var(--text-1); }
+.l11-label {
+  font-family: var(--font-display); left: 96px; width: 380px; font-size: 24px; font-weight: 600; color: var(--text-1); }
 .l11-value {
   left: 520px; width: 320px;
   font-family: var(--font-num);
@@ -196,7 +206,8 @@ body { background: #26262a; }
   font-size: 20px; font-weight: 600; color: var(--on-accent);
 }
 .l12-link { top: 240px; width: 212px; height: 2px; background: var(--hairline); }
-.l12-h { width: 240px; top: 296px; font-size: 22px; font-weight: 600; color: var(--text-1); }
+.l12-h {
+  font-family: var(--font-display); width: 240px; top: 296px; font-size: 22px; font-weight: 600; color: var(--text-1); }
 .l12-p { width: 240px; top: 338px; font-size: 17px; line-height: 1.6; color: var(--text-2); }
 .l12-c1 { left: 96px; } .l12-c2 { left: 376px; } .l12-c3 { left: 656px; } .l12-c4 { left: 936px; }
 .l12-k1 { left: 160px; } .l12-k2 { left: 440px; } .l12-k3 { left: 720px; }
@@ -208,6 +219,7 @@ body { background: #26262a; }
 
 /* ---------- L13 closing ---------- */
 .l13-title {
+  font-family: var(--font-display);
   left: 96px; top: 196px; width: 1088px;
   font-size: 84px; font-weight: 600; line-height: 1.35;
   color: var(--text-1);
