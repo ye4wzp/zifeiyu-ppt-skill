@@ -19,10 +19,12 @@ const cjkFont = flag('--cjk-font', 'PingFang SC');
 // PPTX has no numeric weights: <=300 needs the Light face; >=600 -> bold.
 const CJK_STACK = new Set(['PingFang SC', 'Microsoft YaHei', 'Noto Sans SC']);
 const CJK_SERIF_STACK = new Set(['Songti SC', 'Noto Serif SC', 'SimSun', 'STSong']);
+const MONO_STACK = new Set(['SF Mono', 'Menlo', 'Consolas']);
 const cjkSerif = flag('--cjk-serif', 'SimSun'); // ubiquitous on Windows
 const fontFace = (t) => {
   if (CJK_STACK.has(t.fontFamily)) return t.fontWeight <= 300 ? `${cjkFont} Light` : cjkFont;
   if (CJK_SERIF_STACK.has(t.fontFamily)) return cjkSerif;
+  if (MONO_STACK.has(t.fontFamily)) return 'Consolas'; // Windows-ubiquitous mono
   if (t.fontFamily === 'Helvetica Neue' && t.fontWeight <= 300) return 'Helvetica Neue Light';
   return t.fontFamily;
 };

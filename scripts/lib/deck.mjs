@@ -43,7 +43,11 @@ export async function measureDeck(indexPath) {
           return { kind: 'shape', shape: el.dataset.shape, ...box, opacity, fill: parseColor(s.backgroundColor), classes: [...el.classList] };
         }
         if (el.tagName === 'IMG') {
-          return { kind: 'image', ...box, src: el.getAttribute('src'), alt: el.getAttribute('alt') || '', fit: s.objectFit };
+          return {
+            kind: 'image', ...box, src: el.getAttribute('src'), fit: s.objectFit,
+            alt: el.getAttribute('alt') || '',
+            decor: el.getAttribute('aria-hidden') === 'true',
+          };
         }
         return {
           kind: 'text', tag: el.tagName.toLowerCase(), ...box, opacity,

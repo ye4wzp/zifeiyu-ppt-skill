@@ -37,9 +37,9 @@ slides.forEach((s, i) => {
       errors.push(`R3 ${at(i, el)}: element exceeds 1280x720 canvas`);
     if (el.kind === 'text' && el.overflowX) errors.push(`R3 ${at(i, el)}: horizontal text overflow`);
 
-    // R10 accessibility: content images must carry non-empty alt
-    if (el.kind === 'image' && !(el.alt || '').trim())
-      errors.push(`R10 ${at(i, el)}: <img src="${(el.src || '').slice(-30)}"> missing alt text`);
+    // R10 accessibility: content images need alt; decorative ones declare aria-hidden
+    if (el.kind === 'image' && !el.decor && !(el.alt || '').trim())
+      errors.push(`R10 ${at(i, el)}: <img src="${(el.src || '').slice(-30)}"> missing alt (or aria-hidden="true" for decor)`);
 
     if (el.kind !== 'text') continue;
     // R2 class whitelist

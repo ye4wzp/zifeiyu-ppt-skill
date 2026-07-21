@@ -21,6 +21,7 @@
   --font-cjk: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
   --font-num: 'Helvetica Neue', Arial, sans-serif;
   --font-display: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-mono: 'SF Mono', Menlo, Consolas, monospace;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -47,6 +48,71 @@ body { background: #26262a; }
   --text-1: #f0efea;
   --text-2: #9b9ba4;
   --hairline: #34343b;
+}
+
+/* ---------- full-bleed accent field (rhythm pages, like is-dark) ---------- */
+.slide.is-accent {
+  --bg: #0f62fe;
+  --surface: rgba(255, 255, 255, 0.12);
+  --text-1: #ffffff;
+  --text-2: rgba(255, 255, 255, 0.78);
+  --accent: #ffffff;
+  --on-accent: #0f62fe;
+  --hairline: rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- composition vocabulary (optional, any layout) ---------- */
+/* full-canvas dot-grid texture, always the first element of the slide */
+.sl-texture { left: 0; top: 0; width: 1280px; height: 720px; }
+/* four corner meta anchors */
+.sl-corner {
+  font-family: var(--font-num);
+  font-size: 16px; letter-spacing: 2px; color: var(--text-2);
+  width: 400px;
+}
+.sl-corner.is-tl { left: 48px; top: 40px; }
+.sl-corner.is-tr { left: 832px; top: 40px; text-align: right; }
+.sl-corner.is-bl { left: 48px; top: 664px; }
+.sl-corner.is-br { left: 832px; top: 664px; text-align: right; }
+/* small accent punctuation block, bottom-right */
+.sl-tab { left: 1216px; top: 688px; width: 48px; height: 10px; background: var(--accent); }
+
+/* --- DATUM drafting vocabulary: crop marks, dimension lines, title block --- */
+.sl-mono {
+  font-family: var(--font-mono);
+  font-size: 16px; letter-spacing: 1px; color: var(--text-2);
+  width: 520px;
+}
+.crop { background: var(--text-2); }        /* strokes, position/size inline */
+.dim-line { height: 1px; background: var(--text-2); }
+.dim-tick { width: 1px; height: 10px; background: var(--text-2); }
+.tb-rule { height: 1px; background: var(--text-1); }
+.tb-div { width: 1px; height: 52px; background: var(--hairline); }
+.tb-label {
+  font-family: var(--font-mono);
+  font-size: 16px; letter-spacing: 1px; color: var(--text-2);
+  width: 200px;
+}
+.tb-value { font-size: 19px; font-weight: 600; color: var(--text-1); width: 240px; }
+/* display statement for DATUM pages: tight leading, heavy weight */
+.dt-display {
+  font-family: var(--font-display);
+  left: 96px; width: 1120px;
+  font-size: 128px; font-weight: 900; line-height: 1.14;
+  color: var(--text-1);
+}
+.dt-mega {
+  font-family: var(--font-num);
+  font-size: 360px; font-weight: 200; line-height: 1;
+  color: var(--text-1); width: 700px; text-align: right;
+}
+/* split-panel field for statement pages: left color block + oversized mark */
+.l04-panel { left: 0; top: 0; width: 500px; height: 720px; background: var(--accent); }
+.l04-mark {
+  font-family: var(--font-display);
+  left: 64px; top: 128px; width: 380px;
+  font-size: 220px; font-weight: 900; line-height: 1;
+  color: var(--on-accent);
 }
 
 /* ---------- shared header (L02, L05–L08, L10–L12, L14) ---------- */

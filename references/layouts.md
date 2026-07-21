@@ -284,6 +284,20 @@
 ```
 写提示信号不写逐字稿；每页 ≤3 短句；标记重音、停顿、指图等舞台动作。
 
+## DATUM 制图铺装（现代系统默认构成语法）
+
+每页依次注入（金样 examples/showcase 为完整范例）：
+1. **坐标纸纹理**：`<img class="sl-texture" src="assets/textures/graph-dark.png" aria-hidden="true">` 放页面第一个元素；is-dark / is-accent 页用 `graph-light.png`。
+2. **角线**：8 条 `.crop` 短划（四角 L 形，位置固定，整块复制金样即可）。
+3. **等宽页眉**：左 `<p class="sl-mono" style="left: 96px; top: 64px;">页面角色标签</p>`（英文大写，如 INDEX / FIG. 1–3 / TIMELINE），右 `SHEET nn/NN`（`width: 138px`）。
+4. 有页眉的内容页：`sl-title` 行内 `top: 108px`，并**删除 sl-rule**。
+5. **标注线**（封面/章节/金句页）：`.dim-tick + .dim-line + .dim-tick` 三件套 + 下方 `sl-mono` 标签，标注内容写真实参数（跨度、网格、规则号）。
+6. **图签栏**（封面、数据页、结尾页）：`.tb-rule` 横线 + 三组 `.tb-label`/`.tb-value` + 两条 `.tb-div` 竖分隔；数据页用它承载 SOURCE / DATE / STATUS（数据诚实协议的视觉化）。
+7. 节奏页设计：章节页 = is-accent 满幅色场 + `.dt-mega` 巨号贴右；金句页 = is-dark + `.dt-display` 两行大字（每行一个 h1）；封面 = `.dt-display` 128px 两行。
+8. L09 全幅图页不加铺装，保持纯净。
+
+纪律：标注文字必须真实（不许装饰性假参数）；每页最多一条标注线；SHEET 编号与实际页序一致。
+
 ## 节奏与装饰（宣传/演讲类推荐）
 
 - **深色节奏页**：`<section class="slide is-dark" ...>` 将该页反转为深色。用于 L03 章节页、L04 金句页、L13 结尾页制造节奏；每 3–5 页最多一次，禁止用于数据/正文页。
