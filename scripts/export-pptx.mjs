@@ -1,6 +1,6 @@
 // Usage: node scripts/export-pptx.mjs <deck-dir|index.html> [--out deck.pptx] [--cjk-font "Microsoft YaHei"]
 // Deterministic mapping: measured registered slots -> pptxgenjs calls.
-// Verified facts (validation/REPORT.md): margin:0 and valign:'top' are
+// Verified facts (references/pptx-export.md): margin:0 and valign:'top' are
 // mandatory; lineSpacing/charSpacing in pt; hex colors without '#'.
 import pptxgen from 'pptxgenjs';
 import { dirname, resolve } from 'node:path';
@@ -103,7 +103,19 @@ for (const s of slides) {
       slide.addImage({ path: resolve(deckDir, el.src), ...box, sizing });
       // 'exact': pre-cropped screenshot, box maps 1:1, no sizing needed
     } else {
-      slide.addText(el.text, {
+      // inline emphasis (strong/em/accent span) -> per-run overrides
+      const styled = el.runs?.some((r) => r.bold != null || r.italic || r.color);
+      const content = styled
+        ? el.runs.map((r) => ({
+            text: r.text,
+            options: {
+              ...(r.bold != null && { bold: r.bold }),
+              ...(r.italic && { italic: true }),
+              ...(r.color && { color: r.color }),
+            },
+          }))
+        : el.text;
+      slide.addText(content, {
         ...box,
         fontSize: px2pt(el.fontSize),
         fontFace: fontFace(el),

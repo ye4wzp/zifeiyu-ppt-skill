@@ -1,5 +1,5 @@
 /* ================================================================
-   base.css — design tokens + registered layout skeletons (L01–L13)
+   base.css — design tokens + registered layout skeletons (L01–L16)
    Canvas contract: 1280x720 px -> 960x540 pt (px * 0.75)
    Rules: slides may only use classes defined here; colors only via
    tokens; all text lives in h1/h2/h3/p; decorations on [data-shape].
@@ -40,6 +40,12 @@ body { background: #26262a; }
 
 .slide h1, .slide h2, .slide h3, .slide p { position: absolute; }
 .slide [data-shape], .slide img { position: absolute; }
+
+/* inline emphasis inside text slots — exports as PPTX text runs;
+   only unnested strong/em/span are allowed (validator R7) */
+.slide h1 strong, .slide h2 strong, .slide h3 strong, .slide p strong { font-weight: 700; }
+.slide h1 em, .slide h2 em, .slide h3 em, .slide p em { font-style: italic; }
+.slide h1 .is-accent, .slide h2 .is-accent, .slide h3 .is-accent, .slide p .is-accent { color: var(--accent); }
 
 /* ---------- per-slide dark inversion (rhythm pages: L03/L04/L13) ---------- */
 .slide.is-dark {
