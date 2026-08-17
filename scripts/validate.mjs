@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { deckIndex, measureDeck, CANVAS } from './lib/deck.mjs';
 
-const REGISTERED = new Set(Array.from({ length: 16 }, (_, i) => `L${String(i + 1).padStart(2, '0')}`));
+const REGISTERED = new Set(Array.from({ length: 19 }, (_, i) => `L${String(i + 1).padStart(2, '0')}`));
 const INLINE_ALLOWED = /^(\s*(top|left|width|height|font-size|line-height)\s*:\s*[\d.]+(px|%)\s*;?)*\s*$/;
 const STYLESHEET_ALLOWED = /^assets\/(base\.css|(themes|systems)\/[\w-]+\.css)$/;
 
@@ -81,6 +81,17 @@ slides.forEach((s, i) => {
         (office ? errors : warns).push(`R12 ${at(i, el)}: remote image "${el.src.slice(0, 60)}"; copy it into assets/img/`);
     }
 
+    // R13 media contract: deterministic rendering/export needs a poster,
+    // playback and PPTX embedding need local files
+    if (el.kind === 'video' || el.kind === 'audio') {
+      if (!(el.label || '').trim()) errors.push(`R10 ${at(i, el)}: <${el.kind}> missing aria-label`);
+      if (/^https?:/i.test(el.src || '')) errors.push(`R13 ${at(i, el)}: remote media "${(el.src || '').slice(0, 60)}"; copy it into assets/media/`);
+      if (el.kind === 'video') {
+        if (!el.poster) errors.push(`R13 ${at(i, el)}: video missing poster (flat renders and PPTX cover need one)`);
+        else if (/^https?:/i.test(el.poster)) errors.push(`R13 ${at(i, el)}: remote poster "${el.poster.slice(0, 60)}"; copy it into assets/media/`);
+      }
+    }
+
     if (el.kind !== 'text') continue;
     // R4 font floor
     if (el.fontSize < 16) errors.push(`R4 ${at(i, el)}: font-size ${el.fontSize}px below 16px floor`);
@@ -154,7 +165,7 @@ slides.forEach((s, i) => {
     for (const o of s.els) {
       if (o === el) break; // only surfaces painted beneath the text
       if (o.x > cx || o.x + o.w < cx || o.y > cy || o.y + o.h < cy) continue;
-      if (o.kind === 'image') { if (!o.decor) unknown = true; continue; }
+      if (o.kind === 'image' || o.kind === 'video') { if (!o.decor) unknown = true; continue; }
       if (o.kind !== 'shape') continue;
       const a = Math.min(1, (o.fill.alpha ?? 1) * (o.opacity ?? 1));
       if (a >= 0.99) { base = hex2rgb(o.fill.hex); unknown = false; }
@@ -165,8 +176,8 @@ slides.forEach((s, i) => {
     if (ratio < 3) warns.push(`R11 ${at(i, el)}: contrast ${ratio.toFixed(1)}:1 below 3:1 floor`);
   }
 
-  // R5 density band (warn only); image-led layouts are exempt above
-  const fullBleed = s.els.some((el) => el.kind === 'image' && el.w * el.h >= CANVAS.w * CANVAS.h * 0.25);
+  // R5 density band (warn only); image/video-led layouts are exempt above
+  const fullBleed = s.els.some((el) => (el.kind === 'image' || el.kind === 'video') && el.w * el.h >= CANVAS.w * CANVAS.h * 0.25);
   const cover = ((maxX - minX) * (maxY - minY)) / (CANVAS.w * CANVAS.h);
   if (s.els.length && (cover < 0.25 || (cover > 0.97 && !fullBleed)))
     warns.push(`R5 ${at(i)}: content bounding box covers ${(cover * 100).toFixed(0)}% of canvas`);

@@ -1,0 +1,10 @@
+/* Theme: graphite — dark stage, soft blue accent */
+:root {
+  --bg: #1a1a1e;
+  --surface: #242429;
+  --text-1: #f0efea;
+  --text-2: #9b9ba4;
+  --accent: #5b8cff;
+  --on-accent: #ffffff;
+  --hairline: #34343b;
+}

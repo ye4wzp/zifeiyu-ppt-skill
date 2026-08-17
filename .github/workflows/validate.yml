@@ -16,10 +16,11 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium-headless-shell
-      - name: Validate golden decks (R1-R10 machine gate)
+      - name: Validate golden decks (R1-R13 machine gate)
         run: |
           node scripts/validate.mjs examples/showcase
           node scripts/validate.mjs examples/editorial
+          node scripts/validate.mjs examples/media
       - name: Render check
         run: |
           node scripts/render-png.mjs examples/showcase --out /tmp/renders
@@ -28,3 +29,5 @@ jobs:
         run: |
           node scripts/export-pptx.mjs examples/showcase --out /tmp/deck.pptx
           test -s /tmp/deck.pptx
+          node scripts/export-pptx.mjs examples/media --out /tmp/media.pptx
+          unzip -l /tmp/media.pptx | grep -q "media-.*\.mp4"

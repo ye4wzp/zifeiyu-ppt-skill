@@ -1,4 +1,4 @@
-# 版式注册表（L01–L16）
+# 版式注册表（L01–L19）
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。
 所有骨架已通过校验器与 PPTX 导出双重验证（金样：`examples/showcase/`）。
@@ -230,6 +230,7 @@
   <p class="l14-caption">图片说明 · 来源</p>
 </section>
 ```
+镜像变体（图左文右，连续图文页左右交替用）：`l14-img`/`l14-caption` 加 `is-left`，`l14-body` 加 `is-right`；L18 视频半幅同样适用。
 
 ## L15 条形对比图（必须真实数据）
 固定 4 行；条宽 = 数值/最大值 × 660px（行内 width，四舍五入到整数）；footnote 必须标注来源与"条长与数值成正比"。少于 4 行删除多余行组。
@@ -266,6 +267,55 @@
   <p class="l16-caption">图片说明 · 来源</p>
 </section>
 ```
+
+## L17 视频主视觉
+全幅视频开场/氛围页，规则同 L09（不加 DATUM 铺装）。`poster` 与 `aria-label` 必填（校验器 R13/R10）；`data-autoplay` + `muted` 进页自动静音播放，点击画面暂停；`preload="none"` 保证静止态锁定在封面帧。
+```html
+<section class="slide" data-layout="L17">
+  <video class="l17-video" src="assets/media/1-hero.mp4" poster="assets/media/1-hero-poster.jpg" aria-label="视频内容描述" data-autoplay muted loop preload="none"></video>
+  <div class="l17-scrim" data-shape="rect"></div>
+  <h2 class="l17-title">图上标题</h2>
+  <p class="l17-sub">一句话说明 · 素材来源</p>
+</section>
+```
+
+## L18 视频半幅
+视频作论据时用：左讲解正文 100–140 字，右半幅视频（默认静止在封面帧，点击播放）。支持 is-left/is-right 镜像（同 L14）。
+```html
+<section class="slide" data-layout="L18">
+  <h2 class="sl-title">页标题</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l18-body">左栏讲解正文。</p>
+  <video class="l18-video" src="assets/media/3-demo.mp4" poster="assets/media/3-demo-poster.jpg" aria-label="视频内容描述" preload="none"></video>
+  <p class="l18-caption">点击画面播放 · 素材来源</p>
+</section>
+```
+
+## L19 音频页
+播客节选/音乐作品/访谈片段。`<audio>` 必须带 `controls` 属性（浏览器 UA 规则，无它则元素不渲染；视觉上已隐藏）；时长与来源标真实值（数据诚实）。播放键与进度线由演示层驱动；PPTX 导出时音频图标落在播放键位置。
+```html
+<section class="slide" data-layout="L19">
+  <h2 class="sl-title">页标题</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <div class="l19-card" data-shape="rect"></div>
+  <div class="l19-play" data-shape="ellipse"></div>
+  <p class="l19-glyph">▶</p>
+  <audio class="l19-audio" src="assets/media/4-track.mp3" aria-label="音轨内容描述" controls preload="none"></audio>
+  <h3 class="l19-track">音轨标题</h3>
+  <p class="l19-meta">时长 · 作者/来源 · 授权说明</p>
+  <div class="l19-bar" data-shape="rect"></div>
+  <div class="l19-progress" data-shape="rect"></div>
+  <p class="l19-time">0:00 / 0:00</p>
+  <p class="l19-note">一段说明（可删）。</p>
+</section>
+```
+
+## 媒体约定（L17–L19 通用）
+
+- 媒体文件放 `assets/media/`，命名 `{页码}-{语义}.{ext}`；**禁止远程 URL**（R13 拦截，离线播放与 PPTX 嵌入都需要本地文件）。
+- 视频必须提供 `poster`（同目录 `-poster.jpg`）：flat 渲染、PDF、PPTX 封面帧全部锁定在这一帧，确定性由它保证。选帧规则同照片：主体清晰、文字避让。
+- 视频建议 H.264 MP4（PowerPoint 兼容）、≤60 秒、≤10MB；音频用 MP3。
+- 导出行为：PPTX 用 pptxgenjs addMedia 原生嵌入（接收方双击播放），视频封面为浏览器实际渲染截图；PDF 中视频替换为 poster 图。
 
 ## 企业槽位（可选，任意版式追加）
 

@@ -1,5 +1,5 @@
 /* ================================================================
-   base.css — design tokens + registered layout skeletons (L01–L16)
+   base.css — design tokens + registered layout skeletons (L01–L19)
    Canvas contract: 1280x720 px -> 960x540 pt (px * 0.75)
    Rules: slides may only use classes defined here; colors only via
    tokens; all text lives in h1/h2/h3/p; decorations on [data-shape].
@@ -74,7 +74,7 @@ body { background: #26262a; }
 }
 
 .slide h1, .slide h2, .slide h3, .slide p { position: absolute; }
-.slide [data-shape], .slide img { position: absolute; }
+.slide [data-shape], .slide img, .slide video, .slide audio { position: absolute; }
 
 /* inline emphasis inside text slots — exports as PPTX text runs;
    only unnested strong/em/span are allowed (validator R7) */
@@ -93,7 +93,7 @@ body { background: #26262a; }
 .l11-note, .l12-p, .l13-sub, .l14-caption, .l16-caption {
   text-wrap: balance;
 }
-.l10-body, .l14-body { text-align: justify; }
+.l10-body, .l14-body, .l18-body { text-align: justify; }
 
 /* ---------- per-slide dark inversion (rhythm pages: L03/L04/L13) ---------- */
 .slide.is-dark {
@@ -347,6 +347,39 @@ body { background: #26262a; }
 .l14-body { left: 96px; top: 220px; width: 560px; font-size: 24px; line-height: 1.7; color: var(--text-1); }
 .l14-img { left: 720px; top: 200px; width: 464px; height: 420px; object-fit: cover; }
 .l14-caption { left: 720px; top: 636px; width: 464px; font-size: 16px; color: var(--text-2); }
+/* mirrored variant (L14/L18): media left, text right */
+.l14-img.is-left, .l18-video.is-left { left: 96px; }
+.l14-caption.is-left, .l18-caption.is-left { left: 96px; }
+.l14-body.is-right, .l18-body.is-right { left: 624px; }
+
+/* ---------- L17 video hero ---------- */
+.l17-video { left: 0; top: 0; width: 1280px; height: 720px; object-fit: cover; background: #000; }
+.l17-scrim { left: 0; top: 468px; width: 1280px; height: 252px; background: var(--scrim); }
+.l17-title {
+  font-family: var(--font-display); left: 96px; top: 520px; width: 1088px; font-size: 48px; font-weight: 600; color: var(--on-image); }
+.l17-sub { left: 96px; top: 606px; width: 1000px; font-size: 22px; color: var(--on-image); }
+
+/* ---------- L18 video + text ---------- */
+.l18-body { left: 96px; top: 220px; width: 560px; font-size: 24px; line-height: 1.7; color: var(--text-1); }
+.l18-video { left: 720px; top: 200px; width: 464px; height: 420px; object-fit: cover; background: #000; }
+.l18-caption { left: 720px; top: 636px; width: 464px; font-size: 16px; color: var(--text-2); }
+
+/* ---------- L19 audio feature ---------- */
+.l19-card { left: 96px; top: 232px; width: 1088px; height: 216px; background: var(--surface); }
+.l19-play { left: 152px; top: 292px; width: 96px; height: 96px; background: var(--accent); border-radius: 50%; }
+.l19-glyph { left: 152px; top: 314px; width: 96px; text-align: center; font-size: 36px; line-height: 1.4; color: var(--on-accent); }
+.l19-track {
+  font-family: var(--font-display); left: 296px; top: 282px; width: 680px; font-size: 30px; font-weight: 600; color: var(--text-1); }
+.l19-meta { left: 296px; top: 336px; width: 680px; font-size: 17px; color: var(--text-2); }
+.l19-bar { left: 296px; top: 392px; width: 680px; height: 4px; background: var(--hairline); }
+.l19-progress { left: 296px; top: 392px; width: 0; height: 4px; background: var(--accent); } /* runtime-driven */
+.l19-time {
+  font-family: var(--font-mono); left: 1000px; top: 382px; width: 132px; text-align: right; font-size: 16px; color: var(--text-2); }
+/* the <audio> element itself: needs the controls attribute (Chromium
+   UA-hides it otherwise), rendered invisible over the play dot; exports
+   as the PPTX audio icon at this box; playback is driven by enhance.js */
+.l19-audio { left: 152px; top: 292px; width: 96px; height: 96px; opacity: 0; pointer-events: none; }
+.l19-note { left: 96px; top: 496px; width: 1088px; font-size: 18px; line-height: 1.7; color: var(--text-2); }
 
 /* ---------- L15 h-bar comparison (real data only) ---------- */
 .l15-label {

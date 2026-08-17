@@ -49,7 +49,7 @@ export async function measureDeck(indexPath) {
         if (t && !parent.closest('h1, h2, h3, p')) stray.push({ text: t.slice(0, 24), tag: parent.tagName.toLowerCase() });
       }
 
-      const els = [...slide.querySelectorAll('[data-shape], img, h1, h2, h3, p')].filter((el) => {
+      const els = [...slide.querySelectorAll('[data-shape], img, video, audio, h1, h2, h3, p')].filter((el) => {
         const r = el.getBoundingClientRect();
         return r.width > 0 && r.height > 0; // skip display:none (e.g. speaker notes)
       }).map((el) => {
@@ -66,6 +66,15 @@ export async function measureDeck(indexPath) {
             kind: 'image', ...box, src: el.getAttribute('src'), fit: s.objectFit,
             alt: el.getAttribute('alt') || '',
             decor: el.getAttribute('aria-hidden') === 'true',
+            classes: [...el.classList], inlineStyle,
+          };
+        }
+        if (el.tagName === 'VIDEO' || el.tagName === 'AUDIO') {
+          return {
+            kind: el.tagName.toLowerCase(), ...box, opacity,
+            src: el.getAttribute('src') || '',
+            poster: el.getAttribute('poster') || '',
+            label: el.getAttribute('aria-label') || '',
             classes: [...el.classList], inlineStyle,
           };
         }

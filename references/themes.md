@@ -5,7 +5,7 @@
 ## 两级体系
 
 - **主题**（`themes/*.css`）：只覆写颜色 token，设计语言不变。
-- **设计系统**（`systems/*.css`）：覆写颜色 + 字体 token 及排印细节（字重/字距），整套设计语言切换；禁止触碰几何。16 个版式对所有系统通用。
+- **设计系统**（`systems/*.css`）：覆写颜色 + 字体 token 及排印细节（字重/字距），整套设计语言切换；禁止触碰几何。19 个版式对所有系统通用。
 
 display/数字/mono 槽位使用 deck 内子集 webfont（思源黑 VF、思源宋、JetBrains Mono），mac/Windows/Linux 渲染一致；正文槽位保持系统字体（保证 HTML↔PPTX 段落换行一致）。子集缺失时按 token 中的系统字体栈优雅回退。
 

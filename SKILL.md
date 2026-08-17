@@ -5,7 +5,7 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），并可�
 
 # PPT Skill
 
-把内容装进 16 个注册版式，产出单目录网页 PPT；HTML 是唯一的源，PPTX / PNG 是一键衍生物。
+把内容装进 19 个注册版式，产出单目录网页 PPT；HTML 是唯一的源，PPTX / PNG 是一键衍生物。
 
 ## 硬约束（违反任何一条即返工）
 
@@ -14,6 +14,7 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），并可�
 3. **禁止裸色值与字体声明**。颜色只经 token；行内 style 只允许 `top/left/width/height/font-size/line-height` 的参数化数值。
 4. **每页必须声明 `data-layout="Lxx"`**（L01–L13）。
 5. **文字只能在 `h1/h2/h3/p` 内**；段内强调仅允许非嵌套的 `<strong>`/`<em>`/`<span class="is-accent">`（导出为 PPTX 原生分段样式）；装饰元素挂 `div[data-shape="rect|ellipse"]`；图片用 `<img>`，禁止 background-image 承载内容图。
+9. **媒体本地化 + 封面帧锁定**：视频/音频文件放 `assets/media/`（禁远程 URL）；视频必带 `poster` 与 `aria-label`，音频必带 `controls` 与 `aria-label`——渲染、PDF、PPTX 的静止画面全部锁定在 poster（校验器 R13 拦截）。
 6. **数据诚实**：L07/L11 等数据版式必须使用用户提供的真实数值，禁止编造；无真实数据就改用概念版式。
 7. **每页密度纪律**：1 个核心信息 + 不超过 4 个支撑点；超出即拆页；相邻页不重复同一版式。
 8. **主题整套使用**，一个 deck 一个主题文件，不逐页混搭。
@@ -84,13 +85,16 @@ node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"  # Office �
 | L11 | 台账行 | 4 行 label–value–note 结构化信息 |
 | L12 | 流程步骤 | 4 步过程 |
 | L13 | 结尾 | 收束语 + 元信息 |
-| L14 | 图文半幅 | 左正文 + 右半幅照片，宣传类内容页优先于 L10 |
+| L14 | 图文半幅 | 左正文 + 右半幅照片（is-left/is-right 可镜像） |
 | L15 | 条形对比图 | 4 行真实数据横向条形（条长与数值成正比，校验器核对） |
 | L16 | 图片网格 | 2×2 四图并列 |
+| L17 | 视频主视觉 | 全幅视频开场/氛围（poster 锁帧，自动静音播放） |
+| L18 | 视频半幅 | 左讲解 + 右视频，点击播放（is-left/is-right 可镜像） |
+| L19 | 音频页 | 播客/音乐/访谈片段，设计化播放卡片 |
 
 ## 主题与设计系统
 
-两套设计系统共用全部 16 个版式，换 `<link id="theme">` 一个文件整套切换：
+两套设计系统共用全部 19 个版式，换 `<link id="theme">` 一个文件整套切换：
 - **现代无衬线**（默认）：token 主题 `paper`（暖纸白）· `graphite`（深色）· `forest`（冷纸绿）
 - **「墨韵」衬线杂志风**：`--theme editorial`，宋体 × 暖纸 × 朱砂，适合文化/品牌/人文调性
 
@@ -98,7 +102,7 @@ node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"  # Office �
 
 ## 参考文档（按需读取，勿全量加载）
 
-- `references/layouts.md` — 16 个版式的完整可复制骨架 + DATUM 铺装 + 节奏装饰用法
+- `references/layouts.md` — 19 个版式的完整可复制骨架 + DATUM 铺装 + 媒体约定 + 节奏装饰用法
 - `references/narratives.md` — 路演/汇报/宣传三套叙事页序模板
 - `references/themes.md` — 主题目录与受众映射
 - `references/authoring.md` — 文案密度、中文字号规则

@@ -30,7 +30,7 @@ if (existsSync(index)) {
   process.exit(1);
 }
 
-mkdirSync(join(deck, 'assets/img'), { recursive: true });
+for (const d of ['assets/img', 'assets/media']) mkdirSync(join(deck, d), { recursive: true });
 for (const f of ['base.css', 'runtime.js', 'enhance.js']) cpSync(join(root, 'assets', f), join(deck, 'assets', f));
 for (const d of ['themes', 'systems', 'textures']) cpSync(join(root, 'assets', d), join(deck, 'assets', d), { recursive: true });
 writeFileSync(index, readFileSync(join(root, 'templates/seed.html'), 'utf8').replace('assets/themes/paper.css', themeHref));

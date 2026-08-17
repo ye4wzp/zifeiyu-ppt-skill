@@ -12,10 +12,11 @@
 
 ## 特性
 
-- **16 个注册版式 × 2 套设计系统 × 3 套 Token 主题**：版式覆盖封面、目录、章节、金句、对比、论证、KPI、条形图、时间线、图文、图片网格、台账、流程、全幅图、结尾，另有页码/logo/二维码企业槽位；设计系统有现代无衬线（思源黑可变字重）与「墨韵」衬线杂志风（思源宋 × 暖纸 × 朱砂）两套——同一版式库，换一个 CSS 文件整套切换
+- **19 个注册版式 × 2 套设计系统 × 3 套 Token 主题**：版式覆盖封面、目录、章节、金句、对比、论证、KPI、条形图、时间线、图文（可镜像）、图片网格、台账、流程、全幅图、视频主视觉、视频半幅、音频页、结尾，另有页码/logo/二维码企业槽位；设计系统有现代无衬线（思源黑可变字重）与「墨韵」衬线杂志风（思源宋 × 暖纸 × 朱砂）两套——同一版式库，换一个 CSS 文件整套切换
+- **视频与音频一等公民**：`<video>/<audio>` 进入元素契约——poster 锁定封面帧保证渲染确定性，演示层驱动播放（进页自动静音播放/点击播放/设计化音频卡片），PPTX 原生嵌入媒体（接收方双击播放），PDF 自动替换为封面帧
 - **确定性字体子集**：思源黑/思源宋/JetBrains Mono 按 deck 实际字符裁切成 woff2 随 deck 分发（每 deck 约 800KB），mac/Windows/Linux 渲染一致、file:// 直接可用；标点挤压（halt）、短槽位均衡断行、正文两端对齐等 CJK 排印细节内建
 - **四格式交付链**：HTML 演示 → 可编辑 PPTX → 矢量 PDF → 逐页 PNG，全部一条命令，HTML 是唯一的源
-- **机器质量门**：Playwright 校验器执行 R1–R12 量化规则（版式注册、类名白名单、溢出、字号下限、文本碰撞、条形图比例诚实、对比度下限、文档卫生……），错误即阻断交付；金样像素回归基线随仓库维护（`npm run regress`）
+- **机器质量门**：Playwright 校验器执行 R1–R13 量化规则（版式注册、类名白名单、溢出、字号下限、文本碰撞、条形图比例诚实、对比度下限、文档卫生、媒体契约……），错误即阻断交付；金样像素回归基线随仓库维护（`npm run regress`）
 - **DATUM 制图美学**：坐标纸纹理、四角角线、尺寸标注线、工程图签栏、SHEET 页码、等宽技术标注——设计语言与"确定性导出"的产品灵魂同源；128px 大字排印、满幅色场、单页明暗节奏
 - **语义动画**：数字 count-up、圆点弹入、分隔线拉出——与元素语义绑定，演示模式自动生效，导出通道零影响
 - **演讲者模式**：`S` 键开双窗控制台（当前页 + 下页预览 + 计时器 + 讲稿提示），BroadcastChannel 同步，`file://` 直接可用
@@ -54,7 +55,7 @@ cd ~/.claude/skills/zifeiyu-ppt-skill && npm install
 ```bash
 node scripts/new-deck.mjs <deck-dir> --theme paper           # 建 deck 脚手架
 node scripts/subset-fonts.mjs <deck-dir>                     # 生成 deck 内字体子集（改文字后重跑）
-node scripts/validate.mjs <deck-dir> [--office]              # 机器校验 R1–R12
+node scripts/validate.mjs <deck-dir> [--office]              # 机器校验 R1–R13
 node scripts/render-png.mjs <deck-dir>                       # 逐页截图
 node scripts/export-pdf.mjs <deck-dir>                       # 矢量 PDF（960×540pt）
 node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"  # 可编辑 PPTX

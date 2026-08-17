@@ -14,6 +14,17 @@ const page = await browser.newPage({ viewport: { width: 1280, height: 720 }, dev
 await page.goto('file://' + index + '?flat=1');
 await page.evaluate(() => document.fonts.ready);
 await page.waitForTimeout(200);
+// Chromium print drops <video> frames — substitute each with its poster
+await page.evaluate(() => {
+  document.querySelectorAll('video[poster]').forEach((v) => {
+    const img = document.createElement('img');
+    img.src = v.getAttribute('poster');
+    img.className = v.className;
+    img.setAttribute('style', v.getAttribute('style') || '');
+    img.alt = v.getAttribute('aria-label') || '';
+    v.replaceWith(img);
+  });
+});
 await page.addStyleTag({
   content: `
     @page { size: 1280px 720px; margin: 0; }

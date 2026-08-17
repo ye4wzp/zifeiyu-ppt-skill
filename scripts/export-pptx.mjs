@@ -38,8 +38,9 @@ const { browser, page, slides } = await measureDeck(index);
 
 // Embed cover-cropped images as browser screenshots so the PPTX shows
 // exactly the crop the browser rendered (pptxgenjs cover anchor differs
-// from CSS object-fit center-crop).
-const { mkdirSync } = await import('node:fs');
+// from CSS object-fit center-crop). Videos get the same treatment: their
+// rendered poster becomes the PPTX media cover image.
+const { mkdirSync, readFileSync } = await import('node:fs');
 const cropDir = resolve(deckDir, '.export-crops');
 mkdirSync(cropDir, { recursive: true });
 for (let i = 0; i < slides.length; i++) {
@@ -50,6 +51,12 @@ for (let i = 0; i < slides.length; i++) {
     await page.locator('.slide').nth(i).locator('img').nth(j).screenshot({ path: shot });
     imgs[j].src = shot;
     imgs[j].fit = 'exact';
+  }
+  const vids = slides[i].els.filter((el) => el.kind === 'video');
+  for (let j = 0; j < vids.length; j++) {
+    const shot = resolve(cropDir, `s${i + 1}-vid${j + 1}.png`);
+    await page.locator('.slide').nth(i).locator('video').nth(j).screenshot({ path: shot });
+    vids[j].cover = `data:image/png;base64,${readFileSync(shot).toString('base64')}`;
   }
 }
 await browser.close();
@@ -102,6 +109,15 @@ for (const s of slides) {
         el.fit === 'contain' ? { type: 'contain', w: box.w, h: box.h } : undefined;
       slide.addImage({ path: resolve(deckDir, el.src), ...box, sizing });
       // 'exact': pre-cropped screenshot, box maps 1:1, no sizing needed
+    } else if (el.kind === 'video' || el.kind === 'audio') {
+      // embedded media; videos carry their rendered poster as the cover,
+      // audio keeps the PowerPoint speaker chrome at the play-dot box
+      slide.addMedia({
+        type: el.kind,
+        path: resolve(deckDir, el.src),
+        ...box,
+        ...(el.cover && { cover: el.cover }),
+      });
     } else {
       // inline emphasis (strong/em/accent span) -> per-run overrides
       const styled = el.runs?.some((r) => r.bold != null || r.italic || r.color);

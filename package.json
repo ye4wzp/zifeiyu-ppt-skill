@@ -10,8 +10,8 @@
     "render": "node scripts/render-png.mjs",
     "export": "node scripts/export-pptx.mjs",
     "pdf": "node scripts/export-pdf.mjs",
-    "regress": "node scripts/render-png.mjs examples/showcase --out .regress/showcase && node scripts/render-png.mjs examples/editorial --out .regress/editorial && node scripts/diff.mjs baselines/showcase .regress/showcase --out .regress/diff-showcase && node scripts/diff.mjs baselines/editorial .regress/editorial --out .regress/diff-editorial",
-    "baseline": "node scripts/render-png.mjs examples/showcase --out baselines/showcase && node scripts/render-png.mjs examples/editorial --out baselines/editorial"
+    "regress": "node scripts/render-png.mjs examples/showcase --out .regress/showcase && node scripts/render-png.mjs examples/editorial --out .regress/editorial && node scripts/render-png.mjs examples/media --out .regress/media && node scripts/diff.mjs baselines/showcase .regress/showcase --out .regress/diff-showcase && node scripts/diff.mjs baselines/editorial .regress/editorial --out .regress/diff-editorial && node scripts/diff.mjs baselines/media .regress/media --out .regress/diff-media",
+    "baseline": "node scripts/render-png.mjs examples/showcase --out baselines/showcase && node scripts/render-png.mjs examples/editorial --out baselines/editorial && node scripts/render-png.mjs examples/media --out baselines/media"
   },
   "dependencies": {
     "pixelmatch": "^7.2.0",

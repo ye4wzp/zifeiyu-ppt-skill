@@ -60,16 +60,46 @@
       prep(d, { transform: 'scale(0)' });
       play(d, { transform: 'scale(1)' }, 300 + i * 90, 350);
     });
-    slide.querySelectorAll('img').forEach((img) => {
+    slide.querySelectorAll('img, video').forEach((img) => {
       prep(img, { opacity: '0', transform: 'scale(1.04)' });
       play(img, { opacity: '1', transform: 'scale(1)' }, 0, 900);
     });
   };
 
+  /* media semantics: videos marked data-autoplay start on slide entry
+     (add the muted attribute to satisfy autoplay policy); everything
+     pauses and rewinds on exit; clicking a video or the L19 play dot
+     toggles playback; the L19 progress line and clock follow the audio */
+  const toggle = (m) => (m.paused ? m.play().catch(() => {}) : m.pause());
+  const playMedia = (slide) =>
+    slide.querySelectorAll('video[data-autoplay]').forEach((v) => v.play().catch(() => {}));
+  const stopMedia = (slide) =>
+    slide.querySelectorAll('video, audio').forEach((m) => { m.pause(); m.currentTime = 0; });
+  addEventListener('click', (e) => {
+    const v = e.target.closest('video');
+    if (v) return toggle(v);
+    const dot = e.target.closest('.l19-play, .l19-glyph');
+    const a = dot?.closest('.slide')?.querySelector('audio');
+    if (a) toggle(a);
+  });
+  const fmt = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  document.querySelectorAll('.slide').forEach((slide) => {
+    const a = slide.querySelector('audio');
+    const bar = slide.querySelector('.l19-progress');
+    if (!a || !bar) return;
+    const time = slide.querySelector('.l19-time');
+    a.addEventListener('timeupdate', () => {
+      if (!a.duration) return;
+      bar.style.width = `${(a.currentTime / a.duration) * 680}px`;
+      if (time) time.textContent = `${fmt(a.currentTime)} / ${fmt(a.duration)}`;
+    });
+  });
+
   const slides = document.querySelectorAll('.slide');
   const watch = new MutationObserver((muts) => {
     for (const m of muts) {
-      if (m.target.classList.contains('is-active')) animate(m.target);
+      if (m.target.classList.contains('is-active')) { animate(m.target); playMedia(m.target); }
+      else stopMedia(m.target);
     }
   });
   slides.forEach((s) => watch.observe(s, { attributes: true, attributeFilter: ['class'] }));
