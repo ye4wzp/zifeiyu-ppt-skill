@@ -22,16 +22,26 @@
 ```
 
 ## L02 目录
-3–5 行，少于 5 行时删除多余的 `l02-rN` 对。
+3–5 行，少于 5 行时删除多余的 `l02-rN` 组。页码列与引导线可删；页码必须与实际 SHEET 页序一致（生成端填写）。
 ```html
 <section class="slide" data-layout="L02">
   <h2 class="sl-title">目录</h2>
   <div class="sl-rule" data-shape="rect"></div>
   <p class="l02-num l02-r1">01</p><p class="l02-item l02-r1">议程一</p>
+  <p class="l02-page l02-p1">03</p>
+  <div class="l02-line l02-s1" data-shape="rect"></div>
   <p class="l02-num l02-r2">02</p><p class="l02-item l02-r2">议程二</p>
+  <p class="l02-page l02-p2">05</p>
+  <div class="l02-line l02-s2" data-shape="rect"></div>
   <p class="l02-num l02-r3">03</p><p class="l02-item l02-r3">议程三</p>
+  <p class="l02-page l02-p3">08</p>
+  <div class="l02-line l02-s3" data-shape="rect"></div>
   <p class="l02-num l02-r4">04</p><p class="l02-item l02-r4">议程四</p>
+  <p class="l02-page l02-p4">11</p>
+  <div class="l02-line l02-s4" data-shape="rect"></div>
   <p class="l02-num l02-r5">05</p><p class="l02-item l02-r5">议程五</p>
+  <p class="l02-page l02-p5">14</p>
+  <div class="l02-line l02-s5" data-shape="rect"></div>
 </section>
 ```
 
@@ -293,7 +303,7 @@
 4. 有页眉的内容页：`sl-title` 行内 `top: 108px`，并**删除 sl-rule**。
 5. **标注线**（封面/章节/金句页）：`.dim-tick + .dim-line + .dim-tick` 三件套 + 下方 `sl-mono` 标签，标注内容写真实参数（跨度、网格、规则号）。
 6. **图签栏**（封面、数据页、结尾页）：`.tb-rule` 横线 + 三组 `.tb-label`/`.tb-value` + 两条 `.tb-div` 竖分隔；数据页用它承载 SOURCE / DATE / STATUS（数据诚实协议的视觉化）。
-7. 节奏页设计：章节页 = is-accent 满幅色场 + `.dt-mega` 巨号贴右；金句页 = is-dark + `.dt-display` 两行大字（每行一个 h1）；封面 = `.dt-display` 128px 两行。
+7. 节奏页设计：章节页 = is-accent 满幅色场 + `.dt-mega` 巨号贴右；金句页 = is-dark + `.dt-display` 两行大字（每行一个 h1）；封面 = `.dt-display` 128px 两行，右上空区放 `.sl-ghost` 数字（版式数/年份等真实参数）平衡构图。
 8. L09 全幅图页不加铺装，保持纯净。
 
 纪律：标注文字必须真实（不许装饰性假参数）；每页最多一条标注线；SHEET 编号与实际页序一致。

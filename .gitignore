@@ -1,6 +1,10 @@
 # dependencies
 node_modules/
 
+# full source fonts (~55MB, re-fetch with scripts/fetch-fonts.mjs;
+# decks carry tiny per-deck subsets instead)
+assets/fonts-src/
+
 # private client decks — never commit
 decks/
 

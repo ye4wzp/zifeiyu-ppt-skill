@@ -4,6 +4,8 @@
   "type": "module",
   "scripts": {
     "new-deck": "node scripts/new-deck.mjs",
+    "fonts": "node scripts/fetch-fonts.mjs",
+    "subset": "node scripts/subset-fonts.mjs",
     "validate": "node scripts/validate.mjs",
     "render": "node scripts/render-png.mjs",
     "export": "node scripts/export-pptx.mjs",
@@ -15,6 +17,7 @@
     "pixelmatch": "^7.2.0",
     "playwright": "^1.61.0",
     "pngjs": "^7.0.0",
-    "pptxgenjs": "^4.0.1"
+    "pptxgenjs": "^4.0.1",
+    "subset-font": "^2.5.0"
   }
 }

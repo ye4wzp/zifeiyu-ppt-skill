@@ -15,6 +15,8 @@ node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"
 node scripts/export-pptx.mjs <deck-dir> --cjk-font "PingFang SC"
 ```
 
+HTML / PDF / PNG 三通道由 deck 内字体子集保真（思源黑/思源宋/JetBrains Mono）；PPTX 侧照旧映射系统字体：思源黑→`--cjk-font`（默认 PingFang SC，跨平台交付用 Microsoft YaHei）、思源宋→`--cjk-serif`（默认 SimSun）、JetBrains Mono→Consolas。
+
 事实依据（2026-07-16 全链路实测：HTML 截图 ↔ soffice→PDF→PNG 逐像素比对）：
 - pptxgenjs **不支持字体嵌入**，fontFace 只是名字引用，接收方机器必须装有该字体。
 - PingFang 仅 macOS 可用；Windows 上会静默回退（通常到宋体/等线）改变字宽度量。跨平台交付一律用 Microsoft YaHei。

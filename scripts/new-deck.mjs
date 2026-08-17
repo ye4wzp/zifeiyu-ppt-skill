@@ -38,3 +38,4 @@ writeFileSync(index, readFileSync(join(root, 'templates/seed.html'), 'utf8').rep
 console.log(`deck ready: ${index}`);
 console.log(`theme: ${themeHref}`);
 console.log('next: replace <title>, then copy layout skeletons from references/layouts.md into <!-- SLIDES_HERE -->');
+console.log('after the text is final: node scripts/subset-fonts.mjs <deck-dir>  (deck-local webfont subsets)');

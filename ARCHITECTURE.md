@@ -69,6 +69,7 @@ ppt-skill/
 │   ├── themes/                  # paper / graphite / forest，每套 ≤100 行，只覆写颜色 token
 │   ├── systems/                 # 设计系统（editorial「墨韵」），可覆写字体 token 与排印细节
 │   ├── textures/                # DATUM 坐标纸/点阵纹理
+│   ├── fonts-src/               # 完整字体源（思源黑 VF/思源宋/JetBrains Mono，gitignore，fetch-fonts 拉取）
 │   ├── runtime.js               # 演示导航 + 深链 #/N + 演讲者控制台（BroadcastChannel 双窗同步）
 │   └── enhance.js               # Web 档语义动画层（?flat=1 与导出通道自动跳过）
 ├── templates/seed.html          # 种子模板：完整 head/引用 + <!-- SLIDES_HERE -->
@@ -76,6 +77,8 @@ ppt-skill/
 ├── scripts/                     # 全部基于 Playwright，跨平台
 │   ├── lib/deck.mjs             # 测量器：flat 模式实测每页元素的几何/样式/runs
 │   ├── new-deck.mjs             # deck 脚手架（复制种子 + 全部运行时资产）
+│   ├── fetch-fonts.mjs          # 一次性拉取字体源（~80MB，SIL OFL）
+│   ├── subset-fonts.mjs         # 按 deck 实际字符裁切 woff2 子集 → <deck>/assets/fonts/
 │   ├── validate.mjs             # 校验器 R1–R12（规则见 §6）
 │   ├── export-pptx.mjs          # 测量结果 → pptxgenjs 确定性映射（含 --native-charts）
 │   ├── export-pdf.mjs           # 矢量 PDF
@@ -165,6 +168,7 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
 - **M3 · 完整交付链**：export-pdf.mjs、render-png.mjs、enhance.js 语义动画、原生备注/原生图表导出。
 - **M4 · 体验补强**：设计系统 02「墨韵」、DATUM 制图铺装、演讲者模式（BroadcastChannel 双窗同步 + 讲稿 + 计时器）、L14–L16 版式。
 - **M5 · 质量闭环**：new-deck 脚手架、校验器全元素覆盖（R1–R12：数据比例诚实、对比度预警、文档卫生）、段内强调 text runs 导出、像素回归基线（baselines/ + regress）。
+- **M6 · 排印升级**：确定性字体子集管线（思源黑 VF/思源宋/JetBrains Mono → 每 deck 约 800KB woff2，三端一致）、CJK 排印细节（halt 标点挤压、短槽位 balance 断行、正文 justify、标题 700）、构图修缮（L02 引导线+页码列、L12 垂直居中、封面鬼影数字平衡）。display/数字/mono 走子集字体，正文保持系统字体以维持 HTML↔PPTX 换行一致。
 
 ## 9. 风险与对策
 

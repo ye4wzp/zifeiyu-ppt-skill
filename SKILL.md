@@ -44,8 +44,9 @@ node scripts/new-deck.mjs <deck-dir> --theme paper|graphite|forest|editorial
 ### 第 5 步 · 批量填充
 先按 `references/narratives.md` 选叙事模板（路演/汇报/宣传）定页序，再逐页：从 `references/layouts.md` 复制骨架 → 只替换文字/图片 → 自查密度。图片放 `<deck-dir>/assets/img/`，命名 `{页码}-{语义}.{ext}`。
 
-### 第 6 步 · 机器校验（第一道门）
+### 第 6 步 · 字体子集 + 机器校验（第一道门）
 ```bash
+node scripts/subset-fonts.mjs <deck-dir>      # 文字定稿后生成 deck 内字体子集；之后每次改文字都重跑
 node scripts/validate.mjs <deck-dir>          # Web 档
 node scripts/validate.mjs <deck-dir> --office # Office 档
 ```

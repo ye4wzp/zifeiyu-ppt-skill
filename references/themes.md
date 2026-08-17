@@ -7,9 +7,11 @@
 - **主题**（`themes/*.css`）：只覆写颜色 token，设计语言不变。
 - **设计系统**（`systems/*.css`）：覆写颜色 + 字体 token 及排印细节（字重/字距），整套设计语言切换；禁止触碰几何。16 个版式对所有系统通用。
 
+display/数字/mono 槽位使用 deck 内子集 webfont（思源黑 VF、思源宋、JetBrains Mono），mac/Windows/Linux 渲染一致；正文槽位保持系统字体（保证 HTML↔PPTX 段落换行一致）。子集缺失时按 token 中的系统字体栈优雅回退。
+
 ## 设计系统 02 ·「墨韵」editorial
 
-`systems/editorial.css` — 宋体标题 × 暖纸底 × 朱砂强调 × Georgia 老式数字。适用：文化内容、品牌故事、人文调性的分享与发布。PPTX 导出时衬线标题自动映射 SimSun（`--cjk-serif` 可改），Windows 开箱可用。注意：Georgia 老式数字的 0 呈小写形态，是风格特征而非错误。
+`systems/editorial.css` — 思源宋体标题 × 暖纸底 × 朱砂强调 × 衬线 lining 数字（随 deck 字体子集分发，Windows 不再回退中易宋体）。适用：文化内容、品牌故事、人文调性的分享与发布。PPTX 导出时衬线标题自动映射 SimSun（`--cjk-serif` 可改），Windows 开箱可用。
 
 | 主题 | 气质 | 适用受众/场合 | 备注 |
 |---|---|---|---|

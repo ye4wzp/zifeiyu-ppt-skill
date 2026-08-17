@@ -17,9 +17,9 @@ const outFile = resolve(deckDir, flag('--out', 'deck.pptx'));
 const cjkFont = flag('--cjk-font', 'PingFang SC');
 
 // PPTX has no numeric weights: <=300 needs the Light face; >=600 -> bold.
-const CJK_STACK = new Set(['PingFang SC', 'Microsoft YaHei', 'Noto Sans SC']);
-const CJK_SERIF_STACK = new Set(['Songti SC', 'Noto Serif SC', 'SimSun', 'STSong']);
-const MONO_STACK = new Set(['SF Mono', 'Menlo', 'Consolas']);
+const CJK_STACK = new Set(['Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC']);
+const CJK_SERIF_STACK = new Set(['Source Han Serif SC', 'Songti SC', 'Noto Serif SC', 'SimSun', 'STSong']);
+const MONO_STACK = new Set(['JetBrains Mono', 'SF Mono', 'Menlo', 'Consolas']);
 const cjkSerif = flag('--cjk-serif', 'SimSun'); // ubiquitous on Windows
 const fontFace = (t) => {
   if (CJK_STACK.has(t.fontFamily)) return t.fontWeight <= 300 ? `${cjkFont} Light` : cjkFont;

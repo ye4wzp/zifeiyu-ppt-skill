@@ -11,6 +11,7 @@ The one-line difference from similar projects: beautiful HTML decks usually can'
 ## Features
 
 - **16 registered layouts × 2 design systems × 3 token themes** — cover, agenda, section, statement, comparison, KPI, bar chart, timeline, image hero/grid, ledger, process, closing; swap the entire type language (modern sans ↔ serif editorial) by changing one CSS file
+- **Deterministic font subsets** — Source Han Sans (variable weight), Source Han Serif, and JetBrains Mono are sliced to each deck's actual characters (~800KB per deck) and travel with it: identical rendering on macOS/Windows/Linux, works on file://; CJK refinements (halt punctuation compression, balanced line wrapping, justified body columns) built in
 - **Four-format delivery chain** — HTML presentation → editable PPTX → vector PDF → per-slide PNG, each one command; HTML is the single source of truth
 - **Machine quality gate** — a Playwright validator enforces R1–R12 quantified rules (layout registry, class whitelist, overflow, font floor, text collision, bar-chart proportionality, contrast floor, document hygiene…); errors block delivery, and golden-deck pixel baselines guard every skeleton/theme change (`npm run regress`)
 - **Poster-grade typography** — 100px cover titles, 220px section numerals, 136px thin-weight KPI figures, 280px translucent ghost type, per-slide dark inversion
@@ -32,7 +33,7 @@ git clone https://github.com/ye4wzp/zifeiyu-ppt-skill ~/.claude/skills/zifeiyu-p
 cd ~/.claude/skills/zifeiyu-ppt-skill && npm install
 ```
 
-Requires Node.js ≥ 18 and `npx playwright install chromium-headless-shell`. LibreOffice + poppler are optional (PPTX-side geometry verification).
+Requires Node.js ≥ 18 and `npx playwright install chromium-headless-shell`. Fetch the source fonts once with `node scripts/fetch-fonts.mjs` (~80MB, all SIL OFL; skipping it falls back to system fonts). LibreOffice + poppler are optional (PPTX-side geometry verification).
 
 ## Usage
 
@@ -40,6 +41,7 @@ Ask Claude Code to "make a deck about X" — the skill drives an 8-step workflow
 
 ```bash
 node scripts/new-deck.mjs <deck-dir> --theme paper   # scaffold a self-contained deck
+node scripts/subset-fonts.mjs <deck-dir>             # deck-local webfont subsets (re-run after text edits)
 node scripts/validate.mjs <deck-dir> [--office]      # machine gate R1–R12
 node scripts/render-png.mjs <deck-dir>
 node scripts/export-pdf.mjs <deck-dir>
