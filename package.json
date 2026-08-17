@@ -10,7 +10,7 @@
     "render": "node scripts/render-png.mjs",
     "export": "node scripts/export-pptx.mjs",
     "pdf": "node scripts/export-pdf.mjs",
-    "regress": "node scripts/render-png.mjs examples/showcase --out .regress/showcase && node scripts/render-png.mjs examples/editorial --out .regress/editorial && node scripts/render-png.mjs examples/media --out .regress/media && node scripts/diff.mjs baselines/showcase .regress/showcase --out .regress/diff-showcase && node scripts/diff.mjs baselines/editorial .regress/editorial --out .regress/diff-editorial && node scripts/diff.mjs baselines/media .regress/media --out .regress/diff-media",
+    "regress": "node scripts/render-png.mjs examples/showcase --out .regress/showcase && node scripts/render-png.mjs examples/editorial --out .regress/editorial && node scripts/render-png.mjs examples/media --out .regress/media && node scripts/render-png.mjs examples/swiss --out .regress/swiss && node scripts/diff.mjs baselines/showcase .regress/showcase --out .regress/diff-showcase && node scripts/diff.mjs baselines/editorial .regress/editorial --out .regress/diff-editorial && node scripts/diff.mjs baselines/media .regress/media --out .regress/diff-media && node scripts/diff.mjs baselines/swiss .regress/swiss --out .regress/diff-swiss",
     "baseline": "node scripts/baseline.mjs",
     "check-pptx": "node scripts/check-pptx.mjs",
     "import-theme": "node scripts/import-theme.mjs",

@@ -21,6 +21,7 @@ jobs:
           node scripts/validate.mjs examples/showcase
           node scripts/validate.mjs examples/editorial
           node scripts/validate.mjs examples/media
+          node scripts/validate.mjs examples/swiss
       - name: Render check
         run: |
           node scripts/render-png.mjs examples/showcase --out /tmp/renders

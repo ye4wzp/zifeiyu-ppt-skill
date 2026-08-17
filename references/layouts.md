@@ -358,6 +358,18 @@
 
 纪律：标注文字必须真实（不许装饰性假参数）；每页最多一条标注线；SHEET 编号与实际页序一致。
 
+## GRID 版面语法（瑞士系统 systems/swiss.css 默认构成）
+
+金样 `examples/swiss/` 为完整范例。每页规则：
+1. **等宽页眉**：左 `<p class="sl-mono" style="left: 96px; top: 64px;">GRID · 主题名</p>`，右 `NN / NN` 页码（`width: 138px`）——注意与 DATUM 的 SHEET 编号格式区分。有页眉的内容页 `sl-title` 行内 `top: 108px` 并删除 sl-rule。
+2. **点阵纹理只上封面/宣言页**：`<img class="sl-texture" src="assets/textures/dots-dark.png" aria-hidden="true">`（浅底用 dots-dark，色场/墨底用 dots-light）；正文页保持纯净底色。
+3. **单焦点法则**：全 deck 唯一锚点色。一组卡片/KPI 里只允许一个元素上 accent（`is-accent`）；强调词用 `<span class="is-accent">` 或 `<span class="is-mark">`（荧光块），**巨字禁止加粗**。
+4. **三质互斥**：色块只有三种材质——`.sw-accent`（锚点，一组只许一块）/ `.sw-ink`（墨色反转）/ `.sw-grey`（默认中性），几何行内给定；色底/墨底上的文字加 `.sw-rev` 反白。禁止材质组合（色底加描边等）。
+5. **方块刻度**：分页点/装饰一律直角小方块（`.sw-ink` 行内 10×10px，当前项拉宽为 24px），禁止圆点。
+6. **色彩闭环**：封面 `slide.is-accent` 满幅色场开场，结尾页同样 is-accent 收束——首尾同色缝合。
+7. **双轨中缝**：并列对比在两面板之间加 1px `.sw-ink` 竖线。
+8. 换锚点色：按 swiss.css 头部注释的许可对整套替换 token（柠檬黄/柠檬绿/安全橙），一份 deck 仍只有一色。
+
 ## 节奏与装饰（宣传/演讲类推荐）
 
 - **深色节奏页**：`<section class="slide is-dark" ...>` 将该页反转为深色。用于 L03 章节页、L04 金句页、L13 结尾页制造节奏；每 3–5 页最多一次，禁止用于数据/正文页。
@@ -365,9 +377,9 @@
 
 ## 段内强调（可选）
 
-文本槽位内允许非嵌套的 `<strong>`（加粗）、`<em>`（斜体，中文慎用——CJK 无真斜体）、`<span class="is-accent">`（强调色），PPTX 导出时映射为原生分段样式：
+文本槽位内允许非嵌套的 `<strong>`（加粗）、`<em>`（斜体，中文慎用——CJK 无真斜体）、`<span class="is-accent">`（强调色）、`<span class="is-mark">`（荧光标记，取 `--mark` token），PPTX 导出时映射为原生分段样式（标记为原生 run highlight）：
 ```html
-<p class="l10-body">约束不是限制，<strong>约束换质量</strong>，颜色只走 <span class="is-accent">token</span>。</p>
+<p class="l10-body">约束不是限制，<strong>约束换质量</strong>，颜色只走 <span class="is-mark">token</span>。</p>
 ```
 每页合计 ≤2 处，强调即稀缺；其他标签与嵌套一律禁止（校验器 R7 拦截）。
 

@@ -1,0 +1,65 @@
+/* ================================================================
+   Design System 03 「瑞士国际」 — Swiss International
+   高级灰白 × 单一克莱因蓝锚点 × 巨字越大越细。作为超级主题使用：
+   替换 <link id="theme"> 指向本文件即整套切换，19 个版式全部复用。
+   约定：系统文件可覆写 token 与排印细节（字体/字重/字距/字号），
+   禁止触碰任何几何属性（位置与盒尺寸）。
+   语法要点（详见 layouts.md §GRID）：全 deck 唯一锚点色 + 色彩闭环
+   （accent 封面呼应 accent 收尾）；巨字禁粗，强调只用 accent 词或
+   is-mark；点阵纹理只上封面/宣言页，正文页保持纯净。
+   ================================================================ */
+
+:root {
+  /* calibrated greys (constant across accent variants) + ONE accent.
+     默认克莱因蓝；许可的替换对（换 --accent/--on-accent/--mark/--on-mark）：
+     柠檬黄 #ffd500 / #0a0a0a · 柠檬绿 #c5e803 / #0a0a0a ·
+     安全橙 #ff6b35 / #ffffff。禁止双 accent 并存。 */
+  --bg: #fafaf8;
+  --surface: #f0f0ee;
+  --text-1: #0a0a0a;
+  --text-2: #525252;
+  --accent: #002fa7;
+  --on-accent: #ffffff;
+  --hairline: #e0e0e0;
+  --mark: #002fa7;
+  --on-mark: #ffffff;
+
+  --font-display: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+  --font-num: 'Source Han Sans SC', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.slide.is-dark {
+  --bg: #0a0a0a;
+  --surface: #1a1a1a;
+  --text-1: #fafaf8;
+  --text-2: #a3a3a3;
+  --accent: #5b7bff; /* IKB lifts one step on ink, else it drowns */
+  --mark: #5b7bff;
+  --hairline: #333333;
+}
+
+.slide.is-accent {
+  --bg: #002fa7;
+  --surface: rgba(255, 255, 255, 0.1);
+  --text-1: #ffffff;
+  --text-2: rgba(255, 255, 255, 0.75);
+  --accent: #ffffff;
+  --on-accent: #002fa7;
+  --hairline: rgba(255, 255, 255, 0.35);
+}
+
+/* the soul: the bigger the lighter — display type drops to 200 with
+   negative tracking; bold on display type is a style error here */
+.dt-display { font-weight: 200; letter-spacing: -0.02em; }
+.l01-title, .l03-title, .l13-title { font-weight: 200; letter-spacing: -0.02em; }
+.l04-text { font-weight: 200; letter-spacing: -0.015em; }
+.sl-title { font-weight: 300; letter-spacing: -0.01em; }
+.l07-num, .l03-num, .dt-mega, .sl-ghost { font-weight: 200; letter-spacing: -0.03em; }
+.sl-ghost { opacity: 0.05; }
+
+/* instrument-scale mono voice: small caps labels run heavier + wider */
+.sl-mono, .tb-label { font-weight: 500; letter-spacing: 2px; }
+.l01-kicker { font-family: var(--font-mono); font-weight: 600; letter-spacing: 5px; }
+
+/* grey-world small text reads at 500 (size-weight inverse ladder) */
+.l07-footnote, .l15-footnote, .l11-note, .l14-caption, .l16-caption, .l18-caption { font-weight: 500; }

@@ -98,6 +98,8 @@ export async function measureDeck(indexPath) {
             if (cs.fontStyle === 'italic') run.italic = true;
             const c = parseColor(cs.color);
             if (c.hex !== color.hex) run.color = c.hex;
+            const bg = parseColor(cs.backgroundColor);
+            if (bg.alpha > 0) run.highlight = bg.hex; // marker span
             return run;
           }).filter((run) => run.text);
           if (runs.length) {

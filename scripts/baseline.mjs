@@ -7,7 +7,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const GOLDENS = ['showcase', 'editorial', 'media'];
+const GOLDENS = ['showcase', 'editorial', 'media', 'swiss'];
 const run = (script, args) => execFileSync('node', [join(root, 'scripts', script), ...args], { stdio: 'inherit', cwd: root });
 
 for (const d of GOLDENS) {

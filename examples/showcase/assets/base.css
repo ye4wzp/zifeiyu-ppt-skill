@@ -81,6 +81,12 @@ body { background: #26262a; }
 .slide h1 strong, .slide h2 strong, .slide h3 strong, .slide p strong { font-weight: 700; }
 .slide h1 em, .slide h2 em, .slide h3 em, .slide p em { font-style: italic; }
 .slide h1 .is-accent, .slide h2 .is-accent, .slide h3 .is-accent, .slide p .is-accent { color: var(--accent); }
+/* marker highlight (荧光笔): --mark token, exports as a native PPTX run highlight */
+.slide h1 .is-mark, .slide h2 .is-mark, .slide h3 .is-mark, .slide p .is-mark {
+  background: var(--mark, var(--accent));
+  color: var(--on-mark, var(--on-accent));
+  padding: 0 0.08em;
+}
 
 /* CJK typographic refinements
    halt: half-width fullwidth punctuation on display type (no more holes
@@ -402,6 +408,18 @@ body { background: #26262a; }
 .l16-i1 { left: 96px;  top: 200px; } .l16-i2 { left: 648px; top: 200px; }
 .l16-i3 { left: 96px;  top: 436px; } .l16-i4 { left: 648px; top: 436px; }
 .l16-caption { left: 96px; top: 668px; width: 1088px; font-size: 16px; color: var(--text-2); }
+
+/* --- GRID Swiss vocabulary: flat right-angle fills + reversed text
+       (system 03; optional on any layout, geometry set inline) --- */
+.sw-accent { background: var(--accent); }
+.sw-ink { background: var(--text-1); }
+.sw-grey { background: var(--surface); }
+.sw-rev { color: var(--on-accent); } /* text sitting on sw-accent/sw-ink fields */
+.sw-tag {
+  font-family: var(--font-mono);
+  font-size: 16px; font-weight: 600; letter-spacing: 2px;
+  color: var(--on-accent); width: 200px;
+}
 
 /* ---------- optional corporate slots (any layout) ---------- */
 .sl-page {

@@ -143,11 +143,17 @@ for (const s of slides) {
         ...(el.letterSpacing && { charSpacing: px2pt(el.letterSpacing) }),
         ...(next && { paraSpaceAfter: Math.max(0, (next.y - el.y - el.h) * 0.75) }),
       };
-      const styled = el.runs?.some((r) => r.bold != null || r.italic || r.color);
+      const styled = el.runs?.some((r) => r.bold != null || r.italic || r.color || r.highlight);
       const items = styled
         ? el.runs.map((r) => ({
             text: r.text,
-            options: { ...para, ...(r.bold != null && { bold: r.bold }), ...(r.italic && { italic: true }), ...(r.color && { color: r.color }) },
+            options: {
+              ...para,
+              ...(r.bold != null && { bold: r.bold }),
+              ...(r.italic && { italic: true }),
+              ...(r.color && { color: r.color }),
+              ...(r.highlight && { highlight: r.highlight }),
+            },
           }))
         : [{ text: el.text, options: para }];
       if (next) items[items.length - 1].options = { ...items[items.length - 1].options, breakLine: true };
@@ -189,8 +195,8 @@ for (const s of slides) {
         ...(el.cover && { cover: el.cover }),
       });
     } else {
-      // inline emphasis (strong/em/accent span) -> per-run overrides
-      const styled = el.runs?.some((r) => r.bold != null || r.italic || r.color);
+      // inline emphasis (strong/em/accent/marker span) -> per-run overrides
+      const styled = el.runs?.some((r) => r.bold != null || r.italic || r.color || r.highlight);
       const content = styled
         ? el.runs.map((r) => ({
             text: r.text,
@@ -198,6 +204,7 @@ for (const s of slides) {
               ...(r.bold != null && { bold: r.bold }),
               ...(r.italic && { italic: true }),
               ...(r.color && { color: r.color }),
+              ...(r.highlight && { highlight: r.highlight }),
             },
           }))
         : el.text;

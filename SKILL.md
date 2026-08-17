@@ -96,11 +96,12 @@ node scripts/check-pptx.mjs <deck-dir>/deck.pptx                  # 产物结构
 
 ## 主题与设计系统
 
-两套设计系统共用全部 19 个版式，换 `<link id="theme">` 一个文件整套切换：
-- **现代无衬线**（默认）：token 主题 `paper`（暖纸白）· `graphite`（深色）· `forest`（冷纸绿）
-- **「墨韵」衬线杂志风**：`--theme editorial`，宋体 × 暖纸 × 朱砂，适合文化/品牌/人文调性
+三套设计系统共用全部 19 个版式，换 `<link id="theme">` 一个文件整套切换：
+- **现代无衬线**（默认）：token 主题 `paper`（暖纸白）· `graphite`（深色）· `forest`（冷纸绿），配 DATUM 制图铺装
+- **「墨韵」衬线杂志风**：`--theme editorial`，思源宋 × 暖纸 × 朱砂，适合文化/品牌/人文调性
+- **「瑞士国际」GRID**：`--theme swiss`，高级灰白 × 单一克莱因蓝锚点 × 巨字越大越细，适合数据汇报/产品发布/技术分享
 
-**DATUM 制图铺装是默认构成语法**（两套系统通用）：坐标纸纹理、四角角线、等宽页眉、标注线、图签栏，配方整块复制 `references/layouts.md` §DATUM；L09 全幅图页保持纯净不加铺装。选择依据见 `references/themes.md`。
+构成语法按系统选用：现代/墨韵配 **DATUM 制图铺装**（坐标纸、角线、标注线、图签栏，见 `references/layouts.md` §DATUM）；瑞士配 **GRID 版面语法**（单焦点锚点色、三质互斥色块、方块刻度、色彩闭环，见 §GRID）。L09/L17 全幅页一律保持纯净。受众映射见 `references/themes.md`。
 
 ## 参考文档（按需读取，勿全量加载）
 

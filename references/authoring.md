@@ -18,7 +18,7 @@
 
 ## 段内强调
 
-- `<strong>` / `<span class="is-accent">` 每页合计 ≤2 处——强调即稀缺，处处强调等于没有强调。
+- `<strong>` / `<span class="is-accent">` / `<span class="is-mark">`（荧光标记）每页合计 ≤2 处——强调即稀缺，处处强调等于没有强调。
 - 中文正文避免 `<em>`（CJK 无真斜体，PPTX 中为伪斜变形）；拉丁文/术语可用。
 
 ## 标点与断行

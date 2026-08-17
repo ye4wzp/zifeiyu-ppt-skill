@@ -1,0 +1,10 @@
+/* Theme: forest — cool paper, deep green accent */
+:root {
+  --bg: #f5f7f3;
+  --surface: #ffffff;
+  --text-1: #1b241d;
+  --text-2: #5a6b5f;
+  --accent: #1e7a4f;
+  --on-accent: #ffffff;
+  --hairline: #d9dfd6;
+}

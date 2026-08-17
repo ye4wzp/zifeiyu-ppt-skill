@@ -1,0 +1,10 @@
+/* Theme: paper — warm paper white, blue accent (default) */
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --text-1: #16161a;
+  --text-2: #5c5c66;
+  --accent: #0f62fe;
+  --on-accent: #ffffff;
+  --hairline: #d8d6cf;
+}
