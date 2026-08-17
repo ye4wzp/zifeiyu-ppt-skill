@@ -14,12 +14,13 @@ The one-line difference from similar projects: beautiful HTML decks usually can'
 - **Video & audio as first-class citizens** — `<video>/<audio>` join the element contract: posters lock the still frame for deterministic rendering, the presentation layer drives playback (auto-muted heroes, click-to-play, a designed audio card), PPTX embeds media natively (double-click to play), PDF substitutes poster frames
 - **Deterministic font subsets** — Source Han Sans (variable weight), Source Han Serif, and JetBrains Mono are sliced to each deck's actual characters (~800KB per deck) and travel with it: identical rendering on macOS/Windows/Linux, works on file://; CJK refinements (halt punctuation compression, balanced line wrapping, justified body columns) built in
 - **Four-format delivery chain** — HTML presentation → editable PPTX → vector PDF → per-slide PNG, each one command; HTML is the single source of truth
-- **Machine quality gate** — a Playwright validator enforces R1–R13 quantified rules (layout registry, class whitelist, overflow, font floor, text collision, bar-chart proportionality, contrast floor, document hygiene, media contract…); errors block delivery, and golden-deck pixel baselines guard every skeleton/theme change (`npm run regress`)
+- **Machine quality gate** — a Playwright validator enforces R1–R14 quantified rules (layout registry, class whitelist, overflow with graduated fix advice, font floor, text collision, bar-chart proportionality, contrast floor, document hygiene, media contract, placeholder text…); a separate OOXML artifact gate (`check-pptx`) checks package integrity, relationships, and chart XML after export; golden-deck pixel baselines guard every skeleton/theme change (`npm run regress`)
 - **Poster-grade typography** — 100px cover titles, 220px section numerals, 136px thin-weight KPI figures, 280px translucent ghost type, per-slide dark inversion
 - **Semantic animations** — count-up numbers, popping dots, drawing rules; bound to element semantics, presentation-only, exports never affected
 - **Presenter console** — press `S` for a dual-window console (current + next preview, timer, speaker notes), synced via BroadcastChannel, works on `file://`
 - **Data honesty protocol** — KPI/chart layouts require real, sourced values (validator-enforced), and L15 bar lengths are machine-checked to stay proportional to their stated numbers; no data, no numbers
-- **Editable down to the word** — inline `<strong>/<em>/<span class="is-accent">` export as native PPTX text runs
+- **Editable down to the word** — inline emphasis exports as native PPTX text runs; designed-contiguous slot groups merge into single textboxes with per-paragraph styling and exact spacing; experimental `--embed-fonts` rides font subsets inside the .pptx
+- **Post-delivery tweaks** — open `index.html?edit=1` to edit text in place (layout locked) and download the result; extract a brand theme from any corporate template in one command (`import-theme`, with a contrast report)
 
 | | |
 |---|---|

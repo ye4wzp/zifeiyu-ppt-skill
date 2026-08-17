@@ -11,9 +11,15 @@
     "export": "node scripts/export-pptx.mjs",
     "pdf": "node scripts/export-pdf.mjs",
     "regress": "node scripts/render-png.mjs examples/showcase --out .regress/showcase && node scripts/render-png.mjs examples/editorial --out .regress/editorial && node scripts/render-png.mjs examples/media --out .regress/media && node scripts/diff.mjs baselines/showcase .regress/showcase --out .regress/diff-showcase && node scripts/diff.mjs baselines/editorial .regress/editorial --out .regress/diff-editorial && node scripts/diff.mjs baselines/media .regress/media --out .regress/diff-media",
-    "baseline": "node scripts/render-png.mjs examples/showcase --out baselines/showcase && node scripts/render-png.mjs examples/editorial --out baselines/editorial && node scripts/render-png.mjs examples/media --out baselines/media"
+    "baseline": "node scripts/baseline.mjs",
+    "check-pptx": "node scripts/check-pptx.mjs",
+    "import-theme": "node scripts/import-theme.mjs",
+    "sync": "node scripts/sync-skill.mjs",
+    "sync-check": "node scripts/sync-skill.mjs --check"
   },
   "dependencies": {
+    "fast-xml-parser": "^5.11.0",
+    "jszip": "^3.10.1",
     "pixelmatch": "^7.2.0",
     "playwright": "^1.61.0",
     "pngjs": "^7.0.0",

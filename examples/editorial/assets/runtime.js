@@ -11,6 +11,30 @@
   const total = slides.length;
   const bc = 'BroadcastChannel' in window ? new BroadcastChannel('deck:' + location.pathname) : null;
 
+  /* ---------- edit mode (?edit=1): content editable, geometry locked ---------- */
+  if (qs.has('edit')) {
+    document.body.classList.add('edit-ui');
+    slides.forEach((s) => s.querySelectorAll('h1, h2, h3, p').forEach((t) => {
+      if (!t.closest('.notes')) t.contentEditable = 'plaintext-only';
+    }));
+    const bar = document.createElement('div');
+    bar.className = 'edit-bar';
+    bar.innerHTML = '<p>编辑模式：文字可改，版式锁定</p><button>下载修改后的 HTML</button>';
+    document.body.appendChild(bar);
+    bar.querySelector('button').addEventListener('click', () => {
+      const doc = document.documentElement.cloneNode(true);
+      doc.querySelectorAll('[contenteditable]').forEach((t) => t.removeAttribute('contenteditable'));
+      doc.querySelector('.edit-bar')?.remove();
+      doc.querySelector('body').classList.remove('edit-ui');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob(['<!doctype html>\n' + doc.outerHTML], { type: 'text/html' }));
+      a.download = 'index.html';
+      a.click();
+      alert('已下载。替换 deck 的 index.html 后必须重跑：subset-fonts → validate → 按档位导出');
+    });
+    return;
+  }
+
   /* ---------- presenter console ---------- */
   if (qs.has('presenter')) {
     document.body.classList.add('presenter-ui');
@@ -39,6 +63,10 @@
       count.textContent = `${cur + 1} / ${total}`;
       const n = slides[cur].querySelector('.notes');
       notes.innerHTML = n ? n.innerHTML : '<p>（本页无讲稿提示）</p>';
+      // stage cues (转场/停顿/重音) pop out from regular talk lines
+      notes.querySelectorAll('p').forEach((p) => {
+        if (/^(转场|停顿|重音|TRANSITION)/.test(p.textContent.trim())) p.classList.add('pc-cue');
+      });
     };
     bc?.addEventListener('message', (e) => {
       if (e.data.cur != null) { cur = e.data.cur; update(); }

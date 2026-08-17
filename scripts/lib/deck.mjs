@@ -66,6 +66,7 @@ export async function measureDeck(indexPath) {
             kind: 'image', ...box, src: el.getAttribute('src'), fit: s.objectFit,
             alt: el.getAttribute('alt') || '',
             decor: el.getAttribute('aria-hidden') === 'true',
+            naturalW: el.naturalWidth, naturalH: el.naturalHeight,
             classes: [...el.classList], inlineStyle,
           };
         }
@@ -107,7 +108,7 @@ export async function measureDeck(indexPath) {
         return {
           kind: 'text', tag: el.tagName.toLowerCase(), ...box, opacity,
           text: el.textContent.trim(),
-          overflowX: el.scrollWidth > el.clientWidth + 1,
+          overflowX: Math.max(0, el.scrollWidth - el.clientWidth - 1),
           // no overflowY: text slots are auto-height (overflow renders, never
           // clips); real vertical trouble surfaces as R3 bounds or R9 collision
           fontSize: parseFloat(s.fontSize),

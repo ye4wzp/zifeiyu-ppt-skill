@@ -28,4 +28,6 @@ display/数字/mono 槽位使用 deck 内子集 webfont（思源黑 VF、思源�
 
 ## 自定义品牌色
 
-仅当用户提供明确品牌规范（hex 值或官方资产）时，以 paper 为底复制一份新主题文件、替换 `--accent`，并跑对比度检查。禁止凭记忆猜测品牌色。
+- **用户给企业 PPT 模板时（首选）**：`node scripts/import-theme.mjs <template.pptx> <name>` 自动从模板 theme1.xml 提取配色生成 token 主题文件并输出对比度报告；版式与排印保持锁定。
+- 用户只给 hex 值时：以 paper 为底复制新主题文件、替换 `--accent`，跑对比度检查。
+- 禁止凭记忆猜测品牌色。

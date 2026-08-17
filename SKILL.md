@@ -64,9 +64,11 @@ Web 档交付 deck 目录（浏览器打开 index.html，方向键翻页，F 全
 ```bash
 node scripts/export-pdf.mjs <deck-dir>                            # 矢量 PDF（两档皆可）
 node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"  # Office 档
+node scripts/check-pptx.mjs <deck-dir>/deck.pptx                  # 产物结构校验（OOXML 完整性，必跑）
 ```
-讲稿自动导出为 PowerPoint 原生备注；L15 条形图加 `--native-charts` 可生成可编辑原生图表（详见 pptx-export.md）。
-导出后必须做第三道门：用演示软件打开 .pptx 与 HTML 渲染图逐页比对（详见 `references/pptx-export.md`）。
+讲稿自动导出为 PowerPoint 原生备注（讲稿行以「转场/停顿/重音」开头会在演讲台高亮）；L15 条形图加 `--native-charts` 可生成可编辑原生图表；`--embed-fonts` 为实验性字体嵌入（详见 pptx-export.md）。
+导出后必须做第三道门：check-pptx 过结构 + 用演示软件打开 .pptx 与 HTML 渲染图逐页比对（详见 `references/pptx-export.md`）。
+交付后微调：浏览器打开 `index.html?edit=1` 可就地改文字（版式锁定）并下载新 HTML——替换后必须重跑 subset-fonts 与 validate。
 
 ## 版式速查表
 

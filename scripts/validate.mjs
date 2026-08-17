@@ -59,10 +59,17 @@ slides.forEach((s, i) => {
     maxX = Math.max(maxX, el.x + el.w); maxY = Math.max(maxY, el.y + el.h);
 
     // R3 canvas bounds + text overflow (vertical growth is caught by the
-    // bounds check and R9 collisions — text slots are auto-height)
-    if (el.x < -2 || el.y < -2 || el.x + el.w > CANVAS.w + 2 || el.y + el.h > CANVAS.h + 2)
-      errors.push(`R3 ${at(i, el)}: element exceeds 1280x720 canvas`);
-    if (el.kind === 'text' && el.overflowX) errors.push(`R3 ${at(i, el)}: horizontal text overflow`);
+    // bounds check and R9 collisions — text slots are auto-height).
+    // Fix advice is graduated by overflow amount so repairs start small.
+    const fix = (px) =>
+      px <= 40 ? 'trim a few characters or nudge width/font-size inline'
+      : px <= 120 ? 'cut copy first, then step font-size/line-height down inline'
+      : 'content exceeds this slot — switch to a higher-capacity layout';
+    const exceed = Math.max(el.x + el.w - CANVAS.w, el.y + el.h - CANVAS.h, -el.x, -el.y);
+    if (exceed > 2)
+      errors.push(`R3 ${at(i, el)}: exceeds 1280x720 canvas by ${Math.round(exceed)}px — ${fix(exceed)}`);
+    if (el.kind === 'text' && el.overflowX)
+      errors.push(`R3 ${at(i, el)}: horizontal text overflow by ${Math.round(el.overflowX)}px — ${fix(el.overflowX)}`);
 
     // R2 class whitelist — every kind, including inline-emphasis children
     for (const c of [...el.classes, ...(el.childClasses || [])])
@@ -79,6 +86,16 @@ slides.forEach((s, i) => {
       // R12 self-containment: remote images break offline decks and the PPTX export
       if (/^https?:/i.test(el.src || ''))
         (office ? errors : warns).push(`R12 ${at(i, el)}: remote image "${el.src.slice(0, 60)}"; copy it into assets/img/`);
+      // R13 asset contract: the file must actually load, and cover-fit
+      // should not crop away most of the picture
+      if (el.naturalW === 0)
+        errors.push(`R13 ${at(i, el)}: image "${(el.src || '').slice(-40)}" failed to load (missing or corrupt file)`);
+      else if (el.fit === 'cover' && el.naturalW && !el.decor) {
+        const scale = Math.max(el.w / el.naturalW, el.h / el.naturalH);
+        const loss = 1 - (el.w * el.h) / (scale * scale * el.naturalW * el.naturalH);
+        if (loss > 0.45)
+          warns.push(`R13 ${at(i, el)}: cover crops ${Math.round(loss * 100)}% of "${(el.src || '').slice(-30)}" — pick a closer aspect or another slot`);
+      }
     }
 
     // R13 media contract: deterministic rendering/export needs a poster,
@@ -95,6 +112,9 @@ slides.forEach((s, i) => {
     if (el.kind !== 'text') continue;
     // R4 font floor
     if (el.fontSize < 16) errors.push(`R4 ${at(i, el)}: font-size ${el.fontSize}px below 16px floor`);
+    // R14 content readiness: placeholder text must never ship
+    if (/\b(TODO|TBD|FIXME|lorem|ipsum|xxxx*)\b|待补充|待填写|此处占位|\[insert/i.test(el.text))
+      errors.push(`R14 ${at(i, el)}: placeholder text left in deck`);
     // R7 inline emphasis: only unnested strong/em/span map to PPTX text runs
     if (el.badChildTags?.length)
       errors.push(`R7 ${at(i, el)}: only unnested <strong>/<em>/<span> allowed inside text, got <${el.badChildTags.join(', ')}>`);
@@ -182,6 +202,12 @@ slides.forEach((s, i) => {
   if (s.els.length && (cover < 0.25 || (cover > 0.97 && !fullBleed)))
     warns.push(`R5 ${at(i)}: content bounding box covers ${(cover * 100).toFixed(0)}% of canvas`);
 });
+
+// R14 speaker-notes completeness (warn): a mostly-annotated deck with
+// gaps usually means forgotten pages, not intent
+const noted = slides.map((s, i) => (s.notes ? null : i + 1)).filter(Boolean);
+if (noted.length && noted.length <= slides.length / 2)
+  warns.push(`R14 slides ${noted.join(', ')} lack speaker notes while ${slides.length - noted.length}/${slides.length} slides have them`);
 
 for (const w of warns) console.log(`WARN  ${w}`);
 for (const e of errors) console.log(`ERROR ${e}`);

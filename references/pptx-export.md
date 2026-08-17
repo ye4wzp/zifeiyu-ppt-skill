@@ -23,6 +23,11 @@ HTML / PDF / PNG 三通道由 deck 内字体子集保真（思源黑/思源宋/J
 - 换算契约：坐标 px÷96→英寸；字号/行距/字间距 px×0.75→磅。
 - 字重映射：CSS ≥600 → bold；`Helvetica Neue` ≤300 → face 名 "Helvetica Neue Light"。PPTX 无数值字重。
 
+## 可编辑性
+
+- **文本框合并（注册制）**：设计上连续的槽位组（L05 面板、L06 三列、L10/L12 标题+说明对、L19 音轨行）导出为**一个**文本框——每个槽位成为独立段落，字号/字体/颜色逐段保留，实测间距换算为精确段后距。接收方改一栏文字不再需要逐框点选。
+- **`--embed-fonts`（实验性）**：按 OOXML `embeddedFontLst` 规范在 zip 后处理阶段嵌入 deck 字符子集（思源黑按 400/800 静态实例、Light 面 250；思源宋 Regular/Heavy；JetBrains Mono），并保留真实字体名不再映射系统字体。**无开源先例，交付客户前必须在 WPS/PowerPoint 实开一次确认**；默认关闭。
+
 ## 讲稿与图表
 
 - **讲稿自动随行**：`<aside class="notes">` 的文字导出为 PowerPoint 原生备注（备注视图/演示者视图可见），无需任何参数。
@@ -33,7 +38,8 @@ HTML / PDF / PNG 三通道由 deck 内字体子集保真（思源黑/思源宋/J
 ## 导出后验证（第三道门，不可跳过）
 
 ```bash
-soffice --headless --convert-to pdf <deck-dir>/deck.pptx --outdir <deck-dir>/
+node scripts/check-pptx.mjs <deck-dir>/deck.pptx   # ① 结构门：OOXML 完整性/关系/图表 XML（exit 1 阻断）
+soffice --headless --convert-to pdf <deck-dir>/deck.pptx --outdir <deck-dir>/   # ② 几何门
 pdftoppm -png -r 96 <deck-dir>/deck.pdf <deck-dir>/renders-pptx/slide
 ```
 逐页与 `renders/`（HTML 侧截图）比对。已知无害差异 vs 必须处理的问题：

@@ -458,3 +458,16 @@ body.presenter-ui .slide { display: none; }
 .pc-timer { font: 600 30px/1 var(--font-num); color: #f0efea; }
 .pc-count { font: 13px/1 var(--font-num); color: #9a9aa2; margin: 8px 0 16px; }
 .pc-notes p { font-size: 17px; line-height: 1.7; color: #d5d5cf; margin-bottom: 10px; }
+.pc-notes .pc-cue { color: #9bbcff; }
+
+/* edit mode (?edit=1): text editable in place, geometry locked */
+body.edit-ui .slide :is(h1, h2, h3, p):hover { outline: 1px dashed var(--accent); }
+body.edit-ui .slide :is(h1, h2, h3, p):focus { outline: 2px solid var(--accent); }
+.edit-bar {
+  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 20;
+  display: flex; gap: 14px; align-items: center;
+  background: rgba(20, 20, 24, 0.88); color: #f0efea;
+  padding: 10px 16px; border-radius: 6px;
+  font: 14px/1.4 var(--font-cjk);
+}
+.edit-bar button { font: inherit; padding: 6px 14px; cursor: pointer; }

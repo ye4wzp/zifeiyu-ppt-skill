@@ -28,5 +28,6 @@
 
 1. 逐页看渲染 PNG（不跳页）。
 2. 浏览器打开 index.html 用方向键完整翻一遍（确认运行时正常）。
-3. Office 档：完成 pptx-export.md 的第三道门比对。
+3. Office 档：`node scripts/check-pptx.mjs <deck>/deck.pptx` 过结构门，再完成 pptx-export.md 的几何/字体比对。
 4. 若本次改动触碰了 base.css / 版式骨架 / 主题：`npm run regress` 对金样基线必须全绿。
+5. 技能本体有改动时：`npm run sync` 同步安装副本（`npm run sync-check` 查漂移）。

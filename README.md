@@ -16,12 +16,13 @@
 - **视频与音频一等公民**：`<video>/<audio>` 进入元素契约——poster 锁定封面帧保证渲染确定性，演示层驱动播放（进页自动静音播放/点击播放/设计化音频卡片），PPTX 原生嵌入媒体（接收方双击播放），PDF 自动替换为封面帧
 - **确定性字体子集**：思源黑/思源宋/JetBrains Mono 按 deck 实际字符裁切成 woff2 随 deck 分发（每 deck 约 800KB），mac/Windows/Linux 渲染一致、file:// 直接可用；标点挤压（halt）、短槽位均衡断行、正文两端对齐等 CJK 排印细节内建
 - **四格式交付链**：HTML 演示 → 可编辑 PPTX → 矢量 PDF → 逐页 PNG，全部一条命令，HTML 是唯一的源
-- **机器质量门**：Playwright 校验器执行 R1–R13 量化规则（版式注册、类名白名单、溢出、字号下限、文本碰撞、条形图比例诚实、对比度下限、文档卫生、媒体契约……），错误即阻断交付；金样像素回归基线随仓库维护（`npm run regress`）
+- **机器质量门**：Playwright 校验器执行 R1–R14 量化规则（版式注册、类名白名单、溢出——按溢出量分档给修复建议、字号下限、文本碰撞、条形图比例诚实、对比度下限、文档卫生、媒体契约、占位符拦截……），错误即阻断交付；导出侧另有 OOXML 产物结构门（`check-pptx`：包完整性/关系/图表 XML）；金样像素回归基线随仓库维护（`npm run regress`）
 - **DATUM 制图美学**：坐标纸纹理、四角角线、尺寸标注线、工程图签栏、SHEET 页码、等宽技术标注——设计语言与"确定性导出"的产品灵魂同源；128px 大字排印、满幅色场、单页明暗节奏
 - **语义动画**：数字 count-up、圆点弹入、分隔线拉出——与元素语义绑定，演示模式自动生效，导出通道零影响
 - **演讲者模式**：`S` 键开双窗控制台（当前页 + 下页预览 + 计时器 + 讲稿提示），BroadcastChannel 同步，`file://` 直接可用
 - **数据诚实协议**：KPI/条形图版式强制来源标注（校验器拦截），条长与数值的比例由机器核对，查不到真实数据就换概念版式，禁止编造
-- **可编辑到字**：段内 `<strong>/<em>/<span class="is-accent">` 导出为 PPTX 原生 text runs，接收方在 PowerPoint 里仍可逐字改
+- **可编辑到字**：段内强调导出为 PPTX 原生 text runs；设计上连续的槽位组（对比面板、三点论证、标题+说明对）合并为单个文本框、逐段保留样式与精确段距——接收方改文字不再逐框点选；实验性 `--embed-fonts` 可把字体子集嵌进 .pptx
+- **交付后可微调**：浏览器打开 `index.html?edit=1` 就地改文字（版式锁定）并下载新 HTML；企业模板一条命令提取为品牌主题（`import-theme`，含对比度报告）
 
 | | | |
 |---|---|---|
@@ -59,6 +60,8 @@ node scripts/validate.mjs <deck-dir> [--office]              # 机器校验 R1�
 node scripts/render-png.mjs <deck-dir>                       # 逐页截图
 node scripts/export-pdf.mjs <deck-dir>                       # 矢量 PDF（960×540pt）
 node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"  # 可编辑 PPTX
+node scripts/check-pptx.mjs <deck-dir>/deck.pptx             # 产物结构校验（OOXML 门）
+node scripts/import-theme.mjs <企业模板.pptx> <name>          # 企业模板 → 品牌主题
 npm run regress                                              # 金样像素回归（改 base.css/版式后必跑）
 ```
 

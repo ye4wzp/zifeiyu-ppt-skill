@@ -79,6 +79,10 @@ ppt-skill/
 │   ├── new-deck.mjs             # deck 脚手架（复制种子 + 全部运行时资产）
 │   ├── fetch-fonts.mjs          # 一次性拉取字体源（~80MB，SIL OFL）
 │   ├── subset-fonts.mjs         # 按 deck 实际字符裁切 woff2 子集 → <deck>/assets/fonts/
+│   ├── check-pptx.mjs           # 产物门：OOXML 包完整性/关系/图表 XML
+│   ├── import-theme.mjs         # 企业模板 theme1.xml → token 品牌主题（含对比度报告）
+│   ├── baseline.mjs             # 基线重录闸门（金样必须先过校验器）
+│   ├── sync-skill.mjs           # 同步/漂移检查安装副本（--check）
 │   ├── validate.mjs             # 校验器 R1–R12（规则见 §6）
 │   ├── export-pptx.mjs          # 测量结果 → pptxgenjs 确定性映射（含 --native-charts）
 │   ├── export-pdf.mjs           # 矢量 PDF
@@ -134,7 +138,12 @@ ppt-skill/
 | R10 | error | 可访问性：内容图必须有 alt，装饰图必须声明 aria-hidden |
 | R11 | warn | 对比度下限：文字对其实际所在表面（含半透明 shape 叠色）<3:1 预警；图上文字跳过，交目检 |
 | R12 | error | 文档卫生：禁 `<style>` 标签、只允许 base.css + 一个主题/系统文件、Office 档禁远程图片 |
-| R13 | error | 媒体契约：视频必带 poster（确定性静止帧）、媒体与 poster 禁远程 URL、配合 R10 的 aria-label 要求 |
+| R13 | error | 媒体/资产契约：视频必带 poster（确定性静止帧）、媒体禁远程 URL、图片必须真实加载（裂图报错）、cover 裁切损失 >45% 预警 |
+| R14 | error/warn | 内容就绪：占位文本（TODO/lorem/待补充…）拦截；讲稿覆盖多数页却有遗漏时预警 |
+
+R3 报错按溢出量分档给修复建议（≤40px 收紧文案 → ≤120px 行内降档 → 更大换版式），降低返工轮次。
+
+**产物门 `check-pptx.mjs`**（导出后，exit 1 阻断）：HTML 侧校验器看不到损坏的 .pptx——此门检查 OOXML 包完整性（content types 覆盖、关系目标存在、全部 XML 良构、slide/notes 接线、图表 XML 的已知损坏模式）。`--embed-fonts` 的嵌入结构同样由它守。
 
 R2 + R6 + R12 合围出"颜色只能经 token"的机器保证：deck 内除白名单类与参数化几何外没有任何样式通道。
 
@@ -173,6 +182,7 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
 - **M4 · 体验补强**：设计系统 02「墨韵」、DATUM 制图铺装、演讲者模式（BroadcastChannel 双窗同步 + 讲稿 + 计时器）、L14–L16 版式。
 - **M5 · 质量闭环**：new-deck 脚手架、校验器全元素覆盖（R1–R12：数据比例诚实、对比度预警、文档卫生）、段内强调 text runs 导出、像素回归基线（baselines/ + regress）。
 - **M6 · 排印升级**：确定性字体子集管线（思源黑 VF/思源宋/JetBrains Mono → 每 deck 约 800KB woff2，三端一致）、CJK 排印细节（halt 标点挤压、短槽位 balance 断行、正文 justify、标题 700）、构图修缮（L02 引导线+页码列、L12 垂直居中、封面鬼影数字平衡）。display/数字/mono 走子集字体，正文保持系统字体以维持 HTML↔PPTX 换行一致。
+- **M8 · 竞品机制吸收**（调研驱动）：产物侧 OOXML 结构门（check-pptx）、注册制文本框合并（连续槽位组 → 单框多段落 + 精确段距）、实验性 `--embed-fonts` 字体嵌入、企业模板→品牌主题提取（import-theme）、基线重录闸门（baseline.mjs 先过校验器）、安装副本漂移检查（sync-skill --check）、R14 占位符/讲稿完整性、R3 分档修复建议、R13 裂图与裁切损失、`?edit=1` 槽内编辑模式（版式锁定+下载）、演讲台转场提示高亮。
 - **M7 · 媒体版式**：`<video>/<audio>` 进入元素契约（测量/校验/导出全链路）——L17 视频主视觉、L18 视频半幅、L19 音频页、L14/L18 镜像变体；poster 锁定静止帧保证确定性，enhance.js 驱动播放语义（进页自动静音播放、点击切换、音频进度线），PPTX 用 addMedia 原生嵌入（封面为浏览器实际渲染截图），PDF 将视频替换为 poster；媒体金样 examples/media 进 CI 与回归基线。
 
 ## 9. 风险与对策
