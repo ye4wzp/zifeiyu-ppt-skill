@@ -1,10 +1,10 @@
 // Usage: node scripts/validate.mjs <deck-dir|index.html> [--office]
-// Machine gate (R1–R12): errors exit 1 and block delivery; warnings pass.
+// Machine gate (R1–R15): errors exit 1 and block delivery; warnings pass.
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { deckIndex, measureDeck, CANVAS } from './lib/deck.mjs';
 
-const REGISTERED = new Set(Array.from({ length: 19 }, (_, i) => `L${String(i + 1).padStart(2, '0')}`));
+const REGISTERED = new Set(Array.from({ length: 24 }, (_, i) => `L${String(i + 1).padStart(2, '0')}`));
 const INLINE_ALLOWED = /^(\s*(top|left|width|height|font-size|line-height)\s*:\s*[\d.]+(px|%)\s*;?)*\s*$/;
 const STYLESHEET_ALLOWED = /^assets\/(base\.css|(themes|systems)\/[\w-]+\.css)$/;
 
@@ -22,6 +22,7 @@ await browser.close();
 
 const errors = [];
 const warns = [];
+const states = []; // R15b: per-slide visual state, bleed | dark | light
 const at = (i, el) => `slide ${i + 1}${el ? ` <${el.tag || el.kind}> "${(el.text || '').slice(0, 18)}"` : ''}`;
 
 // WCAG relative luminance / contrast, on token colors blended over the page
@@ -48,6 +49,10 @@ if (doc.links.length > 2) errors.push(`R12 ${doc.links.length} stylesheets linke
 slides.forEach((s, i) => {
   // R1 registered layout
   if (!REGISTERED.has(s.layout)) errors.push(`R1 ${at(i)}: data-layout "${s.layout}" is not a registered layout`);
+
+  // R15a rhythm (warn): adjacent pages must not repeat the same layout
+  if (i && s.layout && s.layout === slides[i - 1].layout)
+    warns.push(`R15 slides ${i}, ${i + 1}: adjacent pages both use ${s.layout} — swap one for a different layout`);
 
   // R7 text containment: bare text outside h1/h2/h3/p is invisible to the
   // PPTX export and breaks the measurement contract (both tiers)
@@ -122,7 +127,7 @@ slides.forEach((s, i) => {
 
   // R8 data honesty: data layouts must cite a source, and L15 bar lengths
   // must be proportional to their stated values
-  if (s.layout === 'L07' || s.layout === 'L15') {
+  if (s.layout === 'L07' || s.layout === 'L15' || s.layout === 'L22') {
     const slot = `${s.layout.toLowerCase()}-footnote`;
     const cited = s.els.some((el) => el.kind === 'text' &&
       ((el.classes.includes(slot) && el.text) ||
@@ -197,11 +202,26 @@ slides.forEach((s, i) => {
   }
 
   // R5 density band (warn only); image/video-led layouts are exempt above
-  const fullBleed = s.els.some((el) => (el.kind === 'image' || el.kind === 'video') && el.w * el.h >= CANVAS.w * CANVAS.h * 0.25);
+  const bleed = s.els.filter((el) => (el.kind === 'image' || el.kind === 'video') && el.w * el.h >= CANVAS.w * CANVAS.h * 0.25);
   const cover = ((maxX - minX) * (maxY - minY)) / (CANVAS.w * CANVAS.h);
-  if (s.els.length && (cover < 0.25 || (cover > 0.97 && !fullBleed)))
+  if (s.els.length && (cover < 0.25 || (cover > 0.97 && !bleed.length)))
     warns.push(`R5 ${at(i)}: content bounding box covers ${(cover * 100).toFixed(0)}% of canvas`);
+
+  // R15b state: decorative texture layers span the canvas on almost every page
+  // without changing how light or dark it reads — only content media bleeds.
+  states.push(bleed.some((el) => !el.decor) ? 'bleed' : relLum(hex2rgb(s.bg.hex)) < 0.35 ? 'dark' : 'light');
 });
+
+// R15b rhythm (warn): a long stretch in one light/dark state reads flat, so
+// every 3–5 pages wants a break (is-dark / is-accent / full-bleed image).
+// Bleed pages break a run and never form a warnable one themselves.
+for (let a = 0; a < states.length; a++) {
+  let b = a;
+  while (states[a] !== 'bleed' && states[b] === states[a]) b++;
+  if (b - a >= 7)
+    warns.push(`R15 slides ${a + 1}–${b}: ${b - a} consecutive ${states[a]} pages — insert a rhythm break every 3–5 pages`);
+  a = Math.max(a, b - 1);
+}
 
 // R14 speaker-notes completeness (warn): a mostly-annotated deck with
 // gaps usually means forgotten pages, not intent

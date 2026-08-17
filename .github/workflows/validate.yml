@@ -16,7 +16,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium-headless-shell
-      - name: Validate golden decks (R1-R13 machine gate)
+      - name: Validate golden decks (R1-R15 machine gate)
         run: |
           node scripts/validate.mjs examples/showcase
           node scripts/validate.mjs examples/editorial

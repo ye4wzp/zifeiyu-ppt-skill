@@ -57,12 +57,13 @@ ppt-skill/
 ├── README.md / README.en.md
 ├── LICENSE                      # MIT
 ├── references/                  # 按需加载，SKILL.md 只放索引
-│   ├── layouts.md               # 版式注册表：16 个骨架 + DATUM 铺装 + 段内强调 + 微调规则
+│   ├── layouts.md               # 版式注册表：24 个骨架 + DATUM 铺装 + 段内强调 + 微调规则
 │   ├── narratives.md            # 路演/汇报/宣传三套叙事页序模板
 │   ├── themes.md                # 主题与设计系统目录（受众→主题映射表）
 │   ├── authoring.md             # 写作规范：密度上限、CJK 字号表、中英混排规则
 │   ├── pptx-export.md           # Office 档约束全文 + 导出排错表 + 维护铁律
 │   ├── animations.md            # 语义动画配方（数字→count-up、点→弹入、线→拉出）
+│   ├── failures.md              # 实战失败案例库（现象→根因→修法→已固化到）
 │   └── checklist.md             # P0–P3 分级质检清单
 ├── assets/
 │   ├── base.css                 # design tokens + 全部版式骨架样式（唯一允许定义 class 的地方）
@@ -83,7 +84,7 @@ ppt-skill/
 │   ├── import-theme.mjs         # 企业模板 theme1.xml → token 品牌主题（含对比度报告）
 │   ├── baseline.mjs             # 基线重录闸门（金样必须先过校验器）
 │   ├── sync-skill.mjs           # 同步/漂移检查安装副本（--check）
-│   ├── validate.mjs             # 校验器 R1–R12（规则见 §6）
+│   ├── validate.mjs             # 校验器 R1–R15（规则见 §6）
 │   ├── export-pptx.mjs          # 测量结果 → pptxgenjs 确定性映射（含 --native-charts）
 │   ├── export-pdf.mjs           # 矢量 PDF
 │   ├── render-png.mjs           # 逐页截图
@@ -92,7 +93,7 @@ ppt-skill/
 └── examples/                    # 金样 deck：showcase（现代系统）+ editorial（墨韵），兼作回归基准
 ```
 
-## 5. 版式注册表（19 个，全部 pptx-safe）
+## 5. 版式注册表（24 个，全部 pptx-safe）
 
 | 编号 | 版式 | 叙事角色 |
 |---|---|---|
@@ -115,6 +116,11 @@ ppt-skill/
 | L17 | 视频主视觉 | 全幅动态开场/氛围（poster 锁帧） |
 | L18 | 视频半幅 | 视频作论据，讲解与画面同屏（可镜像） |
 | L19 | 音频页 | 播客/音乐/访谈片段，设计化播放卡片 |
+| L20 | 环形流程 | 闭环过程（有回路才用，区别于 L12 的线性四步） |
+| L21 | 矩阵盘点 | 8–12 项清单收束到一个总数巨字 |
+| L22 | 规格表 | 参数/规格逐条对照（要求真实数值 + 出处） |
+| L23 | 纵向时间线 | 演进叙事的高容量版本，每节点带一句说明 |
+| L24 | 同心圆系统 | 层级嵌套：越往外越可替换 |
 
 每个版式在 `layouts.md` 中登记骨架、密度区间与适用场景。扩展新版式必须四处同步：base.css 骨架样式 + layouts.md 注册 + 校验器（若涉及新规则）+ 金样重跑回归（归藏同款纪律）。测量驱动的导出器对遵守元素词汇表的新版式零成本。
 
@@ -122,11 +128,11 @@ ppt-skill/
 
 ## 6. 质量管线（三道门）
 
-**第一道：机器校验 `validate.mjs`**（量化规则 R1–R12；error exit 1 阻断交付，warn 放行）
+**第一道：机器校验 `validate.mjs`**（量化规则 R1–R15；error exit 1 阻断交付，warn 放行）
 
 | 规则 | 级别 | 检查内容 |
 |---|---|---|
-| R1 | error | 每页 `data-layout` 必须在注册表内（L01–L16） |
+| R1 | error | 每页 `data-layout` 必须在注册表内（L01–L24） |
 | R2 | error | class 白名单：所有元素（含 shape/img 与段内 span）不得使用 base.css 未定义的 class |
 | R3 | error | 溢出：任何元素不得超出 1280×720 画布；文字不得水平溢出自身槽位 |
 | R4 | error | 字号下限：任何文字 ≥16px |
@@ -140,8 +146,11 @@ ppt-skill/
 | R12 | error | 文档卫生：禁 `<style>` 标签、只允许 base.css + 一个主题/系统文件、Office 档禁远程图片 |
 | R13 | error | 媒体/资产契约：视频必带 poster（确定性静止帧）、媒体禁远程 URL、图片必须真实加载（裂图报错）、cover 裁切损失 >45% 预警 |
 | R14 | error/warn | 内容就绪：占位文本（TODO/lorem/待补充…）拦截；讲稿覆盖多数页却有遗漏时预警 |
+| R15 | warn | 节奏：相邻两页同 `data-layout` 逐对预警；连续 ≥7 页处于同一明暗状态（light/dark，按实测页背景相对亮度 0.35 分档）报页码区间。全幅内容图/视频（≥25% 画布，装饰纹理层不计）算 bleed，只打断连续段、自身不成段 |
 
 R3 报错按溢出量分档给修复建议（≤40px 收紧文案 → ≤120px 行内降档 → 更大换版式），降低返工轮次。
+
+R15 把"每 3–5 页一次节奏断点"这条人肉纪律机器化。样张型 deck（`examples/showcase` / `examples/editorial` 一页一版式地陈列全部版式）会因为版式顺序固定而必然触发一条 R15b，属于已知且接受的预警——样张的职责是覆盖版式，不是示范节奏；真实交付 deck 出现 R15 必须改节奏而不是放宽规则。
 
 **产物门 `check-pptx.mjs`**（导出后，exit 1 阻断）：HTML 侧校验器看不到损坏的 .pptx——此门检查 OOXML 包完整性（content types 覆盖、关系目标存在、全部 XML 良构、slide/notes 接线、图表 XML 的已知损坏模式）。`--embed-fonts` 的嵌入结构同样由它守。
 
@@ -174,7 +183,7 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
 8. 交付 HTML；按档位追加 PPTX / PDF / PNG
 ```
 
-## 8. 里程碑（M1–M5 已全部落地）
+## 8. 里程碑（M1–M9 已全部落地）
 
 - **M1 · 最小闭环**：seed.html + base.css + 3 套 token 主题 + 版式骨架 + runtime.js + validate.mjs + 金样 deck。
 - **M2 · 差异化卖点**：export-pptx.mjs 测量驱动导出 + Office 档规则 + pptx-export.md + Office 档金样。
@@ -184,6 +193,7 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
 - **M6 · 排印升级**：确定性字体子集管线（思源黑 VF/思源宋/JetBrains Mono → 每 deck 约 800KB woff2，三端一致）、CJK 排印细节（halt 标点挤压、短槽位 balance 断行、正文 justify、标题 700）、构图修缮（L02 引导线+页码列、L12 垂直居中、封面鬼影数字平衡）。display/数字/mono 走子集字体，正文保持系统字体以维持 HTML↔PPTX 换行一致。
 - **M8 · 竞品机制吸收**（调研驱动）：产物侧 OOXML 结构门（check-pptx）、注册制文本框合并（连续槽位组 → 单框多段落 + 精确段距）、实验性 `--embed-fonts` 字体嵌入、企业模板→品牌主题提取（import-theme）、基线重录闸门（baseline.mjs 先过校验器）、安装副本漂移检查（sync-skill --check）、R14 占位符/讲稿完整性、R3 分档修复建议、R13 裂图与裁切损失、`?edit=1` 槽内编辑模式（版式锁定+下载）、演讲台转场提示高亮。
 - **M7 · 媒体版式**：`<video>/<audio>` 进入元素契约（测量/校验/导出全链路）——L17 视频主视觉、L18 视频半幅、L19 音频页、L14/L18 镜像变体；poster 锁定静止帧保证确定性，enhance.js 驱动播放语义（进页自动静音播放、点击切换、音频进度线），PPTX 用 addMedia 原生嵌入（封面为浏览器实际渲染截图），PDF 将视频替换为 poster；媒体金样 examples/media 进 CI 与回归基线。
+- **M9 · 数据叙事与纪律机器化**：版式扩容到 24（L20 环形闭环、L21 矩阵盘点、L22 规格表、L23 纵向时间线、L24 同心圆系统）并配「内容形状 → 版式」决策表，让选版式从审美判断变成形状匹配；节奏纪律机器化为 R15（相邻同版式 + 连续同明暗段）；新增实战回流库 `references/failures.md`（现象→根因→修法→已固化到，交付后强制回填）；enhance.js 补齐新版式的语义动效配方（条形生长、环形顺时针点亮、矩阵逐格、纵轴自顶拉出、同心圆由外向内）。
 
 ## 9. 风险与对策
 

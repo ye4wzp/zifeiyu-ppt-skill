@@ -10,11 +10,11 @@ The one-line difference from similar projects: beautiful HTML decks usually can'
 
 ## Features
 
-- **19 registered layouts × 3 design systems × 3 token themes** — cover, agenda, section, statement, comparison, KPI, bar chart, timeline, image hero/grid (mirrorable), ledger, process, video hero, inset video, audio track, closing; swap the entire type language by changing one CSS file: modern sans with DATUM drafting chrome, serif editorial, or Swiss International GRID (calibrated greys × one Klein-blue anchor × the-bigger-the-lighter display type × mutually-exclusive color fields × color loop)
+- **24 registered layouts × 3 design systems × 3 token themes** — cover, agenda, section, statement, comparison, KPI, bar chart, spec table, timeline (horizontal & vertical), image hero/grid (mirrorable), ledger, matrix inventory, process, closed loop, concentric system, video hero, inset video, audio track, closing; swap the entire type language by changing one CSS file: modern sans with DATUM drafting chrome, serif editorial, or Swiss International GRID (calibrated greys × one Klein-blue anchor × the-bigger-the-lighter display type × mutually-exclusive color fields × color loop)
 - **Video & audio as first-class citizens** — `<video>/<audio>` join the element contract: posters lock the still frame for deterministic rendering, the presentation layer drives playback (auto-muted heroes, click-to-play, a designed audio card), PPTX embeds media natively (double-click to play), PDF substitutes poster frames
 - **Deterministic font subsets** — Source Han Sans (variable weight), Source Han Serif, and JetBrains Mono are sliced to each deck's actual characters (~800KB per deck) and travel with it: identical rendering on macOS/Windows/Linux, works on file://; CJK refinements (halt punctuation compression, balanced line wrapping, justified body columns) built in
 - **Four-format delivery chain** — HTML presentation → editable PPTX → vector PDF → per-slide PNG, each one command; HTML is the single source of truth
-- **Machine quality gate** — a Playwright validator enforces R1–R14 quantified rules (layout registry, class whitelist, overflow with graduated fix advice, font floor, text collision, bar-chart proportionality, contrast floor, document hygiene, media contract, placeholder text…); a separate OOXML artifact gate (`check-pptx`) checks package integrity, relationships, and chart XML after export; golden-deck pixel baselines guard every skeleton/theme change (`npm run regress`)
+- **Machine quality gate** — a Playwright validator enforces R1–R15 quantified rules (layout registry, class whitelist, overflow with graduated fix advice, font floor, text collision, bar-chart proportionality, contrast floor, document hygiene, media contract, placeholder text…); a separate OOXML artifact gate (`check-pptx`) checks package integrity, relationships, and chart XML after export; golden-deck pixel baselines guard every skeleton/theme change (`npm run regress`)
 - **Poster-grade typography** — 100px cover titles, 220px section numerals, 136px thin-weight KPI figures, 280px translucent ghost type, per-slide dark inversion
 - **Semantic animations** — count-up numbers, popping dots, drawing rules; bound to element semantics, presentation-only, exports never affected
 - **Presenter console** — press `S` for a dual-window console (current + next preview, timer, speaker notes), synced via BroadcastChannel, works on `file://`
@@ -44,7 +44,7 @@ Ask Claude Code to "make a deck about X" — the skill drives an 8-step workflow
 ```bash
 node scripts/new-deck.mjs <deck-dir> --theme paper   # scaffold a self-contained deck
 node scripts/subset-fonts.mjs <deck-dir>             # deck-local webfont subsets (re-run after text edits)
-node scripts/validate.mjs <deck-dir> [--office]      # machine gate R1–R13
+node scripts/validate.mjs <deck-dir> [--office]      # machine gate R1–R15
 node scripts/render-png.mjs <deck-dir>
 node scripts/export-pdf.mjs <deck-dir>
 node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"

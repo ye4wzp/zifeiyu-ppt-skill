@@ -31,3 +31,4 @@
 3. Office 档：`node scripts/check-pptx.mjs <deck>/deck.pptx` 过结构门，再完成 pptx-export.md 的几何/字体比对。
 4. 若本次改动触碰了 base.css / 版式骨架 / 主题：`npm run regress` 对金样基线必须全绿。
 5. 技能本体有改动时：`npm run sync` 同步安装副本（`npm run sync-check` 查漂移）。
+6. 交付后把本次新踩的坑写回 `references/failures.md`（现象 → 根因 → 修法 → 已固化到）。

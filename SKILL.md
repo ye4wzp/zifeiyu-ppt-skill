@@ -5,14 +5,14 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），并可�
 
 # PPT Skill
 
-把内容装进 19 个注册版式，产出单目录网页 PPT；HTML 是唯一的源，PPTX / PNG 是一键衍生物。
+把内容装进 24 个注册版式，产出单目录网页 PPT；HTML 是唯一的源，PPTX / PNG 是一键衍生物。
 
 ## 硬约束（违反任何一条即返工）
 
 1. **禁止从零写 HTML**。deck 只能由 `templates/seed.html` 复制而来，幻灯片只能复制 `references/layouts.md` 中的注册骨架并替换文字内容。
 2. **禁止发明类名**。只能使用 base.css 已定义的 class；校验器会拒绝白名单外的类名。
 3. **禁止裸色值与字体声明**。颜色只经 token；行内 style 只允许 `top/left/width/height/font-size/line-height` 的参数化数值。
-4. **每页必须声明 `data-layout="Lxx"`**（L01–L13）。
+4. **每页必须声明 `data-layout="Lxx"`**（L01–L24）。
 5. **文字只能在 `h1/h2/h3/p` 内**；段内强调仅允许非嵌套的 `<strong>`/`<em>`/`<span class="is-accent">`（导出为 PPTX 原生分段样式）；装饰元素挂 `div[data-shape="rect|ellipse"]`；图片用 `<img>`，禁止 background-image 承载内容图。
 9. **媒体本地化 + 封面帧锁定**：视频/音频文件放 `assets/media/`（禁远程 URL）；视频必带 `poster` 与 `aria-label`，音频必带 `controls` 与 `aria-label`——渲染、PDF、PPTX 的静止画面全部锁定在 poster（校验器 R13 拦截）。
 6. **数据诚实**：L07/L11 等数据版式必须使用用户提供的真实数值，禁止编造；无真实数据就改用概念版式。
@@ -43,6 +43,7 @@ node scripts/new-deck.mjs <deck-dir> --theme paper|graphite|forest|editorial
 先只做两页：封面（L01）+ 内容最典型的一页。渲染截图给用户确认后，才进入批量生产。方向错误在 2 页时修正，不在 13 页时返工。
 
 ### 第 5 步 · 批量填充
+批量填充前先列一张**明暗节奏表**：每 3–5 页安排一次节奏断点（`is-dark` / `is-accent` / 全幅图），把断点位置连同版式一起定死，避免整段页面同一亮度读起来发平——校验器 R15 是这条纪律的机器兜底（相邻页同版式、连续 ≥7 页同明暗状态即预警）。
 先按 `references/narratives.md` 选叙事模板（路演/汇报/宣传）定页序，再逐页：从 `references/layouts.md` 复制骨架 → 只替换文字/图片 → 自查密度。图片放 `<deck-dir>/assets/img/`，命名 `{页码}-{语义}.{ext}`。
 
 ### 第 6 步 · 字体子集 + 机器校验（第一道门）
@@ -93,10 +94,36 @@ node scripts/check-pptx.mjs <deck-dir>/deck.pptx                  # 产物结构
 | L17 | 视频主视觉 | 全幅视频开场/氛围（poster 锁帧，自动静音播放） |
 | L18 | 视频半幅 | 左讲解 + 右视频，点击播放（is-left/is-right 可镜像） |
 | L19 | 音频页 | 播客/音乐/访谈片段，设计化播放卡片 |
+| L20 | 环形流程 | 3–4 环节的闭环过程（有回路才用） |
+| L21 | 矩阵盘点 | 8–12 项清单 + 总数巨字 |
+| L22 | 规格表 | 参数/规格 2×4 真实数值 + 出处 |
+| L23 | 纵向时间线 | 4 节点纵向演进，每点带一句说明 |
+| L24 | 同心圆系统 | 3 层嵌套结构 + 右侧图例 |
+
+## 内容形状 → 版式决策表
+
+先看内容长什么形状，再挑版式；形状对不上就换内容组织方式，不硬塞。
+
+| 内容形状 | 版式 |
+|---|---|
+| 真实数据指标 2–3 个 | L07 |
+| 行级对比数据 | L15 |
+| 台账 | L11 |
+| 参数 / 规格 | L22 |
+| 8–12 项盘点 + 总数 | L21 |
+| 恰好 3 项 | L06 |
+| 恰好 4 项 | L12 / L16 |
+| 二元对比 | L05 |
+| 线性演进 | L08（横）/ L23（纵，容量更大） |
+| 闭环流程 | L20 |
+| 层级嵌套 | L24 |
+| 单点强调 | L04 |
+| 证据图 | L09 / L14 / L16 |
+| 视频 / 音频 | L17 / L18 / L19 |
 
 ## 主题与设计系统
 
-三套设计系统共用全部 19 个版式，换 `<link id="theme">` 一个文件整套切换：
+三套设计系统共用全部 24 个版式，换 `<link id="theme">` 一个文件整套切换：
 - **现代无衬线**（默认）：token 主题 `paper`（暖纸白）· `graphite`（深色）· `forest`（冷纸绿），配 DATUM 制图铺装
 - **「墨韵」衬线杂志风**：`--theme editorial`，思源宋 × 暖纸 × 朱砂，适合文化/品牌/人文调性
 - **「瑞士国际」GRID**：`--theme swiss`，高级灰白 × 单一克莱因蓝锚点 × 巨字越大越细，适合数据汇报/产品发布/技术分享
@@ -105,10 +132,11 @@ node scripts/check-pptx.mjs <deck-dir>/deck.pptx                  # 产物结构
 
 ## 参考文档（按需读取，勿全量加载）
 
-- `references/layouts.md` — 19 个版式的完整可复制骨架 + DATUM 铺装 + 媒体约定 + 节奏装饰用法
+- `references/layouts.md` — 24 个版式的完整可复制骨架 + DATUM 铺装 + 媒体约定 + 节奏装饰用法
 - `references/narratives.md` — 路演/汇报/宣传三套叙事页序模板
 - `references/themes.md` — 主题目录与受众映射
 - `references/authoring.md` — 文案密度、中文字号规则
 - `references/pptx-export.md` — Office 档约束、字体策略、导出排错
 - `references/checklist.md` — P0–P3 视觉自检清单
 - `references/animations.md` — 演示模式语义动画配方（自动生效，导出不受影响）
+- `references/failures.md` — 实战失败案例库（现象→根因→修法→已固化到），排错时先查这里

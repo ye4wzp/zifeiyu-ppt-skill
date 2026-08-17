@@ -1,5 +1,5 @@
 /* ================================================================
-   base.css — design tokens + registered layout skeletons (L01–L19)
+   base.css — design tokens + registered layout skeletons (L01–L24)
    Canvas contract: 1280x720 px -> 960x540 pt (px * 0.75)
    Rules: slides may only use classes defined here; colors only via
    tokens; all text lives in h1/h2/h3/p; decorations on [data-shape].
@@ -96,7 +96,8 @@ body { background: #26262a; }
   font-feature-settings: 'halt' 1;
 }
 .l03-note, .l05-p, .l06-p, .l07-sub, .l08-text, .l10-point-body,
-.l11-note, .l12-p, .l13-sub, .l14-caption, .l16-caption {
+.l11-note, .l12-p, .l13-sub, .l14-caption, .l16-caption,
+.l20-p, .l24-p {
   text-wrap: balance;
 }
 .l10-body, .l14-body, .l18-body { text-align: justify; }
@@ -408,6 +409,112 @@ body { background: #26262a; }
 .l16-i1 { left: 96px;  top: 200px; } .l16-i2 { left: 648px; top: 200px; }
 .l16-i3 { left: 96px;  top: 436px; } .l16-i4 { left: 648px; top: 436px; }
 .l16-caption { left: 96px; top: 668px; width: 1088px; font-size: 16px; color: var(--text-2); }
+
+/* ---------- L20 cycle: 3–4 stations around a ring ---------- */
+.l20-ring { left: 500px; top: 302px; width: 280px; height: 280px; background: var(--hairline); border-radius: 50%; }
+/* the hole is the page ground punched through the ring — never white */
+.l20-hole { left: 520px; top: 322px; width: 240px; height: 240px; background: var(--bg); border-radius: 50%; }
+.l20-node { width: 28px; height: 28px; background: var(--accent); border-radius: 50%; }
+.l20-n1 { left: 626px; top: 298px; } .l20-n2 { left: 756px; top: 428px; }
+.l20-n3 { left: 626px; top: 558px; } .l20-n4 { left: 496px; top: 428px; }
+.l20-center {
+  left: 520px; top: 431px; width: 240px; text-align: center;
+  font-family: var(--font-mono);
+  font-size: 16px; letter-spacing: 2px; color: var(--text-2);
+}
+.l20-h {
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 600; line-height: 1.3; color: var(--text-1);
+}
+.l20-p { font-size: 17px; line-height: 1.6; color: var(--text-2); }
+/* stations N/E/S/W: each box stops clear of the ring (R9 measures boxes) */
+.l20-hn, .l20-pn, .l20-hs, .l20-ps { left: 480px; width: 320px; text-align: center; }
+.l20-he, .l20-pe { left: 800px; width: 384px; }
+.l20-hw, .l20-pw { left: 96px; width: 368px; text-align: right; }
+.l20-hn { top: 202px; } .l20-pn { top: 236px; }
+.l20-he, .l20-hw { top: 404px; } .l20-pe, .l20-pw { top: 440px; }
+.l20-hs { top: 598px; } .l20-ps { top: 632px; }
+
+/* ---------- L21 inventory matrix (8–12 slots + total) ---------- */
+/* the total is optically centred against the 4-row grid, not top-aligned */
+.l21-total {
+  left: 96px; top: 296px; width: 340px;
+  font-family: var(--font-num);
+  font-size: 200px; font-weight: 200; line-height: 1;
+  color: var(--text-1);
+}
+.l21-total-label {
+  left: 96px; top: 512px; width: 340px;
+  font-family: var(--font-mono);
+  font-size: 16px; letter-spacing: 2px; color: var(--text-2);
+}
+.l21-num {
+  width: 220px;
+  font-family: var(--font-mono);
+  font-size: 16px; letter-spacing: 1px; line-height: 1.3; color: var(--accent);
+}
+.l21-label {
+  width: 220px;
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 600; line-height: 1.3; color: var(--text-1);
+}
+.l21-c1 { left: 480px; } .l21-c2 { left: 720px; } .l21-c3 { left: 960px; }
+.l21-r1 { top: 208px; } .l21-r2 { top: 328px; } .l21-r3 { top: 448px; } .l21-r4 { top: 568px; }
+.l21-b1 { top: 234px; } .l21-b2 { top: 354px; } .l21-b3 { top: 474px; } .l21-b4 { top: 594px; }
+
+/* ---------- L22 spec sheet (real data only) ---------- */
+.l22-label { width: 512px; font-size: 17px; line-height: 1.4; color: var(--text-2); }
+.l22-value {
+  width: 512px;
+  font-family: var(--font-display);
+  font-size: 28px; font-weight: 600; line-height: 1.3; color: var(--text-1);
+}
+.l22-line { left: 96px; width: 1088px; height: 1px; background: var(--hairline); }
+.l22-c1 { left: 96px; } .l22-c2 { left: 672px; }
+.l22-r1 { top: 224px; } .l22-r2 { top: 324px; } .l22-r3 { top: 424px; } .l22-r4 { top: 524px; }
+.l22-b1 { top: 252px; } .l22-b2 { top: 352px; } .l22-b3 { top: 452px; } .l22-b4 { top: 552px; }
+.l22-s1 { top: 302px; } .l22-s2 { top: 402px; } .l22-s3 { top: 502px; } .l22-s4 { top: 602px; }
+.l22-footnote { left: 96px; top: 640px; width: 800px; font-size: 16px; color: var(--text-2); }
+
+/* ---------- L23 vertical timeline (4 nodes) ---------- */
+.l23-axis { left: 320px; top: 208px; width: 2px; height: 412px; background: var(--hairline); }
+.l23-dot { left: 314px; width: 14px; height: 14px; background: var(--accent); border-radius: 50%; }
+.l23-d1 { top: 231px; } .l23-d2 { top: 335px; } .l23-d3 { top: 439px; } .l23-d4 { top: 543px; }
+.l23-date {
+  left: 96px; width: 190px; text-align: right;
+  font-family: var(--font-mono);
+  font-size: 17px; line-height: 1.3; color: var(--accent);
+}
+.l23-h {
+  left: 368px; width: 780px;
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 600; line-height: 1.3; color: var(--text-1);
+}
+.l23-p { left: 368px; width: 780px; font-size: 17px; line-height: 1.6; color: var(--text-2); }
+.l23-r1 { top: 224px; } .l23-r2 { top: 328px; } .l23-r3 { top: 432px; } .l23-r4 { top: 536px; }
+.l23-n1 { top: 260px; } .l23-n2 { top: 364px; } .l23-n3 { top: 468px; } .l23-n4 { top: 572px; }
+
+/* ---------- L24 concentric system (3 nested layers + legend) ---------- */
+.l24-l1 { left: 230px; top: 240px; width: 380px; height: 380px; background: var(--surface); border-radius: 50%; }
+.l24-l2 { left: 290px; top: 300px; width: 260px; height: 260px; background: var(--hairline); border-radius: 50%; }
+.l24-l3 { left: 350px; top: 360px; width: 140px; height: 140px; background: var(--accent); border-radius: 50%; }
+.l24-core {
+  left: 350px; top: 417px; width: 140px; text-align: center;
+  font-family: var(--font-display);
+  font-size: 20px; font-weight: 600; line-height: 1.3; color: var(--on-accent);
+}
+/* legend swatches carry the layer fill only; geometry stays inline */
+.l24-s1 { background: var(--surface); }
+.l24-s2 { background: var(--hairline); }
+.l24-s3 { background: var(--accent); }
+.l24-h {
+  left: 792px; width: 380px;
+  font-family: var(--font-display);
+  font-size: 22px; font-weight: 600; line-height: 1.3; color: var(--text-1);
+}
+.l24-p { left: 792px; width: 380px; font-size: 17px; line-height: 1.6; color: var(--text-2); }
+.l24-h1 { top: 250px; } .l24-h2 { top: 390px; } .l24-h3 { top: 530px; }
+.l24-p1 { top: 286px; } .l24-p2 { top: 426px; } .l24-p3 { top: 566px; }
 
 /* --- GRID Swiss vocabulary: flat right-angle fills + reversed text
        (system 03; optional on any layout, geometry set inline) --- */

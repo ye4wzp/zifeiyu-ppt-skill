@@ -1,4 +1,4 @@
-# 版式注册表（L01–L19）
+# 版式注册表（L01–L24）
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。
 所有骨架已通过校验器与 PPTX 导出双重验证（金样：`examples/showcase/`）。
@@ -310,6 +310,128 @@
 </section>
 ```
 
+## L20 环形流程（3–4 节点）
+有回路的过程才用它（线性演进走 L08/L23）；顺时针读 N → E → S → W，标题 ≤6 字、说明 ≤20 字。**本页不加纹理铺装**：环心是实心色块，会在纹理上打出一个洞。
+```html
+<section class="slide" data-layout="L20">
+  <h2 class="sl-title">页标题</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <div class="l20-ring" data-shape="ellipse"></div>
+  <div class="l20-hole" data-shape="ellipse"></div>
+  <div class="l20-node l20-n1" data-shape="ellipse"></div>
+  <div class="l20-node l20-n2" data-shape="ellipse"></div>
+  <div class="l20-node l20-n3" data-shape="ellipse"></div>
+  <div class="l20-node l20-n4" data-shape="ellipse"></div>
+  <p class="l20-center">CYCLE</p>
+  <h3 class="l20-h l20-hn">环节一</h3>
+  <p class="l20-p l20-pn">说明。</p>
+  <h3 class="l20-h l20-he">环节二</h3>
+  <p class="l20-p l20-pe">说明。</p>
+  <h3 class="l20-h l20-hs">环节三</h3>
+  <p class="l20-p l20-ps">说明。</p>
+  <h3 class="l20-h l20-hw">环节四</h3>
+  <p class="l20-p l20-pw">说明。</p>
+</section>
+```
+可删：`l20-center` 中心标签；节点减到 3 个时整组删除一个方位（`l20-node l20-nN` + 对应 `l20-hX`/`l20-pX`），其余三组不动。`l20-hole` 必须是 `var(--bg)`，改成白色会在深色页露馅。
+
+## L21 矩阵盘点（8–12 项 + 总数）
+清单型内容：左侧极细巨号总数，右侧 3 列 × 4 行细目。label ≤6 字；num 走等宽短串（编号、区间、口径）。
+```html
+<section class="slide" data-layout="L21">
+  <h2 class="sl-title">页标题</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l21-total">24</p>
+  <p class="l21-total-label">TOTAL · 总数口径</p>
+  <p class="l21-num l21-c1 l21-r1">01</p><p class="l21-label l21-c1 l21-b1">条目一</p>
+  <p class="l21-num l21-c2 l21-r1">02</p><p class="l21-label l21-c2 l21-b1">条目二</p>
+  <p class="l21-num l21-c3 l21-r1">03</p><p class="l21-label l21-c3 l21-b1">条目三</p>
+  <p class="l21-num l21-c1 l21-r2">04</p><p class="l21-label l21-c1 l21-b2">条目四</p>
+  <p class="l21-num l21-c2 l21-r2">05</p><p class="l21-label l21-c2 l21-b2">条目五</p>
+  <p class="l21-num l21-c3 l21-r2">06</p><p class="l21-label l21-c3 l21-b2">条目六</p>
+  <p class="l21-num l21-c1 l21-r3">07</p><p class="l21-label l21-c1 l21-b3">条目七</p>
+  <p class="l21-num l21-c2 l21-r3">08</p><p class="l21-label l21-c2 l21-b3">条目八</p>
+  <p class="l21-num l21-c3 l21-r3">09</p><p class="l21-label l21-c3 l21-b3">条目九</p>
+  <p class="l21-num l21-c1 l21-r4">10</p><p class="l21-label l21-c1 l21-b4">条目十</p>
+  <p class="l21-num l21-c2 l21-r4">11</p><p class="l21-label l21-c2 l21-b4">条目十一</p>
+  <p class="l21-num l21-c3 l21-r4">12</p><p class="l21-label l21-c3 l21-b4">条目十二</p>
+</section>
+```
+可删：从末尾整组删（num + label 成对），最少留 8 项。总数必须等于细目之和——盘点页的数据诚实就在这一条。
+
+## L22 规格表（必须真实数据）
+参数、规格、配置清单：2 列 × 4 行 label–value，每行一条发丝线收口。value 走短值（数字 + 单位）；footnote 必须标注参数出处（校验器 R8 拦截）。
+```html
+<section class="slide" data-layout="L22">
+  <h2 class="sl-title">页标题</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <p class="l22-label l22-c1 l22-r1">参数一</p><p class="l22-value l22-c1 l22-b1">数值</p>
+  <p class="l22-label l22-c2 l22-r1">参数二</p><p class="l22-value l22-c2 l22-b1">数值</p>
+  <div class="l22-line l22-s1" data-shape="rect"></div>
+  <p class="l22-label l22-c1 l22-r2">参数三</p><p class="l22-value l22-c1 l22-b2">数值</p>
+  <p class="l22-label l22-c2 l22-r2">参数四</p><p class="l22-value l22-c2 l22-b2">数值</p>
+  <div class="l22-line l22-s2" data-shape="rect"></div>
+  <p class="l22-label l22-c1 l22-r3">参数五</p><p class="l22-value l22-c1 l22-b3">数值</p>
+  <p class="l22-label l22-c2 l22-r3">参数六</p><p class="l22-value l22-c2 l22-b3">数值</p>
+  <div class="l22-line l22-s3" data-shape="rect"></div>
+  <p class="l22-label l22-c1 l22-r4">参数七</p><p class="l22-value l22-c1 l22-b4">数值</p>
+  <p class="l22-label l22-c2 l22-r4">参数八</p><p class="l22-value l22-c2 l22-b4">数值</p>
+  <div class="l22-line l22-s4" data-shape="rect"></div>
+  <p class="l22-footnote">参数来源：xxx · 日期</p>
+</section>
+```
+可删：从末尾整行删（两组 label + value 与该行的 `l22-line` 一起删）。
+
+## L23 纵向时间线（4 节点）
+纵向演进，容量大于 L08：每个节点带一句说明。date 走真实日期，h ≤6 字，p ≤30 字。
+```html
+<section class="slide" data-layout="L23">
+  <h2 class="sl-title">页标题</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <div class="l23-axis" data-shape="rect"></div>
+  <div class="l23-dot l23-d1" data-shape="ellipse"></div>
+  <div class="l23-dot l23-d2" data-shape="ellipse"></div>
+  <div class="l23-dot l23-d3" data-shape="ellipse"></div>
+  <div class="l23-dot l23-d4" data-shape="ellipse"></div>
+  <p class="l23-date l23-r1">2026-01-01</p>
+  <h3 class="l23-h l23-r1">节点一</h3>
+  <p class="l23-p l23-n1">一句话说明。</p>
+  <p class="l23-date l23-r2">2026-02-01</p>
+  <h3 class="l23-h l23-r2">节点二</h3>
+  <p class="l23-p l23-n2">一句话说明。</p>
+  <p class="l23-date l23-r3">2026-03-01</p>
+  <h3 class="l23-h l23-r3">节点三</h3>
+  <p class="l23-p l23-n3">一句话说明。</p>
+  <p class="l23-date l23-r4">2026-04-01</p>
+  <h3 class="l23-h l23-r4">节点四</h3>
+  <p class="l23-p l23-n4">一句话说明。</p>
+</section>
+```
+可删：从末尾整组删（date + h + p + dot 一起），少于 4 个节点时轴线可行内改短 `height`。
+
+## L24 同心圆系统（3 层嵌套）
+层级包含关系：外层可替换、内核不可动；右侧三行图例与三层色块一一对应，核心标签 ≤4 字。**本页不加纹理铺装，且只用于浅色页**——is-dark / is-accent 上三层灰阶会塌成一片。
+```html
+<section class="slide" data-layout="L24">
+  <h2 class="sl-title">页标题</h2>
+  <div class="sl-rule" data-shape="rect"></div>
+  <div class="l24-l1" data-shape="ellipse"></div>
+  <div class="l24-l2" data-shape="ellipse"></div>
+  <div class="l24-l3" data-shape="ellipse"></div>
+  <p class="l24-core">内核</p>
+  <div class="l24-s1" data-shape="rect" style="left: 760px; top: 258px; width: 12px; height: 12px;"></div>
+  <h3 class="l24-h l24-h1">外层名</h3>
+  <p class="l24-p l24-p1">这一层做什么、谁可以动它。</p>
+  <div class="l24-s2" data-shape="rect" style="left: 760px; top: 398px; width: 12px; height: 12px;"></div>
+  <h3 class="l24-h l24-h2">中层名</h3>
+  <p class="l24-p l24-p2">这一层做什么、谁可以动它。</p>
+  <div class="l24-s3" data-shape="rect" style="left: 760px; top: 538px; width: 12px; height: 12px;"></div>
+  <h3 class="l24-h l24-h3">内核名</h3>
+  <p class="l24-p l24-p3">这一层做什么、谁可以动它。</p>
+</section>
+```
+三层色块顺序固定为 `l24-l1`（外，surface）→ `l24-l2`（中，hairline）→ `l24-l3`（核，accent），必须按此顺序书写：后写的压在先写的上面。图例色块只带填充，几何走行内样式。
+
 ## 媒体约定（L17–L19 通用）
 
 - 媒体文件放 `assets/media/`，命名 `{页码}-{语义}.{ext}`；**禁止远程 URL**（R13 拦截，离线播放与 PPTX 嵌入都需要本地文件）。
@@ -354,7 +476,7 @@
 5. **标注线**（封面/章节/金句页）：`.dim-tick + .dim-line + .dim-tick` 三件套 + 下方 `sl-mono` 标签，标注内容写真实参数（跨度、网格、规则号）。
 6. **图签栏**（封面、数据页、结尾页）：`.tb-rule` 横线 + 三组 `.tb-label`/`.tb-value` + 两条 `.tb-div` 竖分隔；数据页用它承载 SOURCE / DATE / STATUS（数据诚实协议的视觉化）。
 7. 节奏页设计：章节页 = is-accent 满幅色场 + `.dt-mega` 巨号贴右；金句页 = is-dark + `.dt-display` 两行大字（每行一个 h1）；封面 = `.dt-display` 128px 两行，右上空区放 `.sl-ghost` 数字（版式数/年份等真实参数）平衡构图。
-8. L09 全幅图页不加铺装，保持纯净。
+8. L09 全幅图页不加铺装，保持纯净；L20 环形与 L24 同心圆同样不加——实心洞与实心层会在纹理上打洞。
 
 纪律：标注文字必须真实（不许装饰性假参数）；每页最多一条标注线；SHEET 编号与实际页序一致。
 
@@ -362,7 +484,7 @@
 
 金样 `examples/swiss/` 为完整范例。每页规则：
 1. **等宽页眉**：左 `<p class="sl-mono" style="left: 96px; top: 64px;">GRID · 主题名</p>`，右 `NN / NN` 页码（`width: 138px`）——注意与 DATUM 的 SHEET 编号格式区分。有页眉的内容页 `sl-title` 行内 `top: 108px` 并删除 sl-rule。
-2. **点阵纹理只上封面/宣言页**：`<img class="sl-texture" src="assets/textures/dots-dark.png" aria-hidden="true">`（浅底用 dots-dark，色场/墨底用 dots-light）；正文页保持纯净底色。
+2. **点阵纹理只上封面/宣言页**：`<img class="sl-texture" src="assets/textures/dots-dark.png" aria-hidden="true">`（浅底用 dots-dark，色场/墨底用 dots-light）；正文页保持纯净底色，L20/L24 一律不加。
 3. **单焦点法则**：全 deck 唯一锚点色。一组卡片/KPI 里只允许一个元素上 accent（`is-accent`）；强调词用 `<span class="is-accent">` 或 `<span class="is-mark">`（荧光块），**巨字禁止加粗**。
 4. **三质互斥**：色块只有三种材质——`.sw-accent`（锚点，一组只许一块）/ `.sw-ink`（墨色反转）/ `.sw-grey`（默认中性），几何行内给定；色底/墨底上的文字加 `.sw-rev` 反白。禁止材质组合（色底加描边等）。
 5. **方块刻度**：分页点/装饰一律直角小方块（`.sw-ink` 行内 10×10px，当前项拉宽为 24px），禁止圆点。

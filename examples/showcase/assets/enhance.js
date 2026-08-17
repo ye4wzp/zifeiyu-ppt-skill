@@ -60,6 +60,35 @@
       prep(d, { transform: 'scale(0)' });
       play(d, { transform: 'scale(1)' }, 300 + i * 90, 350);
     });
+    slide.querySelectorAll('.l15-bar').forEach((b, i) => {
+      prep(b, { transform: 'scaleX(0)', transformOrigin: 'left center' });
+      play(b, { transform: 'scaleX(1)' }, 150 + i * 90, 600);
+    });
+    slide.querySelectorAll('.l20-node').forEach((n, i) => { // N -> E -> S -> W
+      prep(n, { transform: 'scale(0)' });
+      play(n, { transform: 'scale(1)' }, 300 + i * 140, 350);
+    });
+    slide.querySelectorAll('.l21-num, .l21-label').forEach((c, i) => {
+      prep(c, { opacity: '0' });
+      play(c, { opacity: '1' }, 200 + Math.floor(i / 2) * 60, 400);
+    });
+    const axis = slide.querySelector('.l23-axis');
+    if (axis) {
+      prep(axis, { transform: 'scaleY(0)', transformOrigin: 'center top' });
+      play(axis, { transform: 'scaleY(1)' }, 100, 600);
+    }
+    slide.querySelectorAll('.l23-dot').forEach((d, i) => {
+      prep(d, { transform: 'scale(0)' });
+      play(d, { transform: 'scale(1)' }, 500 + i * 110, 320);
+    });
+    slide.querySelectorAll('.l24-l1, .l24-l2, .l24-l3').forEach((c, i) => {
+      prep(c, { transform: 'scale(0)' });
+      play(c, { transform: 'scale(1)' }, 150 + i * 180, 500);
+    });
+    slide.querySelectorAll('.l24-s1, .l24-s2, .l24-s3, .l24-h, .l24-p').forEach((l, i) => {
+      prep(l, { opacity: '0' });
+      play(l, { opacity: '1' }, 400 + i * 70, 400);
+    });
     slide.querySelectorAll('img, video').forEach((img) => {
       prep(img, { opacity: '0', transform: 'scale(1.04)' });
       play(img, { opacity: '1', transform: 'scale(1)' }, 0, 900);
