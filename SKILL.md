@@ -5,7 +5,7 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），并可�
 
 # PPT Skill
 
-把内容装进 13 个注册版式，产出单目录网页 PPT；HTML 是唯一的源，PPTX / PNG 是一键衍生物。
+把内容装进 16 个注册版式，产出单目录网页 PPT；HTML 是唯一的源，PPTX / PNG 是一键衍生物。
 
 ## 硬约束（违反任何一条即返工）
 
@@ -13,7 +13,7 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），并可�
 2. **禁止发明类名**。只能使用 base.css 已定义的 class；校验器会拒绝白名单外的类名。
 3. **禁止裸色值与字体声明**。颜色只经 token；行内 style 只允许 `top/left/width/height/font-size/line-height` 的参数化数值。
 4. **每页必须声明 `data-layout="Lxx"`**（L01–L13）。
-5. **文字只能在 `h1/h2/h3/p` 内**；装饰元素挂 `div[data-shape="rect|ellipse"]`；图片用 `<img>`，禁止 background-image 承载内容图。
+5. **文字只能在 `h1/h2/h3/p` 内**；段内强调仅允许非嵌套的 `<strong>`/`<em>`/`<span class="is-accent">`（导出为 PPTX 原生分段样式）；装饰元素挂 `div[data-shape="rect|ellipse"]`；图片用 `<img>`，禁止 background-image 承载内容图。
 6. **数据诚实**：L07/L11 等数据版式必须使用用户提供的真实数值，禁止编造；无真实数据就改用概念版式。
 7. **每页密度纪律**：1 个核心信息 + 不超过 4 个支撑点；超出即拆页；相邻页不重复同一版式。
 8. **主题整套使用**，一个 deck 一个主题文件，不逐页混搭。
@@ -34,10 +34,9 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），并可�
 
 ### 第 3 步 · 建 deck
 ```bash
-mkdir -p <deck-dir>/assets && cp templates/seed.html <deck-dir>/index.html
-cp -r assets/base.css assets/runtime.js assets/themes <deck-dir>/assets/
+node scripts/new-deck.mjs <deck-dir> --theme paper|graphite|forest|editorial
 ```
-按选定主题修改 `<link id="theme">`；替换 `<title>`。deck 自包含，可整目录分发。
+脚手架复制 seed.html 与全部运行时资产（themes/、systems/、textures/、enhance.js）并指好 `<link id="theme">`；只需替换 `<title>`。deck 自包含，可整目录分发。
 
 ### 第 4 步 · 样张门（deck ≥ 5 页时必做）
 先只做两页：封面（L01）+ 内容最典型的一页。渲染截图给用户确认后，才进入批量生产。方向错误在 2 页时修正，不在 13 页时返工。
@@ -84,14 +83,21 @@ node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"  # Office �
 | L11 | 台账行 | 4 行 label–value–note 结构化信息 |
 | L12 | 流程步骤 | 4 步过程 |
 | L13 | 结尾 | 收束语 + 元信息 |
+| L14 | 图文半幅 | 左正文 + 右半幅照片，宣传类内容页优先于 L10 |
+| L15 | 条形对比图 | 4 行真实数据横向条形（条长与数值成正比，校验器核对） |
+| L16 | 图片网格 | 2×2 四图并列 |
 
-## 主题
+## 主题与设计系统
 
-`paper`（默认，暖纸白）· `graphite`（深色）· `forest`（冷纸绿）。选择依据见 `references/themes.md`。
+两套设计系统共用全部 16 个版式，换 `<link id="theme">` 一个文件整套切换：
+- **现代无衬线**（默认）：token 主题 `paper`（暖纸白）· `graphite`（深色）· `forest`（冷纸绿）
+- **「墨韵」衬线杂志风**：`--theme editorial`，宋体 × 暖纸 × 朱砂，适合文化/品牌/人文调性
+
+**DATUM 制图铺装是默认构成语法**（两套系统通用）：坐标纸纹理、四角角线、等宽页眉、标注线、图签栏，配方整块复制 `references/layouts.md` §DATUM；L09 全幅图页保持纯净不加铺装。选择依据见 `references/themes.md`。
 
 ## 参考文档（按需读取，勿全量加载）
 
-- `references/layouts.md` — 14 个版式的完整可复制骨架 + 节奏装饰用法
+- `references/layouts.md` — 16 个版式的完整可复制骨架 + DATUM 铺装 + 节奏装饰用法
 - `references/narratives.md` — 路演/汇报/宣传三套叙事页序模板
 - `references/themes.md` — 主题目录与受众映射
 - `references/authoring.md` — 文案密度、中文字号规则

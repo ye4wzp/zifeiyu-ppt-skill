@@ -14,11 +14,12 @@
 
 - **16 个注册版式 × 2 套设计系统 × 3 套 Token 主题**：版式覆盖封面、目录、章节、金句、对比、论证、KPI、条形图、时间线、图文、图片网格、台账、流程、全幅图、结尾，另有页码/logo/二维码企业槽位；设计系统有现代无衬线与「墨韵」衬线杂志风（宋体 × 暖纸 × 朱砂）两套——同一版式库，换一个 CSS 文件整套切换
 - **四格式交付链**：HTML 演示 → 可编辑 PPTX → 矢量 PDF → 逐页 PNG，全部一条命令，HTML 是唯一的源
-- **机器质量门**：Playwright 校验器执行 R1–R10 量化规则（版式注册、类名白名单、溢出、字号下限、文本碰撞、密度带……），错误即阻断交付
+- **机器质量门**：Playwright 校验器执行 R1–R12 量化规则（版式注册、类名白名单、溢出、字号下限、文本碰撞、条形图比例诚实、对比度下限、文档卫生……），错误即阻断交付；金样像素回归基线随仓库维护（`npm run regress`）
 - **DATUM 制图美学**：坐标纸纹理、四角角线、尺寸标注线、工程图签栏、SHEET 页码、等宽技术标注——设计语言与"确定性导出"的产品灵魂同源；128px 大字排印、满幅色场、单页明暗节奏
 - **语义动画**：数字 count-up、圆点弹入、分隔线拉出——与元素语义绑定，演示模式自动生效，导出通道零影响
 - **演讲者模式**：`S` 键开双窗控制台（当前页 + 下页预览 + 计时器 + 讲稿提示），BroadcastChannel 同步，`file://` 直接可用
-- **数据诚实协议**：KPI 版式强制真实数据与来源脚注，查不到就换概念版式，禁止编造
+- **数据诚实协议**：KPI/条形图版式强制来源标注（校验器拦截），条长与数值的比例由机器核对，查不到真实数据就换概念版式，禁止编造
+- **可编辑到字**：段内 `<strong>/<em>/<span class="is-accent">` 导出为 PPTX 原生 text runs，接收方在 PowerPoint 里仍可逐字改
 
 | | | |
 |---|---|---|
@@ -50,10 +51,12 @@ cd ~/.claude/skills/zifeiyu-ppt-skill && npm install
 手动命令：
 
 ```bash
-node scripts/validate.mjs <deck-dir> [--office]              # 机器校验
+node scripts/new-deck.mjs <deck-dir> --theme paper           # 建 deck 脚手架
+node scripts/validate.mjs <deck-dir> [--office]              # 机器校验 R1–R12
 node scripts/render-png.mjs <deck-dir>                       # 逐页截图
 node scripts/export-pdf.mjs <deck-dir>                       # 矢量 PDF（960×540pt）
 node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"  # 可编辑 PPTX
+npm run regress                                              # 金样像素回归（改 base.css/版式后必跑）
 ```
 
 演示快捷键：方向键翻页 · `F` 全屏 · `S` 演讲者控制台。
@@ -63,9 +66,9 @@ node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"  # 可编�
 ## 设计原则
 
 1. **约束换质量**：LLM 生成视觉内容的质量下限由约束系统决定。禁止从零写 HTML、禁止自造类名、颜色只经 token——校验器逐条拦截。
-2. **注册制映射**：`data-layout` 声明封闭版式集合，PPTX 导出是每版式一个确定性映射函数，不做任意结构的猜测；cover 图片以浏览器渲染的裁切结果原样嵌入，两侧取景逐像素一致。
+2. **测量驱动映射**：版式集合与元素词汇表（shape/img/h*/p）双重封闭，导出器在浏览器里实测每个元素的渲染几何与计算样式，按固定比例换算成 pptxgenjs 调用，不做任意结构的猜测；cover 图片以浏览器渲染的裁切结果原样嵌入，两侧取景逐像素一致。
 3. **画布契约**：1280×720 逻辑画布，px÷96→英寸、px×0.75→磅，正好映射 PowerPoint 标准 960×540pt。
-4. **三道质量门**：机器校验（exit 1 阻断）→ 渲染目检（P0–P3 分级）→ 导出比对（金样回归基线随仓库维护）。
+4. **三道质量门**：机器校验（exit 1 阻断）→ 渲染目检（P0–P3 分级）→ 导出比对；`baselines/` 金样像素基线守住每一次骨架与主题改动。
 
 ## 已知边界
 

@@ -303,10 +303,18 @@
 - **深色节奏页**：`<section class="slide is-dark" ...>` 将该页反转为深色。用于 L03 章节页、L04 金句页、L13 结尾页制造节奏；每 3–5 页最多一次，禁止用于数据/正文页。
 - **鬼影大字**：`<p class="sl-ghost">01</p>` 放在页面元素最前，280px 半透明大字（数字或 ≤4 个大写字母）。每页最多一个，与 is-dark 搭配效果最佳。
 
+## 段内强调（可选）
+
+文本槽位内允许非嵌套的 `<strong>`（加粗）、`<em>`（斜体，中文慎用——CJK 无真斜体）、`<span class="is-accent">`（强调色），PPTX 导出时映射为原生分段样式：
+```html
+<p class="l10-body">约束不是限制，<strong>约束换质量</strong>，颜色只走 <span class="is-accent">token</span>。</p>
+```
+每页合计 ≤2 处，强调即稀缺；其他标签与嵌套一律禁止（校验器 R7 拦截）。
+
 ## 微调规则
 
 版式槽位不合身时，允许且仅允许行内参数化微调：
 ```html
 <p class="l10-body" style="font-size: 22px; line-height: 1.6;">…</p>
 ```
-只许 `top/left/width/height/font-size/line-height`，数值单位 px 或 %。改颜色、改字体、加新属性一律禁止（校验器 R6 拦截）。
+只许 `top/left/width/height/font-size/line-height`，数值单位 px 或 %。改颜色、改字体、加新属性一律禁止（校验器 R6 拦截，装饰 shape 同样受查）。

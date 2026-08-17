@@ -13,15 +13,15 @@
 
 本项目的差异化定位：**在锁定设计系统的前提下，把 PPTX 导出做成一等公民**——这是归藏（明确不做）和 html-ppt-skill（完全没有）的集体空白，花叔虽有但依赖通用 HTML→PPTX 翻译（自由 HTML 通过率 <30%）。
 
-### 关键架构洞察：注册制版式 × PPTX 导出的组合红利
+### 关键架构洞察：封闭词汇表 × 测量驱动导出的组合红利
 
-因为每页幻灯片必须声明封闭集合内的 `data-layout`，PPTX 导出器**不需要**做通用 HTML→PPTX 翻译（难、脆、不可维护），只需要**为每个注册版式写一个确定性映射函数**：
+因为每页只能使用封闭的版式集合（`data-layout`）与封闭的元素词汇表（`[data-shape]` / `img` / `h1–h3` / `p`），PPTX 导出器**不需要**做通用 HTML→PPTX 翻译（难、脆、不可维护），甚至不需要逐版式映射函数——只需**在浏览器里实测每个注册元素的渲染几何与计算样式，按固定比例换算成 pptxgenjs 调用**：
 
 ```
-data-layout="L07" → 已知的元素结构和坐标 → pptxgenjs 确定性调用
+measureDeck(): box + font + color + runs → px÷96→in、px×0.75→pt → addText / addShape / addImage
 ```
 
-约束换来的不只是视觉稳定，还有导出的可靠性。这是本项目最重要的一条设计决策。
+新增版式因此零导出成本：只要骨架遵守元素词汇表，导出自动正确。约束换来的不只是视觉稳定，还有导出的可靠性。这是本项目最重要的一条设计决策。
 
 ## 2. 三大支柱（从标杆项目继承）
 
@@ -54,79 +54,90 @@ data-layout="L07" → 已知的元素结构和坐标 → pptxgenjs 确定性调�
 ```
 ppt-skill/
 ├── SKILL.md                     # 薄路由：工作流 + 硬约束，≤400 行
-├── README.md
+├── README.md / README.en.md
 ├── LICENSE                      # MIT
 ├── references/                  # 按需加载，SKILL.md 只放索引
-│   ├── layouts.md               # 版式注册表：每个版式的骨架、密度下限、适用场景、pptx-safe 标记
-│   ├── themes.md                # 主题目录与选择建议（受众→主题映射表）
+│   ├── layouts.md               # 版式注册表：16 个骨架 + DATUM 铺装 + 段内强调 + 微调规则
+│   ├── narratives.md            # 路演/汇报/宣传三套叙事页序模板
+│   ├── themes.md                # 主题与设计系统目录（受众→主题映射表）
 │   ├── authoring.md             # 写作规范：密度上限、CJK 字号表、中英混排规则
-│   ├── pptx-export.md           # Office 档约束全文 + 导出排错表
-│   ├── animations.md            # 语义动画配方（数字→count-up、柱→scaleY、线→dashoffset）
-│   └── checklist.md             # P0–P3 分级质检清单（含真实失败案例，随开发积累）
+│   ├── pptx-export.md           # Office 档约束全文 + 导出排错表 + 维护铁律
+│   ├── animations.md            # 语义动画配方（数字→count-up、点→弹入、线→拉出）
+│   └── checklist.md             # P0–P3 分级质检清单
 ├── assets/
-│   ├── base.css                 # design tokens + 版式骨架样式（唯一允许定义 class 的地方）
-│   ├── themes/                  # 每套 ≤100 行，只覆写 token
-│   │   ├── ink.css              # 示例：墨色系
-│   │   ├── klein.css            # 示例：高饱和强调色系
-│   │   └── paper.css            # 示例：纸感暖色系
-│   ├── runtime.js               # 导航（键盘/滚轮/触摸）+ O 键总览 + 深链 #/N + 低功耗模式
-│   └── enhance.js               # Web 档增强层：动画配方 + canvas 背景（Office 档不加载）
-├── templates/
-│   ├── seed.html                # 种子模板：完整 head/引用/结构 + <!-- SLIDES_HERE -->
-│   └── layouts/                 # 每个注册版式一个骨架片段（含占位数据和注释锚点）
-│       ├── L01-cover.html
-│       ├── L02-agenda.html
-│       └── ...
-├── scripts/                     # 全部基于 Playwright，跨平台（不硬编码浏览器路径）
-│   ├── validate.mjs             # 校验器（规则见 §6）
-│   ├── export-pptx.mjs          # 注册版式 → pptxgenjs 确定性映射
+│   ├── base.css                 # design tokens + 全部版式骨架样式（唯一允许定义 class 的地方）
+│   ├── themes/                  # paper / graphite / forest，每套 ≤100 行，只覆写颜色 token
+│   ├── systems/                 # 设计系统（editorial「墨韵」），可覆写字体 token 与排印细节
+│   ├── textures/                # DATUM 坐标纸/点阵纹理
+│   ├── runtime.js               # 演示导航 + 深链 #/N + 演讲者控制台（BroadcastChannel 双窗同步）
+│   └── enhance.js               # Web 档语义动画层（?flat=1 与导出通道自动跳过）
+├── templates/seed.html          # 种子模板：完整 head/引用 + <!-- SLIDES_HERE -->
+│                                # （版式骨架统一登记在 references/layouts.md，不设片段文件）
+├── scripts/                     # 全部基于 Playwright，跨平台
+│   ├── lib/deck.mjs             # 测量器：flat 模式实测每页元素的几何/样式/runs
+│   ├── new-deck.mjs             # deck 脚手架（复制种子 + 全部运行时资产）
+│   ├── validate.mjs             # 校验器 R1–R12（规则见 §6）
+│   ├── export-pptx.mjs          # 测量结果 → pptxgenjs 确定性映射（含 --native-charts）
 │   ├── export-pdf.mjs           # 矢量 PDF
-│   └── render-png.mjs           # 逐页截图（深链 #/N 驱动）
-└── examples/                    # 金样 deck（每套设计系统至少 1 个完整示例，兼作回归基准）
+│   ├── render-png.mjs           # 逐页截图
+│   └── diff.mjs                 # 像素回归比对器（pixelmatch）
+├── baselines/                   # 金样渲染基线（npm run regress 的比对基准）
+└── examples/                    # 金样 deck：showcase（现代系统）+ editorial（墨韵），兼作回归基准
 ```
 
-## 5. 版式注册表（v1 起步集，13 个）
+## 5. 版式注册表（16 个，全部 pptx-safe）
 
-| 编号 | 版式 | 叙事角色 | pptx-safe |
-|---|---|---|---|
-| L01 | 封面 | 开场钩子 | ✅ |
-| L02 | 目录/议程 | 结构预告 | ✅ |
-| L03 | 章节分隔 | 节奏切换 | ✅ |
-| L04 | 观点陈述（大字） | 单点强调 | ✅ |
-| L05 | 双栏对比 | 方案/前后对比 | ✅ |
-| L06 | 三点论证 | 并列论据 | ✅ |
-| L07 | KPI 数据大字 | 数据冲击（要求真实数据） | ✅ |
-| L08 | 时间线 | 演进叙事 | ✅ |
-| L09 | 图片主视觉 | 情绪/产品展示 | ✅ |
-| L10 | 图文混排 | 常规内容页 | ✅ |
-| L11 | 表格 | 结构化信息 | ✅ |
-| L12 | 流程步骤 | 过程说明 | ⚠️ 简化映射 |
-| L13 | 结尾/CTA | 收束 | ✅ |
+| 编号 | 版式 | 叙事角色 |
+|---|---|---|
+| L01 | 封面 | 开场钩子 |
+| L02 | 目录/议程 | 结构预告 |
+| L03 | 章节分隔 | 节奏切换 |
+| L04 | 观点陈述（大字） | 单点强调 |
+| L05 | 双栏对比 | 方案/前后对比 |
+| L06 | 三点论证 | 并列论据 |
+| L07 | KPI 数据大字 | 数据冲击（要求真实数据） |
+| L08 | 时间线 | 演进叙事 |
+| L09 | 图片主视觉 | 情绪/产品展示 |
+| L10 | 正文加要点 | 常规内容页 |
+| L11 | 台账行 | 结构化信息 |
+| L12 | 流程步骤 | 过程说明 |
+| L13 | 结尾/CTA | 收束 |
+| L14 | 图文半幅 | 宣传类内容页 |
+| L15 | 条形对比图 | 数据对比（条长与数值成正比，校验器核对；可导出原生图表） |
+| L16 | 图片网格 2×2 | 多图并列 |
 
-每个版式在 `layouts.md` 中登记四要素：HTML 骨架、内容密度区间（防空防挤）、适用场景、PPTX 映射说明。扩展新版式必须同步三处：骨架文件 + 注册表 + 校验器白名单（归藏同款纪律）。
+每个版式在 `layouts.md` 中登记骨架、密度区间与适用场景。扩展新版式必须四处同步：base.css 骨架样式 + layouts.md 注册 + 校验器（若涉及新规则）+ 金样重跑回归（归藏同款纪律）。测量驱动的导出器对遵守元素词汇表的新版式零成本。
 
 **每页密度纪律**（花叔）：1 个核心信息 + 3–4 个支撑点 + 1 个视觉主角，超出即拆页；相邻页不得重复同一版式。
 
 ## 6. 质量管线（三道门）
 
-**第一道：机器校验 `validate.mjs`**（量化规则，exit 1 阻断交付）
+**第一道：机器校验 `validate.mjs`**（量化规则 R1–R12；error exit 1 阻断交付，warn 放行）
 
-| 规则 | 检查内容 |
-|---|---|
-| R1 | 每页 `data-layout` 必须在注册表内 |
-| R2 | class 白名单：slide 内不得出现 base.css 未定义的 class |
-| R3 | 溢出检测：任何元素不得超出 1280×720 画布 |
-| R4 | 字号下限：正文 ≥24px、标题层级比例（标题:正文 ≥3:1） |
-| R5 | 密度带：内容包围盒占画布 40%–85% |
-| R6 | 禁止裸色值：slide 标记内不得出现 hex/rgb，只允许 `var(--*)` |
-| R7 | Office 档追加：裸文本检测（文字必须在 p/h* 内）、禁渐变/复杂 SVG |
-| R8 | 数据版式（L07/L11）必须含真实数值来源注释，禁止占位假数据 |
+| 规则 | 级别 | 检查内容 |
+|---|---|---|
+| R1 | error | 每页 `data-layout` 必须在注册表内（L01–L16） |
+| R2 | error | class 白名单：所有元素（含 shape/img 与段内 span）不得使用 base.css 未定义的 class |
+| R3 | error | 溢出：任何元素不得超出 1280×720 画布；文字不得水平溢出自身槽位 |
+| R4 | error | 字号下限：任何文字 ≥16px |
+| R5 | warn | 密度带：内容包围盒占画布 25%–97%（全幅图页豁免上限） |
+| R6 | error | 行内样式白名单：所有元素只许 `top/left/width/height/font-size/line-height` 参数化数值——裸色值/字体声明无处可写 |
+| R7 | error | 文字容器契约：h1/h2/h3/p 之外的裸文字、段内非 strong/em/span 标签或嵌套，一律拦截 |
+| R8 | error | 数据诚实：L07/L15 必须有来源标注（footnote 或 DATUM 图签栏 SOURCE）；L15 条长与解析数值的比例偏差 >max(4px, 2%) 即报错 |
+| R9 | error | 文本碰撞：两个不透明文本重叠超过较小者面积 4%（透明度 <0.2 的鬼影字豁免） |
+| R10 | error | 可访问性：内容图必须有 alt，装饰图必须声明 aria-hidden |
+| R11 | warn | 对比度下限：文字对其实际所在表面（含半透明 shape 叠色）<3:1 预警；图上文字跳过，交目检 |
+| R12 | error | 文档卫生：禁 `<style>` 标签、只允许 base.css + 一个主题/系统文件、Office 档禁远程图片 |
+
+R2 + R6 + R12 合围出"颜色只能经 token"的机器保证：deck 内除白名单类与参数化几何外没有任何样式通道。
 
 **第二道：P0–P3 视觉自检**（渲染截图后执行，不是只读代码）
 P0 = 文字溢出/遮挡/对比度不足；P1 = 版式误用/密度失衡；P2 = 主题不一致/间距失谐；P3 = 打磨项。P0/P1 必须修复。
 
 **第三道：导出验证**（Office 档）
 PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐页确认。
+
+**回归基线**：`baselines/` 存两套金样的逐页渲染；`npm run regress` 像素比对（同机），`npm run baseline` 在设计有意变更时重录。
 
 ## 7. Skill 工作流（SKILL.md 主流程）
 
@@ -139,7 +150,7 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
    Q5 硬性约束（品牌色仅在用户有明确品牌规范时接受）
 2. 资产先行：真实 logo（svgl → simpleicons → favicon 链）、真实图片、真实数据；
    涉及真实产品的事实必须先核实再写入
-3. 复制 seed.html + 选定主题 → 建 deck 目录
+3. `scripts/new-deck.mjs` 脚手架建 deck 目录（种子 + 全部运行时资产 + 选定主题）
 4. 大纲 + 2 页语法样张（封面 + 最典型内容页）→ 用户确认后才批量生产
 5. 逐页填充：选注册版式 → 复制骨架 → 只替换内容 → 密度自查
 6. node scripts/validate.mjs → 修复循环直至通过
@@ -147,12 +158,13 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
 8. 交付 HTML；按档位追加 PPTX / PDF / PNG
 ```
 
-## 8. 里程碑
+## 8. 里程碑（M1–M5 已全部落地）
 
-- **M1 · 最小闭环**：seed.html + base.css + 3 套 token 主题 + L01–L13 骨架 + runtime.js（导航/总览/深链）+ validate.mjs（R1–R6）+ 1 个金样 deck。此时已是可用的 Web 档 Skill。
-- **M2 · 差异化卖点**：export-pptx.mjs（13 个版式的确定性映射）+ R7/R8 规则 + pptx-export.md + Office 档金样。
-- **M3 · 完整交付链**：export-pdf.mjs、render-png.mjs、enhance.js 动画配方、低功耗降级。
-- **M4 · 体验补强**：第二套设计系统、演讲者模式（BroadcastChannel 双窗同步 + 讲稿抽屉 + 计时器，对标 html-ppt-skill）、CJK 字号查表完善。
+- **M1 · 最小闭环**：seed.html + base.css + 3 套 token 主题 + 版式骨架 + runtime.js + validate.mjs + 金样 deck。
+- **M2 · 差异化卖点**：export-pptx.mjs 测量驱动导出 + Office 档规则 + pptx-export.md + Office 档金样。
+- **M3 · 完整交付链**：export-pdf.mjs、render-png.mjs、enhance.js 语义动画、原生备注/原生图表导出。
+- **M4 · 体验补强**：设计系统 02「墨韵」、DATUM 制图铺装、演讲者模式（BroadcastChannel 双窗同步 + 讲稿 + 计时器）、L14–L16 版式。
+- **M5 · 质量闭环**：new-deck 脚手架、校验器全元素覆盖（R1–R12：数据比例诚实、对比度预警、文档卫生）、段内强调 text runs 导出、像素回归基线（baselines/ + regress）。
 
 ## 9. 风险与对策
 
