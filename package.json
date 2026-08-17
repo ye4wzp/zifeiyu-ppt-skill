@@ -3,10 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "new-deck": "node scripts/new-deck.mjs",
     "validate": "node scripts/validate.mjs",
     "render": "node scripts/render-png.mjs",
     "export": "node scripts/export-pptx.mjs",
-    "pdf": "node scripts/export-pdf.mjs"
+    "pdf": "node scripts/export-pdf.mjs",
+    "regress": "node scripts/render-png.mjs examples/showcase --out .regress/showcase && node scripts/render-png.mjs examples/editorial --out .regress/editorial && node scripts/diff.mjs baselines/showcase .regress/showcase --out .regress/diff-showcase && node scripts/diff.mjs baselines/editorial .regress/editorial --out .regress/diff-editorial",
+    "baseline": "node scripts/render-png.mjs examples/showcase --out baselines/showcase && node scripts/render-png.mjs examples/editorial --out baselines/editorial"
   },
   "dependencies": {
     "pixelmatch": "^7.2.0",

@@ -7,7 +7,8 @@ import { deckIndex } from './lib/deck.mjs';
 const args = process.argv.slice(2);
 const i = args.indexOf('--out');
 const index = deckIndex(args.find((a) => !a.startsWith('--')) || '.');
-const outDir = resolve(dirname(index), i >= 0 ? args[i + 1] : 'renders');
+// explicit --out resolves from CWD; default stays inside the deck
+const outDir = i >= 0 ? resolve(args[i + 1]) : resolve(dirname(index), 'renders');
 mkdirSync(outDir, { recursive: true });
 
 const browser = await chromium.launch();

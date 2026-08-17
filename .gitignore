@@ -11,6 +11,7 @@ validation/
 **/renders/
 **/renders-pptx/
 **/.export-crops/
+.regress/
 examples/**/deck.pptx
 examples/**/deck.pdf
 examples/**/deck-web.pdf
