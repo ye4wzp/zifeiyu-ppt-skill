@@ -153,3 +153,49 @@
 .mgx-num { left: 88px; top: 236px; width: 400px; font-size: 200px; color: var(--on-image); }
 .mgx-title { left: 96px; top: 448px; width: 1088px; font-size: 80px; line-height: 1.2; color: var(--on-image); }
 .mgx-it { left: 96px; top: 560px; width: 1088px; font-size: 32px; color: var(--on-image); }
+
+/* ---------- magazine/matrix ---------- */
+.mgm-hero { left: 84px; top: 300px; width: 400px; font-size: 200px; }
+.mgm-label { left: 96px; top: 516px; width: 480px; font-size: 26px; line-height: 1.2; }
+.mgm-sub { left: 96px; top: 556px; width: 480px; }
+.mgm-letter { width: 40px; font-size: 32px; }
+.mgm-name { width: 188px; font-size: 21px; line-height: 1.2; }
+.mgm-c1 { left: 704px; }
+.mgm-c1n { left: 748px; }
+.mgm-c2 { left: 952px; }
+.mgm-c2n { left: 996px; }
+.mgm-hair { left: 704px; width: 480px; }
+
+/* ---------- magazine/compare ---------- */
+.mgv-ink { left: 96px; top: 256px; width: 1088px; }
+.mgv-split { left: 640px; top: 288px; width: 1px; height: 312px; background: var(--hairline); }
+.mgv-label { top: 288px; width: 480px; }
+.mgv-h { top: 318px; width: 480px; font-size: 30px; line-height: 1.3; }
+.mgv-p { top: 370px; width: 480px; font-size: 18px; line-height: 1.7; color: var(--text-2); }
+.mgv-num { top: 470px; width: 150px; font-size: 120px; }
+.mgv-nl { top: 542px; width: 320px; font-size: 21px; line-height: 1.4; }
+.mgv-l { left: 96px; }
+.mgv-r { left: 704px; }
+.mgv-ln { left: 256px; }
+.mgv-rn { left: 864px; }
+
+/* ---------- magazine/image-text ---------- */
+.mgi-img { left: 96px; top: 64px; width: 560px; height: 520px; }
+.mgi-cap { left: 96px; top: 600px; width: 560px; }
+.mgi-kicker { left: 704px; top: 64px; width: 480px; }
+.mgi-title { left: 704px; width: 480px; font-size: 48px; line-height: 1.3; }
+.mgi-t1 { top: 104px; }
+.mgi-t2 { top: 166px; }
+.mgi-it { left: 704px; top: 248px; width: 480px; font-size: 28px; }
+.mgi-p { left: 704px; width: 480px; font-size: 18px; line-height: 1.75; color: var(--text-1); text-align: justify; }
+.mgi-p1 { top: 304px; }
+.mgi-p2 { top: 392px; }
+.mgi-ink { left: 704px; top: 488px; width: 480px; }
+.mgi-note { left: 704px; top: 508px; width: 480px; line-height: 1.6; }
+
+/* ---------- magazine/image ---------- */
+.mgf-img { left: 0; top: 0; width: 1280px; height: 720px; }
+.mgf-plate { left: 64px; top: 440px; width: 576px; height: 216px; background: var(--bg); }
+.mgf-cap { left: 96px; top: 472px; width: 512px; }
+.mgf-title { left: 96px; top: 508px; width: 512px; font-size: 40px; line-height: 1.3; }
+.mgf-p { left: 96px; top: 576px; width: 512px; }

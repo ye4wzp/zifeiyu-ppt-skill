@@ -104,6 +104,106 @@
 </section>
 ```
 
+## magazine/matrix · matrix
+
+盘点 + 总数。左：两行标题、大号总数、标签与一句分组说明；右：两列 × 6 行「字母 / 名称」，行间细线。当前项用 `is-mark`。8–12 项，名称 ≤7 字。
+
+```html
+<section class="slide" data-layout="magazine/matrix" data-role="matrix">
+  <p class="mg-mono mg-folio">01 — STYLE INDEX</p>
+  <h2 class="mg-serif mg-head mg-head1" data-merge="title" data-anim="rise">十二种风格，</h2>
+  <h2 class="mg-serif mg-head mg-head2" data-merge="title" data-anim="rise">按场合挑一种。</h2>
+  <p class="mg-num mgm-hero" data-anim="count">12</p>
+  <p class="mg-serif mgm-label" data-merge="hero" data-anim="rise">种风格</p>
+  <p class="mg-body mgm-sub" data-merge="hero" data-anim="rise">分五组：编辑排印、商务理性、舞台冲击、影像叙事、东方人文</p>
+  <p class="mg-num mgm-letter mgm-c1" style="top: 104px;">A</p><p class="mg-serif mgm-name mgm-c1n" style="top: 112px;"><span class="is-mark">杂志 · 暖纸</span></p>
+  <p class="mg-num mgm-letter mgm-c2" style="top: 104px;">G</p><p class="mg-serif mgm-name mgm-c2n" style="top: 112px;">摄影集 · 画册</p>
+  <div class="mg-hair mgm-hair" data-shape="rect" style="top: 164px;"></div>
+  <p class="mg-num mgm-letter mgm-c1" style="top: 188px;">B</p><p class="mg-serif mgm-name mgm-c1n" style="top: 196px;">瑞士 · 网格</p>
+  <p class="mg-num mgm-letter mgm-c2" style="top: 188px;">H</p><p class="mg-serif mgm-name mgm-c2n" style="top: 196px;">咨询 · 白皮书</p>
+  <div class="mg-hair mgm-hair" data-shape="rect" style="top: 248px;"></div>
+  <p class="mg-num mgm-letter mgm-c1" style="top: 272px;">C</p><p class="mg-serif mgm-name mgm-c1n" style="top: 280px;">发布会 · 暗场</p>
+  <p class="mg-num mgm-letter mgm-c2" style="top: 272px;">I</p><p class="mg-serif mgm-name mgm-c2n" style="top: 280px;">日式 · 极简</p>
+  <div class="mg-hair mgm-hair" data-shape="rect" style="top: 332px;"></div>
+  <p class="mg-num mgm-letter mgm-c1" style="top: 356px;">D</p><p class="mg-serif mgm-name mgm-c1n" style="top: 364px;">报刊 · 版面</p>
+  <p class="mg-num mgm-letter mgm-c2" style="top: 356px;">J</p><p class="mg-serif mgm-name mgm-c2n" style="top: 364px;">拼贴 · 手账</p>
+  <div class="mg-hair mgm-hair" data-shape="rect" style="top: 416px;"></div>
+  <p class="mg-num mgm-letter mgm-c1" style="top: 440px;">E</p><p class="mg-serif mgm-name mgm-c1n" style="top: 448px;">大字报 · 粗野</p>
+  <p class="mg-num mgm-letter mgm-c2" style="top: 440px;">K</p><p class="mg-serif mgm-name mgm-c2n" style="top: 448px;">新中式 · 东方</p>
+  <div class="mg-hair mgm-hair" data-shape="rect" style="top: 500px;"></div>
+  <p class="mg-num mgm-letter mgm-c1" style="top: 524px;">F</p><p class="mg-serif mgm-name mgm-c1n" style="top: 532px;">柔和 · 产品</p>
+  <p class="mg-num mgm-letter mgm-c2" style="top: 524px;">L</p><p class="mg-serif mgm-name mgm-c2n" style="top: 532px;">工程制图</p>
+  <div class="mg-hair mgm-hair" data-shape="rect" style="top: 584px;"></div>
+  <div class="mg-hair mg-rule" data-shape="rect"></div>
+  <p class="mg-mono mg-foot">Source — 风格库设计规格 2026-10-08 §2</p>
+  <p class="mg-mono mg-pageno">05 / 18</p>
+</section>
+```
+
+## magazine/compare · compare
+
+二元对比。整行标题 + 斜体副题 + 粗线；左右两栏「等宽标签 / 小标题 / 两行说明 / 大数字 + 一句数字说明」，中间竖细线。数字必须真实。
+
+```html
+<section class="slide" data-layout="magazine/compare" data-role="compare">
+  <p class="mg-mono mg-folio">01 — BEFORE / AFTER</p>
+  <h2 class="mg-serif mg-title" data-anim="rise">换皮，不如换版面。</h2>
+  <p class="mg-it mg-voice" data-anim="rise">Same content, new pages.</p>
+  <div class="mg-ink mgv-ink" data-shape="rect" data-anim="draw"></div>
+  <div class="mgv-split" data-shape="rect"></div>
+  <p class="mg-mono mgv-label mgv-l">BEFORE</p>
+  <h3 class="mg-serif mgv-h mgv-l" data-merge="l" data-anim="rise">通用版式，换主题即换色</h3>
+  <p class="mgv-p mgv-l" data-merge="l" data-anim="rise">三套设计系统共用 L01–L24，换一个主题文件整套换色，版面结构始终一样。</p>
+  <p class="mg-num mgv-num mgv-l" data-anim="count">24</p>
+  <p class="mg-serif mgv-nl mgv-ln" data-anim="rise">个版式，三套系统共用</p>
+  <p class="mg-mono mgv-label mgv-r">AFTER</p>
+  <h3 class="mg-serif mgv-h mgv-r" data-merge="r" data-anim="rise">独立版式，选风格即选版面</h3>
+  <p class="mgv-p mgv-r" data-merge="r" data-anim="rise">十二种风格各有一套版式，按角色登记；校验与导出只认角色，不认风格。</p>
+  <p class="mg-num mgv-num mgv-r" data-anim="count">12</p>
+  <p class="mg-serif mgv-nl mgv-rn" data-anim="rise">种风格，各有<span class="is-mark">一套版式</span></p>
+  <div class="mg-hair mg-rule" data-shape="rect"></div>
+  <p class="mg-mono mg-foot">ZIFEIYU PPT SKILL · VOL. 01</p>
+  <p class="mg-mono mg-pageno">06 / 18</p>
+</section>
+```
+
+## magazine/image-text · image-text
+
+图文专题。左大图（560×520）带图注，右栏等宽 kicker、两行标题、斜体副题、两段正文（每段 ≤50 字）、粗线与等宽注脚。
+
+```html
+<section class="slide" data-layout="magazine/image-text" data-role="image-text">
+  <img class="mg-photo mgi-img" src="assets/img/07-feature.jpg" alt="示意图：暖灰立板与光">
+  <p class="mg-mono mgi-cap">FIG. 04 — 示意图</p>
+  <p class="mg-mono mgi-kicker">02 — MEASURED EXPORT</p>
+  <h2 class="mg-serif mgi-title mgi-t1" data-merge="title" data-anim="rise">所见即所得，</h2>
+  <h2 class="mg-serif mgi-title mgi-t2" data-merge="title" data-anim="rise">靠的是测量。</h2>
+  <p class="mg-it mgi-it" data-anim="rise">Measure first, then draw.</p>
+  <p class="mgi-p mgi-p1" data-merge="body" data-anim="rise">导出器先让浏览器把每一页排好，再逐个量出元素的位置、尺寸、字号与颜色，按同样的坐标写进 PPTX。</p>
+  <p class="mgi-p mgi-p2" data-merge="body" data-anim="rise">圆角、描边、阴影、旋转与竖排换成 PowerPoint 原生形状；画不出的装饰单独截图，文字始终可编辑。</p>
+  <div class="mg-ink mgi-ink" data-shape="rect" data-anim="draw"></div>
+  <p class="mg-mono mgi-note">PRIMITIVES — ROUNDRECT · LINE · CHEVRON · ROTATE · SHADOW · EAVERT</p>
+  <div class="mg-hair mg-rule" data-shape="rect"></div>
+  <p class="mg-mono mg-foot">ZIFEIYU PPT SKILL · VOL. 01</p>
+  <p class="mg-mono mg-pageno">07 / 18</p>
+</section>
+```
+
+## magazine/image · image
+
+满版照片 + 暖纸图注牌：左下角纸色牌子里放图注、一句标题、一句说明。照片左下要安静。
+
+```html
+<section class="slide" data-layout="magazine/image" data-role="image">
+  <img class="mg-photo mgf-img" src="assets/img/08-plate.jpg" alt="示意图：暖灰立板与一块柠檬黄">
+  <div class="mgf-plate" data-shape="rect"></div>
+  <p class="mg-mono mgf-cap">FIG. 05 — 示意图</p>
+  <h2 class="mg-serif mgf-title" data-anim="rise">先选风格，再写内容</h2>
+  <p class="mg-body mgf-p" data-anim="rise">风格决定版面，版面决定一页能放多少字。</p>
+  <p class="mg-mono mg-cap-on mg-pageno">08 / 18</p>
+</section>
+```
+
 ## magazine/kpi · kpi
 
 数据大字。左：两行结论标题 + 一个主数字（≤3 位）+ 标签与说明；右：照片 + 两组次数字。三个数都必须真实，页脚 `data-source` 写出处。

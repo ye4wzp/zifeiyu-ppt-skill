@@ -26,6 +26,10 @@
     "magazine/statement": { "role": "statement" },
     "magazine/section": { "role": "section" },
     "magazine/kpi": { "role": "kpi" },
-    "magazine/process": { "role": "process" }
+    "magazine/process": { "role": "process" },
+    "magazine/matrix": { "role": "matrix" },
+    "magazine/compare": { "role": "compare" },
+    "magazine/image-text": { "role": "image-text" },
+    "magazine/image": { "role": "image" }
   }
 }
