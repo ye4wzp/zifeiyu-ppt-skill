@@ -100,7 +100,7 @@ ppt-skill/
 │   ├── render-png.mjs           # 逐页截图
 │   └── diff.mjs                 # 像素回归比对器（pixelmatch）
 ├── baselines/                   # 金样渲染基线：legacy examples 各一份 + styles/<id>/
-└── examples/                    # legacy 金样 deck：showcase / editorial / media（随风格交付逐个退役）
+└── examples/                    # legacy 金样 deck：showcase / media（随风格交付逐个退役）
 ```
 
 ## 5. 风格包与角色层
@@ -170,7 +170,7 @@ ppt-skill/
 
 R3 报错按溢出量分档给修复建议（≤40px 收紧文案 → ≤120px 行内降档 → 更大换版式），降低返工轮次。
 
-R15 把"每 3–5 页一次节奏断点"这条人肉纪律机器化。样张型 deck（`examples/showcase` / `examples/editorial` 一页一版式地陈列全部版式）会因为版式顺序固定而必然触发一条 R15b，属于已知且接受的预警——样张的职责是覆盖版式，不是示范节奏；真实交付 deck 出现 R15 必须改节奏而不是放宽规则。
+R15 把"每 3–5 页一次节奏断点"这条人肉纪律机器化。样张型 deck（`examples/showcase` 一页一版式地陈列全部版式）会因为版式顺序固定而必然触发一条 R15b，属于已知且接受的预警——样张的职责是覆盖版式，不是示范节奏；真实交付 deck 出现 R15 必须改节奏而不是放宽规则。
 
 **产物门 `check-pptx.mjs`**（导出后，exit 1 阻断）：HTML 侧校验器看不到损坏的 .pptx——此门检查 OOXML 包完整性（content types 覆盖、关系目标存在、全部 XML 良构、slide/notes 接线、图表 XML 的已知损坏模式）。`--embed-fonts` 的嵌入结构同样由它守。
 

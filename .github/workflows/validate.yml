@@ -24,7 +24,6 @@ jobs:
       - name: Validate golden decks (R1-R16 machine gate)
         run: |
           node scripts/validate.mjs examples/showcase
-          node scripts/validate.mjs examples/editorial
           node scripts/validate.mjs examples/media
           for g in styles/*/golden; do node scripts/validate.mjs "$g"; done
       - name: Render check

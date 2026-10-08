@@ -53,7 +53,7 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），从风�
 ### 第 3 步 · 建 deck
 ```bash
 node scripts/new-deck.mjs <deck-dir> --style <id>                  # 风格库
-node scripts/new-deck.mjs <deck-dir> --theme paper|graphite|forest|editorial|swiss   # legacy
+node scripts/new-deck.mjs <deck-dir> --theme paper|graphite|forest|swiss   # legacy
 node scripts/new-deck.mjs <deck-dir> --refresh                     # 已有 deck 换上最新运行时与风格包
 ```
 脚手架复制种子、共用运行时（base.css / runtime.js / enhance.js）与风格包（style.css、manifest.json 及其资产目录）；只需替换 `<title>`。deck 自包含，可整目录分发。
@@ -92,10 +92,10 @@ node scripts/check-pptx.mjs <deck-dir>/deck.pptx       # 产物结构校验（OO
 
 ## Legacy 主题（过渡期）
 
-风格尚未交付时使用。三套设计系统共用 L01–L24 二十四个版式（骨架见 `references/layouts.md`），换 `<link id="theme">` 一个文件整套切换：
+风格尚未交付时使用。两套设计系统共用 L01–L24 二十四个版式（骨架见 `references/layouts.md`），换 `<link id="theme">` 一个文件整套切换：
 - **现代无衬线**：token 主题 `paper`（暖纸白）· `graphite`（深色）· `forest`（冷纸绿），配 DATUM 制图铺装
-- **「墨韵」衬线杂志风**：`editorial`，思源宋 × 暖纸 × 朱砂
 - **「瑞士国际」GRID**：`swiss`（风格库版本见 `styles/swiss/`）
+- `editorial`（墨韵）已由 A 杂志取代退役。
 
 legacy 内容形状 → 版式：数据指标 2–3 个 L07 · 行级对比数据 L15 · 台账 L11 · 规格 L22 · 盘点 + 总数 L21 · 恰好 3 项 L06 · 恰好 4 项 L12 / L16 · 二元对比 L05 · 线性演进 L08 / L23 · 闭环 L20 · 层级嵌套 L24 · 单点强调 L04 · 证据图 L09 / L14 / L16 · 视频 / 音频 L17 / L18 / L19。受众映射见 `references/themes.md`。
 

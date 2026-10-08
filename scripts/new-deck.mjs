@@ -1,5 +1,5 @@
 // Usage: node scripts/new-deck.mjs <deck-dir> --style <id>
-//        node scripts/new-deck.mjs <deck-dir> --theme paper|graphite|forest|editorial|swiss   (legacy)
+//        node scripts/new-deck.mjs <deck-dir> --theme paper|graphite|forest|swiss   (legacy)
 //        node scripts/new-deck.mjs <deck-dir> --refresh
 // Scaffolds a self-contained deck: seed + shared runtime + the chosen style
 // package (style.css, manifest.json and the asset dirs it lists). --refresh

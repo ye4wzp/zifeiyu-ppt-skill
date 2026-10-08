@@ -16,7 +16,7 @@ The one-line difference from similar projects: beautiful HTML decks usually can'
 
 ## Features
 
-- **24 registered layouts × 3 design systems × 3 token themes** — cover, agenda, section, statement, comparison, KPI, bar chart, spec table, timeline (horizontal & vertical), image hero/grid (mirrorable), ledger, matrix inventory, process, closed loop, concentric system, video hero, inset video, audio track, closing; swap the entire type language by changing one CSS file: modern sans with DATUM drafting chrome, serif editorial, or Swiss International GRID (calibrated greys × one Klein-blue anchor × the-bigger-the-lighter display type × mutually-exclusive color fields × color loop)
+- **24 registered layouts × 2 design systems × 3 token themes** — cover, agenda, section, statement, comparison, KPI, bar chart, spec table, timeline (horizontal & vertical), image hero/grid (mirrorable), ledger, matrix inventory, process, closed loop, concentric system, video hero, inset video, audio track, closing; swap the entire type language by changing one CSS file: modern sans with DATUM drafting chrome or Swiss International GRID (calibrated greys × one Klein-blue anchor × the-bigger-the-lighter display type × mutually-exclusive color fields × color loop)
 - **Video & audio as first-class citizens** — `<video>/<audio>` join the element contract: posters lock the still frame for deterministic rendering, the presentation layer drives playback (auto-muted heroes, click-to-play, a designed audio card), PPTX embeds media natively (double-click to play), PDF substitutes poster frames
 - **Deterministic font subsets** — Source Han Sans (variable weight), Source Han Serif, and JetBrains Mono are sliced to each deck's actual characters (~800KB per deck) and travel with it: identical rendering on macOS/Windows/Linux, works on file://; CJK refinements (halt punctuation compression, balanced line wrapping, justified body columns) built in
 - **Four-format delivery chain** — HTML presentation → editable PPTX → vector PDF → per-slide PNG, each one command; HTML is the single source of truth
@@ -27,10 +27,6 @@ The one-line difference from similar projects: beautiful HTML decks usually can'
 - **Data honesty protocol** — KPI/chart layouts require real, sourced values (validator-enforced), and L15 bar lengths are machine-checked to stay proportional to their stated numbers; no data, no numbers
 - **Editable down to the word** — inline emphasis exports as native PPTX text runs; designed-contiguous slot groups merge into single textboxes with per-paragraph styling and exact spacing; experimental `--embed-fonts` rides font subsets inside the .pptx
 - **Post-delivery tweaks** — open `index.html?edit=1` to edit text in place (layout locked) and download the result; extract a brand theme from any corporate template in one command (`import-theme`, with a contrast report)
-
-| | |
-|---|---|
-| ![editorial cover](docs/preview/editorial-cover.png) | ![editorial dark](docs/preview/editorial-dark.png) |
 
 ## Install
 

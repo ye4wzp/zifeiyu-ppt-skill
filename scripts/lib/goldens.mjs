@@ -2,7 +2,7 @@ import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 // legacy goldens retire as their style packages land (spec §8)
-const LEGACY = ['showcase', 'editorial', 'media'];
+const LEGACY = ['showcase', 'media'];
 
 // Every golden deck with the baseline directory it is compared against.
 export function listGoldens(root) {

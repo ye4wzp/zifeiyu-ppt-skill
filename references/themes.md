@@ -17,7 +17,7 @@ display/数字/mono 槽位使用 deck 内子集 webfont（思源黑 VF、思源�
 
 ## 设计系统 02 ·「墨韵」editorial
 
-`systems/editorial.css` — 思源宋体标题 × 暖纸底 × 朱砂强调 × 衬线 lining 数字（随 deck 字体子集分发，Windows 不再回退中易宋体）。适用：文化内容、品牌故事、人文调性的分享与发布。PPTX 导出时衬线标题自动映射 SimSun（`--cjk-serif` 可改），Windows 开箱可用。
+已退役，由风格库 A 杂志（`styles/magazine/`）取代。
 
 | 主题 | 气质 | 适用受众/场合 | 备注 |
 |---|---|---|---|
