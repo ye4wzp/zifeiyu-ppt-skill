@@ -258,3 +258,26 @@
 .mge-p { left: 704px; top: 520px; width: 480px; }
 .mge-hair { left: 704px; top: 640px; width: 480px; }
 .mge-meta { left: 704px; top: 660px; width: 320px; }
+
+/* ---------- magazine/video ---------- */
+.mgw-video { left: 96px; top: 104px; width: 768px; height: 432px; object-fit: cover; background: #000; }
+.mgw-cap { left: 96px; top: 552px; width: 768px; }
+.mgw-title { left: 912px; top: 104px; width: 272px; font-size: 36px; line-height: 1.35; }
+.mgw-it { left: 912px; top: 170px; width: 272px; font-size: 26px; }
+.mgw-p { left: 912px; top: 220px; width: 272px; }
+.mgw-hint { left: 912px; top: 324px; width: 272px; }
+
+/* ---------- magazine/audio ---------- */
+.mgo-img { left: 96px; top: 104px; width: 448px; height: 448px; }
+.mgo-cap { left: 96px; top: 568px; width: 448px; }
+.mgo-title { left: 608px; top: 104px; width: 576px; font-size: 54px; line-height: 1.28; }
+.mgo-it { left: 608px; top: 186px; width: 576px; font-size: 28px; }
+.mgo-p { left: 608px; top: 240px; width: 576px; }
+.mgo-play { left: 608px; top: 420px; width: 72px; height: 72px; background: var(--accent); }
+.mgo-glyph { left: 608px; top: 438px; width: 72px; text-align: center; font-size: 24px; line-height: 1.5; color: var(--on-accent); pointer-events: none; }
+.mgo-audio { left: 608px; top: 420px; width: 72px; height: 72px; opacity: 0; pointer-events: none; }
+.mgo-track { left: 712px; top: 424px; width: 472px; font-size: 24px; line-height: 1.3; }
+.mgo-meta { left: 712px; top: 464px; width: 472px; }
+.mgo-bar { left: 712px; top: 500px; width: 472px; height: 2px; background: var(--hairline); }
+.mgo-progress { left: 712px; top: 500px; width: 0; height: 2px; background: var(--text-1); }
+.mgo-time { left: 712px; top: 516px; width: 472px; }

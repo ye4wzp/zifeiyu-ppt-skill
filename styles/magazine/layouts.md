@@ -337,6 +337,25 @@
 </section>
 ```
 
+## magazine/video · video
+
+视频墨页。左 16:9 视频（默认停在封面帧，点击播放），下方等宽图注；右栏标题、斜体一句、说明与时长（时长标黄）。`poster` 与 `aria-label` 必填，时长写真实值。
+
+```html
+<section class="slide is-dark" data-layout="magazine/video" data-role="video">
+  <p class="mg-mono mg-folio">04 — FILM</p>
+  <video class="mgw-video" src="assets/media/13-film.mp4" poster="assets/media/13-film-poster.jpg" aria-label="示意视频：暖灰立板构成的空间，镜头缓慢推近" preload="none"></video>
+  <p class="mg-mono mgw-cap">FIG. 08 — 示意视频，由抽象图生成</p>
+  <h2 class="mg-serif mgw-title" data-anim="rise">视频也能放进来</h2>
+  <p class="mg-it mgw-it" data-anim="rise">Click to play.</p>
+  <p class="mg-body mgw-p" data-anim="rise">演示时点击画面播放；渲染图、PDF 与 PPTX 的静止画面锁定在封面帧。</p>
+  <p class="mg-mono mgw-hint"><span class="is-mark">0:08</span> · MP4</p>
+  <div class="mg-hair mg-rule" data-shape="rect"></div>
+  <p class="mg-mono mg-foot">ZIFEIYU PPT SKILL · VOL. 01</p>
+  <p class="mg-mono mg-pageno">13 / 18</p>
+</section>
+```
+
 ## magazine/process · process
 
 流程四步。左上标题 + 斜体副题，右上照片；粗线下四列「编号 / 步骤名 / 两行说明」。最关键的一步用 `is-mark` 标黄（全页唯一一处）；说明每条 ≤26 字。
@@ -424,6 +443,32 @@
   <div class="mg-hair mg-rule" data-shape="rect"></div>
   <p class="mg-mono mg-foot">Source — scripts/gen-art.mjs · 固定种子，输出可复现</p>
   <p class="mg-mono mg-pageno">16 / 18</p>
+</section>
+```
+
+## magazine/audio · audio
+
+音频页。左方图带图注；右栏标题、斜体一句、说明，下方播放器：柠檬黄圆点（`data-media="toggle"`，全页唯一的黄）、音轨名、等宽元信息、进度线与时间。`<audio>` 必带 `controls` 与 `aria-label`，时长写真实值。
+
+```html
+<section class="slide" data-layout="magazine/audio" data-role="audio">
+  <p class="mg-mono mg-folio">04 — AUDIO</p>
+  <img class="mg-photo mgo-img" src="assets/img/17-audio.jpg" alt="示意图：柔和色场">
+  <p class="mg-mono mgo-cap">FIG. 14 — 示意图</p>
+  <h2 class="mg-serif mgo-title" data-anim="rise">边听边翻页</h2>
+  <p class="mg-it mgo-it" data-anim="rise">Listen while you flip.</p>
+  <p class="mg-body mgo-p" data-anim="rise">音频放在 deck 目录里，演示时点圆点播放；导出 PPTX 后仍能在演示软件里播放。</p>
+  <div class="mgo-play" data-shape="ellipse" data-media="toggle"></div>
+  <p class="mgo-glyph">▶</p>
+  <audio class="mgo-audio" src="assets/media/17-tone.mp3" aria-label="示意音频：一段 8 秒提示音" controls preload="none"></audio>
+  <h3 class="mg-serif mgo-track">示意音频 · 提示音</h3>
+  <p class="mg-mono mgo-meta">0:08 · MP3 · 示意素材</p>
+  <div class="mgo-bar" data-shape="rect" data-media="track"></div>
+  <div class="mgo-progress" data-shape="rect" data-media="progress"></div>
+  <p class="mg-mono mgo-time" data-media="clock">0:00 / 0:08</p>
+  <div class="mg-hair mg-rule" data-shape="rect"></div>
+  <p class="mg-mono mg-foot">ZIFEIYU PPT SKILL · VOL. 01</p>
+  <p class="mg-mono mg-pageno">17 / 18</p>
 </section>
 ```
 

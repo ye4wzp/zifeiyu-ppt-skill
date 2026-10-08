@@ -36,6 +36,8 @@
     "magazine/table": { "role": "table" },
     "magazine/timeline": { "role": "timeline" },
     "magazine/gallery": { "role": "gallery" },
-    "magazine/closing": { "role": "closing" }
+    "magazine/closing": { "role": "closing" },
+    "magazine/video": { "role": "video" },
+    "magazine/audio": { "role": "audio" }
   }
 }
