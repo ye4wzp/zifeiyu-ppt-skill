@@ -1,5 +1,5 @@
 // Usage: node scripts/gen-art.mjs <out-dir> [--style <id> | --palette "#bg,#surface,#accent,#ink"]
-//                                [--kind field|arch] [--seed N] [--count K] [--size 1600x1000]
+//                                [--kind field|arch] [--seed N] [--count K] [--size 1600x1000] [--format png|jpg]
 // Deterministic abstract imagery for golden decks (no stock, no
 // generation APIs, no licensing questions): a seeded PRNG lays out an SVG
 // composition in the style's own palette, Chromium rasterises it. Same
@@ -19,13 +19,18 @@ const opt = (n, d) => {
 };
 const out = args.find((a, i) => !a.startsWith('--') && !args[i - 1]?.startsWith('--'));
 if (!out) {
-  console.error('usage: node scripts/gen-art.mjs <out-dir> [--style <id> | --palette "#bg,#surface,#accent,#ink"] [--kind field|arch] [--seed N] [--count K] [--size WxH]');
+  console.error('usage: node scripts/gen-art.mjs <out-dir> [--style <id> | --palette "#bg,#surface,#accent,#ink"] [--kind field|arch] [--seed N] [--count K] [--size WxH] [--format png|jpg]');
   process.exit(2);
 }
 const kind = opt('--kind', 'field');
 const seed0 = parseInt(opt('--seed', '1'), 10);
 const count = parseInt(opt('--count', '1'), 10);
 const [W, H] = opt('--size', '1600x1000').split('x').map(Number);
+const format = opt('--format', 'png');
+if (!['png', 'jpg'].includes(format)) {
+  console.error(`unknown --format "${format}" (png|jpg)`);
+  process.exit(2);
+}
 
 // palette: [bg, surface, accent, ink] from --palette or the style's :root tokens
 let palette;
@@ -110,8 +115,8 @@ for (let n = 0; n < count; n++) {
     <rect width="${W}" height="${H}" filter="url(#grain)" opacity="0.14"/>
   </svg>`;
   await page.setContent(`<html><body style="margin:0">${svg}</body></html>`);
-  const file = join(resolve(out), `${kind}-${seed0 + n}.png`);
-  await page.screenshot({ path: file, clip: { x: 0, y: 0, width: W, height: H } });
+  const file = join(resolve(out), `${kind}-${seed0 + n}.${format}`);
+  await page.screenshot({ path: file, clip: { x: 0, y: 0, width: W, height: H }, ...(format === 'jpg' && { type: 'jpeg', quality: 85 }) });
   console.log(file);
 }
 await browser.close();

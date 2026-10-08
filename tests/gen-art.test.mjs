@@ -20,3 +20,10 @@ test('same seed -> identical pixels; different seeds differ', () => {
     assert.notEqual(a[0], a[1]);
   }
 });
+
+test('--format jpg writes JPEG files', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'art-'));
+  execFileSync('node', ['scripts/gen-art.mjs', dir, '--style', 'swiss', '--kind', 'field', '--seed', '3', '--size', '200x120', '--format', 'jpg']);
+  assert.deepEqual(readdirSync(dir), ['field-3.jpg']);
+  assert.deepEqual([...readFileSync(join(dir, 'field-3.jpg')).subarray(0, 3)], [0xff, 0xd8, 0xff]);
+});
