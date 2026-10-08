@@ -1,21 +1,39 @@
 // Usage: node scripts/validate.mjs <deck-dir|index.html> [--office]
-// Machine gate (R1–R15): errors exit 1 and block delivery; warnings pass.
+// Machine gate (R1–R16): errors exit 1 and block delivery; warnings pass.
+// Style-mode decks (linking assets/styles/<id>/style.css) are checked
+// against their style's manifest; legacy decks keep the L01–L24 rules.
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { deckIndex, measureDeck, CANVAS } from './lib/deck.mjs';
-
-const REGISTERED = new Set(Array.from({ length: 24 }, (_, i) => `L${String(i + 1).padStart(2, '0')}`));
-const INLINE_ALLOWED = /^(\s*(top|left|width|height|font-size|line-height)\s*:\s*[\d.]+(px|%)\s*;?)*\s*$/;
-const STYLESHEET_ALLOWED = /^assets\/(base\.css|(themes|systems)\/[\w-]+\.css)$/;
+import { loadStyle } from './lib/style.mjs';
+import { ROLES, DATA_ROLES } from './lib/roles.mjs';
 
 const args = process.argv.slice(2);
 const office = args.includes('--office');
 const index = deckIndex(args.find((a) => !a.startsWith('--')) || '.');
+const style = loadStyle(index);
+const styled = style.mode === 'style';
 
-// Class whitelist comes from the deck's own base.css — the single
-// place classes may be defined.
-const css = readFileSync(resolve(dirname(index), 'assets/base.css'), 'utf8');
-const whitelist = new Set([...css.matchAll(/\.([a-z][a-z0-9-]*)/g)].map((m) => m[1]));
+const REGISTERED = styled
+  ? new Set(Object.keys(style.manifest.layouts))
+  : new Set(Array.from({ length: 24 }, (_, i) => `L${String(i + 1).padStart(2, '0')}`));
+// style mode may also tilt elements inline (rotate exports natively)
+const INLINE_ALLOWED = styled
+  ? /^(\s*((top|left|width|height|font-size|line-height)\s*:\s*[\d.]+(px|%)|rotate\s*:\s*-?[\d.]+deg)\s*;?)*\s*$/
+  : /^(\s*(top|left|width|height|font-size|line-height)\s*:\s*[\d.]+(px|%)\s*;?)*\s*$/;
+const STYLESHEET_ALLOWED = styled
+  ? new RegExp(`^assets/(base\\.css|brand\\.css|styles/${style.id}/style\\.css)$`)
+  : /^assets\/(base\.css|(themes|systems)\/[\w-]+\.css)$/;
+const SHEET_LIMIT = styled ? 3 : 2;
+const SHEET_RULE = styled
+  ? `assets/{base.css, styles/${style.id}/style.css, brand.css}`
+  : 'assets/{base.css, themes/, systems/}';
+
+// Class whitelist: classes may only be defined in the deck's base.css
+// (legacy) or base.css + the style package (+ brand tokens) in style mode.
+const cssSources = styled ? style.sheets : [resolve(dirname(index), 'assets/base.css')];
+const whitelist = new Set(cssSources.flatMap((f) => [...readFileSync(f, 'utf8').matchAll(/\.([a-z][a-z0-9-]*)/g)].map((m) => m[1])));
+const classHome = styled ? 'base.css or the style package' : 'base.css';
 
 const { browser, slides, doc } = await measureDeck(index);
 await browser.close();
@@ -42,13 +60,20 @@ const blend = (fg, a, bg) => fg.map((v, k) => Math.round(a * v + (1 - a) * bg[k]
 // design system.
 if (doc.styleTags) errors.push(`R12 <style> tags are forbidden (${doc.styleTags} found); all styling lives in base.css + theme`);
 for (const href of doc.links) {
-  if (!STYLESHEET_ALLOWED.test(href)) errors.push(`R12 stylesheet "${href}" outside assets/{base.css, themes/, systems/}`);
+  if (!STYLESHEET_ALLOWED.test(href)) errors.push(`R12 stylesheet "${href}" outside ${SHEET_RULE}`);
 }
-if (doc.links.length > 2) errors.push(`R12 ${doc.links.length} stylesheets linked; only base.css + one theme/system file allowed`);
+if (doc.links.length > SHEET_LIMIT) errors.push(`R12 ${doc.links.length} stylesheets linked; only ${SHEET_RULE} allowed`);
 
 slides.forEach((s, i) => {
-  // R1 registered layout
-  if (!REGISTERED.has(s.layout)) errors.push(`R1 ${at(i)}: data-layout "${s.layout}" is not a registered layout`);
+  // R1 registered layout (+ declared role in style mode)
+  if (!styled) {
+    if (!REGISTERED.has(s.layout)) errors.push(`R1 ${at(i)}: data-layout "${s.layout}" is not a registered layout`);
+  } else if (!REGISTERED.has(s.layout)) {
+    errors.push(`R1 ${at(i)}: data-layout "${s.layout}" is not registered by style "${style.id}"`);
+  } else if (style.manifest.layouts[s.layout].role !== s.role) {
+    errors.push(`R1 ${at(i)}: role "${s.role}" does not match ${s.layout} (registered as "${style.manifest.layouts[s.layout].role}")`);
+  }
+  if (styled && s.role && !ROLES.includes(s.role)) errors.push(`R1 ${at(i)}: unknown role "${s.role}"`);
 
   // R15a rhythm (warn): adjacent pages must not repeat the same layout
   if (i && s.layout && s.layout === slides[i - 1].layout)
@@ -60,8 +85,9 @@ slides.forEach((s, i) => {
 
   let minX = CANVAS.w, minY = CANVAS.h, maxX = 0, maxY = 0;
   for (const el of s.els) {
-    minX = Math.min(minX, el.x); minY = Math.min(minY, el.y);
-    maxX = Math.max(maxX, el.x + el.w); maxY = Math.max(maxY, el.y + el.h);
+    const b = el.bbox; // rotated hull (equals the box when unrotated)
+    minX = Math.min(minX, b.x); minY = Math.min(minY, b.y);
+    maxX = Math.max(maxX, b.x + b.w); maxY = Math.max(maxY, b.y + b.h);
 
     // R3 canvas bounds + text overflow (vertical growth is caught by the
     // bounds check and R9 collisions — text slots are auto-height).
@@ -70,7 +96,7 @@ slides.forEach((s, i) => {
       px <= 40 ? 'trim a few characters or nudge width/font-size inline'
       : px <= 120 ? 'cut copy first, then step font-size/line-height down inline'
       : 'content exceeds this slot — switch to a higher-capacity layout';
-    const exceed = Math.max(el.x + el.w - CANVAS.w, el.y + el.h - CANVAS.h, -el.x, -el.y);
+    const exceed = Math.max(b.x + b.w - CANVAS.w, b.y + b.h - CANVAS.h, -b.x, -b.y);
     if (exceed > 2)
       errors.push(`R3 ${at(i, el)}: exceeds 1280x720 canvas by ${Math.round(exceed)}px — ${fix(exceed)}`);
     if (el.kind === 'text' && el.overflowX)
@@ -78,11 +104,23 @@ slides.forEach((s, i) => {
 
     // R2 class whitelist — every kind, including inline-emphasis children
     for (const c of [...el.classes, ...(el.childClasses || [])])
-      if (!whitelist.has(c)) errors.push(`R2 ${at(i, el)}: class "${c}" not defined in base.css`);
+      if (!whitelist.has(c)) errors.push(`R2 ${at(i, el)}: class "${c}" not defined in ${classHome}`);
 
     // R6 inline styles restricted to parameterized position/size values — every kind
     if (el.inlineStyle && !INLINE_ALLOWED.test(el.inlineStyle))
-      errors.push(`R6 ${at(i, el)}: inline style may only set top/left/width/height/font-size/line-height: "${el.inlineStyle}"`);
+      errors.push(`R6 ${at(i, el)}: inline style may only set top/left/width/height/font-size/line-height${styled ? '/rotate' : ''}: "${el.inlineStyle}"`);
+
+    // R16 export parity (style mode): everything the browser draws must
+    // have a PowerPoint equivalent, or the PPTX silently diverges
+    if (styled) {
+      if (el.kind === 'shape' && (el.shape === 'chevron' || el.shape === 'pentagon') && Math.abs((el.tip ?? -1) - Math.min(el.w, el.h) / 2) > 1)
+        errors.push(`R16 ${at(i, el)}: ${el.shape} tip must be --tip: ${Math.min(el.w, el.h) / 2}px (PowerPoint draws it at half the short side)`);
+      if (el.border && !el.border.uniform) errors.push(`R16 ${at(i, el)}: border must be uniform on all four sides to export`);
+      if (el.shadow?.layers > 1) errors.push(`R16 ${at(i, el)}: only one box-shadow layer exports`);
+      if (el.transform && el.transform !== 'none') errors.push(`R16 ${at(i, el)}: transform does not export — use the rotate property`);
+      if (el.kind === 'text' && Object.values(el.textBox).some(Boolean))
+        errors.push(`R16 ${at(i, el)}: text slots export without fill/border/shadow/padding — put a shape behind the text`);
+    }
 
     if (el.kind === 'image') {
       // R10 accessibility: content images need alt; decorative ones declare aria-hidden
@@ -125,16 +163,32 @@ slides.forEach((s, i) => {
       errors.push(`R7 ${at(i, el)}: only unnested <strong>/<em>/<span> allowed inside text, got <${el.badChildTags.join(', ')}>`);
   }
 
-  // R8 data honesty: data layouts must cite a source, and L15 bar lengths
-  // must be proportional to their stated values
-  if (s.layout === 'L07' || s.layout === 'L15' || s.layout === 'L22') {
+  // R8 data honesty (style mode): data roles cite a source, bar lengths
+  // are proportional to their declared data-value
+  if (styled && DATA_ROLES.includes(s.role) && !s.els.some((el) => el.kind === 'text' && el.source && el.text))
+    errors.push(`R8 ${at(i)}: ${s.role} page requires a data-source text citing where the numbers come from`);
+  if (styled && s.role === 'bars') {
+    const bars = s.els.filter((el) => el.kind === 'shape' && el.value != null && el.value > 0);
+    if (bars.length >= 2) {
+      const ref = bars.reduce((a, c) => (c.value > a.value ? c : a));
+      for (const bar of bars) {
+        const expected = (bar.value / ref.value) * ref.w;
+        if (Math.abs(bar.w - expected) > Math.max(4, expected * 0.02))
+          errors.push(`R8 ${at(i)}: bar "${bar.label || bar.value}" is ${Math.round(bar.w)}px, expected ${Math.round(expected)}px (bar length must be proportional to data-value)`);
+      }
+    }
+  }
+
+  // R8 data honesty (legacy): data layouts must cite a source, and L15 bar
+  // lengths must be proportional to their stated values
+  if (!styled && (s.layout === 'L07' || s.layout === 'L15' || s.layout === 'L22')) {
     const slot = `${s.layout.toLowerCase()}-footnote`;
     const cited = s.els.some((el) => el.kind === 'text' &&
       ((el.classes.includes(slot) && el.text) ||
        (el.classes.includes('tb-label') && /source/i.test(el.text)))); // DATUM title block
     if (!cited) errors.push(`R8 ${at(i)}: ${s.layout} requires a ${slot} (or DATUM title-block SOURCE) citing the data source`);
   }
-  if (s.layout === 'L15') {
+  if (!styled && s.layout === 'L15') {
     const rows = [];
     for (const el of s.els) {
       const b = el.classes.find((c) => /^l15-b\d$/.test(c));
@@ -167,13 +221,13 @@ slides.forEach((s, i) => {
   const texts = s.els.filter((el) => el.kind === 'text' && (el.opacity ?? 1) >= 0.2);
   for (let a = 0; a < texts.length; a++) {
     for (let b = a + 1; b < texts.length; b++) {
-      const A = texts[a], B = texts[b];
+      const A = texts[a].bbox, B = texts[b].bbox;
       const ix = Math.min(A.x + A.w, B.x + B.w) - Math.max(A.x, B.x);
       const iy = Math.min(A.y + A.h, B.y + B.h) - Math.max(A.y, B.y);
       if (ix <= 0 || iy <= 0) continue;
       const smaller = Math.min(A.w * A.h, B.w * B.h);
       if (ix * iy > smaller * 0.04)
-        errors.push(`R9 ${at(i, A)}: overlaps "${(B.text || '').slice(0, 18)}" by ${Math.round(ix)}x${Math.round(iy)}px`);
+        errors.push(`R9 ${at(i, texts[a])}: overlaps "${(texts[b].text || '').slice(0, 18)}" by ${Math.round(ix)}x${Math.round(iy)}px`);
     }
   }
 
