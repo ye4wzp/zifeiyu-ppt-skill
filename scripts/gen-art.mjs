@@ -103,8 +103,10 @@ if (!KINDS[kind]) {
 
 mkdirSync(resolve(out), { recursive: true });
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
 for (let n = 0; n < count; n++) {
+  // a fresh page per image: reusing one page for several large blurred
+  // canvases intermittently fails Page.captureScreenshot
+  const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
   const r = mulberry32(seed0 + n);
   const { defs, shapes, base } = KINDS[kind](r);
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
@@ -117,6 +119,7 @@ for (let n = 0; n < count; n++) {
   await page.setContent(`<html><body style="margin:0">${svg}</body></html>`);
   const file = join(resolve(out), `${kind}-${seed0 + n}.${format}`);
   await page.screenshot({ path: file, clip: { x: 0, y: 0, width: W, height: H }, ...(format === 'jpg' && { type: 'jpeg', quality: 85 }) });
+  await page.close();
   console.log(file);
 }
 await browser.close();
