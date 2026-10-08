@@ -8,7 +8,7 @@
 import { cpSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadStyle } from './lib/style.mjs';
+import { styleId } from './lib/style.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const legacy = join(root, 'assets/legacy');
@@ -51,12 +51,12 @@ if (args.includes('--refresh')) {
     console.error(`no deck at ${index}`);
     process.exit(1);
   }
-  const style = loadStyle(index);
-  if (style.mode === 'style') {
+  const id = styleId(index);
+  if (id) {
     copyRuntime();
-    copyStyle(style.id);
+    copyStyle(id);
   } else copyLegacy();
-  console.log(`refreshed ${style.mode === 'style' ? `style "${style.id}"` : 'legacy'} runtime in ${deck}`);
+  console.log(`refreshed ${id ? `style "${id}"` : 'legacy'} runtime in ${deck}`);
   process.exit(0);
 }
 

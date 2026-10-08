@@ -3,6 +3,9 @@ import { dirname, resolve } from 'node:path';
 
 const STYLE_LINK = /<link[^>]+href="assets\/styles\/([\w-]+)\/style\.css"/;
 
+// The style id a deck links (assets/styles/<id>/style.css), or null.
+export const styleId = (indexPath) => readFileSync(indexPath, 'utf8').match(STYLE_LINK)?.[1] ?? null;
+
 // A deck is in style mode when it links assets/styles/<id>/style.css;
 // anything else is a legacy (pre-style-library) deck with the old rules.
 export function loadStyle(indexPath) {
