@@ -14,7 +14,7 @@ const check = args.includes('--check');
 const di = args.indexOf('--dest');
 const dest = resolve(di >= 0 ? args[di + 1] : join(homedir(), '.claude/skills/zifeiyu-ppt-skill'));
 
-const SHIP = ['SKILL.md', 'README.md', 'README.en.md', 'package.json', 'assets', 'references', 'scripts', 'templates', 'examples'];
+const SHIP = ['SKILL.md', 'README.md', 'README.en.md', 'package.json', 'assets', 'references', 'scripts', 'templates', 'examples', 'styles', 'docs/styles'];
 const EXCLUDE = /(^|\/)(node_modules|\.DS_Store|deck\.pptx|deck\.pdf|deck-web\.pdf|renders|renders-pptx|\.export-crops|\.regress)(\/|$)/;
 
 const walk = (base, dir = base, out = []) => {

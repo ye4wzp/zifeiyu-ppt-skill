@@ -16,7 +16,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium-headless-shell
-      - name: Validate golden decks (R1-R15 machine gate)
+      - name: Unit tests (measurement, export primitives, validator, scaffold)
+        run: npm test
+      - name: Style package self-check
+        run: |
+          for s in styles/*/; do node scripts/check-style.mjs "$s"; done
+      - name: Validate golden decks (R1-R16 machine gate)
         run: |
           node scripts/validate.mjs examples/showcase
           node scripts/validate.mjs examples/editorial
@@ -33,3 +38,5 @@ jobs:
           node scripts/export-pptx.mjs examples/media --out /tmp/media.pptx
           unzip -l /tmp/media.pptx | grep -q "media-.*\.mp4"
           node scripts/check-pptx.mjs /tmp/media.pptx --expect-slides 6
+          node scripts/export-pptx.mjs styles/swiss/golden --out /tmp/swiss.pptx --native-charts
+          node scripts/check-pptx.mjs /tmp/swiss.pptx --expect-slides 15

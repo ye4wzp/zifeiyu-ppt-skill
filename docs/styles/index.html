@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>风格画廊</title>
+<style>
+  :root { --bg: #f4f3ef; --card: #ffffff; --text: #16161a; --muted: #6b6b73; --line: #e2e0d9; --badge: #8a5a00; --badge-bg: #fff1c2; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #18181b; --card: #232327; --text: #f0efea; --muted: #a3a3ab; --line: #34343b; --badge: #ffd36b; --badge-bg: #3a2f12; }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--text); font: 15px/1.6 -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 40px clamp(16px, 4vw, 56px); }
+  h1 { font-size: 28px; }
+  .lead { color: var(--muted); margin: 6px 0 32px; }
+  section { margin-bottom: 36px; }
+  h2 { font-size: 18px; margin-bottom: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .card img, .empty { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+  .empty { display: grid; place-items: center; color: var(--muted); background: var(--line); }
+  figcaption { padding: 12px 14px 14px; }
+  .name { font-weight: 600; }
+  .name b { font-family: "SF Mono", Menlo, monospace; margin-right: 8px; }
+  .badge { font: 600 11px/1 "SF Mono", Menlo, monospace; color: var(--badge); background: var(--badge-bg); padding: 3px 6px; border-radius: 4px; margin-left: 8px; vertical-align: 2px; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  code { font-family: "SF Mono", Menlo, monospace; }
+</style>
+</head>
+<body>
+  <h1>风格画廊</h1>
+  <p class="lead">每种风格一套独立版式。选定后：<code>node scripts/new-deck.mjs &lt;deck&gt; --style &lt;id&gt;</code></p>
+    <section>
+      <h2>商务理性</h2>
+      <div class="grid">
+      <figure class="card">
+        <img src="swiss.png" alt="瑞士 · 网格 封面">
+        <figcaption>
+          <p class="name"><b>B</b>瑞士 · 网格<span class="badge">draft</span></p>
+          <p class="meta"><code>--style swiss</code> · 数据 / 发布 / 技术</p>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+</body>
+</html>
