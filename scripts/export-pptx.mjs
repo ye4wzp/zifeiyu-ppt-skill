@@ -6,6 +6,8 @@ import pptxgen from 'pptxgenjs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { deckIndex, measureDeck, px2in, px2pt } from './lib/deck.mjs';
+import { loadStyle } from './lib/style.mjs';
+import { snapshotEl } from './lib/snapshot.mjs';
 
 const skillRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -18,6 +20,7 @@ const index = deckIndex(args.find((a) => !a.startsWith('--')) || '.');
 const deckDir = dirname(index);
 const outFile = resolve(deckDir, flag('--out', 'deck.pptx'));
 const cjkFont = flag('--cjk-font', 'PingFang SC');
+const style = loadStyle(index);
 
 // PPTX has no numeric weights: <=300 needs the Light face; >=600 -> bold.
 const CJK_STACK = new Set(['Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC']);
@@ -28,6 +31,9 @@ const cjkSerif = flag('--cjk-serif', 'SimSun'); // ubiquitous on Windows
 // font subsets inside the pptx instead of mapping to system fonts
 const embedFonts = args.includes('--embed-fonts');
 const fontFace = (t) => {
+  // style packages declare their Office faces; CLI flags stay legacy-only
+  const office = style.mode === 'style' && !embedFonts ? style.manifest.fonts?.office?.[t.fontFamily] : null;
+  if (office) return typeof office === 'string' ? office : (t.fontWeight <= 300 && office.light) || office.regular;
   if (embedFonts) {
     if (CJK_STACK.has(t.fontFamily)) return t.fontWeight <= 300 ? 'Source Han Sans SC Light' : 'Source Han Sans SC';
     if (CJK_SERIF_STACK.has(t.fontFamily)) return 'Source Han Serif SC';
@@ -47,27 +53,26 @@ const alpha2transparency = (a, opacity = 1) => {
 
 const { browser, page, slides } = await measureDeck(index);
 
-// Embed cover-cropped images as browser screenshots so the PPTX shows
-// exactly the crop the browser rendered (pptxgenjs cover anchor differs
-// from CSS object-fit center-crop). Videos get the same treatment: their
-// rendered poster becomes the PPTX media cover image.
+// Bake what PPTX cannot reproduce into isolated browser screenshots:
+// cover crops (pptxgenjs cover anchor differs from CSS center-crop),
+// rounded/filtered/rotated images (rotation is re-applied natively) and
+// data-raster shapes (gradients etc.). Videos get their rendered poster
+// as the PPTX media cover. Text is never baked — it stays native.
 const { mkdirSync, readFileSync } = await import('node:fs');
 const cropDir = resolve(deckDir, '.export-crops');
 mkdirSync(cropDir, { recursive: true });
 for (let i = 0; i < slides.length; i++) {
-  const imgs = slides[i].els.filter((el) => el.kind === 'image');
-  for (let j = 0; j < imgs.length; j++) {
-    if (imgs[j].fit !== 'cover') continue;
-    const shot = resolve(cropDir, `s${i + 1}-img${j + 1}.png`);
-    await page.locator('.slide').nth(i).locator('img').nth(j).screenshot({ path: shot });
-    imgs[j].src = shot;
-    imgs[j].fit = 'exact';
-  }
-  const vids = slides[i].els.filter((el) => el.kind === 'video');
-  for (let j = 0; j < vids.length; j++) {
-    const shot = resolve(cropDir, `s${i + 1}-vid${j + 1}.png`);
-    await page.locator('.slide').nth(i).locator('video').nth(j).screenshot({ path: shot });
-    vids[j].cover = `data:image/png;base64,${readFileSync(shot).toString('base64')}`;
+  for (const el of slides[i].els) {
+    const bake = el.kind === 'image' && (el.fit === 'cover' || el.radius > 0 || el.filter || el.rotate);
+    if (bake || (el.kind === 'shape' && el.raster)) {
+      const shot = resolve(cropDir, `s${i + 1}-${el.mid}.png`);
+      await snapshotEl(page, el.mid, shot, { unrotate: !!el.rotate });
+      Object.assign(el, { kind: 'image', src: shot, fit: 'exact' });
+    } else if (el.kind === 'video') {
+      const shot = resolve(cropDir, `s${i + 1}-${el.mid}.png`);
+      await snapshotEl(page, el.mid, shot);
+      el.cover = `data:image/png;base64,${readFileSync(shot).toString('base64')}`;
+    }
   }
 }
 await browser.close();
@@ -77,6 +82,15 @@ pres.defineLayout({ name: 'W16x9', width: 13.333, height: 7.5 });
 pres.layout = 'W16x9';
 
 const nativeCharts = args.includes('--native-charts');
+
+const SHAPE = { rect: pres.ShapeType.rect, ellipse: pres.ShapeType.ellipse, chevron: pres.ShapeType.chevron, pentagon: pres.ShapeType.homePlate };
+const shadowOf = (sh) => sh && {
+  type: 'outer', color: sh.color.hex, opacity: sh.color.alpha,
+  blur: px2pt(sh.blur), offset: px2pt(Math.hypot(sh.x, sh.y)),
+  angle: Math.round(((Math.atan2(sh.y, sh.x) * 180) / Math.PI + 360) % 360),
+};
+// text options shared by single and merged boxes: vertical CJK + rotation
+const textXform = (el) => ({ ...(el.vertical && { vert: 'eaVert' }), ...(el.rotate && { rotate: el.rotate }) });
 
 // Registered merge groups: designed-contiguous text stacks collapse into
 // ONE editable textbox per group — each slot becomes a paragraph keeping
@@ -106,7 +120,25 @@ for (const s of slides) {
 
   // --native-charts: L15 bars become a real editable PowerPoint chart
   let chartEls = new Set();
-  if (nativeCharts && s.layout === 'L15') {
+  if (nativeCharts && style.mode === 'style' && s.role === 'bars') {
+    const bars = s.els.filter((e) => e.kind === 'shape' && e.value != null);
+    const replaced = s.els.filter((e) => e.kind === 'text' && e.chart);
+    if (bars.length && bars.every((b) => Number.isFinite(b.value))) {
+      chartEls = new Set([...bars, ...replaced]);
+      const hull = [...chartEls].map((e) => e.bbox);
+      const x = Math.min(...hull.map((b) => b.x)), y = Math.min(...hull.map((b) => b.y));
+      const r = Math.max(...hull.map((b) => b.x + b.w)), btm = Math.max(...hull.map((b) => b.y + b.h));
+      slide.addChart(pres.ChartType.bar, [{ name: 'data', labels: bars.map((b) => b.label || ''), values: bars.map((b) => b.value) }], {
+        x: px2in(x), y: px2in(y), w: px2in(r - x), h: px2in(btm - y),
+        barDir: 'bar',
+        chartColors: [bars[0].fill.hex],
+        valAxisHidden: true,
+        catAxisOrientation: 'maxMin',
+        valGridLine: { style: 'none' }, catGridLine: { style: 'none' },
+        showValue: true, dataLabelPosition: 'outEnd', dataLabelFormatCode: '0.#', dataLabelFontSize: 12, catAxisLabelFontSize: 14,
+      });
+    }
+  } else if (nativeCharts && s.layout === 'L15') {
     const has = (el, c) => el.classes?.some((k) => k.startsWith(c));
     const labels = s.els.filter((e) => e.kind === 'text' && has(e, 'l15-label'));
     const vals = s.els.filter((e) => e.kind === 'text' && has(e, 'l15-val'));
@@ -128,10 +160,21 @@ for (const s of slides) {
 
   // resolve this layout's merge groups; members are emitted once, together
   const inGroup = new Map();
-  for (const g of MERGE_GROUPS[s.layout] || []) {
-    const els = g.map((need) => s.els.find((el) => el.kind === 'text' && need.every((c) => el.classes.includes(c))));
-    if (els.some((el) => !el)) continue; // trimmed skeleton rows are fine
-    els.forEach((el, i) => inGroup.set(el, { els, first: i === 0 }));
+  if (style.mode === 'style') {
+    // style packages declare merge groups on the skeleton (data-merge)
+    const groups = new Map();
+    for (const el of s.els) if (el.kind === 'text' && el.merge) groups.set(el.merge, [...(groups.get(el.merge) || []), el]);
+    for (const els of groups.values()) {
+      if (els.length < 2) continue;
+      els.sort((a, b) => a.y - b.y);
+      els.forEach((el, i) => inGroup.set(el, { els, first: i === 0 }));
+    }
+  } else {
+    for (const g of MERGE_GROUPS[s.layout] || []) {
+      const els = g.map((need) => s.els.find((el) => el.kind === 'text' && need.every((c) => el.classes.includes(c))));
+      if (els.some((el) => !el)) continue; // trimmed skeleton rows are fine
+      els.forEach((el, i) => inGroup.set(el, { els, first: i === 0 }));
+    }
   }
   const mergedText = (els) => {
     const x = Math.min(...els.map((e) => e.x));
@@ -175,22 +218,36 @@ for (const s of slides) {
     if (m) {
       if (m.first) {
         const { content, box } = mergedText(m.els);
-        slide.addText(content, { ...box, valign: 'top', margin: 0, fit: 'none' });
+        slide.addText(content, { ...box, ...textXform(m.els[0]), valign: 'top', margin: 0, fit: 'none' });
       }
       continue;
     }
     const box = { x: px2in(el.x), y: px2in(el.y), w: px2in(el.w), h: px2in(el.h) };
     if (el.kind === 'shape') {
-      slide.addShape(el.shape === 'ellipse' ? pres.ShapeType.ellipse : pres.ShapeType.rect, {
-        ...box,
+      // CSS borders sit inside the box, PPTX lines straddle the edge: inset by half
+      const inset = el.border ? el.border.width / 2 : 0;
+      const sbox = { x: px2in(el.x + inset), y: px2in(el.y + inset), w: px2in(el.w - 2 * inset), h: px2in(el.h - 2 * inset) };
+      const round = el.shape === 'rect' && el.radius > 0;
+      slide.addShape(round ? pres.ShapeType.roundRect : SHAPE[el.shape] || pres.ShapeType.rect, {
+        ...sbox,
         fill: { color: el.fill.hex, transparency: alpha2transparency(el.fill.alpha, el.opacity) },
-        line: { type: 'none' },
+        line: el.border
+          ? { color: el.border.color.hex, width: px2pt(el.border.width), transparency: alpha2transparency(el.border.color.alpha) }
+          : { type: 'none' },
+        // rectRadius is in inches: pptxgenjs writes adj = r / min(w, h)
+        ...(round && { rectRadius: px2in(Math.min(el.radius - inset, (el.w - 2 * inset) / 2, (el.h - 2 * inset) / 2)) }),
+        ...(el.rotate && { rotate: el.rotate }),
+        ...(el.shadow && { shadow: shadowOf(el.shadow) }),
       });
     } else if (el.kind === 'image') {
       const sizing =
         el.fit === 'cover' ? { type: 'cover', w: box.w, h: box.h } :
         el.fit === 'contain' ? { type: 'contain', w: box.w, h: box.h } : undefined;
-      slide.addImage({ path: resolve(deckDir, el.src), ...box, sizing });
+      slide.addImage({
+        path: resolve(deckDir, el.src), ...box, sizing,
+        ...(el.rotate && { rotate: el.rotate }),
+        ...(el.shadow && { shadow: shadowOf(el.shadow) }),
+      });
       // 'exact': pre-cropped screenshot, box maps 1:1, no sizing needed
     } else if (el.kind === 'video' || el.kind === 'audio') {
       // embedded media; videos carry their rendered poster as the cover,
@@ -217,6 +274,7 @@ for (const s of slides) {
         : el.text;
       slide.addText(content, {
         ...box,
+        ...textXform(el),
         fontSize: px2pt(el.fontSize),
         fontFace: fontFace(el),
         bold: el.fontWeight >= 600,
