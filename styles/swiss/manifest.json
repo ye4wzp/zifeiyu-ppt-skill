@@ -13,6 +13,7 @@
     ],
     "office": {
       "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
       "JetBrains Mono": "Consolas"
     }
   },

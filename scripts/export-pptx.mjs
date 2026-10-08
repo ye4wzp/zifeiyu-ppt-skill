@@ -30,10 +30,12 @@ const cjkSerif = flag('--cjk-serif', 'SimSun'); // ubiquitous on Windows
 // --embed-fonts (EXPERIMENTAL): keep the deck's real families and ride
 // font subsets inside the pptx instead of mapping to system fonts
 const embedFonts = args.includes('--embed-fonts');
+const unmapped = new Set();
 const fontFace = (t) => {
   // style packages declare their Office faces; CLI flags stay legacy-only
   const office = style.mode === 'style' && !embedFonts ? style.manifest.fonts?.office?.[t.fontFamily] : null;
   if (office) return typeof office === 'string' ? office : (t.fontWeight <= 300 && office.light) || office.regular;
+  if (style.mode === 'style' && !embedFonts) unmapped.add(t.fontFamily);
   if (embedFonts) {
     if (CJK_STACK.has(t.fontFamily)) return t.fontWeight <= 300 ? 'Source Han Sans SC Light' : 'Source Han Sans SC';
     if (CJK_SERIF_STACK.has(t.fontFamily)) return 'Source Han Serif SC';
@@ -353,5 +355,6 @@ if (embedFonts) {
 }
 
 console.log('written:', outFile);
-console.log('cjk font:', cjkFont);
+if (style.mode === 'legacy') console.log('cjk font:', cjkFont);
+if (unmapped.size) console.log(`warn: no fonts.office mapping in styles/${style.id}/manifest.json for ${[...unmapped].join(', ')} — fell back to legacy defaults (PingFang SC has no Windows install)`);
 console.log(slides.map((s, i) => `#${i + 1} ${s.layout}: ${s.els.length} elements`).join('\n'));

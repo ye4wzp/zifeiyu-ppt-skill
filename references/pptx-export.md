@@ -8,7 +8,7 @@
 
 ## 导出命令与字体策略
 
-风格库 deck 的字体映射写在风格包 `manifest.json` 的 `fonts.office` 里（例如思源黑 → Microsoft YaHei / Microsoft YaHei Light，JetBrains Mono → Consolas），直接 `node scripts/export-pptx.mjs <deck-dir>` 即可；下面的 `--cjk-font / --cjk-serif` 参数只对 legacy deck 生效。
+风格库 deck 的字体映射写在风格包 `manifest.json` 的 `fonts.office` 里（例如思源黑 → Microsoft YaHei / Microsoft YaHei Light，JetBrains Mono → Consolas），直接 `node scripts/export-pptx.mjs <deck-dir>` 即可；下面的 `--cjk-font / --cjk-serif` 参数只对 legacy deck 生效。映射必须覆盖 deck 实际用到的每个字体族——包括 base.css 正文默认的 `PingFang SC`；漏掉的族会退回 legacy 默认值并打印 `warn: no fonts.office mapping`，新风格包出现这条警告就补 manifest。
 
 ```bash
 # 接收方主要在 Windows/跨平台（默认推荐）：

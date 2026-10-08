@@ -36,4 +36,14 @@ test('exports native primitives', async () => {
   assert.equal((xml.match(/标题/g) || []).length, 1);
   assert.match(xml, /标题<\/a:t>(?:(?!<\/p:sp>)[\s\S])*说明文字/); // one shape, two paragraphs
   assert.equal((xml.match(/<p:pic>/g) || []).length, 2); // baked photo + rastered gradient
+  assert.doesNotMatch(xml, /typeface="PingFang SC"/); // mapped via manifest fonts.office
+});
+
+test('warns when a family has no fonts.office mapping', () => {
+  const mono = makeDeck(`
+<section class="slide" data-layout="fixture/card" data-role="points">
+  <p class="fx-p">等宽 mono</p>
+</section>`, { extraHead: `<style>.fx-p { font-family: 'JetBrains Mono'; }</style>` });
+  const log = execFileSync('node', ['scripts/export-pptx.mjs', mono, '--out', resolve(mono, 'deck.pptx')], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  assert.match(log, /no fonts\.office mapping.*JetBrains Mono/);
 });
