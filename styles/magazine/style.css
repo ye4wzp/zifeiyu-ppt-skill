@@ -199,3 +199,27 @@
 .mgf-cap { left: 96px; top: 472px; width: 512px; }
 .mgf-title { left: 96px; top: 508px; width: 512px; font-size: 40px; line-height: 1.3; }
 .mgf-p { left: 96px; top: 576px; width: 512px; }
+
+/* ---------- magazine/points ---------- */
+.mgt-img { top: 248px; width: 336px; height: 196px; }
+.mgt-h { top: 468px; width: 336px; font-size: 26px; line-height: 1.3; }
+.mgt-p { top: 510px; width: 336px; }
+.mgt-c1 { left: 96px; }
+.mgt-c2 { left: 472px; }
+.mgt-c3 { left: 848px; }
+
+/* ---------- magazine/bars ---------- */
+/* bar width = value × 140px (max 4 → 560px); value text sits 20px after the bar end, rule ids 52px after that */
+.mgb-label { left: 96px; width: 220px; font-size: 21px; line-height: 1.3; }
+.mgb-bar { left: 336px; height: 28px; background: var(--text-1); }
+.mgb-key { background: var(--mark); }
+.mgb-val { width: 48px; font-size: 40px; }
+.mgb-ids { width: 216px; }
+
+/* ---------- magazine/table ---------- */
+.mgd-head { top: 248px; }
+.mgd-ink { left: 96px; top: 276px; width: 1088px; }
+.mgd-k { left: 96px; width: 240px; font-size: 21px; line-height: 1.3; }
+.mgd-v { left: 376px; width: 520px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
+.mgd-s { left: 936px; width: 248px; }
+.mgd-hair { left: 96px; width: 1088px; }

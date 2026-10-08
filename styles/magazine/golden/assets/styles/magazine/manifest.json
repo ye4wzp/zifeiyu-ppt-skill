@@ -30,6 +30,9 @@
     "magazine/matrix": { "role": "matrix" },
     "magazine/compare": { "role": "compare" },
     "magazine/image-text": { "role": "image-text" },
-    "magazine/image": { "role": "image" }
+    "magazine/image": { "role": "image" },
+    "magazine/points": { "role": "points" },
+    "magazine/bars": { "role": "bars" },
+    "magazine/table": { "role": "table" }
   }
 }
