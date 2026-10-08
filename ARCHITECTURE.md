@@ -23,6 +23,8 @@ measureDeck(): box + font + color + runs → px÷96→in、px×0.75→pt → add
 
 新增版式因此零导出成本：只要骨架遵守元素词汇表，导出自动正确。约束换来的不只是视觉稳定，还有导出的可靠性。这是本项目最重要的一条设计决策。
 
+同一条洞察让**风格库**成立：几何随风格任意变化都不影响导出，因为导出器测的是渲染结果而不是版式编号。每种风格因此可以有自己独立的版式集（§5）；导出器、校验器、动画层只认骨架上的声明属性（`data-role / data-merge / data-anim / data-source …`），不认任何风格的 class 名。
+
 ## 2. 三大支柱（从标杆项目继承）
 
 | 支柱 | 来源 | 落地方式 |
@@ -57,7 +59,8 @@ ppt-skill/
 ├── README.md / README.en.md
 ├── LICENSE                      # MIT
 ├── references/                  # 按需加载，SKILL.md 只放索引
-│   ├── layouts.md               # 版式注册表：24 个骨架 + DATUM 铺装 + 段内强调 + 微调规则
+│   ├── roles.md                 # 角色表 + 内容形状→角色 + 骨架声明属性 + R16
+│   ├── layouts.md               # legacy 版式注册表：L01–L24 骨架 + DATUM 铺装 + 段内强调 + 微调规则
 │   ├── narratives.md            # 路演/汇报/宣传三套叙事页序模板
 │   ├── themes.md                # 主题与设计系统目录（受众→主题映射表）
 │   ├── authoring.md             # 写作规范：密度上限、CJK 字号表、中英混排规则
@@ -66,34 +69,50 @@ ppt-skill/
 │   ├── failures.md              # 实战失败案例库（现象→根因→修法→已固化到）
 │   └── checklist.md             # P0–P3 分级质检清单
 ├── assets/
-│   ├── base.css                 # design tokens + 全部版式骨架样式（唯一允许定义 class 的地方）
-│   ├── themes/                  # paper / graphite / forest，每套 ≤100 行，只覆写颜色 token
-│   ├── systems/                 # 设计系统（editorial「墨韵」），可覆写字体 token 与排印细节
-│   ├── textures/                # DATUM 坐标纸/点阵纹理
+│   ├── base.css                 # 所有风格共用底座：默认 token、slide 外壳、元素契约、段内强调、形状原语、运行时 chrome
+│   ├── legacy/                  # 风格库之前的设计层：L01–L24 base.css、themes/、systems/、textures/、seed、class 版 enhance.js
 │   ├── fonts-src/               # 完整字体源（思源黑 VF/思源宋/JetBrains Mono，gitignore，fetch-fonts 拉取）
 │   ├── runtime.js               # 演示导航 + 深链 #/N + 演讲者控制台（BroadcastChannel 双窗同步）
-│   └── enhance.js               # Web 档语义动画层（?flat=1 与导出通道自动跳过）
-├── templates/seed.html          # 种子模板：完整 head/引用 + <!-- SLIDES_HERE -->
-│                                # （版式骨架统一登记在 references/layouts.md，不设片段文件）
+│   └── enhance.js               # Web 档语义动画层：data-anim 配方 + data-media 钩子（?flat=1 与导出通道自动跳过）
+├── styles/<id>/                 # 风格包：style.css（token + 字体 + 全部版式几何）、layouts.md（骨架）、
+│                                # manifest.json（角色登记 + 字体映射）、资产目录、golden/ 金样 deck
+├── templates/seed.html          # 风格库种子：base.css + styles/__STYLE__/style.css + <!-- SLIDES_HERE -->
+├── docs/styles/                 # 风格画廊（style-gallery.mjs 生成：封面图 + 分组卡片页 + 拼图）
+├── tests/                       # node --test 单测：测量、导出原语、校验器、脚手架、动画、配图生成
 ├── scripts/                     # 全部基于 Playwright，跨平台
-│   ├── lib/deck.mjs             # 测量器：flat 模式实测每页元素的几何/样式/runs
-│   ├── new-deck.mjs             # deck 脚手架（复制种子 + 全部运行时资产）
+│   ├── lib/deck.mjs             # 测量器：flat 模式实测每页元素的几何/样式/runs/声明属性
+│   ├── lib/style.mjs            # 识别 style / legacy 模式，加载风格 manifest
+│   ├── lib/snapshot.mjs         # 单元素隔离截图（导出时烘焙 PPTX 画不出的元素）
+│   ├── new-deck.mjs             # deck 脚手架（--style / legacy --theme / --refresh）
+│   ├── check-style.mjs          # 风格包自检：核心角色覆盖、金样↔注册表一致、骨架 class 已定义
+│   ├── gen-art.mjs              # 确定性抽象配图（金样用，零版权）
+│   ├── style-gallery.mjs        # 风格画廊生成
+│   ├── regress.mjs              # 全部金样像素回归
 │   ├── fetch-fonts.mjs          # 一次性拉取字体源（~80MB，SIL OFL）
 │   ├── subset-fonts.mjs         # 按 deck 实际字符裁切 woff2 子集 → <deck>/assets/fonts/
 │   ├── check-pptx.mjs           # 产物门：OOXML 包完整性/关系/图表 XML
 │   ├── import-theme.mjs         # 企业模板 theme1.xml → token 品牌主题（含对比度报告）
 │   ├── baseline.mjs             # 基线重录闸门（金样必须先过校验器）
 │   ├── sync-skill.mjs           # 同步/漂移检查安装副本（--check）
-│   ├── validate.mjs             # 校验器 R1–R15（规则见 §6）
+│   ├── validate.mjs             # 校验器 R1–R16（规则见 §6）
 │   ├── export-pptx.mjs          # 测量结果 → pptxgenjs 确定性映射（含 --native-charts）
 │   ├── export-pdf.mjs           # 矢量 PDF
 │   ├── render-png.mjs           # 逐页截图
 │   └── diff.mjs                 # 像素回归比对器（pixelmatch）
-├── baselines/                   # 金样渲染基线（npm run regress 的比对基准）
-└── examples/                    # 金样 deck：showcase（现代系统）+ editorial（墨韵），兼作回归基准
+├── baselines/                   # 金样渲染基线：legacy examples 各一份 + styles/<id>/
+└── examples/                    # legacy 金样 deck：showcase / editorial / media（随风格交付逐个退役）
 ```
 
-## 5. 版式注册表（24 个，全部 pptx-safe）
+## 5. 风格包与角色层
+
+每种风格是 `styles/<id>/` 下的一个自包含包，拥有**独立的版式集**（版式 id 形如 `swiss/kpi`），彼此不共享几何。deck 链接 `assets/base.css` + 一个 `assets/styles/<id>/style.css`（可选再加只改 token 的 `assets/brand.css`）。
+
+- **角色层**：每个版式声明 `data-role`，取值来自固定的 20 个角色（cover / agenda / section / statement / kpi / compare / points / process / timeline / image / image-text / closing 为 12 个核心角色，另有 bars / table / gallery / cycle / matrix / system / video / audio）。`status: ready` 的风格必须覆盖全部核心角色（check-style 把关）。选版式分两步：内容形状 → 角色（`references/roles.md`）→ 当前风格 `layouts.md` 里该角色的版式。
+- **骨架声明**：文本框合并（`data-merge`）、动画（`data-anim`）、出处（`data-source`）、条形数值（`data-value / data-label`）、单独截图（`data-raster`）都写在骨架上，工具链因此不认识任何具体风格。
+- **两种模式并存**：`scripts/lib/style.mjs` 按 deck 的 `<link>` 判定 style / legacy 模式；legacy deck（链接 themes/ 或 systems/）沿用下表的 L01–L24 与旧规则，直到对应风格交付后退役。
+- 风格清单与分期见 `docs/superpowers/specs/2026-10-08-style-library-design.md`；已交付风格见 `docs/styles/index.html`。
+
+### 附：legacy 版式注册表（24 个，全部 pptx-safe）
 
 | 编号 | 版式 | 叙事角色 |
 |---|---|---|
@@ -128,7 +147,7 @@ ppt-skill/
 
 ## 6. 质量管线（三道门）
 
-**第一道：机器校验 `validate.mjs`**（量化规则 R1–R15；error exit 1 阻断交付，warn 放行）
+**第一道：机器校验 `validate.mjs`**（量化规则 R1–R16；error exit 1 阻断交付，warn 放行）。style 模式下：R1 以风格 manifest 为注册表并核对 `data-role`；R2 白名单 = base.css + 风格 style.css（+ brand.css）；R6 另放行 `rotate`；R8 按角色检查（kpi / bars / table 需 `data-source`，bars 条长对 `data-value`）；R12 只许 base.css + 一个风格文件 + 可选 brand.css；R3 / R5 / R9 按旋转后外框计算。
 
 | 规则 | 级别 | 检查内容 |
 |---|---|---|
@@ -146,6 +165,7 @@ ppt-skill/
 | R12 | error | 文档卫生：禁 `<style>` 标签、只允许 base.css + 一个主题/系统文件、Office 档禁远程图片 |
 | R13 | error | 媒体/资产契约：视频必带 poster（确定性静止帧）、媒体禁远程 URL、图片必须真实加载（裂图报错）、cover 裁切损失 >45% 预警 |
 | R14 | error/warn | 内容就绪：占位文本（TODO/lorem/待补充…）拦截；讲稿覆盖多数页却有遗漏时预警 |
+| R16 | error | 导出一致性（style 模式）：chevron / pentagon 的 `--tip` 必须等于短边一半；描边四边一致；阴影单层；禁 `transform`（旋转用 `rotate`）；文字槽位不得自带背景 / 描边 / 阴影 / 内边距 |
 | R15 | warn | 节奏：相邻两页同 `data-layout` 逐对预警；连续 ≥7 页处于同一明暗状态（light/dark，按实测页背景相对亮度 0.35 分档）报页码区间。全幅内容图/视频（≥25% 画布，装饰纹理层不计）算 bleed，只打断连续段、自身不成段 |
 
 R3 报错按溢出量分档给修复建议（≤40px 收紧文案 → ≤120px 行内降档 → 更大换版式），降低返工轮次。
@@ -169,21 +189,21 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
 ```
 1. 需求澄清（一次性 ≤5 问）
    Q1 交付格式 → 定档位（Web / Office）   ← 不可后置
-   Q2 受众与场合 → 查"受众→主题"映射表，推荐 2–3 个主题
+   Q2 受众与场合 → 给用户看风格画廊，按场合推荐 2–3 种风格
    Q3 页数/时长
    Q4 已有素材（大纲/文档/数据/图片/logo）
    Q5 硬性约束（品牌色仅在用户有明确品牌规范时接受）
 2. 资产先行：真实 logo（svgl → simpleicons → favicon 链）、真实图片、真实数据；
    涉及真实产品的事实必须先核实再写入
-3. `scripts/new-deck.mjs` 脚手架建 deck 目录（种子 + 全部运行时资产 + 选定主题）
+3. `scripts/new-deck.mjs --style <id>` 脚手架建 deck 目录（种子 + 共用运行时 + 风格包）
 4. 大纲 + 2 页语法样张（封面 + 最典型内容页）→ 用户确认后才批量生产
-5. 逐页填充：选注册版式 → 复制骨架 → 只替换内容 → 密度自查
+5. 逐页填充：内容形状 → 角色 → 风格版式 → 复制骨架 → 只替换内容 → 密度自查
 6. node scripts/validate.mjs → 修复循环直至通过
 7. 渲染截图 → P0–P3 视觉自检
 8. 交付 HTML；按档位追加 PPTX / PDF / PNG
 ```
 
-## 8. 里程碑（M1–M9 已全部落地）
+## 8. 里程碑（M1–M9 已全部落地，M10 进行中）
 
 - **M1 · 最小闭环**：seed.html + base.css + 3 套 token 主题 + 版式骨架 + runtime.js + validate.mjs + 金样 deck。
 - **M2 · 差异化卖点**：export-pptx.mjs 测量驱动导出 + Office 档规则 + pptx-export.md + Office 档金样。
@@ -194,6 +214,8 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
 - **M8 · 竞品机制吸收**（调研驱动）：产物侧 OOXML 结构门（check-pptx）、注册制文本框合并（连续槽位组 → 单框多段落 + 精确段距）、实验性 `--embed-fonts` 字体嵌入、企业模板→品牌主题提取（import-theme）、基线重录闸门（baseline.mjs 先过校验器）、安装副本漂移检查（sync-skill --check）、R14 占位符/讲稿完整性、R3 分档修复建议、R13 裂图与裁切损失、`?edit=1` 槽内编辑模式（版式锁定+下载）、演讲台转场提示高亮。
 - **M7 · 媒体版式**：`<video>/<audio>` 进入元素契约（测量/校验/导出全链路）——L17 视频主视觉、L18 视频半幅、L19 音频页、L14/L18 镜像变体；poster 锁定静止帧保证确定性，enhance.js 驱动播放语义（进页自动静音播放、点击切换、音频进度线），PPTX 用 addMedia 原生嵌入（封面为浏览器实际渲染截图），PDF 将视频替换为 poster；媒体金样 examples/media 进 CI 与回归基线。
 - **M9 · 数据叙事与纪律机器化**：版式扩容到 24（L20 环形闭环、L21 矩阵盘点、L22 规格表、L23 纵向时间线、L24 同心圆系统）并配「内容形状 → 版式」决策表，让选版式从审美判断变成形状匹配；节奏纪律机器化为 R15（相邻同版式 + 连续同明暗段）；新增实战回流库 `references/failures.md`（现象→根因→修法→已固化到，交付后强制回填）；enhance.js 补齐新版式的语义动效配方（条形生长、环形顺时针点亮、矩阵逐格、纵轴自顶拉出、同心圆由外向内）。
+
+- **M10 · 风格库平台（P0）**：风格包结构（style.css / layouts.md / manifest.json / golden）与 20 角色层；base.css 瘦身为共用底座，旧设计层迁入 `assets/legacy/`；测量与导出新增圆角、描边、燕尾箭头、旋转、阴影、竖排、单元素隔离截图（顺带修掉 cover 图截图把遮罩文字烤进图片的旧问题）；文本框合并与动画改为骨架声明（`data-merge` / `data-anim`）；校验器 style 模式 + R16 导出一致性；`check-style` / `gen-art` / `style-gallery` / `regress.mjs`；swiss 原样迁成第一个风格包，像素回归 15/15 页 0.00%，PPTX 文本框结构逐页一致；`node --test` 单测进 CI。P1–P3 按 spec 交付其余 11 种风格。
 
 ## 9. 风险与对策
 

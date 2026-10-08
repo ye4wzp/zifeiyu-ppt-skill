@@ -36,14 +36,14 @@
 - **现象**：「墨韵」系统的数据页里，数字 0 看起来像字母 o，KPI 与台账的可读性明显下降。
 - **根因**：Georgia 默认使用老式数字（old-style figures），0/3/4/7 有升降部，不适合表数。
 - **修法**：数字 token 换成思源宋（lining figures，等高数字），保留衬线调性但恢复表数可读性。
-- **已固化到**：`assets/systems/editorial.css` 的 `--font-num`。
+- **已固化到**：`assets/legacy/systems/editorial.css` 的 `--font-num`。
 
 ## 6 · 换衬线后 KPI「5.0%」在 136px 溢出
 
 - **现象**：上一条修完，校验器 R3 立刻报 L07 数字水平溢出。
 - **根因**：衬线 lining 数字的字面宽度大于无衬线，同字号下同样字符数更宽。
 - **修法**：只在「墨韵」系统里把 `.l07-num` 降到 120px——**系统文件调排印，不动几何**。
-- **已固化到**：`assets/systems/editorial.css` 的 `.l07-num`。
+- **已固化到**：`assets/legacy/systems/editorial.css` 的 `.l07-num`。
 
 ## 7 · `<audio>` 无 controls 时元素完全不渲染
 

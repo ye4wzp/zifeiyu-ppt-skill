@@ -482,7 +482,7 @@
 
 ## GRID 版面语法（瑞士系统 systems/swiss.css 默认构成）
 
-金样 `examples/swiss/` 为完整范例。每页规则：
+金样 `styles/swiss/golden/`（风格库版本）为完整范例。每页规则：
 1. **等宽页眉**：左 `<p class="sl-mono" style="left: 96px; top: 64px;">GRID · 主题名</p>`，右 `NN / NN` 页码（`width: 138px`）——注意与 DATUM 的 SHEET 编号格式区分。有页眉的内容页 `sl-title` 行内 `top: 108px` 并删除 sl-rule。
 2. **点阵纹理只上封面/宣言页**：`<img class="sl-texture" src="assets/textures/dots-dark.png" aria-hidden="true">`（浅底用 dots-dark，色场/墨底用 dots-light）；正文页保持纯净底色，L20/L24 一律不加。
 3. **单焦点法则**：全 deck 唯一锚点色。一组卡片/KPI 里只允许一个元素上 accent（`is-accent`）；强调词用 `<span class="is-accent">` 或 `<span class="is-mark">`（荧光块），**巨字禁止加粗**。

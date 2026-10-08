@@ -1,4 +1,6 @@
-# 主题与设计系统目录
+# 主题与设计系统目录（legacy）
+
+> 风格库上线后，新 deck 优先从风格画廊 `docs/styles/index.html` 选风格（`new-deck --style <id>`，场合推荐见 SKILL.md 第 1 步）。本页描述的是风格交付前的 legacy 主题，文件在 `assets/legacy/`。
 
 切换 = 换 `<link id="theme">` 指向的一个文件。一个 deck 一套，不混搭。
 
@@ -32,6 +34,6 @@ display/数字/mono 槽位使用 deck 内子集 webfont（思源黑 VF、思源�
 
 ## 自定义品牌色
 
-- **用户给企业 PPT 模板时（首选）**：`node scripts/import-theme.mjs <template.pptx> <name>` 自动从模板 theme1.xml 提取配色生成 token 主题文件并输出对比度报告；版式与排印保持锁定。
+- **用户给企业 PPT 模板时（首选）**：`node scripts/import-theme.mjs <template.pptx> <name>` 自动从模板 theme1.xml 提取配色生成 token 主题文件并输出对比度报告；版式与排印保持锁定。风格库 deck 加 `--deck <deck-dir>`，产出 `assets/brand.css`（链接在风格样式表之后，只改 token）。
 - 用户只给 hex 值时：以 paper 为底复制新主题文件、替换 `--accent`，跑对比度检查。
 - 禁止凭记忆猜测品牌色。

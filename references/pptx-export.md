@@ -8,6 +8,8 @@
 
 ## 导出命令与字体策略
 
+风格库 deck 的字体映射写在风格包 `manifest.json` 的 `fonts.office` 里（例如思源黑 → Microsoft YaHei / Microsoft YaHei Light，JetBrains Mono → Consolas），直接 `node scripts/export-pptx.mjs <deck-dir>` 即可；下面的 `--cjk-font / --cjk-serif` 参数只对 legacy deck 生效。
+
 ```bash
 # 接收方主要在 Windows/跨平台（默认推荐）：
 node scripts/export-pptx.mjs <deck-dir> --cjk-font "Microsoft YaHei"
@@ -25,15 +27,30 @@ HTML / PDF / PNG 三通道由 deck 内字体子集保真（思源黑/思源宋/J
 
 ## 可编辑性
 
-- **文本框合并（注册制）**：设计上连续的槽位组（L05 面板、L06 三列、L10/L12 标题+说明对、L19 音轨行）导出为**一个**文本框——每个槽位成为独立段落，字号/字体/颜色逐段保留，实测间距换算为精确段后距。接收方改一栏文字不再需要逐框点选。
+- **文本框合并**：设计上连续的槽位组导出为**一个**文本框——每个槽位成为独立段落，字号/字体/颜色逐段保留，实测间距换算为精确段后距。风格库在骨架上用 `data-merge="<组名>"` 声明；legacy deck 沿用导出器内登记的 L05/L06/L10/L12/L19–L24 组。接收方改一栏文字不再需要逐框点选。
 - **`--embed-fonts`（实验性）**：按 OOXML `embeddedFontLst` 规范在 zip 后处理阶段嵌入 deck 字符子集（思源黑按 400/800 静态实例、Light 面 250；思源宋 Regular/Heavy；JetBrains Mono），并保留真实字体名不再映射系统字体。**无开源先例，交付客户前必须在 WPS/PowerPoint 实开一次确认**；默认关闭。
+
+## 风格库导出原语（2026-10 实测）
+
+| 浏览器侧写法 | PPTX 侧 | 备注 |
+|---|---|---|
+| shape 的 `border-radius` | `roundRect` + `rectRadius` | pptxgenjs 文档写 0–1，源码实际按**英寸**：`adj = r·EMU·100000 / min(w,h)`；导出器传 `px2in(半径 − 描边半宽)`，夹具实测 adj 与浏览器圆角一致 |
+| shape 的 `border`（四边一致） | `line { color, width, transparency }` | CSS 描边在盒内、PPTX 线压在边上：导出器把形状四边各内缩半个线宽 |
+| `data-shape="chevron" / "pentagon"` + `--tip` | `chevron` / `homePlate` | pptxgenjs 不暴露尖角参数，PowerPoint 固定画在短边一半处，所以 `--tip` 必须等于短边一半（R16） |
+| `rotate: <deg>` | `rotate` | 测量未旋转盒（外框中心 + offset 尺寸）+ 角度；R3/R9 用旋转后外框 |
+| `box-shadow`（单层） | `shadow { type:'outer', blur, offset, angle, color, opacity }` | 偏移量与角度由 x/y 换算 |
+| `writing-mode: vertical-rl` + `text-orientation: mixed` | `vert: 'eaVert'` | LibreOffice 实测：中文直排、拉丁字母与数字侧转 90°，与浏览器一致；WPS / PowerPoint 待真实 deck 人工确认 |
+| cover 裁切、圆角 / 滤镜 / 旋转图片 | 浏览器内单独截图后嵌入 | 截图时隐藏同页其他元素、清空页面底色，圆角为真透明；旋转图先摘掉旋转再截，角度交给 PPTX |
+| `data-raster` 装饰（渐变等） | 单独截图嵌入 | 只用于装饰，文字永远是原生文本框 |
+
+**单独截图修掉的旧问题**：旧导出器直接对 cover 图做元素截图，压在图上的遮罩、标题、副标题会一起被截进图片，PPTX 里于是有两份文字（一份烤在图里、一份原生文本框）。现在截图前会隐藏同页其他元素，legacy deck 同样受益。
 
 ## 讲稿与图表
 
 - **讲稿自动随行**：`<aside class="notes">` 的文字导出为 PowerPoint 原生备注（备注视图/演示者视图可见），无需任何参数。
 - **段内强调随行**：`<strong>/<em>/<span class="is-accent">` 导出为原生 text runs（分段加粗/斜体/换色），在 PowerPoint 中仍可逐字编辑。
 - **媒体随行**：L17/L18 视频与 L19 音频通过 addMedia 原生嵌入 PPTX（接收方双击播放，Windows PowerPoint 对 H.264 MP4 / MP3 开箱支持）；视频封面为浏览器实际渲染的 poster 截图，静止画面与 HTML 逐像素一致；音频图标落在播放键位置。LibreOffice 几何验证会把媒体渲染为占位帧，属验证侧行为。
-- **图表两种模式**：默认 L15 条形图映射为矩形（与 HTML 逐像素一致）；加 `--native-charts` 则生成**原生可编辑图表**（接收方可双击改数据）。原生模式下图表样式由 PowerPoint 渲染，与 HTML 预览不逐像素一致、几何比对会标红——这是模式特性，按需选择：交付定稿用默认，交付给要继续编辑数据的人用 native。数值从 `.l15-val` 文本解析（"21.5k"→21.5，单位丢失），解析失败自动回退矩形模式。
+- **图表两种模式**：风格库按 `data-role="bars"` 识别条形图页，数值取条形 shape 上的 `data-value / data-label`，被原生图表取代的文字标 `data-chart`。legacy 规则如下：默认 L15 条形图映射为矩形（与 HTML 逐像素一致）；加 `--native-charts` 则生成**原生可编辑图表**（接收方可双击改数据）。原生模式下图表样式由 PowerPoint 渲染，与 HTML 预览不逐像素一致、几何比对会标红——这是模式特性，按需选择：交付定稿用默认，交付给要继续编辑数据的人用 native。数值从 `.l15-val` 文本解析（"21.5k"→21.5，单位丢失），解析失败自动回退矩形模式。
 
 ## 导出后验证（第三道门，不可跳过）
 
@@ -56,6 +73,6 @@ pdftoppm -png -r 96 <deck-dir>/deck.pdf <deck-dir>/renders-pptx/slide
 
 ## 维护铁律
 
-新增/修改版式必须四处同步：base.css 骨架样式 + `references/layouts.md` 注册 + 校验器（若涉及新规则）+ 金样 deck 重跑全链路比对。金样即回归基准。
+风格库新增/修改版式必须同步：`styles/<id>/style.css` 几何 + `layouts.md` 骨架 + `manifest.json` 注册（id → role）+ 金样 deck 用上该版式，然后 `node scripts/check-style.mjs styles/<id>` 与 validate 双绿、重跑全链路比对。legacy 版式同步 `assets/legacy/base.css` + `references/layouts.md`。金样即回归基准。
 
 改动 base.css / 版式骨架 / 主题后必须跑像素回归：`npm run regress`（对 `baselines/` 逐像素比对，任何一页超阈值即 exit 1）；设计**有意**变更时用 `npm run baseline` 重录基线并连同改动一起提交。基线是同机比对（跨 OS 字体栅格不同），CI 只做校验 + 冒烟。
