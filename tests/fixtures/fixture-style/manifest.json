@@ -1,0 +1,13 @@
+{
+  "id": "fixture",
+  "name": "测试夹具",
+  "status": "draft",
+  "assets": [],
+  "fonts": { "web": [], "office": { "PingFang SC": "Microsoft YaHei" } },
+  "layouts": {
+    "fixture/card": { "role": "points" },
+    "fixture/kpi": { "role": "kpi" },
+    "fixture/bars": { "role": "bars" },
+    "fixture/vertical": { "role": "statement" }
+  }
+}
