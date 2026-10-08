@@ -7,16 +7,21 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { deckIndex, measureDeck } from './lib/deck.mjs';
+import { loadStyle } from './lib/style.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const srcDir = join(root, 'assets/fonts-src');
-const FONTS = [
+// legacy decks carry every family; style packages list their own in manifest.fonts.web
+const LEGACY_FONTS = [
   { src: 'SourceHanSansSC-VF.otf', out: 'source-han-sans-sc.woff2' },
   { src: 'SourceHanSerifSC-Regular.otf', out: 'source-han-serif-sc-regular.woff2' },
   { src: 'SourceHanSerifSC-Bold.otf', out: 'source-han-serif-sc-bold.woff2' },
   { src: 'SourceHanSerifSC-Heavy.otf', out: 'source-han-serif-sc-heavy.woff2' },
   { src: 'JetBrainsMono-Regular.ttf', out: 'jetbrains-mono.woff2' },
 ];
+const index = deckIndex(process.argv[2] || '.');
+const style = loadStyle(index);
+const FONTS = style.mode === 'style' ? style.manifest.fonts?.web || [] : LEGACY_FONTS;
 for (const f of FONTS) {
   if (!existsSync(join(srcDir, f.src))) {
     console.error(`missing ${f.src} — run: node scripts/fetch-fonts.mjs`);
@@ -24,7 +29,6 @@ for (const f of FONTS) {
   }
 }
 
-const index = deckIndex(process.argv[2] || '.');
 const { browser, slides } = await measureDeck(index);
 await browser.close();
 

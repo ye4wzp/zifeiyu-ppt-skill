@@ -1,8 +1,10 @@
-// Usage: node scripts/import-theme.mjs <template.pptx|.potx> <theme-name>
+// Usage: node scripts/import-theme.mjs <template.pptx|.potx> <theme-name> [--deck <deck-dir>]
 // Corporate branding, the light route: read the template's theme1.xml
 // color scheme and emit a token-only theme CSS (the design language and
 // every layout stay locked). Prints a contrast report — fix the source
-// colors, never the tokens' roles.
+// colors, never the tokens' roles. With --deck the tokens land in that
+// style-mode deck as assets/brand.css (link it after the style sheet);
+// without it they become a legacy theme in assets/legacy/themes/.
 import JSZip from 'jszip';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -58,7 +60,8 @@ const tokens = {
 };
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const out = join(root, 'assets/themes', `${name}.css`);
+const di = process.argv.indexOf('--deck');
+const out = di > 0 ? join(resolve(process.argv[di + 1]), 'assets/brand.css') : join(root, 'assets/legacy/themes', `${name}.css`);
 writeFileSync(out, `/* brand theme "${name}" — tokens extracted from ${src.split('/').pop()}
    (theme1.xml color scheme); layout geometry and type stay locked */
 :root {
