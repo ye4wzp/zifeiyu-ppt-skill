@@ -216,6 +216,7 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
 - **M9 · 数据叙事与纪律机器化**：版式扩容到 24（L20 环形闭环、L21 矩阵盘点、L22 规格表、L23 纵向时间线、L24 同心圆系统）并配「内容形状 → 版式」决策表，让选版式从审美判断变成形状匹配；节奏纪律机器化为 R15（相邻同版式 + 连续同明暗段）；新增实战回流库 `references/failures.md`（现象→根因→修法→已固化到，交付后强制回填）；enhance.js 补齐新版式的语义动效配方（条形生长、环形顺时针点亮、矩阵逐格、纵轴自顶拉出、同心圆由外向内）。
 
 - **M10 · 风格库平台（P0）**：风格包结构（style.css / layouts.md / manifest.json / golden）与 20 角色层；base.css 瘦身为共用底座，旧设计层迁入 `assets/legacy/`；测量与导出新增圆角、描边、燕尾箭头、旋转、阴影、竖排、单元素隔离截图（顺带修掉 cover 图截图把遮罩文字烤进图片的旧问题）；文本框合并与动画改为骨架声明（`data-merge` / `data-anim`）；校验器 style 模式 + R16 导出一致性；`check-style` / `gen-art` / `style-gallery` / `regress.mjs`；swiss 原样迁成第一个风格包，像素回归 15/15 页 0.00%，PPTX 文本框结构逐页一致；`node --test` 单测进 CI。P1–P3 按 spec 交付其余 11 种风格。
+- **M11 · 风格 A 杂志（P1）**：第一个 ready 风格，18 个版式覆盖 12 个核心角色 + matrix / bars / table / gallery / video / audio；12 种风格共用的金样文字 `docs/golden-content.md`；数字改用 Playfair 等高数字（Office 映射 Times New Roman）；导出器补上整段斜体；gen-art 支持 JPEG 输出（金样配图从 MB 级降到几十 KB）。
 
 ## 9. 风险与对策
 

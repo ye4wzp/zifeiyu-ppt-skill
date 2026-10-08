@@ -8,6 +8,12 @@
 
 一句话说清楚它和同类项目的区别：**别人的网页 PPT 很美但导不出 .pptx，通用 HTML→PPTX 翻译又太脆——这里用"注册制版式 + 确定性映射"同时拿到两者**：每页必须声明封闭集合内的版式编号，导出器只面对已知结构，坐标按固定比例换算，结果可预期、可回归测试。
 
+## 风格库
+
+12 种风格、每种独立版式集，开场先挑风格；已交付：A 杂志 · 暖纸，其余按 `docs/superpowers/specs/2026-10-08-style-library-design.md` 分期交付。
+
+![风格库](docs/styles/gallery.png)
+
 ![封面版式](docs/preview/cover.png)
 
 ## 特性
@@ -60,7 +66,7 @@ cd ~/.claude/skills/zifeiyu-ppt-skill && npm install
 手动命令：
 
 ```bash
-node scripts/new-deck.mjs <deck-dir> --theme paper           # 建 deck 脚手架
+node scripts/new-deck.mjs <deck-dir> --style magazine        # 建 deck 脚手架
 node scripts/subset-fonts.mjs <deck-dir>                     # 生成 deck 内字体子集（改文字后重跑）
 node scripts/validate.mjs <deck-dir> [--office]              # 机器校验 R1–R15
 node scripts/render-png.mjs <deck-dir>                       # 逐页截图

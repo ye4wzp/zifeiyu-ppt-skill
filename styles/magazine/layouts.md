@@ -1,6 +1,6 @@
 # 杂志 · 暖纸（magazine）版式注册表
 
-> 状态：draft（P1 执行中）。
+> 状态：ready · 18 个版式，覆盖全部 12 个核心角色 + matrix / bars / table / gallery / video / audio。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/magazine/golden/`；金样文字来自 `docs/golden-content.md`。
 
@@ -362,7 +362,7 @@
 
 ```html
 <section class="slide" data-layout="magazine/process" data-role="process">
-  <p class="mg-mono mg-folio">CHAPTER 02 — WORKFLOW</p>
+  <p class="mg-mono mg-folio">04 — WORKFLOW</p>
   <h2 class="mg-serif mgp-title" data-anim="rise">从大纲到成稿，四步</h2>
   <p class="mg-it mgp-it" data-anim="rise">from outline to deck.</p>
   <img class="mg-photo mgp-img" src="assets/img/14-process.jpg" alt="示意图：暖灰立板构成的空间">
@@ -381,7 +381,7 @@
   <h3 class="mg-serif mgp-h mgp-c4" data-merge="s4" data-anim="rise"><span class="is-mark">导出</span></h3>
   <p class="mg-body mgp-p mgp-c4" data-merge="s4" data-anim="rise">一键得到可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
   <div class="mg-hair mg-rule" data-shape="rect"></div>
-  <p class="mg-mono mg-foot">ZIFEIYU PPT SKILL · WORKFLOW</p>
+  <p class="mg-mono mg-foot">ZIFEIYU PPT SKILL · VOL. 01</p>
   <p class="mg-mono mg-pageno">14 / 18</p>
 </section>
 ```

@@ -9,7 +9,7 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），从风�
 
 ## 风格库现状（过渡期，先读）
 
-- 已交付的风格以风格画廊为准：`docs/styles/index.html`（`node scripts/style-gallery.mjs` 重新生成，`docs/styles/gallery.png` 可直接发给用户看）。当前：**B 瑞士 · 网格**（`swiss`，draft，暂缺 process / image / image-text 三类页面）。
+- 已交付的风格以风格画廊为准：`docs/styles/index.html`（`node scripts/style-gallery.mjs` 重新生成，`docs/styles/gallery.png` 可直接发给用户看）。当前：**A 杂志 · 暖纸**（`magazine`，ready，18 个版式）· **B 瑞士 · 网格**（`swiss`，draft，暂缺 process / image / image-text 三类页面）。
 - 其余风格按 `docs/superpowers/specs/2026-10-08-style-library-design.md` 分期交付。用户选中的风格尚未交付时，走 **legacy 主题**：`--theme paper|graphite|forest|editorial|swiss` + `references/layouts.md` 的 L01–L24（见文末「Legacy 主题」）。
 - 校验器与导出器按 deck 链接的样式表自动区分 style 模式与 legacy 模式，规则各自生效。
 
@@ -29,7 +29,7 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），从风�
 
 ### 第 1 步 · 澄清定档（一次性提问，不超过 5 问）
 - **Q1 交付格式**（必问，定档位，之后不可切换）：只需网页演示 → Web 档；需要可编辑 .pptx → Office 档。每种风格都支持 Office 档。
-- **Q2 受众与场合 → 选风格**：给用户看风格画廊（`docs/styles/gallery.png`），按下表推荐 2–3 种并各附一句理由；用户不挑时默认 A 杂志（尚未交付时用 legacy `editorial`）。
+- **Q2 受众与场合 → 选风格**：给用户看风格画廊（`docs/styles/gallery.png`），按下表推荐 2–3 种并各附一句理由；用户不挑时默认 A 杂志（`--style magazine`）。
 
   | 场合 | 推荐 |
   |---|---|

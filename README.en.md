@@ -6,6 +6,12 @@
 
 The one-line difference from similar projects: beautiful HTML decks usually can't become .pptx files, and generic HTML→PPTX translators are too fragile. This skill gets both through **registered layouts + deterministic mapping**: every slide must declare a layout ID from a closed set, so the exporter only ever faces known structures — coordinates convert at a fixed ratio, results are predictable and regression-testable.
 
+## Style library
+
+12 styles, each with its own layout set — pick one at intake. Shipped: A Magazine; the rest follow the phased spec (`docs/superpowers/specs/2026-10-08-style-library-design.md`).
+
+![style library](docs/styles/gallery.png)
+
 ![cover](docs/preview/cover.png)
 
 ## Features
@@ -42,7 +48,7 @@ Requires Node.js ≥ 18 and `npx playwright install chromium-headless-shell`. Fe
 Ask Claude Code to "make a deck about X" — the skill drives an 8-step workflow: clarify & pick tier → verify facts → scaffold → 2-slide sample gate → batch production → machine validation → visual check → export.
 
 ```bash
-node scripts/new-deck.mjs <deck-dir> --theme paper   # scaffold a self-contained deck
+node scripts/new-deck.mjs <deck-dir> --style magazine   # scaffold a self-contained deck
 node scripts/subset-fonts.mjs <deck-dir>             # deck-local webfont subsets (re-run after text edits)
 node scripts/validate.mjs <deck-dir> [--office]      # machine gate R1–R15
 node scripts/render-png.mjs <deck-dir>

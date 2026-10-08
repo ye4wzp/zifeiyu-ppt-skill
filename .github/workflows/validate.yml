@@ -26,7 +26,7 @@ jobs:
           node scripts/validate.mjs examples/showcase
           node scripts/validate.mjs examples/editorial
           node scripts/validate.mjs examples/media
-          node scripts/validate.mjs styles/swiss/golden
+          for g in styles/*/golden; do node scripts/validate.mjs "$g"; done
       - name: Render check
         run: |
           node scripts/render-png.mjs examples/showcase --out /tmp/renders
@@ -40,3 +40,6 @@ jobs:
           node scripts/check-pptx.mjs /tmp/media.pptx --expect-slides 6
           node scripts/export-pptx.mjs styles/swiss/golden --out /tmp/swiss.pptx --native-charts
           node scripts/check-pptx.mjs /tmp/swiss.pptx --expect-slides 15
+          node scripts/export-pptx.mjs styles/magazine/golden --out /tmp/magazine.pptx
+          unzip -l /tmp/magazine.pptx | grep -q "media-.*\.mp4"
+          node scripts/check-pptx.mjs /tmp/magazine.pptx --expect-slides 18
