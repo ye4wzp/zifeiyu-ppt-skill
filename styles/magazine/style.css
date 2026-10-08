@@ -223,3 +223,38 @@
 .mgd-v { left: 376px; width: 520px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
 .mgd-s { left: 936px; width: 248px; }
 .mgd-hair { left: 96px; width: 1088px; }
+
+/* ---------- magazine/timeline ---------- */
+.mgl-it { left: 96px; top: 256px; width: 560px; font-size: 28px; }
+.mgl-img { left: 704px; top: 64px; width: 480px; height: 260px; }
+.mgl-cap { left: 704px; top: 340px; width: 480px; }
+.mgl-date { top: 404px; width: 200px; font-size: 44px; }
+.mgl-ink { left: 96px; top: 468px; width: 1088px; }
+.mgl-tick { top: 460px; width: 2px; height: 18px; background: var(--text-1); }
+.mgl-h { top: 492px; width: 196px; font-size: 22px; line-height: 1.3; }
+.mgl-p { top: 528px; width: 196px; }
+.mgl-c1 { left: 96px; }
+.mgl-c2 { left: 314px; }
+.mgl-c3 { left: 532px; }
+.mgl-c4 { left: 750px; }
+.mgl-c5 { left: 968px; }
+
+/* ---------- magazine/gallery ---------- */
+.mgg-img { top: 248px; height: 312px; }
+.mgg-cap { top: 576px; }
+.mgg-w1 { left: 96px; width: 520px; }
+.mgg-w2 { left: 636px; width: 264px; }
+.mgg-w3 { left: 920px; width: 264px; }
+
+/* ---------- magazine/closing ---------- */
+.mge-img { left: 0; top: 0; width: 640px; height: 720px; }
+.mge-cap { left: 32px; top: 664px; width: 576px; }
+.mge-it { left: 704px; top: 112px; width: 480px; font-size: 80px; }
+.mge-title { left: 704px; width: 480px; font-size: 44px; line-height: 1.3; }
+.mge-t1 { top: 240px; }
+.mge-t2 { top: 297px; }
+.mge-label { left: 704px; top: 400px; width: 480px; }
+.mge-cmd { left: 704px; top: 432px; width: 480px; font-family: var(--font-mono); font-size: 18px; line-height: 1.6; color: var(--text-1); }
+.mge-p { left: 704px; top: 520px; width: 480px; }
+.mge-hair { left: 704px; top: 640px; width: 480px; }
+.mge-meta { left: 704px; top: 660px; width: 320px; }

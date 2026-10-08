@@ -33,6 +33,9 @@
     "magazine/image": { "role": "image" },
     "magazine/points": { "role": "points" },
     "magazine/bars": { "role": "bars" },
-    "magazine/table": { "role": "table" }
+    "magazine/table": { "role": "table" },
+    "magazine/timeline": { "role": "timeline" },
+    "magazine/gallery": { "role": "gallery" },
+    "magazine/closing": { "role": "closing" }
   }
 }
