@@ -158,6 +158,7 @@ export async function measureDeck(indexPath) {
           fontSize: parseFloat(s.fontSize),
           fontFamily: s.fontFamily.split(',')[0].replace(/["']/g, '').trim(),
           fontWeight,
+          italic: s.fontStyle === 'italic',
           color,
           lineHeight: parseFloat(s.lineHeight),
           letterSpacing: s.letterSpacing === 'normal' ? 0 : parseFloat(s.letterSpacing),

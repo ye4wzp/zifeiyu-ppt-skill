@@ -39,6 +39,17 @@ test('exports native primitives', async () => {
   assert.doesNotMatch(xml, /typeface="PingFang SC"/); // mapped via manifest fonts.office
 });
 
+test('keeps element-level italic', async () => {
+  const it = makeDeck(`
+<section class="slide" data-layout="fixture/card" data-role="points">
+  <p class="fx-p">One Person Company.</p>
+</section>`, { extraHead: `<style>.fx-p { font-style: italic; }</style>` });
+  const out = resolve(it, 'deck.pptx');
+  execFileSync('node', ['scripts/export-pptx.mjs', it, '--out', out]);
+  const xml = await (await JSZip.loadAsync(readFileSync(out))).file('ppt/slides/slide1.xml').async('string');
+  assert.match(xml, /<a:rPr[^>]* i="1"[^>]*>(?:(?!<\/a:r>)[\s\S])*One Person Company\./);
+});
+
 test('warns when a family has no fonts.office mapping', () => {
   const mono = makeDeck(`
 <section class="slide" data-layout="fixture/card" data-role="points">
