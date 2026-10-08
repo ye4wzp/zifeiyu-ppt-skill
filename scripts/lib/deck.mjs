@@ -31,13 +31,20 @@ export async function measureDeck(indexPath) {
       return { hex, alpha: m.length > 3 ? parseFloat(m[3]) : 1 };
     };
     const INLINE_TAGS = ['STRONG', 'B', 'EM', 'I', 'SPAN'];
+    const px = (v) => parseFloat(v) || 0;
+    const parseShadow = (v) => {
+      if (!v || v === 'none') return null;
+      const color = v.match(/rgba?\([^)]+\)/)?.[0] || 'rgb(0, 0, 0)';
+      const [x, y, blur] = v.split(/,(?![^(]*\))/)[0].replace(color, '').trim().split(/\s+/).map(px);
+      return { x, y, blur, color: parseColor(color), layers: v.split(/,(?![^(]*\))/).length };
+    };
 
     const doc = {
       styleTags: document.querySelectorAll('style').length,
       links: [...document.querySelectorAll('link[rel="stylesheet"]')].map((l) => l.getAttribute('href')),
     };
 
-    const slides = [...document.querySelectorAll('.slide')].map((slide) => {
+    const slides = [...document.querySelectorAll('.slide')].map((slide, si) => {
       const sr = slide.getBoundingClientRect();
 
       // Text nodes outside h1/h2/h3/p never reach the export -> report them.
@@ -52,18 +59,45 @@ export async function measureDeck(indexPath) {
       const els = [...slide.querySelectorAll('[data-shape], img, video, audio, h1, h2, h3, p')].filter((el) => {
         const r = el.getBoundingClientRect();
         return r.width > 0 && r.height > 0; // skip display:none (e.g. speaker notes)
-      }).map((el) => {
+      }).map((el, ei) => {
         const r = el.getBoundingClientRect();
         const s = getComputedStyle(el);
-        const box = { x: r.left - sr.left, y: r.top - sr.top, w: r.width, h: r.height };
+        el.dataset.mid = `${si}-${ei}`; // stable handle for export-time snapshots
+        const bbox = { x: r.left - sr.left, y: r.top - sr.top, w: r.width, h: r.height };
+        const rotate = s.rotate && s.rotate !== 'none' ? parseFloat(s.rotate) : 0;
+        // unrotated box: same centre as the rotated hull, layout size from offset metrics
+        const w = el.offsetWidth || bbox.w, h = el.offsetHeight || bbox.h;
+        const box = { x: bbox.x + bbox.w / 2 - w / 2, y: bbox.y + bbox.h / 2 - h / 2, w, h };
+        const common = {
+          mid: el.dataset.mid, bbox, rotate, transform: s.transform,
+          merge: el.dataset.merge || null, anim: el.dataset.anim || null,
+          raster: el.hasAttribute('data-raster'), source: el.hasAttribute('data-source'),
+        };
+        const radius = s.borderTopLeftRadius.endsWith('%')
+          ? (px(s.borderTopLeftRadius) / 100) * Math.min(w, h) : px(s.borderTopLeftRadius);
         const opacity = parseFloat(s.opacity);
         const inlineStyle = el.getAttribute('style') || '';
         if (el.dataset.shape) {
-          return { kind: 'shape', shape: el.dataset.shape, ...box, opacity, fill: parseColor(s.backgroundColor), classes: [...el.classList], inlineStyle };
+          return {
+            kind: 'shape', shape: el.dataset.shape, ...box, ...common, opacity, fill: parseColor(s.backgroundColor),
+            radius,
+            border: px(s.borderTopWidth) && s.borderTopStyle !== 'none'
+              ? {
+                  width: px(s.borderTopWidth), color: parseColor(s.borderTopColor),
+                  uniform: ['Right', 'Bottom', 'Left'].every((k) => s[`border${k}Width`] === s.borderTopWidth && s[`border${k}Color`] === s.borderTopColor),
+                }
+              : null,
+            shadow: parseShadow(s.boxShadow),
+            tip: s.getPropertyValue('--tip') ? px(s.getPropertyValue('--tip')) : null,
+            value: el.dataset.value != null ? parseFloat(el.dataset.value) : null,
+            label: el.dataset.label || null,
+            classes: [...el.classList], inlineStyle,
+          };
         }
         if (el.tagName === 'IMG') {
           return {
-            kind: 'image', ...box, src: el.getAttribute('src'), fit: s.objectFit,
+            kind: 'image', ...box, ...common, radius, filter: s.filter !== 'none', shadow: parseShadow(s.boxShadow),
+            src: el.getAttribute('src'), fit: s.objectFit,
             alt: el.getAttribute('alt') || '',
             decor: el.getAttribute('aria-hidden') === 'true',
             naturalW: el.naturalWidth, naturalH: el.naturalHeight,
@@ -72,7 +106,7 @@ export async function measureDeck(indexPath) {
         }
         if (el.tagName === 'VIDEO' || el.tagName === 'AUDIO') {
           return {
-            kind: el.tagName.toLowerCase(), ...box, opacity,
+            kind: el.tagName.toLowerCase(), ...box, ...common, opacity,
             src: el.getAttribute('src') || '',
             poster: el.getAttribute('poster') || '',
             label: el.getAttribute('aria-label') || '',
@@ -108,7 +142,15 @@ export async function measureDeck(indexPath) {
           }
         }
         return {
-          kind: 'text', tag: el.tagName.toLowerCase(), ...box, opacity,
+          kind: 'text', tag: el.tagName.toLowerCase(), ...box, ...common, opacity,
+          vertical: s.writingMode.startsWith('vertical'),
+          chart: el.hasAttribute('data-chart'),
+          textBox: {
+            bg: parseColor(s.backgroundColor).alpha > 0 || s.backgroundImage !== 'none',
+            border: px(s.borderTopWidth) > 0,
+            shadow: s.boxShadow !== 'none',
+            padding: ['Top', 'Right', 'Bottom', 'Left'].some((k) => px(s[`padding${k}`]) > 0),
+          },
           text: el.textContent.trim(),
           overflowX: Math.max(0, el.scrollWidth - el.clientWidth - 1),
           // no overflowY: text slots are auto-height (overflow renders, never
@@ -129,6 +171,7 @@ export async function measureDeck(indexPath) {
       });
       return {
         layout: slide.dataset.layout || '',
+        role: slide.dataset.role || '',
         bg: parseColor(getComputedStyle(slide).backgroundColor),
         notes: slide.querySelector('.notes')?.textContent.trim() || '',
         stray,
