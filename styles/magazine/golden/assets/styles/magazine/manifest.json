@@ -15,13 +15,16 @@
     ],
     "office": {
       "Source Han Serif SC": "SimSun",
-      "Playfair Display": "Georgia",
+      "Playfair Display": "Times New Roman",
       "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
       "JetBrains Mono": "Consolas"
     }
   },
   "layouts": {
     "magazine/cover": { "role": "cover" },
+    "magazine/agenda": { "role": "agenda" },
+    "magazine/statement": { "role": "statement" },
+    "magazine/section": { "role": "section" },
     "magazine/kpi": { "role": "kpi" },
     "magazine/process": { "role": "process" }
   }
