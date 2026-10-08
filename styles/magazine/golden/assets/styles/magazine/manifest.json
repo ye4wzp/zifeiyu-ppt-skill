@@ -1,0 +1,28 @@
+{
+  "id": "magazine",
+  "name": "杂志 · 暖纸",
+  "letter": "A",
+  "group": "编辑排印",
+  "status": "draft",
+  "recommend": ["分享", "宣传", "人文"],
+  "assets": [],
+  "fonts": {
+    "web": [
+      { "src": "SourceHanSerifSC-Bold.otf", "out": "source-han-serif-sc-bold.woff2" },
+      { "src": "PlayfairDisplay-VF.ttf", "out": "playfair-display.woff2" },
+      { "src": "PlayfairDisplay-Italic-VF.ttf", "out": "playfair-display-italic.woff2" },
+      { "src": "JetBrainsMono-Regular.ttf", "out": "jetbrains-mono.woff2" }
+    ],
+    "office": {
+      "Source Han Serif SC": "SimSun",
+      "Playfair Display": "Georgia",
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "JetBrains Mono": "Consolas"
+    }
+  },
+  "layouts": {
+    "magazine/cover": { "role": "cover" },
+    "magazine/kpi": { "role": "kpi" },
+    "magazine/process": { "role": "process" }
+  }
+}

@@ -20,6 +20,9 @@ examples/**/deck.pptx
 examples/**/deck.pdf
 examples/**/deck-web.pdf
 examples/**/REGRESSION.txt
+styles/**/deck.pptx
+styles/**/deck.pdf
+styles/**/deck-web.pdf
 
 # os
 .DS_Store
