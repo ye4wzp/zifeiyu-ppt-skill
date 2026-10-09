@@ -24,6 +24,10 @@
     "photobook/agenda": { "role": "agenda" },
     "photobook/statement": { "role": "statement" },
     "photobook/section": { "role": "section" },
+    "photobook/matrix": { "role": "matrix" },
+    "photobook/compare": { "role": "compare" },
+    "photobook/image-text": { "role": "image-text" },
+    "photobook/image": { "role": "image" },
     "photobook/kpi": { "role": "kpi" },
     "photobook/process": { "role": "process" }
   }

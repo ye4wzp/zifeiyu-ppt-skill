@@ -140,3 +140,46 @@
 .pbx-num { left: 60px; top: 488px; width: 180px; font-size: 128px; }
 .pbx-title { left: 248px; top: 500px; width: 900px; font-size: 48px; line-height: 1.25; }
 .pbx-it { left: 248px; top: 572px; width: 900px; font-size: 26px; }
+
+/* ---------- photobook/matrix ---------- */
+/* hero total on the left; a 4×3 contact sheet A–L on the right, the current style ringed */
+.pbm-hero { left: 56px; top: 148px; width: 248px; font-size: 160px; }
+.pbm-label { left: 64px; top: 324px; width: 240px; font-size: 28px; line-height: 1.2; }
+.pbm-sub { left: 64px; top: 372px; width: 240px; }
+.pbm-img { width: 208px; height: 112px; }
+.pbm-key { width: 24px; }
+.pbm-name { width: 176px; font-size: 18px; line-height: 1.3; }
+.pbm-sel { width: 220px; height: 124px; border: 2px solid var(--text-1); }
+
+/* ---------- photobook/compare ---------- */
+.pbv-img { top: 148px; width: 568px; height: 260px; }
+.pbv-label { top: 428px; width: 568px; }
+.pbv-h { top: 456px; width: 568px; font-size: 24px; line-height: 1.3; }
+.pbv-p { top: 496px; width: 568px; }
+.pbv-num { top: 572px; width: 80px; font-size: 56px; }
+.pbv-nl { top: 590px; width: 480px; font-size: 20px; line-height: 1.3; }
+.pbv-l { left: 64px; }
+.pbv-r { left: 648px; }
+.pbv-ln { left: 152px; }
+.pbv-rn { left: 736px; }
+
+/* ---------- photobook/image-text ---------- */
+/* the photo bleeds off the left half; text column 688–1216 */
+.pbi-img { left: 0; top: 0; width: 640px; height: 720px; }
+.pbi-title { left: 688px; width: 528px; font-size: 44px; line-height: 1.25; }
+.pbi-t1 { top: 96px; }
+.pbi-t2 { top: 151px; }
+.pbi-it { left: 688px; top: 226px; width: 528px; font-size: 26px; }
+.pbi-p { left: 688px; width: 528px; }
+.pbi-p1 { top: 288px; }
+.pbi-p2 { top: 364px; }
+.pbi-hair { left: 688px; top: 452px; width: 528px; }
+.pbi-note { left: 688px; top: 476px; width: 528px; }
+.pbi-foot { left: 688px; top: 668px; width: 320px; }
+
+/* ---------- photobook/image ---------- */
+/* a plate: the photo matted on the page, caption underneath */
+.pbf-img { left: 64px; top: 48px; width: 1152px; height: 540px; }
+.pbf-title { left: 64px; top: 608px; width: 720px; font-size: 28px; line-height: 1.25; }
+.pbf-p { left: 64px; top: 652px; width: 720px; }
+.pbf-cap { left: 816px; top: 616px; width: 400px; text-align: right; }
