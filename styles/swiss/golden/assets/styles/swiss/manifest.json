@@ -21,6 +21,9 @@
   },
   "layouts": {
     "swiss/cover": { "role": "cover" },
+    "swiss/agenda": { "role": "agenda" },
+    "swiss/statement": { "role": "statement" },
+    "swiss/section": { "role": "section" },
     "swiss/kpi": { "role": "kpi" },
     "swiss/process": { "role": "process" }
   }

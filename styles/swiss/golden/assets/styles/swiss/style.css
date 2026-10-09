@@ -31,6 +31,7 @@
 :root {
   --bg: #fafaf8;
   --surface: #f0f0ee;
+  --surface-2: #d8d8d4;
   --text-1: #0a0a0a;
   --text-2: #525252;
   --accent: #002fa7;
@@ -43,6 +44,28 @@
 
   --font-display: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-num: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ink page: section / cycle */
+.slide.is-dark {
+  --bg: #0a0a0a;
+  --surface: #1a1a1a;
+  --text-1: #fafaf8;
+  --text-2: #a3a3a3;
+  --accent: #5b7bff; /* Klein blue lifts one step on ink, else it drowns */
+  --hairline: #333333;
+  --tick: #3d3d3d;
+}
+
+/* blue page: statement — the page itself is the one accent */
+.slide.is-accent {
+  --bg: #002fa7;
+  --text-1: #ffffff;
+  --text-2: #b3c1e8;
+  --accent: #ffffff;
+  --on-accent: #002fa7;
+  --hairline: #4061bd;
+  --tick: #8097d3;
 }
 
 /* ---------- vocabulary ---------- */
@@ -64,6 +87,7 @@
 /* blocks: one accent block per page; grey for the rest */
 .sw-accent { background: var(--accent); }
 .sw-grey { background: var(--surface); }
+.sw-ink { background: var(--text-1); }
 .sw-rule { background: var(--text-1); height: 1px; }
 .sw-hair { background: var(--hairline); height: 1px; }
 .sw-photo { object-fit: cover; }
@@ -73,6 +97,11 @@
 .sw-tick.is-on { width: 24px; background: var(--accent); }
 .sw-tick.sw-on { background: var(--on-accent-2); }
 .sw-tick.sw-on.is-on { background: var(--on-accent); }
+/* a four-tick row flush with the grid's left edge (cover, section) */
+.sw-k1 { left: 64px; }
+.sw-k2 { left: 96px; }
+.sw-k3 { left: 114px; }
+.sw-k4 { left: 132px; }
 
 /* running heads on content pages */
 .sw-folio { left: 64px; top: 48px; width: 700px; }
@@ -80,6 +109,7 @@
 .sw-foot-rule { left: 64px; top: 640px; width: 1152px; }
 .sw-foot { left: 64px; top: 660px; width: 1000px; }
 .sw-head { left: 64px; top: 104px; width: 1152px; }
+.sw-head2 { left: 64px; top: 166px; width: 1152px; }
 
 /* ---------- swiss/cover ---------- */
 .swc-panel { left: 0; top: 0; width: 768px; height: 720px; }
@@ -91,10 +121,6 @@
 .swc-t2 { top: 298px; }
 .swc-lede { left: 64px; top: 488px; width: 600px; }
 .swc-tick { top: 600px; }
-.swc-k1 { left: 64px; }
-.swc-k2 { left: 96px; }
-.swc-k3 { left: 114px; }
-.swc-k4 { left: 132px; }
 .swc-meta { left: 64px; top: 656px; width: 640px; }
 .swc-cap { left: 800px; top: 656px; width: 384px; color: var(--text-1); }
 
@@ -124,3 +150,24 @@
 .swp-c2 { left: 378px; }
 .swp-c3 { left: 672px; }
 .swp-c4 { left: 966px; }
+
+/* ---------- swiss/agenda ---------- */
+/* rows of 106px from 216; the foot rule at 640 closes the last row */
+.swa-rule { left: 64px; top: 216px; width: 1152px; }
+.swa-hair { left: 64px; width: 1152px; }
+.swa-num { left: 60px; width: 160px; font-size: 64px; }
+.swa-h { left: 260px; width: 368px; font-size: 30px; }
+.swa-p { left: 652px; width: 420px; }
+.swa-page { left: 1118px; width: 98px; text-align: right; }
+
+/* ---------- swiss/statement ---------- */
+.sws-bar { left: 64px; top: 208px; width: 48px; height: 8px; }
+.sws-line { left: 58px; width: 1152px; font-size: 88px; }
+.sws-l1 { top: 264px; }
+.sws-l2 { top: 359px; }
+.sws-by { left: 64px; top: 512px; width: 700px; }
+
+/* ---------- swiss/section ---------- */
+.swx-num { left: 56px; top: 88px; width: 700px; font-size: 320px; }
+.swx-title { left: 58px; top: 456px; width: 1100px; font-size: 104px; }
+.swx-tick { top: 608px; }

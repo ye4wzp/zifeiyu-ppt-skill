@@ -1,18 +1,19 @@
 # 瑞士 · 网格（swiss）版式注册表
 
-> 状态：draft · P1 重做中，已有 cover / kpi / process；其余核心角色未完成前，交付请用其他风格。
+> 状态：draft · P1 重做中，已有 6 个版式；其余核心角色未完成前，交付请用其他风格。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/swiss/golden/`；金样文字来自 `docs/golden-content.md`。
 
 ## 版面语法
 
-1. **12 栏网格**：版心 64–1216（1152px），栏宽 74、栏距 24；常用分栏起点——三栏 64 / 456 / 848（宽 368），四栏 64 / 358 / 652 / 946（宽 270），两栏 64 / 652（宽 564）。页眉等宽标签与页码在 top 48，页脚细线在 640、页脚文字在 660，标题在 104。
+1. **12 栏网格**：版心 64–1216（1152px），栏宽 74、栏距 24；常用分栏起点——三栏 64 / 456 / 848（宽 368），四栏 64 / 358 / 652 / 946（宽 270），两栏 64 / 652（宽 564）。页眉等宽标签与页码在 top 48，页脚细线在 640、页脚文字在 660，标题在 104；两行标题第二行用 `sw-head2`（top 166）。
 2. **字体分工**：巨字中文用 `sw-giant`（思源黑最细一档，Office 里是微软雅黑 Light）；巨数字用 `sw-num`（Inter ExtraLight，Office 里是 Segoe UI Light）；页标题 `sw-title`（细体 52px）；小标题 `sw-h`（600）；说明 `sw-body`；页眉页脚、图注、出处用等宽 `sw-mono`（大写拉丁直接写成大写）。
-3. **克莱因蓝全页只用一处**：一块 `sw-accent` 色块，或一个 `sw-ac` 数字 / 词，二选一；其余色块一律 `sw-grey`。色块上的文字用 `sw-on`（主）/ `sw-on2`（次）。
-4. **巨字只用细体**：巨字与巨数字禁止加粗，层级靠字号拉开。
-5. **方块刻度**：分页标记一律直角小方块 `sw-tick`（10×10），当前项加 `is-on` 拉宽到 24px；不用圆点。
+3. **克莱因蓝全页只用一处**：一块 `sw-accent` 色块，或一个 `sw-ac` 数字 / `is-accent` 词，或一格 `is-on` 刻度，三选一；其余色块一律 `sw-grey` / `sw-ink`。色块上的文字用 `sw-on`（主）/ `sw-on2`（次）。
+4. **巨字只用细体**：巨字与巨数字禁止加粗，层级靠字号拉开。巨数字字形几乎没有左侧留白，左坐标比栏起点内收或外放几像素做视觉对齐（见各版式的数字类）。
+5. **方块刻度**：分页标记一律直角小方块 `sw-tick`（10×10），当前项加 `is-on` 拉宽到 24px；不用圆点。贴左缘的四格一排用 `sw-k1`–`sw-k4`。
 6. **色彩闭环**：封面以克莱因蓝色块开场，结尾页同样以克莱因蓝收束。
 7. **换 accent**：按 style.css 头部注释的许可对整套替换 token，一份 deck 只有一种 accent。
+8. **墨页与蓝页**：`slide is-dark` 给 section / cycle（克莱因蓝在墨底上提亮为 #5b7bff）；`slide is-accent` 整页克莱因蓝，只给 statement——蓝页本身就是这一页的那一处蓝。
 
 ## swiss/cover · cover
 
@@ -27,12 +28,80 @@
   <h1 class="sw-giant sw-on swc-title swc-t1" data-merge="title" data-anim="rise">一份源文件</h1>
   <h1 class="sw-giant sw-on swc-title swc-t2" data-merge="title" data-anim="rise">三种交付</h1>
   <p class="sw-lede sw-on swc-lede" data-anim="rise">浏览器里直接演示，再一键导出可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
-  <div class="sw-tick sw-on is-on swc-tick swc-k1" data-shape="rect"></div>
-  <div class="sw-tick sw-on swc-tick swc-k2" data-shape="rect"></div>
-  <div class="sw-tick sw-on swc-tick swc-k3" data-shape="rect"></div>
-  <div class="sw-tick sw-on swc-tick swc-k4" data-shape="rect"></div>
+  <div class="sw-tick sw-on is-on swc-tick sw-k1" data-shape="rect"></div>
+  <div class="sw-tick sw-on swc-tick sw-k2" data-shape="rect"></div>
+  <div class="sw-tick sw-on swc-tick sw-k3" data-shape="rect"></div>
+  <div class="sw-tick sw-on swc-tick sw-k4" data-shape="rect"></div>
   <p class="sw-mono sw-on swc-meta">网页 PPT · 可编辑导出</p>
   <p class="sw-mono swc-cap">FIG. 01 — 示意图</p>
+</section>
+```
+
+## swiss/agenda · agenda
+
+目录。整行标题 + 黑色细线，4 行「巨数字编号 / 条目 / 一行说明 / 页码」，行高 106px、行间细线，页脚细线收住最后一行；第一个编号上蓝。条目 ≤6 字，说明 ≤14 字。
+
+```html
+<section class="slide" data-layout="swiss/agenda" data-role="agenda">
+  <p class="sw-mono sw-folio">00 — CONTENTS</p>
+  <p class="sw-mono sw-pageno">02 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">目录</h2>
+  <div class="sw-rule swa-rule" data-shape="rect" data-anim="draw"></div>
+  <p class="sw-num sw-ac swa-num" style="top: 237px;" data-anim="rise">01</p>
+  <h3 class="sw-h swa-h" style="top: 249px;" data-anim="rise">风格库</h3>
+  <p class="sw-body swa-p" style="top: 256px;" data-anim="rise">十二种风格，开场先挑一种</p>
+  <p class="sw-mono swa-page" style="top: 261px;">P. 04</p>
+  <div class="sw-hair swa-hair" data-shape="rect" style="top: 322px;"></div>
+  <p class="sw-num swa-num" style="top: 343px;" data-anim="rise">02</p>
+  <h3 class="sw-h swa-h" style="top: 355px;" data-anim="rise">测量与导出</h3>
+  <p class="sw-body swa-p" style="top: 362px;" data-anim="rise">先量后画，文字始终可编辑</p>
+  <p class="sw-mono swa-page" style="top: 367px;">P. 07</p>
+  <div class="sw-hair swa-hair" data-shape="rect" style="top: 428px;"></div>
+  <p class="sw-num swa-num" style="top: 449px;" data-anim="rise">03</p>
+  <h3 class="sw-h swa-h" style="top: 461px;" data-anim="rise">质量门</h3>
+  <p class="sw-body swa-p" style="top: 468px;" data-anim="rise">十六条规则，错误清零才交付</p>
+  <p class="sw-mono swa-page" style="top: 473px;">P. 10</p>
+  <div class="sw-hair swa-hair" data-shape="rect" style="top: 534px;"></div>
+  <p class="sw-num swa-num" style="top: 555px;" data-anim="rise">04</p>
+  <h3 class="sw-h swa-h" style="top: 567px;" data-anim="rise">工作流</h3>
+  <p class="sw-body swa-p" style="top: 574px;" data-anim="rise">从大纲到成稿的四步</p>
+  <p class="sw-mono swa-page" style="top: 579px;">P. 13</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">ZIFEIYU PPT SKILL · STYLE B — SWISS</p>
+</section>
+```
+
+## swiss/statement · statement
+
+金句蓝页。整页克莱因蓝，白色短条 → 两行极细巨字（每行一个 h2，每行 ≤10 字）→ 等宽出处。
+
+```html
+<section class="slide is-accent" data-layout="swiss/statement" data-role="statement">
+  <p class="sw-mono sw-folio">NOTE — 设计原则</p>
+  <p class="sw-mono sw-pageno">03 / 17</p>
+  <div class="sw-accent sws-bar" data-shape="rect" data-anim="draw"></div>
+  <h2 class="sw-giant sws-line sws-l1" data-merge="quote" data-anim="rise">HTML 是唯一的源，</h2>
+  <h2 class="sw-giant sws-line sws-l2" data-merge="quote" data-anim="rise">其余都是衍生物。</h2>
+  <p class="sw-mono sws-by">— SKILL.md · 设计原则</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">ZIFEIYU PPT SKILL · STYLE B — SWISS</p>
+</section>
+```
+
+## swiss/section · section
+
+章节墨页。极细巨数字章节号、极细巨字章节名、四格方块刻度标出当前章（`is-on`）。
+
+```html
+<section class="slide is-dark" data-layout="swiss/section" data-role="section">
+  <p class="sw-mono sw-folio">CHAPTER 01 / 04</p>
+  <p class="sw-mono sw-pageno">04 / 17</p>
+  <p class="sw-num swx-num" data-anim="rise">01</p>
+  <h2 class="sw-giant swx-title" data-anim="rise">风格库</h2>
+  <div class="sw-tick is-on swx-tick sw-k1" data-shape="rect"></div>
+  <div class="sw-tick swx-tick sw-k2" data-shape="rect"></div>
+  <div class="sw-tick swx-tick sw-k3" data-shape="rect"></div>
+  <div class="sw-tick swx-tick sw-k4" data-shape="rect"></div>
 </section>
 ```
 
