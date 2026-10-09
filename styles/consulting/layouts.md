@@ -1,6 +1,6 @@
 # 咨询 · 白皮书（consulting）版式注册表
 
-> 状态：draft · P1 制作中，已有 13 个版式；其余核心角色未完成前，交付请用其他风格。
+> 状态：draft · P1 制作中，已有 17 个版式；其余核心角色未完成前，交付请用其他风格。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/consulting/golden/`；金样文字来自 `docs/golden-content.md`。
 
@@ -398,5 +398,135 @@
   <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
   <p class="cs-source">来源：SKILL.md 工作流</p>
   <p class="cs-pageno">13</p>
+</section>
+```
+
+## consulting/timeline · timeline
+
+时间线（4–5 个节点，5 等分列，列距 230）。Inter 日期在海军蓝 2px 横线上方，线上方块节点（最新节点亮蓝，日期同时 `cs-ac`），线下「节点名 / 两行说明」。说明 ≤18 字。
+
+```html
+<section class="slide" data-layout="consulting/timeline" data-role="timeline">
+  <p class="cs-trk cs-tracker">工作流</p>
+  <h2 class="cs-semi cs-title" data-anim="rise">从一套版式，到一座风格库。</h2>
+  <div class="cs-hair cs-head-rule" data-shape="rect"></div>
+  <p class="cs-semi cs-exhibit">图表 8 · 版本里程碑（2026 年）</p>
+  <div class="cs-navy csl-line" data-shape="rect" data-anim="draw"></div>
+  <p class="cs-num csl-date csl-c1" data-anim="rise">07.16</p>
+  <div class="cs-navy csl-node csl-c1" data-shape="rect" data-anim="pop"></div>
+  <h3 class="cs-semi csl-h csl-c1" data-merge="c1" data-anim="rise">首版发布</h3>
+  <p class="cs-note csl-p csl-c1" data-merge="c1" data-anim="rise">锁定设计系统的网页 PPT，确定性导出。</p>
+  <p class="cs-num csl-date csl-c2" data-anim="rise">07.18</p>
+  <div class="cs-navy csl-node csl-c2" data-shape="rect" data-anim="pop"></div>
+  <h3 class="cs-semi csl-h csl-c2" data-merge="c2" data-anim="rise">墨韵衬线</h3>
+  <p class="cs-note csl-p csl-c2" data-merge="c2" data-anim="rise">第二套设计系统：思源宋、暖纸、朱砂。</p>
+  <p class="cs-num csl-date csl-c3" data-anim="rise">08.17</p>
+  <div class="cs-navy csl-node csl-c3" data-shape="rect" data-anim="pop"></div>
+  <h3 class="cs-semi csl-h csl-c3" data-merge="c3" data-anim="rise">校验全覆盖</h3>
+  <p class="cs-note csl-p csl-c3" style="width: 212px;" data-merge="c3" data-anim="rise">规则覆盖全部元素，文字分段原生导出。</p>
+  <p class="cs-num csl-date csl-c4" data-anim="rise">08.18</p>
+  <div class="cs-navy csl-node csl-c4" data-shape="rect" data-anim="pop"></div>
+  <h3 class="cs-semi csl-h csl-c4" data-merge="c4" data-anim="rise">瑞士国际</h3>
+  <p class="cs-note csl-p csl-c4" style="width: 168px;" data-merge="c4" data-anim="rise">第三套设计系统，加入数据叙事版式。</p>
+  <p class="cs-num cs-ac csl-date csl-c5" data-anim="rise">10.08</p>
+  <div class="cs-blue csl-node csl-c5" data-shape="rect" data-anim="pop"></div>
+  <h3 class="cs-semi csl-h csl-c5" data-merge="c5" data-anim="rise">风格库</h3>
+  <p class="cs-note csl-p csl-c5" data-merge="c5" data-anim="rise">十二种风格，版式独立。</p>
+  <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
+  <p class="cs-source">来源：git log（2026-07-16 → 2026-10-08）</p>
+  <p class="cs-pageno">14</p>
+</section>
+```
+
+## consulting/cycle · cycle
+
+闭环海军蓝页（有回路才用）。左：描边圆环 + N/E/S/W 四个方块节点（起点亮蓝）带编号、环心 Inter 步数；右：四行「编号 / 步骤名」+ 一句回到起点。步骤名 ≤5 字。
+
+```html
+<section class="slide is-dark" data-layout="consulting/cycle" data-role="cycle">
+  <p class="cs-trk cs-tracker">工作流</p>
+  <h2 class="cs-semi cs-title" data-anim="rise">每次改动，都绕这一圈</h2>
+  <div class="cs-hair cs-head-rule" data-shape="rect"></div>
+  <p class="cs-semi cs-exhibit">图表 9 · 每次改动的回路</p>
+  <div class="csy-ring" data-shape="ellipse" data-anim="fade"></div>
+  <div class="cs-blue csy-node csy-n1" data-shape="rect" data-anim="ring"></div>
+  <div class="cs-navy2 csy-node csy-n2" data-shape="rect" data-anim="ring"></div>
+  <div class="cs-navy2 csy-node csy-n3" data-shape="rect" data-anim="ring"></div>
+  <div class="cs-navy2 csy-node csy-n4" data-shape="rect" data-anim="ring"></div>
+  <p class="cs-num cs-on csy-k" style="left: 316px; top: 254px;">01</p>
+  <p class="cs-num csy-k" style="left: 476px; top: 414px;">02</p>
+  <p class="cs-num csy-k" style="left: 316px; top: 574px;">03</p>
+  <p class="cs-num csy-k" style="left: 156px; top: 414px;">04</p>
+  <p class="cs-num csy-core" data-anim="count">4</p>
+  <p class="cs-note csy-core-l">个步骤，一圈</p>
+  <p class="cs-trk csy-n" style="top: 268px;">01</p>
+  <h3 class="cs-semi csy-h" style="top: 256px;" data-anim="rise">改版式</h3>
+  <div class="cs-hair csy-hair" data-shape="rect" style="top: 320px;"></div>
+  <p class="cs-trk csy-n" style="top: 348px;">02</p>
+  <h3 class="cs-semi csy-h" style="top: 336px;" data-anim="rise">过校验</h3>
+  <div class="cs-hair csy-hair" data-shape="rect" style="top: 400px;"></div>
+  <p class="cs-trk csy-n" style="top: 428px;">03</p>
+  <h3 class="cs-semi csy-h" style="top: 416px;" data-anim="rise">渲染比对</h3>
+  <div class="cs-hair csy-hair" data-shape="rect" style="top: 480px;"></div>
+  <p class="cs-trk csy-n" style="top: 508px;">04</p>
+  <h3 class="cs-semi csy-h" style="top: 496px;" data-anim="rise">记基线</h3>
+  <div class="cs-hair csy-hair" data-shape="rect" style="top: 560px;"></div>
+  <p class="cs-note csy-back">→ 回到改版式</p>
+  <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
+  <p class="cs-source">来源：scripts/baseline.mjs（基线前先过 check-style 与 validate）</p>
+  <p class="cs-pageno">15</p>
+</section>
+```
+
+## consulting/system · system
+
+层级嵌套。左：三层同心圆（外浅蓝、中海军蓝灰、内亮蓝），圆上写层名；右：三行「追踪标签层级 / 名称 / 一行说明」。
+
+```html
+<section class="slide" data-layout="consulting/system" data-role="system">
+  <p class="cs-trk cs-tracker">工作流</p>
+  <h2 class="cs-semi cs-title" data-anim="rise">三层样式，各管一层</h2>
+  <div class="cs-hair cs-head-rule" data-shape="rect"></div>
+  <p class="cs-semi cs-exhibit">图表 10 · 样式的三层</p>
+  <div class="cs-tint csz-d1" data-shape="ellipse" data-anim="scale"></div>
+  <div class="cs-navy3 csz-d2" data-shape="ellipse" data-anim="scale"></div>
+  <div class="cs-blue csz-d3" data-shape="ellipse" data-anim="scale"></div>
+  <p class="cs-semi csz-lab csz-l1">base.css</p>
+  <p class="cs-semi cs-on csz-lab csz-l2">style.css</p>
+  <p class="cs-semi cs-on csz-lab csz-l3">brand.css</p>
+  <p class="cs-trk csz-tag" style="top: 264px;" data-merge="o" data-anim="rise">外层</p>
+  <h3 class="cs-semi csz-h" style="top: 292px;" data-merge="o" data-anim="rise">base.css</h3>
+  <p class="cs-body csz-p" style="top: 330px;" data-merge="o" data-anim="rise">画布、元素契约、形状原语</p>
+  <div class="cs-hair csz-hair" data-shape="rect" style="top: 368px;"></div>
+  <p class="cs-trk csz-tag" style="top: 376px;" data-merge="m" data-anim="rise">中层</p>
+  <h3 class="cs-semi csz-h" style="top: 404px;" data-merge="m" data-anim="rise">style.css</h3>
+  <p class="cs-body csz-p" style="top: 442px;" data-merge="m" data-anim="rise">风格的 token、字体与全部版式</p>
+  <div class="cs-hair csz-hair" data-shape="rect" style="top: 480px;"></div>
+  <p class="cs-trk csz-tag" style="top: 488px;" data-merge="i" data-anim="rise">内层</p>
+  <h3 class="cs-semi csz-h" style="top: 516px;" data-merge="i" data-anim="rise">brand.css</h3>
+  <p class="cs-body csz-p" style="top: 554px;" data-merge="i" data-anim="rise">只改 token 的品牌色</p>
+  <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
+  <p class="cs-source">来源：风格库 spec §3.1</p>
+  <p class="cs-pageno">16</p>
+</section>
+```
+
+## consulting/closing · closing
+
+结尾海军蓝页，标题块与封面同位：追踪标签「下一步」→ 浅蓝短条 → 两行标题 → 命令框（Inter）→ 一句说明 → 细线 + 标签与日期。
+
+```html
+<section class="slide is-dark" data-layout="consulting/closing" data-role="closing">
+  <p class="cs-trk cse-trk">下一步</p>
+  <div class="cs-blue cse-bar" data-shape="rect" data-anim="draw"></div>
+  <h2 class="cs-semi cse-title cse-t1" data-merge="title" data-anim="rise">挑一种风格，</h2>
+  <h2 class="cs-semi cse-title cse-t2" data-merge="title" data-anim="rise">开始下一份。</h2>
+  <p class="cs-trk cse-label">新建 deck</p>
+  <div class="cs-navy2 cse-box" data-shape="rect"></div>
+  <p class="cse-cmd">node scripts/new-deck.mjs my-deck --style consulting</p>
+  <p class="cse-p">风格画廊：docs/styles/index.html</p>
+  <div class="cs-hair cse-hair" data-shape="rect"></div>
+  <p class="cse-meta">ZIFEIYU PPT SKILL · 风格 H 咨询 · 白皮书</p>
+  <p class="cse-date">2026 年 10 月</p>
 </section>
 ```

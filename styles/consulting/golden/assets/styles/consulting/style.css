@@ -229,3 +229,61 @@
 .csd-v { left: 296px; width: 560px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
 .csd-s { left: 880px; width: 320px; }
 .csd-th { top: 248px; font-size: 16px; line-height: 1.5; color: var(--on-accent); }
+
+/* ---------- consulting/timeline ---------- */
+/* five columns, pitch 230; the newest milestone carries the blue */
+.csl-date { top: 328px; width: 206px; font-size: 48px; letter-spacing: 0; }
+.csl-line { left: 64px; top: 415px; width: 1152px; height: 2px; }
+.csl-node { top: 410px; width: 12px; height: 12px; }
+.csl-h { top: 440px; width: 206px; font-size: 22px; line-height: 1.4; }
+.csl-p { top: 480px; width: 206px; }
+.csl-c1 { left: 64px; }
+.csl-c2 { left: 294px; }
+.csl-c3 { left: 524px; }
+.csl-c4 { left: 754px; }
+.csl-c5 { left: 984px; }
+
+/* ---------- consulting/cycle ---------- */
+/* ring centre (336, 424), radius 160; square nodes on N / E / S / W, the start node blue */
+.csy-ring { left: 176px; top: 264px; width: 320px; height: 320px; border: 2px solid var(--navy-3); }
+.csy-node { width: 40px; height: 40px; }
+.csy-n1 { left: 316px; top: 244px; }
+.csy-n2 { left: 476px; top: 404px; }
+.csy-n3 { left: 316px; top: 564px; }
+.csy-n4 { left: 156px; top: 404px; }
+.csy-k { width: 40px; font-size: 16px; line-height: 20px; text-align: center; }
+.csy-core { left: 256px; top: 380px; width: 160px; font-size: 72px; text-align: center; }
+.csy-core-l { left: 256px; top: 460px; width: 160px; text-align: center; }
+.csy-n { left: 640px; width: 48px; }
+.csy-h { left: 704px; width: 512px; font-size: 28px; line-height: 1.4; }
+.csy-hair { left: 640px; width: 576px; }
+.csy-back { left: 704px; top: 576px; width: 512px; }
+
+/* ---------- consulting/system ---------- */
+/* three concentric discs centred (240, 432): base outer (tint), style middle (navy), brand inner (the blue) */
+.csz-d1 { left: 64px; top: 256px; width: 352px; height: 352px; }
+.csz-d2 { left: 128px; top: 320px; width: 224px; height: 224px; }
+.csz-d3 { left: 184px; top: 376px; width: 112px; height: 112px; }
+.csz-lab { font-size: 16px; line-height: 1.5; text-align: center; }
+.csz-l1 { left: 140px; top: 276px; width: 200px; }
+.csz-l2 { left: 140px; top: 336px; width: 200px; }
+.csz-l3 { left: 184px; top: 420px; width: 112px; }
+.csz-tag { left: 512px; width: 704px; }
+.csz-h { left: 512px; width: 704px; font-size: 24px; line-height: 1.4; }
+.csz-p { left: 512px; width: 704px; }
+.csz-hair { left: 512px; width: 704px; }
+
+/* ---------- consulting/closing ---------- */
+/* navy page; title block at the cover's positions so the deck closes where it opened */
+.cse-trk { left: 64px; top: 64px; width: 600px; }
+.cse-bar { left: 64px; top: 196px; width: 64px; height: 6px; }
+.cse-title { left: 64px; width: 1152px; font-size: 56px; line-height: 1.25; }
+.cse-t1 { top: 228px; }
+.cse-t2 { top: 298px; }
+.cse-label { left: 64px; top: 412px; width: 600px; }
+.cse-box { left: 64px; top: 444px; width: 736px; height: 64px; }
+.cse-cmd { left: 88px; top: 461px; width: 696px; font-family: var(--font-num); font-size: 20px; line-height: 1.5; color: var(--text-1); }
+.cse-p { left: 64px; top: 532px; width: 736px; font-size: 18px; line-height: 1.5; color: var(--text-2); }
+.cse-hair { left: 64px; top: 600px; width: 1152px; }
+.cse-meta { left: 64px; top: 620px; width: 600px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.cse-date { left: 916px; top: 620px; width: 300px; font-size: 16px; line-height: 1.5; text-align: right; color: var(--text-2); }

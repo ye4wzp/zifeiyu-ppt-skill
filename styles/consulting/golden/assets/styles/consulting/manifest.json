@@ -30,6 +30,10 @@
     "consulting/kpi": { "role": "kpi" },
     "consulting/bars": { "role": "bars" },
     "consulting/table": { "role": "table" },
-    "consulting/process": { "role": "process" }
+    "consulting/process": { "role": "process" },
+    "consulting/timeline": { "role": "timeline" },
+    "consulting/cycle": { "role": "cycle" },
+    "consulting/system": { "role": "system" },
+    "consulting/closing": { "role": "closing" }
   }
 }
