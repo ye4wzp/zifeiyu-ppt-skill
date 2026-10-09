@@ -125,6 +125,8 @@ for (const s of slides) {
   if (nativeCharts && style.mode === 'style' && s.role === 'bars') {
     const bars = s.els.filter((e) => e.kind === 'shape' && e.value != null);
     const replaced = s.els.filter((e) => e.kind === 'text' && e.chart);
+    const catEl = replaced.find((e) => bars.some((b) => b.label === e.text));
+    const valEl = replaced.find((e) => bars.some((b) => String(b.value) === e.text));
     if (bars.length && bars.every((b) => Number.isFinite(b.value))) {
       chartEls = new Set([...bars, ...replaced]);
       const hull = [...chartEls].map((e) => e.bbox);
@@ -133,7 +135,8 @@ for (const s of slides) {
       slide.addChart(pres.ChartType.bar, [{ name: 'data', labels: bars.map((b) => b.label || ''), values: bars.map((b) => b.value) }], {
         x: px2in(x), y: px2in(y), w: px2in(r - x), h: px2in(btm - y),
         barDir: 'bar',
-        chartColors: [bars[0].fill.hex],
+        chartColors: bars.map((b) => b.fill.hex),
+        ...(catEl && { catAxisLabelColor: catEl.color.hex }), ...(valEl && { dataLabelColor: valEl.color.hex }),
         valAxisHidden: true,
         catAxisOrientation: 'maxMin',
         valGridLine: { style: 'none' }, catGridLine: { style: 'none' },

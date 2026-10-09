@@ -58,3 +58,25 @@ test('warns when a family has no fonts.office mapping', () => {
   const log = execFileSync('node', ['scripts/export-pptx.mjs', mono, '--out', resolve(mono, 'deck.pptx')], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
   assert.match(log, /no fonts\.office mapping.*JetBrains Mono/);
 });
+
+test('native bar chart keeps per-bar and label colours', async () => {
+  const d = makeDeck(`
+<section class="slide" data-layout="fixture/card" data-role="bars">
+  <div data-shape="rect" data-value="4" data-label="甲" style="position:absolute;left:424px;top:200px;width:300px;height:40px;background:#f5f5f7"></div>
+  <p data-chart style="position:absolute;left:80px;top:200px;margin:0;font-size:20px;color:#f5f5f7">甲</p>
+  <p data-chart style="position:absolute;left:740px;top:200px;margin:0;font-size:20px;color:#f5f5f7">4</p>
+  <div data-shape="rect" data-value="3" data-label="乙" style="position:absolute;left:424px;top:280px;width:225px;height:40px;background:#ffc21a"></div>
+  <p data-chart style="position:absolute;left:80px;top:280px;margin:0;font-size:20px;color:#f5f5f7">乙</p>
+  <p data-chart style="position:absolute;left:665px;top:280px;margin:0;font-size:20px;color:#f5f5f7">3</p>
+</section>`, { extraHead: `<style>.slide { background: #0a0a0b; }</style>` });
+  const out = resolve(d, 'deck.pptx');
+  execFileSync('node', ['scripts/export-pptx.mjs', d, '--out', out, '--native-charts']);
+  const xml = await (await JSZip.loadAsync(readFileSync(out))).file('ppt/charts/chart1.xml').async('string');
+  const dpts = xml.match(/<c:dPt>[\s\S]*?<\/c:dPt>/g) || [];
+  assert.match(dpts.join(''), /<a:srgbClr val="F5F5F7"\/>/i);
+  assert.match(dpts.join(''), /<a:srgbClr val="FFC21A"\/>/i);
+  const cat = xml.match(/<c:catAx>[\s\S]*?<\/c:catAx>/)[0];
+  const dl = xml.match(/<c:dLbls>[\s\S]*?<\/c:dLbls>/)[0];
+  assert.match(cat, /<a:srgbClr val="F5F5F7"\/>/i);
+  assert.match(dl, /<a:srgbClr val="F5F5F7"\/>/i);
+});
