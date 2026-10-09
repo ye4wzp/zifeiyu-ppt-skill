@@ -32,9 +32,11 @@
     "photobook/kpi": { "role": "kpi" },
     "photobook/bars": { "role": "bars" },
     "photobook/table": { "role": "table" },
+    "photobook/video": { "role": "video" },
     "photobook/process": { "role": "process" },
     "photobook/timeline": { "role": "timeline" },
     "photobook/gallery": { "role": "gallery" },
+    "photobook/audio": { "role": "audio" },
     "photobook/closing": { "role": "closing" }
   }
 }

@@ -241,3 +241,21 @@
 .pbe-cmd { left: 0; top: 504px; width: 1280px; font-family: var(--font-mono); font-size: 18px; line-height: 1.6; text-align: center; color: var(--text-1); }
 .pbe-p { left: 0; top: 548px; width: 1280px; text-align: center; }
 .pbe-meta { left: 0; top: 670px; width: 1280px; text-align: center; }
+
+/* ---------- photobook/video ---------- */
+.pbw-video { left: 64px; top: 148px; width: 864px; height: 486px; object-fit: cover; background: #000; }
+.pbw-p { left: 960px; top: 148px; width: 256px; }
+.pbw-hint { left: 960px; top: 248px; width: 256px; }
+
+/* ---------- photobook/audio ---------- */
+.pbo-img { left: 64px; top: 148px; width: 448px; height: 448px; }
+.pbo-p { left: 576px; top: 264px; width: 640px; }
+.pbo-hair { left: 576px; top: 360px; width: 640px; }
+.pbo-play { left: 576px; top: 400px; width: 72px; height: 72px; }
+.pbo-glyph { left: 576px; top: 418px; width: 72px; text-align: center; font-size: 24px; line-height: 1.5; color: var(--on-accent); pointer-events: none; }
+.pbo-audio { left: 576px; top: 400px; width: 72px; height: 72px; opacity: 0; pointer-events: none; }
+.pbo-track { left: 680px; top: 404px; width: 536px; font-size: 24px; line-height: 1.3; }
+.pbo-meta { left: 680px; top: 444px; width: 536px; }
+.pbo-bar { left: 680px; top: 484px; width: 536px; height: 2px; background: var(--hairline); }
+.pbo-progress { left: 680px; top: 484px; width: 0; height: 2px; background: var(--text-1); }
+.pbo-time { left: 680px; top: 500px; width: 536px; }

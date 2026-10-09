@@ -344,6 +344,22 @@
 </section>
 ```
 
+## photobook/video · video
+
+视频暗房页。一行标题 + 斜体副题 → 左 864×486 视频（默认停在封面帧，点击播放）；右栏说明与等宽时长。`poster` 与 `aria-label` 必填，时长写真实值。
+
+```html
+<section class="slide is-dark" data-layout="photobook/video" data-role="video">
+  <h2 class="pb-serif pb-title" data-anim="rise">视频也能放进来</h2>
+  <p class="pb-it pb-voice" data-anim="rise">Click to play.</p>
+  <video class="pbw-video" src="assets/media/13-film.mp4" poster="assets/media/13-film-poster.jpg" aria-label="示意视频：窗光落在暗墙上，镜头缓慢推近" preload="none"></video>
+  <p class="pb-body pbw-p" data-anim="rise">演示时点击画面播放；渲染图、PDF 与 PPTX 的静止画面锁定在封面帧。</p>
+  <p class="pb-mono pbw-hint">0:08 · MP4</p>
+  <p class="pb-mono pb-foot">示意视频，由抽象图生成</p>
+  <p class="pb-mono pb-pageno">13 / 18</p>
+</section>
+```
+
 ## photobook/process · process
 
 流程页。一行标题 + 右侧斜体副题 → 4 张 276×300 照片对应 4 步 → 每张下面斜体「No. N」+ 宋体步骤名 + 一段说明（≤26 字）→ 页脚出处与页码。
@@ -421,6 +437,30 @@
   <img class="pb-photo pbg-w3" src="assets/img/16-gallery-3.jpg" alt="示意图：冷色墙面上的窗光">
   <p class="pb-mono pb-foot">Source — scripts/gen-art.mjs · 固定种子，输出可复现 · 三幅均为示意图</p>
   <p class="pb-mono pb-pageno">16 / 18</p>
+</section>
+```
+
+## photobook/audio · audio
+
+音频页。一行标题 + 斜体副题 → 左 448 方图；右栏说明 → 细线 → 播放器：墨色圆点（`data-media="toggle"`，上面的 ▶ 不接收点击）、宋体音轨名、等宽元信息、进度线与时间。`<audio>` 必带 `controls` 与 `aria-label`，时长写真实值。
+
+```html
+<section class="slide" data-layout="photobook/audio" data-role="audio">
+  <h2 class="pb-serif pb-title" data-anim="rise">边听边翻页</h2>
+  <p class="pb-it pb-voice" data-anim="rise">Listen while you flip.</p>
+  <img class="pb-photo pbo-img" src="assets/img/17-audio.jpg" alt="示意图：冷色色场">
+  <p class="pb-body pbo-p" data-anim="rise">音频放在 deck 目录里，演示时点圆点播放；导出 PPTX 后仍能在演示软件里播放。</p>
+  <div class="pb-hair pbo-hair" data-shape="rect"></div>
+  <div class="pb-ink pbo-play" data-shape="ellipse" data-media="toggle"></div>
+  <p class="pbo-glyph">▶</p>
+  <audio class="pbo-audio" src="assets/media/17-tone.mp3" aria-label="示意音频：一段 8 秒提示音" controls preload="none"></audio>
+  <h3 class="pb-serif pbo-track">示意音频 · 提示音</h3>
+  <p class="pb-mono pbo-meta">0:08 · MP3 · 示意素材</p>
+  <div class="pbo-bar" data-shape="rect" data-media="track"></div>
+  <div class="pbo-progress" data-shape="rect" data-media="progress"></div>
+  <p class="pb-mono pbo-time" data-media="clock">0:00 / 0:08</p>
+  <p class="pb-mono pb-foot">Source — references/pptx-export.md「媒体随行」 · 图为示意图</p>
+  <p class="pb-mono pb-pageno">17 / 18</p>
 </section>
 ```
 
