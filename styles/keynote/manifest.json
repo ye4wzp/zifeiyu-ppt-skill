@@ -19,6 +19,9 @@
   },
   "layouts": {
     "keynote/cover": { "role": "cover" },
+    "keynote/agenda": { "role": "agenda" },
+    "keynote/statement": { "role": "statement" },
+    "keynote/section": { "role": "section" },
     "keynote/kpi": { "role": "kpi" },
     "keynote/process": { "role": "process" }
   }

@@ -36,6 +36,17 @@
   --font-num: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
 
+/* yellow page: statement — the page itself is the one accent */
+.slide.is-accent {
+  --bg: #ffc21a;
+  --surface: #f0b400;
+  --text-1: #0a0a0b;
+  --text-2: #4a3a00;
+  --accent: #0a0a0b;
+  --on-accent: #ffc21a;
+  --hairline: #e0a800;
+}
+
 /* ---------- vocabulary ---------- */
 .kn-semi { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; color: var(--text-1); }
 .kn-num { font-family: var(--font-num); font-weight: 600; line-height: 1; letter-spacing: -0.04em; color: var(--text-1); }
@@ -45,6 +56,9 @@
 .kn-note { font-size: 16px; line-height: 1.6; color: var(--text-2); }
 .kn-ac { color: var(--accent); }
 .kn-grey { color: var(--text-2); }
+.kn-on { color: var(--on-accent); }
+.kn-fill { background: var(--text-1); }
+.kn-acbg { background: var(--accent); }
 .kn-on2 { color: var(--on-image-2); }
 .kn-card { background: var(--surface); border-radius: 24px; }
 .kn-scrim { background: rgba(10, 10, 11, 0.58); border-radius: 24px; }
@@ -56,6 +70,10 @@
 /* foot: grey source left, page number right */
 .kn-source { left: 64px; top: 672px; width: 800px; }
 .kn-pageno { left: 1016px; top: 672px; width: 200px; text-align: right; }
+/* shared centred head for content pages; caption on full-bleed photo pages */
+.kn-title { left: 0; top: 72px; width: 1280px; font-size: 56px; line-height: 1.2; text-align: center; }
+.kn-sub { left: 0; top: 156px; width: 1280px; font-size: 22px; line-height: 1.6; text-align: center; color: var(--text-2); }
+.kn-capl { left: 80px; top: 672px; width: 800px; }
 
 /* ---------- keynote/cover ---------- */
 .knc-img { left: 0; top: 0; width: 1280px; height: 720px; }
@@ -80,8 +98,6 @@
 
 /* ---------- keynote/process ---------- */
 /* four dark cards; the last step carries the photo and the page's one accent */
-.knp-title { left: 0; top: 72px; width: 1280px; font-size: 56px; line-height: 1.2; text-align: center; }
-.knp-sub { left: 0; top: 156px; width: 1280px; font-size: 22px; text-align: center; }
 .knp-card { top: 236px; width: 276px; height: 388px; }
 .knp-num { top: 268px; width: 212px; font-size: 24px; }
 .knp-name { top: 480px; width: 212px; font-size: 38px; line-height: 1.2; }
@@ -94,3 +110,24 @@
 .knp-c2 { left: 388px; }
 .knp-c3 { left: 680px; }
 .knp-c4 { left: 972px; }
+
+/* ---------- keynote/agenda ---------- */
+/* four rows of 92px from 236 inside an 880px measure, hairline under each */
+.kna-num { left: 200px; width: 120px; font-size: 48px; }
+.kna-h { left: 340px; width: 340px; font-size: 36px; line-height: 1.3; }
+.kna-p { left: 700px; width: 380px; font-size: 20px; line-height: 1.6; color: var(--text-2); }
+.kna-hair { left: 200px; width: 880px; }
+
+/* ---------- keynote/statement ---------- */
+.knq-line { left: 0; width: 1280px; font-size: 72px; line-height: 1.2; text-align: center; }
+.knq-l1 { top: 252px; }
+.knq-l2 { top: 338px; }
+.knq-by { left: 0; top: 470px; width: 1280px; font-size: 20px; line-height: 1.5; text-align: center; color: var(--text-2); }
+
+/* ---------- keynote/section ---------- */
+/* the cover's fade; a yellow chapter number, the name and a Latin line bottom-left */
+.knx-img { left: 0; top: 0; width: 1280px; height: 720px; }
+.knx-fade { left: 0; top: 0; width: 1280px; height: 720px; }
+.knx-num { left: 70px; top: 336px; width: 400px; font-size: 160px; }
+.knx-title { left: 80px; top: 512px; width: 1000px; font-size: 64px; line-height: 1.2; }
+.knx-sub { left: 80px; top: 604px; width: 1000px; font-size: 22px; line-height: 1.5; }
