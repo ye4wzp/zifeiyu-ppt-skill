@@ -70,7 +70,7 @@ ppt-skill/
 │   └── checklist.md             # P0–P3 分级质检清单
 ├── assets/
 │   ├── base.css                 # 所有风格共用底座：默认 token、slide 外壳、元素契约、段内强调、形状原语、运行时 chrome
-│   ├── legacy/                  # 风格库之前的设计层：L01–L24 base.css、themes/、systems/、textures/、seed、class 版 enhance.js
+│   ├── legacy/                  # 风格库之前的设计层：L01–L24 base.css、themes/、textures/、seed、class 版 enhance.js（systems/ 已随 editorial、swiss 退役）
 │   ├── fonts-src/               # 完整字体源（思源黑 VF/思源宋/JetBrains Mono，gitignore，fetch-fonts 拉取）
 │   ├── runtime.js               # 演示导航 + 深链 #/N + 演讲者控制台（BroadcastChannel 双窗同步）
 │   └── enhance.js               # Web 档语义动画层：data-anim 配方 + data-media 钩子（?flat=1 与导出通道自动跳过）

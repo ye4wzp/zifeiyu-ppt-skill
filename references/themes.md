@@ -7,13 +7,13 @@
 ## 两级体系
 
 - **主题**（`themes/*.css`）：只覆写颜色 token，设计语言不变。
-- **设计系统**（`systems/*.css`）：覆写颜色 + 字体 token 及排印细节（字重/字距），整套设计语言切换；禁止触碰几何。24 个版式对所有系统通用。
+- **设计系统**（`systems/*.css`）：已全部退役（editorial → 风格库 A 杂志，swiss → 风格库 B 瑞士）；旧 deck 自带的副本仍能通过校验。
 
 display/数字/mono 槽位使用 deck 内子集 webfont（思源黑 VF、思源宋、JetBrains Mono），mac/Windows/Linux 渲染一致；正文槽位保持系统字体（保证 HTML↔PPTX 段落换行一致）。子集缺失时按 token 中的系统字体栈优雅回退。
 
 ## 设计系统 03 ·「瑞士国际」swiss
 
-`systems/swiss.css` — 高级灰白 × 单一克莱因蓝锚点 × 巨字 ExtraLight（越大越细，禁粗）× 几何点阵 × 方块刻度。适用：数据汇报、产品发布、技术分享——数字能自己说话的内容。构成语法见 `layouts.md` §GRID（单焦点/三质互斥/色彩闭环）。许可换色对（全 deck 仍单色）：柠檬黄 #ffd500（配黑字）· 柠檬绿 #c5e803（配黑字）· 安全橙 #ff6b35（配白字）。PPTX 导出映射同现代系统（思源黑 → --cjk-font）。
+已退役，由风格库 B 瑞士（`styles/swiss/`）取代。
 
 ## 设计系统 02 ·「墨韵」editorial
 

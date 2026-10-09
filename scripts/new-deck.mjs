@@ -1,5 +1,5 @@
 // Usage: node scripts/new-deck.mjs <deck-dir> --style <id>
-//        node scripts/new-deck.mjs <deck-dir> --theme paper|graphite|forest|swiss   (legacy)
+//        node scripts/new-deck.mjs <deck-dir> --theme paper|graphite|forest   (legacy)
 //        node scripts/new-deck.mjs <deck-dir> --refresh
 // Scaffolds a self-contained deck: seed + shared runtime + the chosen style
 // package (style.css, manifest.json and the asset dirs it lists). --refresh
@@ -43,7 +43,7 @@ const copyStyle = (id) => {
 };
 const copyLegacy = () => {
   copyRuntime(legacy);
-  for (const d of ['themes', 'systems', 'textures']) cpSync(join(legacy, d), join(deck, 'assets', d), { recursive: true });
+  for (const d of ['themes', 'textures']) cpSync(join(legacy, d), join(deck, 'assets', d), { recursive: true });
 };
 
 if (args.includes('--refresh')) {
@@ -84,10 +84,9 @@ if (id) {
   console.log(`style: ${id}`);
   console.log(`next: replace <title>, then copy skeletons from styles/${id}/layouts.md into <!-- SLIDES_HERE -->`);
 } else {
-  // legacy: design systems and token themes share one flag
-  const themeHref = existsSync(join(legacy, `systems/${theme}.css`)) ? `assets/systems/${theme}.css` : `assets/themes/${theme}.css`;
+  const themeHref = `assets/themes/${theme}.css`;
   if (!existsSync(join(legacy, themeHref.slice('assets/'.length)))) {
-    console.error(`unknown theme "${theme}": no assets/legacy/themes/${theme}.css or assets/legacy/systems/${theme}.css`);
+    console.error(`unknown theme "${theme}": no assets/legacy/themes/${theme}.css`);
     process.exit(2);
   }
   copyLegacy();
