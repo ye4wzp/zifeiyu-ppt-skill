@@ -26,7 +26,10 @@
     "keynote/compare": { "role": "compare" },
     "keynote/image-text": { "role": "image-text" },
     "keynote/image": { "role": "image" },
+    "keynote/points": { "role": "points" },
     "keynote/kpi": { "role": "kpi" },
+    "keynote/bars": { "role": "bars" },
+    "keynote/table": { "role": "table" },
     "keynote/process": { "role": "process" }
   }
 }

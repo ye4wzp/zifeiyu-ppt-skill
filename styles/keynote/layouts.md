@@ -196,6 +196,31 @@
 </section>
 ```
 
+## keynote/points · points
+
+三点并列。共用页头 → 三列（left 64 / 448 / 832，列宽 352）：352×176 圆角照片 → Inter 编号 + 粗体小标题（≤8 字）→ 一句说明（≤30 字）；第三个编号是全页唯一的暖黄。
+
+```html
+<section class="slide" data-layout="keynote/points" data-role="points">
+  <h2 class="kn-semi kn-title" data-anim="rise">三件事，件件可验证。</h2>
+  <p class="kn-sub" data-anim="rise">Three promises, all checkable.</p>
+  <img class="kn-photo kn-card knt-img knt-c1" src="assets/img/09-points-1.jpg" alt="示意图：暗色远山与低悬的太阳">
+  <img class="kn-photo kn-card knt-img knt-c2" src="assets/img/09-points-2.jpg" alt="示意图：暗色立板与一块暖黄">
+  <img class="kn-photo kn-card knt-img knt-c3" src="assets/img/09-points-3.jpg" alt="示意图：暗墙上的一束窗光">
+  <p class="kn-num kn-grey knt-num knt-c1" data-anim="rise">01</p>
+  <h3 class="kn-semi knt-h knt-h1" data-anim="rise">浏览器里演示</h3>
+  <p class="kn-body knt-p knt-c1" data-anim="rise">方向键翻页，F 全屏，S 打开演讲者控制台，讲稿只给自己看。</p>
+  <p class="kn-num kn-grey knt-num knt-c2" data-anim="rise">02</p>
+  <h3 class="kn-semi knt-h knt-h2" data-anim="rise">可编辑的 PPTX</h3>
+  <p class="kn-body knt-p knt-c2" data-anim="rise">文字是原生文本框，形状是原生形状，交给同事也能接着改。</p>
+  <p class="kn-num kn-ac knt-num knt-c3" data-anim="rise">03</p>
+  <h3 class="kn-semi knt-h knt-h3" data-anim="rise">机器先把关</h3>
+  <p class="kn-body knt-p knt-c3" data-anim="rise">十六条规则查版式、字号、出处与导出一致性，错误清零才交付。</p>
+  <p class="kn-note kn-source">来源：SKILL.md 第 6、8 步 · 图为示意图</p>
+  <p class="kn-note kn-pageno">9</p>
+</section>
+```
+
 ## keynote/kpi · kpi
 
 数据页，一个数撑满一页。暖黄小标题居中 → 288px 巨大数字 → 粗体标签 + 一句说明 → 短细线 → 并排两个辅助数字与标签 → 页脚出处（`data-source`）与页码。三个数都必须真实；巨大数字 ≤3 位。
@@ -213,6 +238,84 @@
   <p class="kn-note knk-sub knk-c2">导出格式</p>
   <p class="kn-note kn-source" data-source>来源：scripts/validate.mjs · scripts/lib/roles.mjs</p>
   <p class="kn-note kn-pageno">10</p>
+</section>
+```
+
+## keynote/bars · bars
+
+条形对比（3–6 行，行距 64px）。共用页头 → 每行「粗体标签（右对齐，≤6 字）/ 白色圆角条 / Inter 数值 / 灰色规则号」；条从 left 424 起，条长 = 数值 × 单位长，单位长 = 480 ÷ 最大值（金样最大值 4 → 120px）；数值 left = 424 + 条长 + 16，注释 left = 数值 left + 48。要强调的一条用暖黄（`kn-acbg`）。来源写 `data-source`；`--native-charts` 时整组换成 PowerPoint 原生条形图。
+
+```html
+<section class="slide" data-layout="keynote/bars" data-role="bars">
+  <h2 class="kn-semi kn-title" data-anim="rise">十六条规则，各管一摊。</h2>
+  <p class="kn-sub" data-anim="rise">Sixteen rules, six concerns.</p>
+  <p class="kn-semi knb-label" style="top: 240px;" data-chart>排版与几何</p>
+  <div class="kn-fill knb-bar" data-shape="rect" data-value="4" data-label="排版与几何" data-anim="grow-x" style="top: 240px; width: 480px;"></div>
+  <p class="kn-num knb-val" style="top: 240px; left: 920px;" data-chart>4</p>
+  <p class="knb-ids" style="top: 242px; left: 968px;" data-chart>R3 · R4 · R7 · R9</p>
+  <p class="kn-semi knb-label" style="top: 304px;" data-chart>版式与样式</p>
+  <div class="kn-fill knb-bar" data-shape="rect" data-value="4" data-label="版式与样式" data-anim="grow-x" style="top: 304px; width: 480px;"></div>
+  <p class="kn-num knb-val" style="top: 304px; left: 920px;" data-chart>4</p>
+  <p class="knb-ids" style="top: 306px; left: 968px;" data-chart>R1 · R2 · R6 · R12</p>
+  <p class="kn-semi knb-label" style="top: 368px;" data-chart>内容与数据</p>
+  <div class="kn-fill knb-bar" data-shape="rect" data-value="3" data-label="内容与数据" data-anim="grow-x" style="top: 368px; width: 360px;"></div>
+  <p class="kn-num knb-val" style="top: 368px; left: 800px;" data-chart>3</p>
+  <p class="knb-ids" style="top: 370px; left: 848px;" data-chart>R5 · R8 · R14</p>
+  <p class="kn-semi knb-label" style="top: 432px;" data-chart>可访问与媒体</p>
+  <div class="kn-fill knb-bar" data-shape="rect" data-value="3" data-label="可访问与媒体" data-anim="grow-x" style="top: 432px; width: 360px;"></div>
+  <p class="kn-num knb-val" style="top: 432px; left: 800px;" data-chart>3</p>
+  <p class="knb-ids" style="top: 434px; left: 848px;" data-chart>R10 · R11 · R13</p>
+  <p class="kn-semi knb-label" style="top: 496px;" data-chart>节奏</p>
+  <div class="kn-fill knb-bar" data-shape="rect" data-value="1" data-label="节奏" data-anim="grow-x" style="top: 496px; width: 120px;"></div>
+  <p class="kn-num knb-val" style="top: 496px; left: 560px;" data-chart>1</p>
+  <p class="knb-ids" style="top: 498px; left: 608px;" data-chart>R15</p>
+  <p class="kn-semi knb-label" style="top: 560px;" data-chart>导出一致</p>
+  <div class="kn-acbg knb-bar" data-shape="rect" data-value="1" data-label="导出一致" data-anim="grow-x" style="top: 560px; width: 120px;"></div>
+  <p class="kn-num knb-val" style="top: 560px; left: 560px;" data-chart>1</p>
+  <p class="knb-ids" style="top: 562px; left: 608px;" data-chart>R16</p>
+  <p class="kn-note kn-source" data-source>来源：scripts/validate.mjs 规则注释（R1–R16），按守护对象分组</p>
+  <p class="kn-note kn-pageno">11</p>
+</section>
+```
+
+## keynote/table · table
+
+规格表（4–6 行，规格 ≤30 字）。共用页头 → 一张 1152×400 深色圆角卡片：灰色表头 项目 / 规格 / 出处 + 细线 → 每行 56px（行 n 顶 = 284 + 56n），行间细线；一处关键词用 `is-accent`。来源写 `data-source`。
+
+```html
+<section class="slide" data-layout="keynote/table" data-role="table">
+  <h2 class="kn-semi kn-title" data-anim="rise">一页纸，看懂规格。</h2>
+  <p class="kn-sub" data-anim="rise">The fine print.</p>
+  <div class="kn-card knd-card" data-shape="rect"></div>
+  <p class="kn-semi knd-head" style="left: 96px;">项目</p>
+  <p class="kn-semi knd-head" style="left: 320px;">规格</p>
+  <p class="kn-semi knd-head" style="left: 912px;">出处</p>
+  <div class="kn-hair knd-hair" data-shape="rect" style="top: 282px;"></div>
+  <p class="kn-semi knd-k" style="top: 300px;">画布</p>
+  <p class="knd-v" style="top: 301px;">1280 × 720 px，导出时 px × 0.75 换算为 pt</p>
+  <p class="knd-s" style="top: 303px;">assets/base.css</p>
+  <div class="kn-hair knd-hair" data-shape="rect" style="top: 340px;"></div>
+  <p class="kn-semi knd-k" style="top: 356px;">字号下限</p>
+  <p class="knd-v" style="top: 357px;">16 px，溢出先删字、再换版式</p>
+  <p class="knd-s" style="top: 359px;">validate.mjs · R4</p>
+  <div class="kn-hair knd-hair" data-shape="rect" style="top: 396px;"></div>
+  <p class="kn-semi knd-k" style="top: 412px;">校验规则</p>
+  <p class="knd-v" style="top: 413px;">R1–R16，<span class="is-accent">错误清零</span>才能交付</p>
+  <p class="knd-s" style="top: 415px;">validate.mjs</p>
+  <div class="kn-hair knd-hair" data-shape="rect" style="top: 452px;"></div>
+  <p class="kn-semi knd-k" style="top: 468px;">导出格式</p>
+  <p class="knd-v" style="top: 469px;">PPTX · PDF · PNG，HTML 是唯一的源</p>
+  <p class="knd-s" style="top: 471px;">SKILL.md</p>
+  <div class="kn-hair knd-hair" data-shape="rect" style="top: 508px;"></div>
+  <p class="kn-semi knd-k" style="top: 524px;">页面角色</p>
+  <p class="knd-v" style="top: 525px;">20 个，其中 12 个核心角色</p>
+  <p class="knd-s" style="top: 527px;">lib/roles.mjs</p>
+  <div class="kn-hair knd-hair" data-shape="rect" style="top: 564px;"></div>
+  <p class="kn-semi knd-k" style="top: 580px;">字体</p>
+  <p class="knd-v" style="top: 581px;">SIL OFL 开源字体，按 deck 用字子集化</p>
+  <p class="knd-s" style="top: 583px;">fetch-fonts.mjs</p>
+  <p class="kn-note kn-source" data-source>来源：表内「出处」列（本仓库文件）</p>
+  <p class="kn-note kn-pageno">12</p>
 </section>
 ```
 

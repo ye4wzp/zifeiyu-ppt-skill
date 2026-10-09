@@ -173,3 +173,32 @@
 .knf-kick { left: 80px; top: 480px; width: 800px; }
 .knf-title { left: 76px; top: 512px; width: 1000px; font-size: 56px; line-height: 1.2; }
 .knf-p { left: 80px; top: 596px; width: 1000px; font-size: 22px; line-height: 1.5; }
+
+/* ---------- keynote/points ---------- */
+/* three columns: a rounded photo, number + heading, one line of text */
+.knt-img { top: 236px; width: 352px; height: 176px; }
+.knt-num { top: 440px; width: 48px; font-size: 32px; }
+.knt-h { top: 434px; width: 296px; font-size: 32px; line-height: 1.3; }
+.knt-p { top: 492px; width: 352px; }
+.knt-c1 { left: 64px; }
+.knt-c2 { left: 448px; }
+.knt-c3 { left: 832px; }
+.knt-h1 { left: 120px; }
+.knt-h2 { left: 504px; }
+.knt-h3 { left: 888px; }
+
+/* ---------- keynote/bars ---------- */
+/* six rows of 64px from 240; bars at 120px per rule, the key bar yellow */
+.knb-label { left: 160px; width: 240px; font-size: 20px; line-height: 1.4; text-align: right; }
+.knb-bar { left: 424px; height: 28px; border-radius: 6px; }
+.knb-val { width: 40px; font-size: 28px; }
+.knb-ids { width: 240px; font-size: 16px; line-height: 1.6; color: var(--text-2); }
+
+/* ---------- keynote/table ---------- */
+/* one dark card; header row, six rows of 56px with hairlines */
+.knd-card { left: 64px; top: 224px; width: 1152px; height: 400px; }
+.knd-head { top: 252px; width: 200px; font-size: 16px; line-height: 1; letter-spacing: 0.12em; color: var(--text-2); }
+.knd-hair { left: 96px; width: 1088px; }
+.knd-k { left: 96px; width: 200px; font-size: 20px; line-height: 1.4; }
+.knd-v { left: 320px; width: 560px; font-size: 18px; line-height: 1.5; color: var(--text-1); }
+.knd-s { left: 912px; width: 272px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
