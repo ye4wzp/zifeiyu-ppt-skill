@@ -205,7 +205,7 @@
   <h2 class="kn-semi kn-title" data-anim="rise">三件事，件件可验证。</h2>
   <p class="kn-sub" data-anim="rise">Three promises, all checkable.</p>
   <img class="kn-photo kn-card knt-img knt-c1" src="assets/img/09-points-1.jpg" alt="示意图：暗色远山与低悬的太阳">
-  <img class="kn-photo kn-card knt-img knt-c2" src="assets/img/09-points-2.jpg" alt="示意图：暗色立板与一块暖黄">
+  <img class="kn-photo kn-card knt-img knt-c2" src="assets/img/09-points-2.jpg" alt="示意图：暗色立板构成的空间">
   <img class="kn-photo kn-card knt-img knt-c3" src="assets/img/09-points-3.jpg" alt="示意图：暗墙上的一束窗光">
   <p class="kn-num kn-grey knt-num knt-c1" data-anim="rise">01</p>
   <h3 class="kn-semi knt-h knt-h1" data-anim="rise">浏览器里演示</h3>
@@ -393,7 +393,7 @@
   <p class="kn-sub" data-anim="rise">Seeded, repeatable, on palette.</p>
   <img class="kn-photo kn-card kng-w1" src="assets/img/16-gallery-1.jpg" alt="示意图：暗色远山与低悬的太阳">
   <img class="kn-photo kn-card kng-w2" src="assets/img/16-gallery-2.jpg" alt="示意图：暗场里的暖色光晕">
-  <img class="kn-photo kn-card kng-w3" src="assets/img/16-gallery-3.jpg" alt="示意图：暗色立板与一块暖黄">
+  <img class="kn-photo kn-card kng-w3" src="assets/img/16-gallery-3.jpg" alt="示意图：暗色立板构成的空间">
   <p class="kn-note kn-source">来源：scripts/gen-art.mjs · 固定种子，输出可复现 · 三幅均为示意图</p>
   <p class="kn-note kn-pageno">16</p>
 </section>
