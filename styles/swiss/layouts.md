@@ -1,6 +1,6 @@
 # 瑞士 · 网格（swiss）版式注册表
 
-> 状态：draft · P1 重做中，已有 10 个版式；其余核心角色未完成前，交付请用其他风格。
+> 状态：draft · P1 重做中，已有 13 个版式；其余核心角色未完成前，交付请用其他风格。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/swiss/golden/`；金样文字来自 `docs/golden-content.md`。
 
@@ -217,6 +217,114 @@
   <p class="sw-lede sw-on swf-p" data-anim="rise">风格决定版面，版面决定一页能放多少字。</p>
   <p class="sw-mono sw-on2 swf-cap">FIG. 03 — 示意图</p>
   <p class="sw-mono sw-pageno">08 / 17</p>
+</section>
+```
+
+## swiss/points · points
+
+三个并列要点（第 0 / 4 / 8 栏起，各宽 368）：顶部粗条（前两条黑、第三条蓝）→ 等宽编号 → 小标题 → 两行说明 → 下方一张图。三张图一个图注写在页脚；说明 ≤28 字；配图不要再带蓝。
+
+```html
+<section class="slide" data-layout="swiss/points" data-role="points">
+  <p class="sw-mono sw-folio">02 — THREE PROMISES</p>
+  <p class="sw-mono sw-pageno">09 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">三件事，件件可验证。</h2>
+  <div class="sw-ink swt-bar swt-c1" data-shape="rect" data-anim="draw"></div>
+  <div class="sw-ink swt-bar swt-c2" data-shape="rect" data-anim="draw"></div>
+  <div class="sw-accent swt-bar swt-c3" data-shape="rect" data-anim="draw"></div>
+  <p class="sw-mono swt-num swt-c1" data-merge="c1" data-anim="rise">01</p>
+  <h3 class="sw-h swt-h swt-c1" data-merge="c1" data-anim="rise">浏览器里演示</h3>
+  <p class="sw-body swt-p swt-c1" data-merge="c1" data-anim="rise">方向键翻页，F 全屏，S 打开演讲者控制台，讲稿只给自己看。</p>
+  <p class="sw-mono swt-num swt-c2" data-merge="c2" data-anim="rise">02</p>
+  <h3 class="sw-h swt-h swt-c2" data-merge="c2" data-anim="rise">可编辑的 PPTX</h3>
+  <p class="sw-body swt-p swt-c2" data-merge="c2" data-anim="rise">文字是原生文本框，形状是原生形状，交给同事也能接着改。</p>
+  <p class="sw-mono swt-num swt-c3" data-merge="c3" data-anim="rise">03</p>
+  <h3 class="sw-h swt-h swt-c3" data-merge="c3" data-anim="rise">机器先把关</h3>
+  <p class="sw-body swt-p swt-c3" data-merge="c3" data-anim="rise">十六条规则查版式、字号、出处与导出一致性，错误清零才交付。</p>
+  <img class="sw-photo swt-img swt-c1" src="assets/img/09-points-1.jpg" alt="示意图：灰白立板">
+  <img class="sw-photo swt-img swt-c2" src="assets/img/09-points-2.jpg" alt="示意图：灰白立板">
+  <img class="sw-photo swt-img swt-c3" src="assets/img/09-points-3.jpg" alt="示意图：灰白立板">
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">FIG. 04 — 三幅均为示意图</p>
+</section>
+```
+
+## swiss/bars · bars
+
+条形对比（3–6 行，行距 64）。条从 260 起，条长 = 数值 × 160px（最大值 4 时满长 640；最大值不同就按 640 ÷ 最大值换算单位长度），数值紧跟条尾 16px，等宽注释再后 64px；只有一根条用 `sw-accent`，其余 `sw-ink`。页脚 `data-source` 必填。
+
+```html
+<section class="slide" data-layout="swiss/bars" data-role="bars">
+  <p class="sw-mono sw-folio">03 — RULES BY CONCERN</p>
+  <p class="sw-mono sw-pageno">11 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">十六条规则，各管一摊。</h2>
+  <h3 class="sw-h swb-label" style="top: 234px;" data-chart>排版与几何</h3>
+  <div class="sw-ink swb-bar" data-shape="rect" data-value="4" data-label="排版与几何" data-anim="grow-x" style="top: 232px; width: 640px;"></div>
+  <p class="sw-num swb-val" style="top: 226px; left: 916px;" data-chart>4</p>
+  <p class="sw-mono swb-ids" style="top: 240px; left: 980px;" data-chart>R3 · R4 · R7 · R9</p>
+  <h3 class="sw-h swb-label" style="top: 298px;" data-chart>版式与样式</h3>
+  <div class="sw-ink swb-bar" data-shape="rect" data-value="4" data-label="版式与样式" data-anim="grow-x" style="top: 296px; width: 640px;"></div>
+  <p class="sw-num swb-val" style="top: 290px; left: 916px;" data-chart>4</p>
+  <p class="sw-mono swb-ids" style="top: 304px; left: 980px;" data-chart>R1 · R2 · R6 · R12</p>
+  <h3 class="sw-h swb-label" style="top: 362px;" data-chart>内容与数据</h3>
+  <div class="sw-ink swb-bar" data-shape="rect" data-value="3" data-label="内容与数据" data-anim="grow-x" style="top: 360px; width: 480px;"></div>
+  <p class="sw-num swb-val" style="top: 354px; left: 756px;" data-chart>3</p>
+  <p class="sw-mono swb-ids" style="top: 368px; left: 820px;" data-chart>R5 · R8 · R14</p>
+  <h3 class="sw-h swb-label" style="top: 426px;" data-chart>可访问与媒体</h3>
+  <div class="sw-ink swb-bar" data-shape="rect" data-value="3" data-label="可访问与媒体" data-anim="grow-x" style="top: 424px; width: 480px;"></div>
+  <p class="sw-num swb-val" style="top: 418px; left: 756px;" data-chart>3</p>
+  <p class="sw-mono swb-ids" style="top: 432px; left: 820px;" data-chart>R10 · R11 · R13</p>
+  <h3 class="sw-h swb-label" style="top: 490px;" data-chart>节奏</h3>
+  <div class="sw-ink swb-bar" data-shape="rect" data-value="1" data-label="节奏" data-anim="grow-x" style="top: 488px; width: 160px;"></div>
+  <p class="sw-num swb-val" style="top: 482px; left: 436px;" data-chart>1</p>
+  <p class="sw-mono swb-ids" style="top: 496px; left: 500px;" data-chart>R15</p>
+  <h3 class="sw-h swb-label" style="top: 554px;" data-chart>导出一致</h3>
+  <div class="sw-accent swb-bar" data-shape="rect" data-value="1" data-label="导出一致" data-anim="grow-x" style="top: 552px; width: 160px;"></div>
+  <p class="sw-num swb-val" style="top: 546px; left: 436px;" data-chart>1</p>
+  <p class="sw-mono swb-ids" style="top: 560px; left: 500px;" data-chart>R16</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot" data-source>SOURCE — scripts/validate.mjs 规则注释（R1–R16），按守护对象分组</p>
+</section>
+```
+
+## swiss/table · table
+
+规格表（4–6 行，行距 62）。等宽表头 + 黑细线，每行「项目 / 规格 / 出处」（第 0 / 2 / 8 栏起），行间细线；全表只用一个 `is-accent` 词。规格 ≤30 字。页脚 `data-source` 必填。
+
+```html
+<section class="slide" data-layout="swiss/table" data-role="table">
+  <p class="sw-mono sw-folio">03 — SPEC SHEET</p>
+  <p class="sw-mono sw-pageno">12 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">一页纸，看懂规格。</h2>
+  <p class="sw-mono swd-head" style="left: 64px;">ITEM</p>
+  <p class="sw-mono swd-head" style="left: 260px;">SPEC</p>
+  <p class="sw-mono swd-head" style="left: 848px;">SOURCE</p>
+  <div class="sw-rule swd-rule" data-shape="rect" data-anim="draw"></div>
+  <h3 class="sw-h swd-k" style="top: 274px;">画布</h3>
+  <p class="swd-v" style="top: 274px;">1280 × 720 px，导出时 px × 0.75 换算为 pt</p>
+  <p class="sw-mono swd-s" style="top: 279px;">assets/base.css</p>
+  <div class="sw-hair swd-hair" data-shape="rect" style="top: 318px;"></div>
+  <h3 class="sw-h swd-k" style="top: 336px;">字号下限</h3>
+  <p class="swd-v" style="top: 336px;">16 px，溢出先删字、再换版式</p>
+  <p class="sw-mono swd-s" style="top: 341px;">validate.mjs · R4</p>
+  <div class="sw-hair swd-hair" data-shape="rect" style="top: 380px;"></div>
+  <h3 class="sw-h swd-k" style="top: 398px;">校验规则</h3>
+  <p class="swd-v" style="top: 398px;">R1–R16，错误清零才能交付</p>
+  <p class="sw-mono swd-s" style="top: 403px;">validate.mjs</p>
+  <div class="sw-hair swd-hair" data-shape="rect" style="top: 442px;"></div>
+  <h3 class="sw-h swd-k" style="top: 460px;">导出格式</h3>
+  <p class="swd-v" style="top: 460px;">PPTX · PDF · PNG，HTML 是唯一的源</p>
+  <p class="sw-mono swd-s" style="top: 465px;">SKILL.md</p>
+  <div class="sw-hair swd-hair" data-shape="rect" style="top: 504px;"></div>
+  <h3 class="sw-h swd-k" style="top: 522px;">页面角色</h3>
+  <p class="swd-v" style="top: 522px;">20 个，其中 12 个核心角色</p>
+  <p class="sw-mono swd-s" style="top: 527px;">lib/roles.mjs</p>
+  <div class="sw-hair swd-hair" data-shape="rect" style="top: 566px;"></div>
+  <h3 class="sw-h swd-k" style="top: 584px;">字体</h3>
+  <p class="swd-v" style="top: 584px;">SIL OFL 开源字体，按 deck 用字<span class="is-accent">子集化</span></p>
+  <p class="sw-mono swd-s" style="top: 589px;">fetch-fonts.mjs</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot" data-source>SOURCE — 本仓库 SKILL.md · scripts/ · assets/base.css</p>
 </section>
 ```
 

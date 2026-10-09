@@ -28,6 +28,9 @@
     "swiss/compare": { "role": "compare" },
     "swiss/image-text": { "role": "image-text" },
     "swiss/image": { "role": "image" },
+    "swiss/points": { "role": "points" },
+    "swiss/bars": { "role": "bars" },
+    "swiss/table": { "role": "table" },
     "swiss/kpi": { "role": "kpi" },
     "swiss/process": { "role": "process" }
   }

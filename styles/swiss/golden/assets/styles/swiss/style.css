@@ -216,3 +216,28 @@
 .swf-title { left: 64px; top: 504px; width: 560px; font-size: 44px; }
 .swf-p { left: 64px; top: 576px; width: 560px; }
 .swf-cap { left: 64px; top: 656px; width: 560px; }
+
+/* ---------- swiss/points ---------- */
+.swt-bar { top: 216px; width: 368px; height: 4px; }
+.swt-num { top: 240px; width: 368px; }
+.swt-h { top: 276px; width: 368px; font-size: 28px; }
+.swt-p { top: 322px; width: 368px; }
+.swt-img { top: 416px; width: 368px; height: 200px; }
+.swt-c1 { left: 64px; }
+.swt-c2 { left: 456px; }
+.swt-c3 { left: 848px; }
+
+/* ---------- swiss/bars ---------- */
+/* bar width = value × 160px (max 4 → 640px); value 16px after the bar end, rule ids 64px after the value */
+.swb-label { left: 64px; width: 180px; font-size: 22px; }
+.swb-bar { left: 260px; height: 32px; }
+.swb-val { width: 48px; font-size: 44px; }
+.swb-ids { width: 236px; }
+
+/* ---------- swiss/table ---------- */
+.swd-head { top: 216px; }
+.swd-rule { left: 64px; top: 244px; width: 1152px; }
+.swd-k { left: 64px; width: 180px; font-size: 20px; }
+.swd-v { left: 260px; width: 564px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
+.swd-s { left: 848px; width: 368px; }
+.swd-hair { left: 64px; width: 1152px; }
