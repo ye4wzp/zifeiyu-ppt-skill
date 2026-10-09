@@ -26,7 +26,10 @@
     "consulting/compare": { "role": "compare" },
     "consulting/image-text": { "role": "image-text" },
     "consulting/image": { "role": "image" },
+    "consulting/points": { "role": "points" },
     "consulting/kpi": { "role": "kpi" },
+    "consulting/bars": { "role": "bars" },
+    "consulting/table": { "role": "table" },
     "consulting/process": { "role": "process" }
   }
 }

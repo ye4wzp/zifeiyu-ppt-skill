@@ -198,3 +198,34 @@
 .csf-title { left: 64px; top: 552px; width: 760px; font-size: 40px; line-height: 1.3; }
 .csf-p { left: 64px; top: 616px; width: 760px; font-size: 20px; line-height: 1.5; color: var(--text-2); }
 .csf-cap { left: 856px; top: 618px; width: 360px; font-size: 16px; line-height: 1.5; text-align: right; color: var(--text-2); }
+
+/* ---------- consulting/points ---------- */
+/* three navy tiles (the third blue) on the kpi columns 64 / 456 / 848 */
+.cst-tile { top: 216px; width: 368px; height: 240px; }
+.cst-num { top: 244px; width: 312px; font-size: 40px; }
+.cst-h { top: 392px; width: 312px; font-size: 28px; line-height: 1.4; }
+.cst-p { top: 488px; width: 320px; font-size: 18px; line-height: 1.75; color: var(--text-1); }
+.cst-c1 { left: 64px; }
+.cst-c2 { left: 456px; }
+.cst-c3 { left: 848px; }
+.cst-i1 { left: 92px; }
+.cst-i2 { left: 484px; }
+.cst-i3 { left: 876px; }
+
+/* ---------- consulting/bars ---------- */
+/* rows of 56 from 248; bar width = value × 120px from x 280 (max 4 → 480px); value 12px after the bar end.
+   No axis line: --native-charts swaps bars and labels for a chart, a loose shape would cut through it */
+.csb-label { left: 64px; width: 200px; font-size: 18px; line-height: 1.4; text-align: right; }
+.csb-bar { left: 280px; height: 40px; }
+.csb-val { width: 48px; font-size: 20px; }
+.csb-vr { left: 864px; top: 240px; width: 1px; height: 336px; background: var(--hairline); }
+.csb-ids { left: 896px; width: 320px; }
+
+/* ---------- consulting/table ---------- */
+/* navy header row, six 56px rows from 280, every second row tinted */
+.csd-head { left: 64px; top: 240px; width: 1152px; height: 40px; }
+.csd-band { left: 64px; width: 1152px; height: 56px; }
+.csd-k { left: 88px; width: 184px; font-size: 18px; line-height: 1.4; }
+.csd-v { left: 296px; width: 560px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
+.csd-s { left: 880px; width: 320px; }
+.csd-th { top: 248px; font-size: 16px; line-height: 1.5; color: var(--on-accent); }

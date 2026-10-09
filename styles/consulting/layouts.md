@@ -1,6 +1,6 @@
 # 咨询 · 白皮书（consulting）版式注册表
 
-> 状态：draft · P1 制作中，已有 10 个版式；其余核心角色未完成前，交付请用其他风格。
+> 状态：draft · P1 制作中，已有 13 个版式；其余核心角色未完成前，交付请用其他风格。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/consulting/golden/`；金样文字来自 `docs/golden-content.md`。
 
@@ -226,6 +226,33 @@
 </section>
 ```
 
+## consulting/points · points
+
+三个并列要点（kpi 同栏：64 / 456 / 848，各宽 368）：顶部 200px 色块（前两块海军蓝、第三块亮蓝），块内 Inter 编号与小标题，块下两行说明。小标题 ≤7 字，说明 ≤30 字。
+
+```html
+<section class="slide" data-layout="consulting/points" data-role="points">
+  <p class="cs-trk cs-tracker">测量与导出</p>
+  <h2 class="cs-semi cs-title" data-anim="rise">三件事，件件可验证。</h2>
+  <div class="cs-hair cs-head-rule" data-shape="rect"></div>
+  <div class="cs-navy cst-tile cst-c1" data-shape="rect"></div>
+  <div class="cs-navy cst-tile cst-c2" data-shape="rect"></div>
+  <div class="cs-blue cst-tile cst-c3" data-shape="rect"></div>
+  <p class="cs-num cs-on2 cst-num cst-i1" data-merge="t1">01</p>
+  <h3 class="cs-semi cs-on cst-h cst-i1" data-merge="t1">浏览器里演示</h3>
+  <p class="cst-p cst-c1" style="width: 368px;" data-anim="rise">方向键翻页，F 全屏，S 打开演讲者控制台，讲稿只给自己看。</p>
+  <p class="cs-num cs-on2 cst-num cst-i2" data-merge="t2">02</p>
+  <h3 class="cs-semi cs-on cst-h cst-i2" data-merge="t2">可编辑的 PPTX</h3>
+  <p class="cst-p cst-c2" data-anim="rise">文字是原生文本框，形状是原生形状，交给同事也能接着改。</p>
+  <p class="cs-num cs-on2 cst-num cst-i3" data-merge="t3">03</p>
+  <h3 class="cs-semi cs-on cst-h cst-i3" data-merge="t3">机器先把关</h3>
+  <p class="cst-p cst-c3" data-anim="rise">十六条规则查版式、字号、出处与导出一致性，错误清零才交付。</p>
+  <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
+  <p class="cs-source">来源：SKILL.md 第 6、8 步</p>
+  <p class="cs-pageno">9</p>
+</section>
+```
+
 ## consulting/kpi · kpi
 
 数据页。页头四件套 → 三栏关键数字（第一个用 `cs-ac` 上亮蓝）+ 标签 + 一句说明，栏间竖细线 → 「要点」结论条 → 来源与页码。三个数都必须真实；说明每条 ≤22 字。
@@ -254,6 +281,88 @@
   <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
   <p class="cs-source" data-source>来源：scripts/validate.mjs · scripts/lib/roles.mjs</p>
   <p class="cs-pageno">10</p>
+</section>
+```
+
+## consulting/bars · bars
+
+条形对比（3–6 行，行距 56）。右对齐标签 → 条从 x 280 起（不画轴线：原生图表模式下散落的形状会穿过图表），条长 = 数值 × 120px（最大值 4 时满长 480；最大值不同就按 480 ÷ 最大值换算单位长度）→ 条尾 12px 写数值；竖细线右侧一栏写规则编号等注释。只有一根条用 `cs-blue`（数值同时 `cs-ac`）。导出加 `--native-charts` 时标签、条、数值变成原生图表，注释栏保留为文字。页脚 `data-source` 必填。
+
+```html
+<section class="slide" data-layout="consulting/bars" data-role="bars">
+  <p class="cs-trk cs-tracker">质量门</p>
+  <h2 class="cs-semi cs-title" data-anim="rise">十六条规则，各管一摊。</h2>
+  <div class="cs-hair cs-head-rule" data-shape="rect"></div>
+  <p class="cs-semi cs-exhibit">图表 5 · 各类规则的条数（条）</p>
+  <div class="csb-vr" data-shape="rect"></div>
+  <h3 class="cs-semi csb-label" style="top: 255px;" data-chart>排版与几何</h3>
+  <div class="cs-navy csb-bar" data-shape="rect" data-value="4" data-label="排版与几何" data-anim="grow-x" style="top: 248px; width: 480px;"></div>
+  <p class="cs-num csb-val" style="top: 258px; left: 772px;" data-chart>4</p>
+  <p class="cs-note csb-ids" style="top: 255px;">R3 · R4 · R7 · R9</p>
+  <h3 class="cs-semi csb-label" style="top: 311px;" data-chart>版式与样式</h3>
+  <div class="cs-navy csb-bar" data-shape="rect" data-value="4" data-label="版式与样式" data-anim="grow-x" style="top: 304px; width: 480px;"></div>
+  <p class="cs-num csb-val" style="top: 314px; left: 772px;" data-chart>4</p>
+  <p class="cs-note csb-ids" style="top: 311px;">R1 · R2 · R6 · R12</p>
+  <h3 class="cs-semi csb-label" style="top: 367px;" data-chart>内容与数据</h3>
+  <div class="cs-navy csb-bar" data-shape="rect" data-value="3" data-label="内容与数据" data-anim="grow-x" style="top: 360px; width: 360px;"></div>
+  <p class="cs-num csb-val" style="top: 370px; left: 652px;" data-chart>3</p>
+  <p class="cs-note csb-ids" style="top: 367px;">R5 · R8 · R14</p>
+  <h3 class="cs-semi csb-label" style="top: 423px;" data-chart>可访问与媒体</h3>
+  <div class="cs-navy csb-bar" data-shape="rect" data-value="3" data-label="可访问与媒体" data-anim="grow-x" style="top: 416px; width: 360px;"></div>
+  <p class="cs-num csb-val" style="top: 426px; left: 652px;" data-chart>3</p>
+  <p class="cs-note csb-ids" style="top: 423px;">R10 · R11 · R13</p>
+  <h3 class="cs-semi csb-label" style="top: 479px;" data-chart>节奏</h3>
+  <div class="cs-navy csb-bar" data-shape="rect" data-value="1" data-label="节奏" data-anim="grow-x" style="top: 472px; width: 120px;"></div>
+  <p class="cs-num csb-val" style="top: 482px; left: 412px;" data-chart>1</p>
+  <p class="cs-note csb-ids" style="top: 479px;">R15</p>
+  <h3 class="cs-semi csb-label" style="top: 535px;" data-chart>导出一致</h3>
+  <div class="cs-blue csb-bar" data-shape="rect" data-value="1" data-label="导出一致" data-anim="grow-x" style="top: 528px; width: 120px;"></div>
+  <p class="cs-num cs-ac csb-val" style="top: 538px; left: 412px;" data-chart>1</p>
+  <p class="cs-note csb-ids" style="top: 535px;">R16</p>
+  <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
+  <p class="cs-source" data-source>来源：scripts/validate.mjs 规则注释（R1–R16），按守护对象分组</p>
+  <p class="cs-pageno">11</p>
+</section>
+```
+
+## consulting/table · table
+
+规格表（4–6 行，行高 56）。海军蓝表头行（项目 / 规格 / 出处），偶数行浅蓝底；全表只用一个 `is-accent` 词。规格 ≤30 字。页脚 `data-source` 必填。
+
+```html
+<section class="slide" data-layout="consulting/table" data-role="table">
+  <p class="cs-trk cs-tracker">质量门</p>
+  <h2 class="cs-semi cs-title" data-anim="rise">一页纸，看懂规格。</h2>
+  <div class="cs-hair cs-head-rule" data-shape="rect"></div>
+  <p class="cs-semi cs-exhibit">图表 6 · 规格一览</p>
+  <div class="cs-navy csd-head" data-shape="rect"></div>
+  <p class="cs-semi csd-k csd-th">项目</p>
+  <p class="cs-semi csd-v csd-th">规格</p>
+  <p class="cs-semi csd-s csd-th">出处</p>
+  <h3 class="cs-semi csd-k" style="top: 296px;">画布</h3>
+  <p class="csd-v" style="top: 296px;">1280 × 720 px，导出时 px × 0.75 换算为 pt</p>
+  <p class="cs-note csd-s" style="top: 295px;">assets/base.css</p>
+  <div class="cs-tint csd-band" data-shape="rect" style="top: 336px;"></div>
+  <h3 class="cs-semi csd-k" style="top: 352px;">字号下限</h3>
+  <p class="csd-v" style="top: 352px;">16 px，溢出先删字、再换版式</p>
+  <p class="cs-note csd-s" style="top: 351px;">validate.mjs · R4</p>
+  <h3 class="cs-semi csd-k" style="top: 408px;">校验规则</h3>
+  <p class="csd-v" style="top: 408px;">R1–R16，<span class="is-accent">错误清零</span>才能交付</p>
+  <p class="cs-note csd-s" style="top: 407px;">validate.mjs</p>
+  <div class="cs-tint csd-band" data-shape="rect" style="top: 448px;"></div>
+  <h3 class="cs-semi csd-k" style="top: 464px;">导出格式</h3>
+  <p class="csd-v" style="top: 464px;">PPTX · PDF · PNG，HTML 是唯一的源</p>
+  <p class="cs-note csd-s" style="top: 463px;">SKILL.md</p>
+  <h3 class="cs-semi csd-k" style="top: 520px;">页面角色</h3>
+  <p class="csd-v" style="top: 520px;">20 个，其中 12 个核心角色</p>
+  <p class="cs-note csd-s" style="top: 519px;">lib/roles.mjs</p>
+  <div class="cs-tint csd-band" data-shape="rect" style="top: 560px;"></div>
+  <h3 class="cs-semi csd-k" style="top: 576px;">字体</h3>
+  <p class="csd-v" style="top: 576px;">SIL OFL 开源字体，按 deck 用字子集化</p>
+  <p class="cs-note csd-s" style="top: 575px;">fetch-fonts.mjs</p>
+  <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
+  <p class="cs-source" data-source>来源：表内「出处」列（本仓库文件）</p>
+  <p class="cs-pageno">12</p>
 </section>
 ```
 
