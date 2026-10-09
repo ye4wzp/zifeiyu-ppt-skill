@@ -1,0 +1,104 @@
+/* ================================================================
+   Style G 「摄影集 · 画册」 — photobook
+   近白纸 × 照片占满版面 × 文字退到图注；宋体标题 + Playfair 斜体图注与数字
+   + 等宽帧号。
+   语法要点（详见 layouts.md）：界面不用强调色，颜色交给照片；数字压在
+   照片底部的半透明压暗条上（原生透明度）；版心左右 64px，页脚等宽一行
+   固定在 668px。
+   ================================================================ */
+
+@font-face {
+  font-family: 'Source Han Serif SC';
+  src: url('../../fonts/source-han-serif-sc-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../../fonts/playfair-display-italic.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: block;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../fonts/jetbrains-mono.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+
+:root {
+  --bg: #faf9f6;
+  --surface: #ece8e0;
+  --text-1: #1a1a1a;
+  --text-2: #6f6a62;
+  /* no UI accent: the photographs carry the colour; ink keeps edit outlines visible */
+  --accent: #1a1a1a;
+  --on-accent: #faf9f6;
+  --mark: #1a1a1a;
+  --on-mark: #faf9f6;
+  --hairline: #dcd7cd;
+  --on-image: #ffffff;
+  --on-image-2: #ddd8cf;
+  --scrim: rgba(12, 11, 10, 0.55);
+
+  --font-serif: 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+  --font-latin: 'Playfair Display', Georgia, serif;
+}
+
+/* ---------- vocabulary ---------- */
+.pb-serif { font-family: var(--font-serif); font-weight: 700; color: var(--text-1); }
+/* lining figures: old-style 0 reads as o (failures.md #5); Office face is Times New Roman, also lining */
+.pb-it { font-family: var(--font-latin); font-style: italic; font-weight: 400; line-height: 1; font-variant-numeric: lining-nums; color: var(--text-2); }
+.pb-num { font-family: var(--font-latin); font-style: italic; font-weight: 400; line-height: 1; letter-spacing: -0.01em; font-variant-numeric: lining-nums; color: var(--text-1); }
+.pb-body { font-size: 16px; line-height: 1.7; color: var(--text-2); }
+.pb-mono { font-family: var(--font-mono); font-size: 16px; line-height: 1; letter-spacing: 2px; font-weight: 400; color: var(--text-2); }
+.pb-on { color: var(--on-image); }
+.pb-on2 { color: var(--on-image-2); }
+.pb-photo { object-fit: cover; }
+.pb-scrim { background: var(--scrim); }
+.pb-hair { background: var(--hairline); height: 1px; }
+
+/* running heads: one-line serif title + right italic voice; foot: mono source / caption + folio */
+.pb-title { left: 64px; top: 56px; width: 640px; font-size: 44px; line-height: 1.25; }
+.pb-voice { left: 716px; top: 74px; width: 500px; font-size: 26px; text-align: right; }
+.pb-foot { left: 64px; top: 668px; width: 900px; }
+.pb-pageno { left: 1016px; top: 668px; width: 200px; text-align: right; }
+
+/* ---------- photobook/cover ---------- */
+.pbc-title { left: 0; width: 1280px; font-size: 56px; line-height: 1.2; text-align: center; letter-spacing: 0.06em; }
+.pbc-t1 { top: 52px; }
+.pbc-t2 { top: 119px; }
+.pbc-it { left: 0; top: 206px; width: 1280px; font-size: 26px; text-align: center; }
+.pbc-img { top: 260px; width: 224px; height: 300px; }
+.pbc-fr { top: 574px; width: 224px; }
+.pbc-c1 { left: 64px; }
+.pbc-c2 { left: 296px; }
+.pbc-c3 { left: 528px; }
+.pbc-c4 { left: 760px; }
+.pbc-c5 { left: 992px; }
+.pbc-sub { left: 0; top: 614px; width: 1280px; font-size: 18px; line-height: 1.6; text-align: center; color: var(--text-2); }
+.pbc-meta { left: 0; top: 670px; width: 1280px; text-align: center; }
+
+/* ---------- photobook/kpi ---------- */
+.pbk-img { top: 148px; width: 376px; height: 492px; }
+.pbk-scrim { top: 400px; width: 376px; height: 240px; }
+.pbk-c1 { left: 64px; }
+.pbk-c2 { left: 452px; }
+.pbk-c3 { left: 840px; }
+.pbk-num { top: 420px; width: 328px; font-size: 88px; }
+.pbk-label { top: 524px; width: 328px; font-size: 20px; line-height: 1.4; }
+.pbk-desc { top: 560px; width: 328px; font-size: 16px; line-height: 1.6; }
+.pbk-i1 { left: 88px; }
+.pbk-i2 { left: 476px; }
+.pbk-i3 { left: 864px; }
+
+/* ---------- photobook/process ---------- */
+.pbp-img { top: 148px; width: 276px; height: 300px; }
+.pbp-no { top: 472px; width: 276px; font-size: 22px; }
+.pbp-name { top: 504px; width: 276px; font-size: 30px; line-height: 1.2; }
+.pbp-desc { top: 552px; width: 268px; }
+.pbp-c1 { left: 64px; }
+.pbp-c2 { left: 356px; }
+.pbp-c3 { left: 648px; }
+.pbp-c4 { left: 940px; }
