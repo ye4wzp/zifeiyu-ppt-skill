@@ -24,6 +24,10 @@
     "swiss/agenda": { "role": "agenda" },
     "swiss/statement": { "role": "statement" },
     "swiss/section": { "role": "section" },
+    "swiss/matrix": { "role": "matrix" },
+    "swiss/compare": { "role": "compare" },
+    "swiss/image-text": { "role": "image-text" },
+    "swiss/image": { "role": "image" },
     "swiss/kpi": { "role": "kpi" },
     "swiss/process": { "role": "process" }
   }

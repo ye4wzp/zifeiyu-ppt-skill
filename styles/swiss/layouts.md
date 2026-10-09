@@ -1,6 +1,6 @@
 # 瑞士 · 网格（swiss）版式注册表
 
-> 状态：draft · P1 重做中，已有 6 个版式；其余核心角色未完成前，交付请用其他风格。
+> 状态：draft · P1 重做中，已有 10 个版式；其余核心角色未完成前，交付请用其他风格。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/swiss/golden/`；金样文字来自 `docs/golden-content.md`。
 
@@ -102,6 +102,121 @@
   <div class="sw-tick swx-tick sw-k2" data-shape="rect"></div>
   <div class="sw-tick swx-tick sw-k3" data-shape="rect"></div>
   <div class="sw-tick swx-tick sw-k4" data-shape="rect"></div>
+</section>
+```
+
+## swiss/matrix · matrix
+
+盘点 + 总数。左：整行标题下的巨数字总数、标签与两行分组说明；右：4 × 3 灰格「字母 / 名称」（列 456 / 652 / 848 / 1044，行 216 / 352 / 488），当前项整格上蓝。8–12 项，名称 ≤7 字。
+
+```html
+<section class="slide" data-layout="swiss/matrix" data-role="matrix">
+  <p class="sw-mono sw-folio">01 — STYLE INDEX</p>
+  <p class="sw-mono sw-pageno">05 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">十二种风格，按场合挑一种。</h2>
+  <p class="sw-num swm-hero" data-anim="count">12</p>
+  <h3 class="sw-h swm-label" data-merge="hero" data-anim="rise">种风格</h3>
+  <p class="sw-body swm-sub" data-merge="hero" data-anim="rise">分五组：编辑排印、商务理性、舞台冲击、影像叙事、东方人文</p>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 456px; top: 216px;"></div>
+  <p class="sw-num swm-letter" style="left: 472px; top: 230px;">A</p>
+  <h3 class="sw-h swm-name" style="left: 472px; top: 298px;">杂志 · 暖纸</h3>
+  <div class="sw-accent swm-cell" data-shape="rect" style="left: 652px; top: 216px;"></div>
+  <p class="sw-num sw-on swm-letter" style="left: 668px; top: 230px;">B</p>
+  <h3 class="sw-h sw-on swm-name" style="left: 668px; top: 298px;">瑞士 · 网格</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 848px; top: 216px;"></div>
+  <p class="sw-num swm-letter" style="left: 864px; top: 230px;">C</p>
+  <h3 class="sw-h swm-name" style="left: 864px; top: 298px;">发布会 · 暗场</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 1044px; top: 216px;"></div>
+  <p class="sw-num swm-letter" style="left: 1060px; top: 230px;">D</p>
+  <h3 class="sw-h swm-name" style="left: 1060px; top: 298px;">报刊 · 版面</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 456px; top: 352px;"></div>
+  <p class="sw-num swm-letter" style="left: 472px; top: 366px;">E</p>
+  <h3 class="sw-h swm-name" style="left: 472px; top: 434px;">大字报 · 粗野</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 652px; top: 352px;"></div>
+  <p class="sw-num swm-letter" style="left: 668px; top: 366px;">F</p>
+  <h3 class="sw-h swm-name" style="left: 668px; top: 434px;">柔和 · 产品</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 848px; top: 352px;"></div>
+  <p class="sw-num swm-letter" style="left: 864px; top: 366px;">G</p>
+  <h3 class="sw-h swm-name" style="left: 864px; top: 434px;">摄影集 · 画册</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 1044px; top: 352px;"></div>
+  <p class="sw-num swm-letter" style="left: 1060px; top: 366px;">H</p>
+  <h3 class="sw-h swm-name" style="left: 1060px; top: 434px;">咨询 · 白皮书</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 456px; top: 488px;"></div>
+  <p class="sw-num swm-letter" style="left: 472px; top: 502px;">I</p>
+  <h3 class="sw-h swm-name" style="left: 472px; top: 570px;">日式 · 极简</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 652px; top: 488px;"></div>
+  <p class="sw-num swm-letter" style="left: 668px; top: 502px;">J</p>
+  <h3 class="sw-h swm-name" style="left: 668px; top: 570px;">拼贴 · 手账</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 848px; top: 488px;"></div>
+  <p class="sw-num swm-letter" style="left: 864px; top: 502px;">K</p>
+  <h3 class="sw-h swm-name" style="left: 864px; top: 570px;">新中式 · 东方</h3>
+  <div class="sw-grey swm-cell" data-shape="rect" style="left: 1044px; top: 488px;"></div>
+  <p class="sw-num swm-letter" style="left: 1060px; top: 502px;">L</p>
+  <h3 class="sw-h swm-name" style="left: 1060px; top: 570px;">工程制图</h3>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">SOURCE — 风格库设计规格 2026-10-08 §2</p>
+</section>
+```
+
+## swiss/compare · compare
+
+二元对比。整行标题，左灰右蓝两块半宽色块，各含「等宽标签 / 小标题 / 两行说明 / 巨数字 + 一句数字说明」。数字必须真实；结论一侧放蓝块。
+
+```html
+<section class="slide" data-layout="swiss/compare" data-role="compare">
+  <p class="sw-mono sw-folio">01 — BEFORE / AFTER</p>
+  <p class="sw-mono sw-pageno">06 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">换皮，不如换版面。</h2>
+  <div class="sw-grey swv-block swv-l" data-shape="rect"></div>
+  <div class="sw-accent swv-block swv-r" data-shape="rect"></div>
+  <p class="sw-mono swv-label swv-tl">BEFORE</p>
+  <h3 class="sw-h swv-h swv-tl" data-merge="l" data-anim="rise">通用版式，换主题即换色</h3>
+  <p class="sw-body swv-p swv-tl" data-merge="l" data-anim="rise">三套设计系统共用 L01–L24，换一个主题文件整套换色，版面结构始终一样。</p>
+  <p class="sw-num swv-num swv-nml" data-anim="count">24</p>
+  <p class="sw-h swv-nl swv-nll" data-anim="rise">个版式，三套系统共用</p>
+  <p class="sw-mono sw-on2 swv-label swv-tr">AFTER</p>
+  <h3 class="sw-h sw-on swv-h swv-tr" data-merge="r" data-anim="rise">独立版式，选风格即选版面</h3>
+  <p class="sw-body sw-on2 swv-p swv-tr" data-merge="r" data-anim="rise">十二种风格各有一套版式，按角色登记；校验与导出只认角色，不认风格。</p>
+  <p class="sw-num sw-on swv-num swv-nmr" data-anim="count">12</p>
+  <p class="sw-h sw-on swv-nl swv-nlr" data-anim="rise">种风格，各有一套版式</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">ZIFEIYU PPT SKILL · STYLE B — SWISS</p>
+</section>
+```
+
+## swiss/image-text · image-text
+
+图文。左图（564×512，第 0–5 栏），右栏（第 7–11 栏）两行标题、两段正文（每段 ≤50 字）、黑细线与等宽注脚；页脚写图注。
+
+```html
+<section class="slide" data-layout="swiss/image-text" data-role="image-text">
+  <p class="sw-mono sw-folio">02 — MEASURED EXPORT</p>
+  <p class="sw-mono sw-pageno">07 / 17</p>
+  <img class="sw-photo swi-img" src="assets/img/07-feature.jpg" alt="示意图：灰白立板之间的一块克莱因蓝">
+  <h2 class="sw-title swi-title swi-t1" data-merge="title" data-anim="rise">所见即所得，</h2>
+  <h2 class="sw-title swi-title swi-t2" data-merge="title" data-anim="rise">靠的是测量。</h2>
+  <p class="swi-p swi-p1" data-merge="body" data-anim="rise">导出器先让浏览器把每一页排好，再逐个量出元素的位置、尺寸、字号与颜色，按同样的坐标写进 PPTX。</p>
+  <p class="swi-p swi-p2" data-merge="body" data-anim="rise">圆角、描边、阴影、旋转与竖排换成 PowerPoint 原生形状；画不出的装饰单独截图，文字始终可编辑。</p>
+  <div class="sw-rule swi-rule" data-shape="rect" data-anim="draw"></div>
+  <p class="sw-mono swi-note swi-n1" data-merge="note">PRIMITIVES — ROUNDRECT · LINE · CHEVRON</p>
+  <p class="sw-mono swi-note swi-n2" data-merge="note">ROTATE · SHADOW · EAVERT</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">FIG. 02 — 示意图</p>
+</section>
+```
+
+## swiss/image · image
+
+满版照片 + 左下克莱因蓝色块：块内一句标题、一句说明、等宽图注。照片右上要浅，页码压在那里。
+
+```html
+<section class="slide" data-layout="swiss/image" data-role="image">
+  <img class="sw-photo swf-img" src="assets/img/08-image.jpg" alt="示意图：灰白立板构成的空间">
+  <div class="sw-accent swf-panel" data-shape="rect"></div>
+  <h2 class="sw-title sw-on swf-title" data-anim="rise">先选风格，再写内容</h2>
+  <p class="sw-lede sw-on swf-p" data-anim="rise">风格决定版面，版面决定一页能放多少字。</p>
+  <p class="sw-mono sw-on2 swf-cap">FIG. 03 — 示意图</p>
+  <p class="sw-mono sw-pageno">08 / 17</p>
 </section>
 ```
 
