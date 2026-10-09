@@ -75,6 +75,7 @@
 .kn-title { left: 0; top: 72px; width: 1280px; font-size: 56px; line-height: 1.2; text-align: center; }
 .kn-sub { left: 0; top: 156px; width: 1280px; font-size: 22px; line-height: 1.6; text-align: center; color: var(--text-2); }
 .kn-capl { left: 80px; top: 672px; width: 800px; }
+.kn-capr { left: 900px; top: 672px; width: 316px; text-align: right; }
 
 /* ---------- keynote/cover ---------- */
 .knc-img { left: 0; top: 0; width: 1280px; height: 720px; }
@@ -231,8 +232,6 @@
 .kne-card { left: 80px; top: 552px; width: 640px; height: 56px; }
 .kne-cmd { left: 104px; top: 566px; width: 600px; font-family: var(--font-num); font-size: 20px; line-height: 1.4; color: var(--text-1); }
 .kne-p { left: 80px; top: 628px; width: 800px; }
-/* the gallery path takes the bottom-left, so the caption moves to the right edge */
-.kne-cap { left: 900px; top: 672px; width: 316px; text-align: right; }
 
 /* ---------- keynote/video ---------- */
 /* the film owns the page; title, hint and text in one band underneath */

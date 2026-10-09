@@ -6,18 +6,19 @@
 
 ## 版面语法
 
-1. **一页一个重点**：近黑底，大字居中。内容页用共用页头：`kn-semi kn-title`（top 72，56px 居中，≤18 字）+ `kn-sub`（top 156，22px 灰字，一行拉丁副题）；内容区 236–624。封面与满版照片页的文字放左下（left 80），压在 `kn-fade` 上。
-2. **暖黄全页最多一处**：一个 `kn-kick` 小标签、一个 `kn-ac` 数字 / 词、一个 `is-accent` 片段，或一块 `kn-acbg` 填充（黄卡片 = `kn-card kn-acbg`，上面的字用 `kn-on`），四选一；其余只用白与灰。
-3. **页脚**：top 672，左「来源：……」灰字（`kn-note kn-source`，数据页加 `data-source`），右页码（`kn-note kn-pageno`，只写数字）；满版照片页的图注用 `kn-note kn-capl`（left 80）；封面与结尾不放页码。
-4. **深色圆角卡片**：`kn-card`（#1c1c1e、圆角 24），导出为 PowerPoint 原生圆角矩形；卡片里放照片时，`<img>` 用同一组类得到同尺寸同圆角，再盖一块同尺寸的 `kn-scrim`。
+1. **一页一个重点**：近黑底，大字居中。内容页用共用页头：`kn-semi kn-title`（top 72，56px 居中，≤18 字）+ `kn-sub`（top 156，22px 灰字，一行拉丁副题）；内容区 236–624。封面与满版照片页的文字放左下（left 80），压在 `kn-fade` 上。table 的深色卡片从 224 起，是唯一的例外。
+2. **暖黄全页最多一处**：一个 `kn-kick` 小标签、一个 `kn-ac` 数字 / 词、一个 `is-accent` 片段，或一块 `kn-acbg` 填充（黄卡片 = `kn-card kn-acbg`，上面的字用 `kn-on`），四选一；其余只用白与灰。不用 `is-mark`（它的底色也是暖黄，在黄页上会消失）；照片里自带的暖黄不计入这一处。
+3. **页脚**：top 672，左「来源：……」灰字（`kn-note kn-source`，数据页加 `data-source`），右页码（`kn-note kn-pageno`，只写数字）；满版照片页的图注用 `kn-note kn-capl`（左下，left 80）；左下被占用时（封面、结尾）用 `kn-note kn-capr`（右下）；封面与结尾不放页码。
+4. **深色圆角卡片**：`kn-card`（#1c1c1e、圆角 24），导出为 PowerPoint 原生圆角矩形；圆角照片只需给 `<img>` 加 `kn-card` 取圆角；照片上还要放字时（process 最后一张卡），再盖一块同尺寸的 `kn-scrim`。
 5. **照片上的渐变压暗**：`kn-fade` 必须带 `data-raster`——PowerPoint 画不出这种渐变，导出时单独截成带透明度的图片，文字仍是原生文本框。
 6. **字体分工**：标题、标签用思源黑 600（`kn-semi` / `kn-kick`，Office 里是微软雅黑）；数字用 Inter 600（`kn-num`，Office 里是 Segoe UI）；正文与说明走系统字体（`kn-body` / `kn-note`）。
 7. **配图**：金样配图由 `scripts/gen-art.mjs` 用暗调配色生成（`--palette "#3a3836,#232224,#ffc21a,#0a0a0b"`），alt 与页脚都写「示意图」。
 8. **黄页**：`slide is-accent` 整页暖黄、黑字，只给 statement；这一页本身就是那一处暖黄。
+9. **文本合并**：`data-merge` 只用于同一 left、上下排列的文字；左右并排的文字各自独立——导出时同组会从组内最左边起排成一列。
 
 ## keynote/cover · cover
 
-封面。满版照片 + 全幅渐变压暗（`kn-fade` + `data-raster`）；左下暖黄小标签 → 两行 100px 标题（每行一个 h1，每行 ≤6 字）→ 一行说明。
+封面。满版照片 + 全幅渐变压暗（`kn-fade` + `data-raster`）；左下暖黄小标签 → 两行 100px 标题（每行一个 h1，每行 ≤6 字）→ 一行说明；右下「图为示意图」（`kn-capr`）。
 
 ```html
 <section class="slide" data-layout="keynote/cover" data-role="cover">
@@ -27,6 +28,7 @@
   <h1 class="kn-semi knc-title knc-t1" data-merge="title" data-anim="rise">一份源文件</h1>
   <h1 class="kn-semi knc-title knc-t2" data-merge="title" data-anim="rise">三种交付</h1>
   <p class="kn-on2 knc-sub" data-anim="rise">浏览器里直接演示，再一键导出可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
+  <p class="kn-note kn-capr">图为示意图</p>
 </section>
 ```
 
@@ -73,7 +75,7 @@
 
 ## keynote/section · section
 
-章节页。满版照片 + 渐变压暗（`kn-fade` + `data-raster`）；左下暖黄 160px 章节号 → 64px 章节名 → 一行拉丁副题；左下图注「第 N 部分 · 图为示意图」与页码。
+章节页。满版照片 + 渐变压暗（`kn-fade` + `data-raster`）；左下暖黄 160px 章节号 → 64px 章节名（≤8 字） → 一行拉丁副题；左下图注「第 N 部分 · 图为示意图」与页码。
 
 ```html
 <section class="slide" data-layout="keynote/section" data-role="section">
@@ -138,7 +140,7 @@
 
 ## keynote/compare · compare
 
-对比。共用页头 → 左右两张 568×388 深色圆角卡片：灰色小标签「之前 / 现在」→ 粗体小标题（≤14 字）→ 两行以内说明（≤70 字）→ 96px 大数字 + 一句单位（≤12 字）；右边的数字是全页唯一的暖黄。
+对比。共用页头 → 左右两张 568×388 深色圆角卡片：灰色小标签「之前 / 现在」→ 粗体小标题（≤14 字）→ 两行以内说明（≤70 字）→ 96px 大数字（≤2 位）+ 一句单位（≤12 字）；右边的数字是全页唯一的暖黄。
 
 ```html
 <section class="slide" data-layout="keynote/compare" data-role="compare">
@@ -182,7 +184,7 @@
 
 ## keynote/image · image
 
-大图。满版照片 + 渐变压暗；左下暖黄小标签 → 56px 标题 → 一行说明；左下图注与页码。
+大图。满版照片 + 渐变压暗；左下暖黄小标签 → 56px 标题（≤14 字）→ 一行说明；左下图注与页码。
 
 ```html
 <section class="slide" data-layout="keynote/image" data-role="image">
@@ -243,7 +245,7 @@
 
 ## keynote/bars · bars
 
-条形对比（3–6 行，行距 64px）。共用页头 → 每行「粗体标签（右对齐，≤6 字）/ 白色圆角条 / Inter 数值 / 灰色规则号」；条从 left 424 起，条长 = 数值 × 单位长，单位长 = 480 ÷ 最大值（金样最大值 4 → 120px）；数值 left = 424 + 条长 + 16，注释 left = 数值 left + 48。要强调的一条用暖黄（`kn-acbg`）。来源写 `data-source`；`--native-charts` 时整组换成 PowerPoint 原生条形图。
+条形对比（3–6 行，行距 64px）。共用页头 → 每行「粗体标签（右对齐，≤6 字）/ 白色圆角条 / Inter 数值 / 灰色规则号」；条从 left 424 起，条长 = 数值 × 单位长，单位长 = 480 ÷ 最大值（金样最大值 4 → 120px）；数值（≤2 位）left = 424 + 条长 + 16，注释（≤18 字符）left = 数值 left + 48。要强调的一条用暖黄（`kn-acbg`）。来源写 `data-source`；`--native-charts` 时整组换成 PowerPoint 原生条形图。
 
 ```html
 <section class="slide" data-layout="keynote/bars" data-role="bars">
@@ -366,7 +368,7 @@
 
 ## keynote/timeline · timeline
 
-时间线。共用页头 → 5 列（left 64 起，列距 232px）：Inter 日期 → 细线与白色圆点 → 粗体节点名 + 两行以内说明（≤20 字）；最后一个日期是全页唯一的暖黄。
+时间线。共用页头 → 5 列（left 64 起，列距 232px）：Inter 日期 → 细线与白色圆点 → 粗体节点名（≤7 字）+ 两行以内说明（≤20 字）；最后一个日期是全页唯一的暖黄。
 
 ```html
 <section class="slide" data-layout="keynote/timeline" data-role="timeline">
@@ -440,7 +442,7 @@
 
 ## keynote/closing · closing
 
-结尾。满版照片 + 渐变压暗；左下暖黄「下一步」→ 两行 88px 标题（每行一个 h2）→ 深色圆角条里一行命令 → 风格画廊路径；图注移到右下，不放页码。
+结尾。满版照片 + 渐变压暗；左下暖黄「下一步」→ 两行 88px 标题（每行一个 h2，每行 ≤8 字）→ 深色圆角条里一行命令 → 风格画廊路径；图注用 `kn-capr` 放右下，不放页码。
 
 ```html
 <section class="slide" data-layout="keynote/closing" data-role="closing">
@@ -452,6 +454,6 @@
   <div class="kn-card kne-card" data-shape="rect"></div>
   <p class="kne-cmd">node scripts/new-deck.mjs my-deck --style keynote</p>
   <p class="kn-body kne-p">风格画廊：docs/styles/index.html</p>
-  <p class="kn-note kne-cap">图为示意图</p>
+  <p class="kn-note kn-capr">图为示意图</p>
 </section>
 ```
