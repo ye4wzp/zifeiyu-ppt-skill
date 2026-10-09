@@ -319,6 +319,21 @@
 </section>
 ```
 
+## keynote/video · video
+
+视频页。896×504 视频占满上部（默认停在封面帧，点击播放）；下方一条：粗体标题 + 暖黄时长（全页唯一的黄）| 右侧说明（≤40 字）。`poster` 与 `aria-label` 必填，时长写真实值。
+
+```html
+<section class="slide" data-layout="keynote/video" data-role="video">
+  <video class="knw-video" src="assets/media/13-film.mp4" poster="assets/media/13-film-poster.jpg" aria-label="示意视频：暗色远山与低悬的太阳，镜头缓慢推近" preload="none"></video>
+  <h2 class="kn-semi knw-title" data-anim="rise">视频也能放进来</h2>
+  <p class="kn-kick knw-hint">0:08 · MP4</p>
+  <p class="kn-note knw-p" data-anim="rise">演示时点击画面播放；渲染图、PDF 与 PPTX 的静止画面锁定在封面帧。</p>
+  <p class="kn-note kn-source">示意视频，由抽象图生成</p>
+  <p class="kn-note kn-pageno">13</p>
+</section>
+```
+
 ## keynote/process · process
 
 流程页。共用页头 + 一行灰色副题 → 4 张 276×388 深色圆角卡片：左上编号、底部步骤名与说明（≤26 字）；最后一步的卡片垫一张照片（同圆角）并盖压暗层，它的编号是全页唯一的暖黄。
@@ -396,6 +411,30 @@
   <img class="kn-photo kn-card kng-w3" src="assets/img/16-gallery-3.jpg" alt="示意图：暗色立板构成的空间">
   <p class="kn-note kn-source">来源：scripts/gen-art.mjs · 固定种子，输出可复现 · 三幅均为示意图</p>
   <p class="kn-note kn-pageno">16</p>
+</section>
+```
+
+## keynote/audio · audio
+
+音频页。共用页头 → 左 388 圆角方图；右栏说明 → 深色圆角播放卡：暖黄圆点（`data-media="toggle"`，全页唯一的黄；上面的 ▶ 不接收点击）、粗体音轨名、灰色元信息、圆角进度条与时间。`<audio>` 必带 `controls` 与 `aria-label`，时长写真实值。
+
+```html
+<section class="slide" data-layout="keynote/audio" data-role="audio">
+  <h2 class="kn-semi kn-title" data-anim="rise">边听边翻页</h2>
+  <p class="kn-sub" data-anim="rise">Listen while you flip.</p>
+  <img class="kn-photo kn-card kno-img" src="assets/img/17-audio.jpg" alt="示意图：暗场里的暖色光晕">
+  <p class="kn-body kno-p" data-anim="rise">音频放在 deck 目录里，演示时点圆点播放；导出 PPTX 后仍能在演示软件里播放。</p>
+  <div class="kn-card kno-card" data-shape="rect"></div>
+  <div class="kn-acbg kno-play" data-shape="ellipse" data-media="toggle"></div>
+  <p class="kno-glyph">▶</p>
+  <audio class="kno-audio" src="assets/media/17-tone.mp3" aria-label="示意音频：一段 8 秒提示音" controls preload="none"></audio>
+  <h3 class="kn-semi kno-track">示意音频 · 提示音</h3>
+  <p class="kn-note kno-meta">0:08 · MP3 · 示意素材</p>
+  <div class="kno-bar" data-shape="rect" data-media="track"></div>
+  <div class="kno-progress" data-shape="rect" data-media="progress"></div>
+  <p class="kn-note kno-time" data-media="clock">0:00 / 0:08</p>
+  <p class="kn-note kn-source">来源：references/pptx-export.md「媒体随行」 · 图为示意图</p>
+  <p class="kn-note kn-pageno">17</p>
 </section>
 ```
 

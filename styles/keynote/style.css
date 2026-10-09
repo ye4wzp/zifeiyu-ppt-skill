@@ -233,3 +233,23 @@
 .kne-p { left: 80px; top: 628px; width: 800px; }
 /* the gallery path takes the bottom-left, so the caption moves to the right edge */
 .kne-cap { left: 900px; top: 672px; width: 316px; text-align: right; }
+
+/* ---------- keynote/video ---------- */
+/* the film owns the page; title, hint and text in one band underneath */
+.knw-video { left: 192px; top: 56px; width: 896px; height: 504px; object-fit: cover; background: #000; }
+.knw-title { left: 192px; top: 584px; width: 380px; font-size: 32px; line-height: 1.3; }
+.knw-hint { left: 192px; top: 640px; width: 380px; }
+.knw-p { left: 600px; top: 588px; width: 488px; }
+
+/* ---------- keynote/audio ---------- */
+.kno-img { left: 64px; top: 236px; width: 388px; height: 388px; }
+.kno-p { left: 500px; top: 252px; width: 716px; }
+.kno-card { left: 500px; top: 380px; width: 716px; height: 176px; }
+.kno-play { left: 532px; top: 432px; width: 72px; height: 72px; }
+.kno-glyph { left: 532px; top: 450px; width: 72px; text-align: center; font-size: 24px; line-height: 1.5; color: var(--on-accent); pointer-events: none; }
+.kno-audio { left: 532px; top: 432px; width: 72px; height: 72px; opacity: 0; pointer-events: none; }
+.kno-track { left: 628px; top: 424px; width: 556px; font-size: 24px; line-height: 1.3; }
+.kno-meta { left: 628px; top: 462px; width: 556px; }
+.kno-bar { left: 628px; top: 504px; width: 556px; height: 4px; border-radius: 2px; background: var(--hairline); }
+.kno-progress { left: 628px; top: 504px; width: 0; height: 4px; border-radius: 2px; background: var(--text-1); }
+.kno-time { left: 628px; top: 516px; width: 556px; }

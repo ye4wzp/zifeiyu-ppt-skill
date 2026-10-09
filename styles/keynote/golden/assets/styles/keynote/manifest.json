@@ -30,9 +30,11 @@
     "keynote/kpi": { "role": "kpi" },
     "keynote/bars": { "role": "bars" },
     "keynote/table": { "role": "table" },
+    "keynote/video": { "role": "video" },
     "keynote/process": { "role": "process" },
     "keynote/timeline": { "role": "timeline" },
     "keynote/gallery": { "role": "gallery" },
+    "keynote/audio": { "role": "audio" },
     "keynote/closing": { "role": "closing" }
   }
 }
