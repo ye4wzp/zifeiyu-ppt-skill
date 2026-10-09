@@ -1,376 +1,91 @@
 # 瑞士 · 网格（swiss）版式注册表
 
-> 状态：draft（P0 原样迁移自旧瑞士系统，P1 重做）。核心角色缺 process / image / image-text，交付前用其他风格或等 P1。
+> 状态：draft · P1 重做中，已有 cover / kpi / process；其余核心角色未完成前，交付请用其他风格。
 
-规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/swiss/golden/`。
+规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/swiss/golden/`；金样文字来自 `docs/golden-content.md`。
 
-## GRID 版面语法
+## 版面语法
 
-1. **等宽页眉**：左 `<p class="sl-mono" style="left: 96px; top: 64px;">GRID · 主题名</p>`，右 `NN / NN` 页码（`width: 138px`）；有页眉的内容页 `sl-title` 行内 `top: 108px`。
-2. **点阵纹理只上封面 / 宣言页**：`<img class="sl-texture" src="assets/styles/swiss/textures/dots-dark.png" aria-hidden="true">`（浅底用 dots-dark，色场 / 墨底用 dots-light），放页面第一个元素；正文页保持纯净，cycle / system 一律不加。
-3. **单焦点法则**：全 deck 唯一锚点色。一组卡片 / KPI 只允许一个元素上 accent（`is-accent`）；强调词用 `<span class="is-accent">` 或 `<span class="is-mark">`，**巨字禁止加粗**。
-4. **三质互斥**：色块只有 `.sw-accent`（锚点，一组只许一块）/ `.sw-ink`（墨色反转）/ `.sw-grey`（中性）三种，几何行内给定；色底 / 墨底上的文字加 `.sw-rev` 反白。
-5. **方块刻度**：分页点 / 装饰一律直角小方块（`.sw-ink` 行内 10×10px，当前项拉宽为 24px），禁止圆点。
-6. **色彩闭环**：封面 `slide is-accent` 开场，结尾页同样 `is-accent` 收束。
-7. **换锚点色**：按 style.css 头部注释的许可对整套替换 token，一份 deck 仍只有一色。
+1. **12 栏网格**：版心 64–1216（1152px），栏宽 74、栏距 24；常用分栏起点——三栏 64 / 456 / 848（宽 368），四栏 64 / 358 / 652 / 946（宽 270），两栏 64 / 652（宽 564）。页眉等宽标签与页码在 top 48，页脚细线在 640、页脚文字在 660，标题在 104。
+2. **字体分工**：巨字中文用 `sw-giant`（思源黑最细一档，Office 里是微软雅黑 Light）；巨数字用 `sw-num`（Inter ExtraLight，Office 里是 Segoe UI Light）；页标题 `sw-title`（细体 52px）；小标题 `sw-h`（600）；说明 `sw-body`；页眉页脚、图注、出处用等宽 `sw-mono`（大写拉丁直接写成大写）。
+3. **克莱因蓝全页只用一处**：一块 `sw-accent` 色块，或一个 `sw-ac` 数字 / 词，二选一；其余色块一律 `sw-grey`。色块上的文字用 `sw-on`（主）/ `sw-on2`（次）。
+4. **巨字只用细体**：巨字与巨数字禁止加粗，层级靠字号拉开。
+5. **方块刻度**：分页标记一律直角小方块 `sw-tick`（10×10），当前项加 `is-on` 拉宽到 24px；不用圆点。
+6. **色彩闭环**：封面以克莱因蓝色块开场，结尾页同样以克莱因蓝收束。
+7. **换 accent**：按 style.css 头部注释的许可对整套替换 token，一份 deck 只有一种 accent。
 
 ## swiss/cover · cover
 
-封面。满幅 `is-accent` 色场开场（与结尾同色闭环），两行 `dt-display` 巨字（每行一个 h1），方块分页刻度。
+封面。左 768px 克莱因蓝色块、右 512px 照片（深色图注）；色块上：等宽卷号 → 两行极细巨字（每行一个 h1，每行 ≤5 个汉字）→ 两行以内说明 → 方块刻度 → 等宽标签。
 
 ```html
-<section class="slide is-accent" data-layout="swiss/cover" data-role="cover">
-  <img class="sl-texture" src="assets/styles/swiss/textures/dots-light.png" aria-hidden="true">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">01 / 15</p>
-  <p class="l01-kicker" style="top: 148px;">GRID · 单色锚点设计系统</p>
-  <h1 class="dt-display" style="top: 208px;">一种颜色，</h1>
-  <h1 class="dt-display" style="top: 354px;">全部秩序。</h1>
-  <p class="sl-mono" style="left: 96px; top: 540px;">OPEN IN BLUE · CLOSE IN BLUE · REGISTRY 24</p>
-  <div class="sw-ink" data-shape="rect" style="left: 96px; top: 600px; width: 24px; height: 10px;"></div>
-  <div class="sw-ink" data-shape="rect" style="left: 130px; top: 600px; width: 10px; height: 10px;"></div>
-  <div class="sw-ink" data-shape="rect" style="left: 150px; top: 600px; width: 10px; height: 10px;"></div>
-  <div class="sw-ink" data-shape="rect" style="left: 170px; top: 600px; width: 10px; height: 10px;"></div>
-  <div class="sw-ink" data-shape="rect" style="left: 96px; top: 640px; width: 1088px; height: 1px;"></div>
-  <p class="l01-meta" style="top: 660px;">zifeiyu-ppt-skill · 设计系统 03 金样 · 2026-08</p>
-</section>
-```
-
-## swiss/agenda · agenda
-
-目录，3–5 行；页码列与引导线可删。
-
-```html
-<section class="slide" data-layout="swiss/agenda" data-role="agenda">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">02 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">目录</h2>
-  <p class="l02-num l02-r1">01</p><p class="l02-item l02-r1">字阶与灰阶：越大越细</p>
-  <p class="l02-page l02-p1">03</p>
-  <div class="l02-line l02-s1" data-shape="rect"></div>
-  <p class="l02-num l02-r2">02</p><p class="l02-item l02-r2">数据大字报与对比度实测</p>
-  <p class="l02-page l02-p2">05</p>
-  <div class="l02-line l02-s2" data-shape="rect"></div>
-  <p class="l02-num l02-r3">03</p><p class="l02-item l02-r3">版式清单与画布契约</p>
-  <p class="l02-page l02-p3">07</p>
-  <div class="l02-line l02-s3" data-shape="rect"></div>
-  <p class="l02-num l02-r4">04</p><p class="l02-item l02-r4">里程碑、质量闭环与三层架构</p>
-  <p class="l02-page l02-p4">09</p>
-  <div class="l02-line l02-s4" data-shape="rect"></div>
-  <p class="l02-num l02-r5">05</p><p class="l02-item l02-r5">三质、双轨与蓝色闭环</p>
-  <p class="l02-page l02-p5">12</p>
-  <div class="l02-line l02-s5" data-shape="rect"></div>
-</section>
-```
-
-## swiss/section · section
-
-章节分隔，推荐 `is-dark`；`l03-num` 用两位数字。
-
-```html
-<section class="slide is-dark" data-layout="swiss/section" data-role="section">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">04 / 15</p>
-  <p class="l03-num">02</p>
-  <h2 class="l03-title" data-anim="rise">数据大字报</h2>
-  <div class="l03-rule" data-anim="draw" data-shape="rect"></div>
-  <p class="l03-note">真实数值 + 极细巨字 + 等宽刻度标签——数据页是瑞士系统的主舞台。</p>
-</section>
-```
-
-## swiss/statement · statement
-
-单句观点 / 金句；强调词用 `is-mark`，每页 ≤2 处。
-
-```html
-<section class="slide" data-layout="swiss/statement" data-role="statement">
-  <img class="sl-texture" src="assets/styles/swiss/textures/dots-dark.png" aria-hidden="true">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">03 / 15</p>
-  <p class="l04-text" data-anim="rise">越大越细；强调靠<span class="is-mark">颜色</span>，不靠加粗。</p>
-  <p class="l04-attr">—— GRID 字阶第一法则 · 巨字 200，小字 500，反差 8:1</p>
-</section>
-```
-
-## swiss/compare · compare
-
-两方案 / 前后对比，两块中性面板 + 1px 墨色中缝。
-
-```html
-<section class="slide" data-layout="swiss/compare" data-role="compare">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">13 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">双轨对照：同一骨架，两种语法</h2>
-  <div class="l05-panel-a" data-shape="rect"></div>
-  <div class="l05-panel-b" data-shape="rect"></div>
-  <div class="sw-ink" data-shape="rect" style="left: 640px; top: 232px; width: 1px; height: 372px;"></div>
-  <h3 class="l05-h l05-ha" data-merge="a">DATUM · 制图</h3>
-  <p class="l05-p l05-a1" data-merge="a">被测量的页面：坐标纸、裁切标、尺寸标注、图签栏。</p>
-  <p class="l05-p l05-a2" data-merge="a">适合工程、验证、过程叙事——证据感来自标注。</p>
-  <h3 class="l05-h l05-hb" data-merge="b">GRID · 排印</h3>
-  <p class="l05-p l05-b1" data-merge="b">被排印的页面：色场、点阵、极端字阶、方块刻度。</p>
-  <p class="l05-p l05-b2" data-merge="b">适合发布、宣言、数据大字报——张力来自反差。</p>
-</section>
-```
-
-## swiss/points · points
-
-三点并列论证，序号用等宽。
-
-```html
-<section class="slide" data-layout="swiss/points" data-role="points">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">12 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">三质色块：互斥的材质系统</h2>
-  <div class="sw-accent" data-shape="rect" style="left: 80px; top: 200px; width: 352px; height: 400px;"></div>
-  <div class="sw-ink" data-shape="rect" style="left: 464px; top: 200px; width: 352px; height: 400px;"></div>
-  <div class="sw-grey" data-shape="rect" style="left: 848px; top: 200px; width: 352px; height: 400px;"></div>
-  <p class="l06-num l06-c1 sw-rev" data-merge="c1" style="left: 112px;">01</p>
-  <h3 class="l06-h l06-c1 sw-rev" data-merge="c1" style="left: 112px;">锚点色块</h3>
-  <p class="l06-p l06-c1 sw-rev" data-merge="c1" style="left: 112px; width: 288px;">整组卡片只允许一张上色——单焦点法则，蓝一旦泛滥就掉档。</p>
-  <p class="l06-num l06-c2 sw-rev" data-merge="c2" style="left: 496px;">02</p>
-  <h3 class="l06-h l06-c2 sw-rev" data-merge="c2" style="left: 496px;">墨色反转</h3>
-  <p class="l06-p l06-c2 sw-rev" data-merge="c2" style="left: 496px; width: 288px;">宣言与反转页用近黑，禁纯黑；反白文字承担全部层级。</p>
-  <p class="l06-num l06-c3" data-merge="c3" style="left: 880px;">03</p>
-  <h3 class="l06-h l06-c3" data-merge="c3" style="left: 880px;">灰底中性</h3>
-  <p class="l06-p l06-c3" data-merge="c3" style="left: 880px; width: 288px;">默认材质。禁止组合：色底加描边、灰底加描边均违规。</p>
+<section class="slide" data-layout="swiss/cover" data-role="cover">
+  <div class="sw-accent swc-panel" data-shape="rect"></div>
+  <img class="sw-photo swc-img" src="assets/img/01-cover.jpg" alt="示意图：灰白立板之间的一块克莱因蓝">
+  <p class="sw-mono sw-on2 swc-kicker">ZIFEIYU PPT SKILL</p>
+  <p class="sw-mono sw-on2 swc-vol">VOL. 01 — 2026</p>
+  <h1 class="sw-giant sw-on swc-title swc-t1" data-merge="title" data-anim="rise">一份源文件</h1>
+  <h1 class="sw-giant sw-on swc-title swc-t2" data-merge="title" data-anim="rise">三种交付</h1>
+  <p class="sw-lede sw-on swc-lede" data-anim="rise">浏览器里直接演示，再一键导出可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
+  <div class="sw-tick sw-on is-on swc-tick swc-k1" data-shape="rect"></div>
+  <div class="sw-tick sw-on swc-tick swc-k2" data-shape="rect"></div>
+  <div class="sw-tick sw-on swc-tick swc-k3" data-shape="rect"></div>
+  <div class="sw-tick sw-on swc-tick swc-k4" data-shape="rect"></div>
+  <p class="sw-mono sw-on swc-meta">网页 PPT · 可编辑导出</p>
+  <p class="sw-mono swc-cap">FIG. 01 — 示意图</p>
 </section>
 ```
 
 ## swiss/kpi · kpi
 
-三个真实数字；只许一个 `is-accent`；脚注 `data-source` 必填（R8）。
+数据大字。整行标题 → 黑色细线 → 三栏巨数字（Inter 极细，第一个用 `sw-ac` 上蓝）→ 标签与一行说明。三个数都必须真实，页脚 `data-source` 写出处；说明每条 ≤22 字，保持一行。
 
 ```html
 <section class="slide" data-layout="swiss/kpi" data-role="kpi">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">05 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">字阶与灰阶的系统参数</h2>
-  <p class="l07-num l07-c1 is-accent" data-anim="count">200</p>
-  <p class="l07-label l07-c1">巨字字重</p>
-  <p class="l07-sub l07-c1">display 槽位统一 ExtraLight，负字距收紧</p>
-  <p class="l07-num l07-c2" data-anim="count">8:1</p>
-  <p class="l07-label l07-c2">标题正文反差</p>
-  <p class="l07-sub l07-c2">128px 巨题对 16px 说明，双极反差即戏剧</p>
-  <p class="l07-num l07-c3" data-anim="count">1px</p>
-  <p class="l07-label l07-c3">发丝线</p>
-  <p class="l07-sub l07-c3">层级只靠线宽与灰阶，禁阴影禁圆角</p>
-  <p class="l07-footnote" data-source>参数来源：assets/systems/swiss.css · 2026-08</p>
+  <p class="sw-mono sw-folio">03 — QUALITY GATES</p>
+  <p class="sw-mono sw-pageno">10 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">导出之前，先过十六道检查。</h2>
+  <div class="sw-rule swk-rule" data-shape="rect" data-anim="draw"></div>
+  <p class="sw-num sw-ac swk-num swk-n1" data-anim="count">16</p>
+  <p class="sw-num swk-num swk-n2" data-anim="count">20</p>
+  <p class="sw-num swk-num swk-n3" data-anim="count">3</p>
+  <h3 class="sw-h swk-label swk-c1" data-merge="c1" data-anim="rise">条校验规则</h3>
+  <p class="sw-body swk-sub swk-c1" data-merge="c1" data-anim="rise">R1–R16，从版式注册一路查到 PPTX 导出一致性</p>
+  <h3 class="sw-h swk-label swk-c2" data-merge="c2" data-anim="rise">页面角色</h3>
+  <p class="sw-body swk-sub swk-c2" data-merge="c2" data-anim="rise">其中 12 个是每种风格必须覆盖的核心角色</p>
+  <h3 class="sw-h swk-label swk-c3" data-merge="c3" data-anim="rise">导出格式</h3>
+  <p class="sw-body swk-sub swk-c3" data-merge="c3" data-anim="rise">PPTX · PDF · PNG，HTML 是唯一的源</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot" data-source>SOURCE — scripts/validate.mjs · scripts/lib/roles.mjs</p>
 </section>
 ```
 
-## swiss/body-points · points
+## swiss/process · process
 
-左正文 + 右三条要点，常规内容页。
-
-```html
-<section class="slide" data-layout="swiss/body-points" data-role="points">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">14 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">把 GRID 用在你的内容上</h2>
-  <p class="l10-body">换一个 CSS 文件，二十四个版式整套切换到瑞士语法。数据、工程、发布会类内容优先选它：真实数字配极细巨字，灰阶配唯一锚点，每一页都像仪表盘上的一格刻度。</p>
-  <h3 class="l10-point-title l10-p1t" data-merge="p1">01 · 适用</h3>
-  <p class="l10-point-body l10-p1b" data-merge="p1">数据汇报、产品发布、技术分享——凡是数字能自己说话的内容。</p>
-  <h3 class="l10-point-title l10-p2t" data-merge="p2">02 · 禁用清单</h3>
-  <p class="l10-point-body l10-p2b" data-merge="p2">渐变、阴影、圆角、双 accent、巨字加粗——出现任何一项即掉档。</p>
-  <h3 class="l10-point-title l10-p3t" data-merge="p3">03 · 换色</h3>
-  <p class="l10-point-body l10-p3b" data-merge="p3">柠檬黄/柠檬绿/安全橙按许可对替换 token，全 deck 仍只有一色。</p>
-</section>
-```
-
-## swiss/closing · closing
-
-结尾，`is-accent` 收束与封面闭环。
+流程四步。整行标题 → 四个等宽色块（前三块灰、最后一块蓝）→ 块内巨数字编号、步骤名、两行以内说明。步骤名 ≤4 字，说明 ≤28 字。
 
 ```html
-<section class="slide is-accent" data-layout="swiss/closing" data-role="closing">
-  <img class="sl-texture" src="assets/styles/swiss/textures/dots-light.png" aria-hidden="true">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">15 / 15</p>
-  <h1 class="l13-title" data-anim="rise">以蓝开场，以蓝收束。</h1>
-  <p class="l13-sub">单色锚点 · 字重反比 · 三质互斥 · 色彩闭环——四条法则，一套秩序。</p>
-  <div class="l13-rule" data-anim="draw" data-shape="rect"></div>
-  <p class="l13-meta">zifeiyu-ppt-skill · GRID 金样 · 2026-08</p>
-  <div class="sw-ink" data-shape="rect" style="left: 96px; top: 648px; width: 10px; height: 10px;"></div>
-  <div class="sw-ink" data-shape="rect" style="left: 116px; top: 648px; width: 10px; height: 10px;"></div>
-  <div class="sw-ink" data-shape="rect" style="left: 136px; top: 648px; width: 10px; height: 10px;"></div>
-  <div class="sw-ink" data-shape="rect" style="left: 156px; top: 648px; width: 24px; height: 10px;"></div>
-</section>
-```
-
-## swiss/bars · bars
-
-2–4 项真实数值对比；每根条写 `data-value` / `data-label`，条长与数值成正比（R8）；`--native-charts` 导出为原生图表。
-
-```html
-<section class="slide" data-layout="swiss/bars" data-role="bars">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">06 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">四套锚点色对纸面的对比度</h2>
-  <p class="l15-label l15-r1" data-chart>克莱因蓝</p>
-  <div class="l15-bar l15-b1" data-anim="grow-x" data-shape="rect" data-value="10.3" data-label="克莱因蓝" style="width: 660px;"></div>
-  <p class="l15-val l15-r1" data-chart>10.3</p>
-  <p class="l15-label l15-r2" data-chart>安全橙</p>
-  <div class="l15-bar l15-b2" data-anim="grow-x" data-shape="rect" data-value="2.7" data-label="安全橙" style="width: 173px;"></div>
-  <p class="l15-val l15-r2" data-chart>2.7</p>
-  <p class="l15-label l15-r3" data-chart>柠檬绿</p>
-  <div class="l15-bar l15-b3" data-anim="grow-x" data-shape="rect" data-value="1.4" data-label="柠檬绿" style="width: 90px;"></div>
-  <p class="l15-val l15-r3" data-chart>1.4</p>
-  <p class="l15-label l15-r4" data-chart>柠檬黄</p>
-  <div class="l15-bar l15-b4" data-anim="grow-x" data-shape="rect" data-value="1.4" data-label="柠檬黄" style="width: 90px;"></div>
-  <p class="l15-val l15-r4" data-chart>1.4</p>
-  <p class="l15-footnote" data-source>WCAG 相对亮度实测（对 #fafaf8）· 黄绿只可做高亮底色不可做字色 · 条长与数值成正比</p>
-</section>
-```
-
-## swiss/cycle · cycle
-
-有回路的 3–4 步闭环（线性流程不要用它）；页面不加纹理。
-
-```html
-<section class="slide is-dark" data-layout="swiss/cycle" data-role="cycle">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">10 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">四道门构成的质量闭环</h2>
-  <div class="l20-ring" data-shape="ellipse"></div>
-  <div class="l20-hole" data-shape="ellipse"></div>
-  <div class="l20-node l20-n1" data-anim="ring" data-shape="ellipse"></div>
-  <div class="l20-node l20-n2" data-anim="ring" data-shape="ellipse"></div>
-  <div class="l20-node l20-n3" data-anim="ring" data-shape="ellipse"></div>
-  <div class="l20-node l20-n4" data-anim="ring" data-shape="ellipse"></div>
-  <p class="l20-center">LOOP</p>
-  <h3 class="l20-h l20-hn" data-merge="n">机器校验</h3>
-  <p class="l20-p l20-pn" data-merge="n">validate.mjs R1–R15，错误清零</p>
-  <h3 class="l20-h l20-he" data-merge="e">渲染目检</h3>
-  <p class="l20-p l20-pe" data-merge="e">render-png.mjs 逐页读图，P0/P1 必修</p>
-  <h3 class="l20-h l20-hs" data-merge="s">确定性导出</h3>
-  <p class="l20-p l20-ps" data-merge="s">export-pptx.mjs + check-pptx.mjs</p>
-  <h3 class="l20-h l20-hw" data-merge="w">像素回归</h3>
-  <p class="l20-p l20-pw" data-merge="w">diff.mjs 比对 baselines 金样</p>
-</section>
-```
-
-## swiss/matrix · matrix
-
-8–12 项清单收束到一个总数巨字。
-
-```html
-<section class="slide" data-layout="swiss/matrix" data-role="matrix">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">07 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">注册版式按叙事角色盘点</h2>
-  <p class="l21-total">24</p>
-  <p class="l21-total-label">REGISTRY · 注册版式总数</p>
-  <p class="l21-num l21-c1 l21-r1" data-merge="r1c1" data-anim="fade">L01 · L13</p>
-  <p class="l21-label l21-c1 l21-b1" data-merge="r1c1" data-anim="fade">首尾闭环</p>
-  <p class="l21-num l21-c2 l21-r1" data-merge="r1c2" data-anim="fade">L02 · L03</p>
-  <p class="l21-label l21-c2 l21-b1" data-merge="r1c2" data-anim="fade">导航节奏</p>
-  <p class="l21-num l21-c3 l21-r1" data-merge="r1c3" data-anim="fade">L04</p>
-  <p class="l21-label l21-c3 l21-b1" data-merge="r1c3" data-anim="fade">单点陈述</p>
-  <p class="l21-num l21-c1 l21-r2" data-merge="r2c1" data-anim="fade">L05</p>
-  <p class="l21-label l21-c1 l21-b2" data-merge="r2c1" data-anim="fade">二元对比</p>
-  <p class="l21-num l21-c2 l21-r2" data-merge="r2c2" data-anim="fade">L06</p>
-  <p class="l21-label l21-c2 l21-b2" data-merge="r2c2" data-anim="fade">三点并列</p>
-  <p class="l21-num l21-c3 l21-r2" data-merge="r2c3" data-anim="fade">L07 · L15 · L22</p>
-  <p class="l21-label l21-c3 l21-b2" data-merge="r2c3" data-anim="fade">真实数据</p>
-  <p class="l21-num l21-c1 l21-r3" data-merge="r3c1" data-anim="fade">L08 · L23</p>
-  <p class="l21-label l21-c1 l21-b3" data-merge="r3c1" data-anim="fade">时序演进</p>
-  <p class="l21-num l21-c2 l21-r3" data-merge="r3c2" data-anim="fade">L09 · L14 · L16</p>
-  <p class="l21-label l21-c2 l21-b3" data-merge="r3c2" data-anim="fade">图像证据</p>
-  <p class="l21-num l21-c3 l21-r3" data-merge="r3c3" data-anim="fade">L10 · L11</p>
-  <p class="l21-label l21-c3 l21-b3" data-merge="r3c3" data-anim="fade">正文台账</p>
-  <p class="l21-num l21-c1 l21-r4" data-merge="r4c1" data-anim="fade">L12 · L20</p>
-  <p class="l21-label l21-c1 l21-b4" data-merge="r4c1" data-anim="fade">过程流程</p>
-  <p class="l21-num l21-c2 l21-r4" data-merge="r4c2" data-anim="fade">L21 · L24</p>
-  <p class="l21-label l21-c2 l21-b4" data-merge="r4c2" data-anim="fade">结构盘点</p>
-  <p class="l21-num l21-c3 l21-r4" data-merge="r4c3" data-anim="fade">L17 · L18 · L19</p>
-  <p class="l21-label l21-c3 l21-b4" data-merge="r4c3" data-anim="fade">媒体播放</p>
-</section>
-```
-
-## swiss/spec · table
-
-参数 / 规格逐条对照，真实数值 + 脚注出处（R8）。
-
-```html
-<section class="slide" data-layout="swiss/spec" data-role="table">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">08 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">画布契约：全系统共用的常量</h2>
-  <p class="l22-label l22-c1 l22-r1" data-merge="r1c1">画布尺寸</p>
-  <p class="l22-value l22-c1 l22-b1" data-merge="r1c1">1280 × 720 px</p>
-  <p class="l22-label l22-c2 l22-r1" data-merge="r1c2">导出幻灯片尺寸</p>
-  <p class="l22-value l22-c2 l22-b1" data-merge="r1c2">960 × 540 pt</p>
-  <div class="l22-line l22-s1" data-shape="rect"></div>
-  <p class="l22-label l22-c1 l22-r2" data-merge="r2c1">像素换算系数</p>
-  <p class="l22-value l22-c1 l22-b2" data-merge="r2c1">px × 0.75</p>
-  <p class="l22-label l22-c2 l22-r2" data-merge="r2c2">页面边距</p>
-  <p class="l22-value l22-c2 l22-b2" data-merge="r2c2">左右各 96 px</p>
-  <div class="l22-line l22-s2" data-shape="rect"></div>
-  <p class="l22-label l22-c1 l22-r3" data-merge="r3c1">内容净宽</p>
-  <p class="l22-value l22-c1 l22-b3" data-merge="r3c1">1088 px</p>
-  <p class="l22-label l22-c2 l22-r3" data-merge="r3c2">字号下限</p>
-  <p class="l22-value l22-c2 l22-b3" data-merge="r3c2">16 px</p>
-  <div class="l22-line l22-s3" data-shape="rect"></div>
-  <p class="l22-label l22-c1 l22-r4" data-merge="r4c1">巨题对说明反差</p>
-  <p class="l22-value l22-c1 l22-b4" data-merge="r4c1">8 : 1</p>
-  <p class="l22-label l22-c2 l22-r4" data-merge="r4c2">注册版式</p>
-  <p class="l22-value l22-c2 l22-b4" data-merge="r4c2">24 个（L01–L24）</p>
-  <div class="l22-line l22-s4" data-shape="rect"></div>
-  <p class="l22-footnote" data-source style="width: 1088px;">参数来源：assets/base.css 画布契约 · assets/systems/swiss.css 字阶 · scripts/validate.mjs R3/R4 · 2026-08</p>
-</section>
-```
-
-## swiss/timeline · timeline
-
-4 个节点的纵向时间线，每节点一句说明。
-
-```html
-<section class="slide" data-layout="swiss/timeline" data-role="timeline">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">09 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">四个里程碑：从骨架到机制</h2>
-  <div class="l23-axis" data-anim="grow-y" data-shape="rect"></div>
-  <div class="l23-dot l23-d1" data-anim="pop" data-shape="ellipse"></div>
-  <div class="l23-dot l23-d2" data-anim="pop" data-shape="ellipse"></div>
-  <div class="l23-dot l23-d3" data-anim="pop" data-shape="ellipse"></div>
-  <div class="l23-dot l23-d4" data-anim="pop" data-shape="ellipse"></div>
-  <p class="l23-date l23-r1">2026-07-16</p>
-  <h3 class="l23-h l23-r1" data-merge="r1">M1 · 最小闭环</h3>
-  <p class="l23-p l23-n1" data-merge="r1">seed.html、base.css、三套 token 主题、校验器与金样 deck 成套落地。</p>
-  <p class="l23-date l23-r2">2026-07-18</p>
-  <h3 class="l23-h l23-r2" data-merge="r2">M4 · 体验补强</h3>
-  <p class="l23-p l23-n2" data-merge="r2">「墨韵」衬线系统、条形图、图片网格与原生备注导出同期并入。</p>
-  <p class="l23-date l23-r3">2026-08-17</p>
-  <h3 class="l23-h l23-r3" data-merge="r3">M6 · 排印升级</h3>
-  <p class="l23-p l23-n3" data-merge="r3">确定性字体子集、CJK 标点收束、构图修缮——三端排印一致。</p>
-  <p class="l23-date l23-r4">2026-08-18</p>
-  <h3 class="l23-h l23-r4" data-merge="r4">M8 · 机制吸收</h3>
-  <p class="l23-p l23-n4" data-merge="r4">OOXML 结构门、文本框合并、品牌主题提取、就地编辑模式入库。</p>
-</section>
-```
-
-## swiss/system · system
-
-三层嵌套（越往外越可替换）；只用于浅色页，页面不加纹理。
-
-```html
-<section class="slide" data-layout="swiss/system" data-role="system">
-  <p class="sl-mono" style="left: 96px; top: 64px;">GRID · 瑞士国际主义</p>
-  <p class="sl-mono" style="left: 1046px; top: 64px; width: 138px;">11 / 15</p>
-  <h2 class="sl-title" data-anim="rise" style="top: 108px;">三层架构：越往外越可替换</h2>
-  <div class="l24-l1" data-anim="scale" data-shape="ellipse"></div>
-  <div class="l24-l2" data-anim="scale" data-shape="ellipse"></div>
-  <div class="l24-l3" data-anim="scale" data-shape="ellipse"></div>
-  <p class="l24-core">骨架</p>
-  <div class="l24-s1" data-anim="fade" data-shape="rect" style="left: 760px; top: 258px; width: 12px; height: 12px;"></div>
-  <h3 class="l24-h l24-h1" data-merge="h1" data-anim="fade">主题 token</h3>
-  <p class="l24-p l24-p1" data-merge="h1" data-anim="fade">themes/*.css 只改颜色变量，一个文件换掉整套配色。</p>
-  <div class="l24-s2" data-anim="fade" data-shape="rect" style="left: 760px; top: 398px; width: 12px; height: 12px;"></div>
-  <h3 class="l24-h l24-h2" data-merge="h2" data-anim="fade">设计系统</h3>
-  <p class="l24-p l24-p2" data-merge="h2" data-anim="fade">systems/*.css 覆写排印与字重，禁止触碰任何几何。</p>
-  <div class="l24-s3" data-anim="fade" data-shape="rect" style="left: 760px; top: 538px; width: 12px; height: 12px;"></div>
-  <h3 class="l24-h l24-h3" data-merge="h3" data-anim="fade">版式骨架</h3>
-  <p class="l24-p l24-p3" data-merge="h3" data-anim="fade">base.css 定义全部类名与几何，是唯一的结构真源。</p>
+<section class="slide" data-layout="swiss/process" data-role="process">
+  <p class="sw-mono sw-folio">04 — WORKFLOW</p>
+  <p class="sw-mono sw-pageno">13 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">从大纲到成稿，四步</h2>
+  <div class="sw-grey swp-block swp-b1" data-shape="rect" data-anim="rise"></div>
+  <div class="sw-grey swp-block swp-b2" data-shape="rect" data-anim="rise"></div>
+  <div class="sw-grey swp-block swp-b3" data-shape="rect" data-anim="rise"></div>
+  <div class="sw-accent swp-block swp-b4" data-shape="rect" data-anim="rise"></div>
+  <p class="sw-num swp-num swp-c1" data-merge="s1" data-anim="rise">01</p>
+  <h3 class="sw-h swp-h swp-c1" data-merge="s1" data-anim="rise">选风格</h3>
+  <p class="sw-body swp-p swp-c1" data-merge="s1" data-anim="rise">看风格画廊，按场合挑一种，整份 deck 只用这一种。</p>
+  <p class="sw-num swp-num swp-c2" data-merge="s2" data-anim="rise">02</p>
+  <h3 class="sw-h swp-h swp-c2" data-merge="s2" data-anim="rise">填版式</h3>
+  <p class="sw-body swp-p swp-c2" data-merge="s2" data-anim="rise">按内容形状找角色，复制版式骨架，只换文字和图片。</p>
+  <p class="sw-num swp-num swp-c3" data-merge="s3" data-anim="rise">03</p>
+  <h3 class="sw-h swp-h swp-c3" data-merge="s3" data-anim="rise">过校验</h3>
+  <p class="sw-body swp-p swp-c3" data-merge="s3" data-anim="rise">查类名、字号、出处与导出一致性，错误必须清零。</p>
+  <p class="sw-num sw-on swp-num swp-c4" data-merge="s4" data-anim="rise">04</p>
+  <h3 class="sw-h sw-on swp-h swp-c4" data-merge="s4" data-anim="rise">导出</h3>
+  <p class="sw-body sw-on2 swp-p swp-c4" data-merge="s4" data-anim="rise">一键得到可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">ZIFEIYU PPT SKILL · STYLE B — SWISS</p>
 </section>
 ```

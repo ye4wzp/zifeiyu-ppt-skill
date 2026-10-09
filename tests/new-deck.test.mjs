@@ -23,7 +23,7 @@ test('shared base.css carries no layout geometry', () => {
 test('scaffolds a style deck that validates', () => {
   const dir = join(mkdtempSync(join(tmpdir(), 'nd-')), 'd');
   execFileSync('node', ['scripts/new-deck.mjs', dir, '--style', 'swiss']);
-  for (const f of ['assets/base.css', 'assets/runtime.js', 'assets/enhance.js', 'assets/styles/swiss/style.css', 'assets/styles/swiss/manifest.json', 'assets/styles/swiss/textures/dots-light.png'])
+  for (const f of ['assets/base.css', 'assets/runtime.js', 'assets/enhance.js', 'assets/styles/swiss/style.css', 'assets/styles/swiss/manifest.json'])
     assert.ok(existsSync(join(dir, f)), f);
   assert.match(readFileSync(join(dir, 'index.html'), 'utf8'), /assets\/styles\/swiss\/style\.css/);
   assert.equal(spawnSync('node', ['scripts/validate.mjs', dir]).status, 0);

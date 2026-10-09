@@ -1,7 +1,7 @@
 // Usage: node scripts/fetch-fonts.mjs
 // One-time download of the full source fonts (gitignored, ~55MB) that
 // subset-fonts.mjs slices into tiny per-deck woff2 files.
-// Licenses: Source Han Sans/Serif, JetBrains Mono and Playfair Display are all SIL OFL 1.1 —
+// Licenses: Source Han Sans/Serif, JetBrains Mono, Playfair Display and Inter are all SIL OFL 1.1 —
 // subsetting and embedding are permitted.
 import { createWriteStream, existsSync, mkdirSync } from 'node:fs';
 import { Readable } from 'node:stream';
@@ -22,9 +22,11 @@ const FILES = {
   'JetBrainsMono-Regular.ttf': 'https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/fonts/ttf/JetBrainsMono-Regular.ttf',
   'PlayfairDisplay-VF.ttf': 'https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf',
   'PlayfairDisplay-Italic-VF.ttf': 'https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/PlayfairDisplay-Italic%5Bwght%5D.ttf',
+  'Inter-VF.ttf': 'https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz,wght%5D.ttf',
   'LICENSE-SourceHan.txt': 'https://raw.githubusercontent.com/adobe-fonts/source-han-sans/release/LICENSE.txt',
   'LICENSE-JetBrainsMono.txt': 'https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/OFL.txt',
   'LICENSE-PlayfairDisplay.txt': 'https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/OFL.txt',
+  'LICENSE-Inter.txt': 'https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt',
 };
 
 for (const [name, url] of Object.entries(FILES)) {

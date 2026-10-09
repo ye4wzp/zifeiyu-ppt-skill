@@ -5,33 +5,23 @@
   "group": "商务理性",
   "status": "draft",
   "recommend": ["数据", "发布", "技术"],
-  "assets": ["textures"],
+  "assets": [],
   "fonts": {
     "web": [
       { "src": "SourceHanSansSC-VF.otf", "out": "source-han-sans-sc.woff2" },
+      { "src": "Inter-VF.ttf", "out": "inter.woff2" },
       { "src": "JetBrainsMono-Regular.ttf", "out": "jetbrains-mono.woff2" }
     ],
     "office": {
       "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "Inter": { "regular": "Segoe UI", "light": "Segoe UI Light" },
       "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
       "JetBrains Mono": "Consolas"
     }
   },
   "layouts": {
     "swiss/cover": { "role": "cover" },
-    "swiss/agenda": { "role": "agenda" },
-    "swiss/section": { "role": "section" },
-    "swiss/statement": { "role": "statement" },
-    "swiss/compare": { "role": "compare" },
-    "swiss/points": { "role": "points" },
     "swiss/kpi": { "role": "kpi" },
-    "swiss/body-points": { "role": "points" },
-    "swiss/closing": { "role": "closing" },
-    "swiss/bars": { "role": "bars" },
-    "swiss/cycle": { "role": "cycle" },
-    "swiss/matrix": { "role": "matrix" },
-    "swiss/spec": { "role": "table" },
-    "swiss/timeline": { "role": "timeline" },
-    "swiss/system": { "role": "system" }
+    "swiss/process": { "role": "process" }
   }
 }

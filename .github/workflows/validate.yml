@@ -38,7 +38,7 @@ jobs:
           unzip -l /tmp/media.pptx | grep -q "media-.*\.mp4"
           node scripts/check-pptx.mjs /tmp/media.pptx --expect-slides 6
           node scripts/export-pptx.mjs styles/swiss/golden --out /tmp/swiss.pptx --native-charts
-          node scripts/check-pptx.mjs /tmp/swiss.pptx --expect-slides 15
+          node scripts/check-pptx.mjs /tmp/swiss.pptx --expect-slides 3
           node scripts/export-pptx.mjs styles/magazine/golden --out /tmp/magazine.pptx
           unzip -l /tmp/magazine.pptx | grep -q "media-.*\.mp4"
           node scripts/check-pptx.mjs /tmp/magazine.pptx --expect-slides 18
