@@ -104,7 +104,7 @@
 
 ## photobook/matrix · matrix
 
-矩阵盘点。一行标题 + 斜体副题 → 左栏斜体大总数 + 宋体单位 + 一句分组说明；右侧 4×3 底片小样（208×112 小图 + 等宽字母 + 宋体名称），当前风格的那一格外加一圈 2px 墨线（`pbm-sel`）。小图用 416×224 的专用横幅图（复用竖幅图会被裁掉一半以上，R13 报警）。
+矩阵盘点（8–12 项，名称 ≤7 字）。一行标题 + 斜体副题 → 左栏斜体大总数 + 宋体单位 + 一句分组说明；右侧 4×3 底片小样：列 left 336 / 560 / 784 / 1008，行的图顶 148 / 312 / 476（208×112 小图，字母与名称在图下 124px / 127px 处）；当前项外加一圈 2px 墨线 `pbm-sel`，位置 = 该格图片 left − 6、top − 6。小图用 416×224 的专用横幅图（复用竖幅图会被裁掉一半以上，R13 报警）。
 
 ```html
 <section class="slide" data-layout="photobook/matrix" data-role="matrix">
@@ -157,7 +157,7 @@
 
 ## photobook/compare · compare
 
-对比。一行标题 + 斜体副题 → 左右两张 568×260 照片 → 每侧等宽 BEFORE / AFTER、宋体小标题、两行以内说明、斜体大数字 + 一句单位。
+对比。一行标题 + 斜体副题 → 左右两张 568×260 照片 → 每侧等宽 BEFORE / AFTER、宋体小标题（≤14 字）、两行以内说明（≤70 字）、斜体大数字 + 一句单位（≤12 字）。
 
 ```html
 <section class="slide" data-layout="photobook/compare" data-role="compare">
@@ -267,7 +267,7 @@
 
 ## photobook/bars · bars
 
-条形对比。一行标题 + 斜体副题 → 左 376×492 照片；右侧 6 行「宋体标签（右对齐）/ 墨色条 / 斜体数值 / 等宽规则号」，条长每单位 72px（`data-value` × 72）。来源写 `data-source`；`--native-charts` 时整组换成 PowerPoint 原生条形图。
+条形对比（3–6 行，行距 80px）。一行标题 + 斜体副题 → 左 376×492 照片；右侧每行「宋体标签（右对齐，≤6 字）/ 墨色条 / 斜体数值 / 等宽规则号」。条从 left 624 起，条长 = 数值 × 单位长，单位长 = 288 ÷ 最大值（金样最大值 4 → 72px）；数值 left = 624 + 条长 + 16，注释 left = 数值 left + 40（注释 ≤18 字符）。来源写 `data-source`；`--native-charts` 时整组换成 PowerPoint 原生条形图。
 
 ```html
 <section class="slide" data-layout="photobook/bars" data-role="bars">
@@ -305,7 +305,7 @@
 
 ## photobook/table · table
 
-规格表。一行标题 + 斜体副题 → 等宽表头 ITEM / SPEC / SOURCE + 2px 墨线 → 6 行，行高 64px、行间细线。表格页不放照片。来源写 `data-source`。
+规格表（4–6 行，规格 ≤30 字）。一行标题 + 斜体副题 → 等宽表头 ITEM / SPEC / SOURCE + 2px 墨线 → 每行 64px、行间细线（行 n 顶 = 194 + 64n）。表格页不放照片。来源写 `data-source`。
 
 ```html
 <section class="slide" data-layout="photobook/table" data-role="table">
@@ -346,7 +346,7 @@
 
 ## photobook/video · video
 
-视频暗房页。一行标题 + 斜体副题 → 左 864×486 视频（默认停在封面帧，点击播放）；右栏说明与等宽时长。`poster` 与 `aria-label` 必填，时长写真实值。
+视频暗房页。一行标题 + 斜体副题 → 左 864×486 视频（默认停在封面帧，点击播放）；右栏说明（≤45 字）与等宽时长。`poster` 与 `aria-label` 必填，时长写真实值。
 
 ```html
 <section class="slide is-dark" data-layout="photobook/video" data-role="video">
@@ -426,7 +426,7 @@
 
 ## photobook/gallery · gallery
 
-图集。一行标题 + 斜体副题 → 左大图 680×492 + 右两张 456×238 叠放，三张同高收边于 640；页脚写出处与「三幅均为示意图」。
+图集。一行标题 + 斜体副题 → 左大图 680×492 + 右两张 456×238 叠放，上下边与大图对齐（148 / 640）；页脚写出处与「三幅均为示意图」。
 
 ```html
 <section class="slide" data-layout="photobook/gallery" data-role="gallery">

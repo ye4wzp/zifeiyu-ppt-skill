@@ -76,49 +76,49 @@ const field = (r) => {
 
 const arch = (r) => {
   // a lit room: back wall, floor plane, then receding wall planes and window slots
-  const light = mix(bg, '#ffffff', 0.5), shade = mix(surface, ink, 0.18), deep = mix(surface, ink, 0.45);
-  const horizon = H * (0.55 + r() * 0.12);
+  const wallLight = mix(bg, '#ffffff', 0.5), shade = mix(surface, ink, 0.18), deep = mix(surface, ink, 0.45);
+  const horizonY = H * (0.55 + r() * 0.12);
   let defs = `<linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${shade}"/><stop offset="1" stop-color="${deep}"/></linearGradient>
-    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${light}"/><stop offset="1" stop-color="${surface}"/></linearGradient>`;
-  let shapes = `<rect width="${W}" height="${horizon}" fill="url(#wall)"/><rect y="${horizon}" width="${W}" height="${H - horizon}" fill="url(#floor)"/>`;
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="${wallLight}"/><stop offset="1" stop-color="${surface}"/></linearGradient>`;
+  let shapes = `<rect width="${W}" height="${horizonY}" fill="url(#wall)"/><rect y="${horizonY}" width="${W}" height="${H - horizonY}" fill="url(#floor)"/>`;
   const planes = 4 + Math.floor(r() * 4);
   for (let i = 0; i < planes; i++) {
-    const x = r() * W, w = W * (0.06 + r() * 0.22), top = horizon * (0.08 + r() * 0.4);
+    const x = r() * W, w = W * (0.06 + r() * 0.22), top = horizonY * (0.08 + r() * 0.4);
     const lean = (r() - 0.5) * w * 0.6;
     const c = r() < 0.18 ? accent : mix(surface, ink, 0.05 + r() * 0.3);
     defs += `<linearGradient id="p${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${mix(c, '#ffffff', 0.2)}"/><stop offset="1" stop-color="${mix(c, ink, 0.15)}"/></linearGradient>`;
-    shapes += `<polygon points="${x},${top} ${x + w},${top + lean * 0.2} ${x + w + lean},${horizon + (H - horizon) * 0.5} ${x + lean},${horizon + (H - horizon) * 0.55}" fill="url(#p${i})" opacity="${0.75 + r() * 0.25}"/>`;
+    shapes += `<polygon points="${x},${top} ${x + w},${top + lean * 0.2} ${x + w + lean},${horizonY + (H - horizonY) * 0.5} ${x + lean},${horizonY + (H - horizonY) * 0.55}" fill="url(#p${i})" opacity="${0.75 + r() * 0.25}"/>`;
   }
   const slots = 2 + Math.floor(r() * 4);
   for (let i = 0; i < slots; i++) {
-    const x = W * (0.05 + r() * 0.85), y = horizon * (0.05 + r() * 0.25);
+    const x = W * (0.05 + r() * 0.85), y = horizonY * (0.05 + r() * 0.25);
     shapes += `<rect x="${x}" y="${y}" width="${W * (0.04 + r() * 0.1)}" height="${H * 0.012 + r() * 6}" fill="#ffffff" opacity="${0.6 + r() * 0.35}"/>`;
   }
-  return { defs, shapes, base: light };
+  return { defs, shapes, base: wallLight, blur: 1.2 };
 };
 
 const light = (r) => {
   // a dim room: sun through a paned window lands as a skewed patch on wall and floor
   const wallL = mix(surface, ink, 0.62), wallR = mix(surface, ink, 0.4), sun = mix(bg, accent, 0.3);
-  const horizon = H * (0.68 + r() * 0.12);
+  const floorY = H * (0.68 + r() * 0.12);
   let defs = `<linearGradient id="wall" x1="0" y1="0" x2="1" y2="0.3"><stop offset="0" stop-color="${wallL}"/><stop offset="1" stop-color="${wallR}"/></linearGradient>
     <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(surface, ink, 0.5)}"/><stop offset="1" stop-color="${mix(surface, ink, 0.78)}"/></linearGradient>
     <radialGradient id="glow"><stop offset="0" stop-color="${sun}" stop-opacity="0.45"/><stop offset="1" stop-color="${sun}" stop-opacity="0"/></radialGradient>`;
-  let shapes = `<rect width="${W}" height="${horizon}" fill="url(#wall)"/><rect y="${horizon}" width="${W}" height="${H - horizon}" fill="url(#floor)"/>`;
+  let shapes = `<rect width="${W}" height="${floorY}" fill="url(#wall)"/><rect y="${floorY}" width="${W}" height="${H - floorY}" fill="url(#floor)"/>`;
   const cols = 2 + Math.floor(r() * 2), rows = 2 + Math.floor(r() * 2);
-  const x0 = W * (0.12 + r() * 0.4), y0 = horizon * (0.12 + r() * 0.25);
-  const pw = W * (0.07 + r() * 0.05), ph = horizon * (0.12 + r() * 0.06), skew = pw * (0.5 + r() * 0.6), gap = Math.max(4, W * 0.008);
+  const x0 = W * (0.12 + r() * 0.4), y0 = floorY * (0.12 + r() * 0.25);
+  const pw = W * (0.07 + r() * 0.05), ph = floorY * (0.12 + r() * 0.06), skew = pw * (0.5 + r() * 0.6), gap = Math.max(4, W * 0.008);
   shapes += `<ellipse cx="${x0 + cols * pw * 0.6 + skew}" cy="${y0 + rows * ph * 0.5}" rx="${cols * pw * 1.6}" ry="${rows * ph * 1.4}" fill="url(#glow)"/>`;
   for (let c = 0; c < cols; c++) {
-    for (let w = 0; w < rows; w++) {
-      const x = x0 + c * (pw + gap) + w * skew * 0.35, y = y0 + w * (ph + gap);
+    for (let row = 0; row < rows; row++) {
+      const x = x0 + c * (pw + gap) + row * skew * 0.35, y = y0 + row * (ph + gap);
       const o = 0.62 + r() * 0.3;
       shapes += `<polygon points="${x},${y} ${x + pw},${y} ${x + pw + skew * 0.35},${y + ph} ${x + skew * 0.35},${y + ph}" fill="${sun}" opacity="${o}"/>`;
     }
   }
   // the same window again, stretched across the floor
   const fx = x0 + skew * 1.4, fw = (cols * (pw + gap)) * 1.25;
-  shapes += `<polygon points="${fx},${horizon + 6} ${fx + fw},${horizon + 6} ${fx + fw + skew * 2.2},${H} ${fx + skew * 1.6},${H}" fill="${sun}" opacity="${0.35 + r() * 0.2}"/>`;
+  shapes += `<polygon points="${fx},${floorY + 6} ${fx + fw},${floorY + 6} ${fx + fw + skew * 2.2},${H} ${fx + skew * 1.6},${H}" fill="${sun}" opacity="${0.35 + r() * 0.2}"/>`;
   // a door jamb or column throwing a hard dark edge
   const jx = r() < 0.5 ? W * (0.02 + r() * 0.08) : W * (0.82 + r() * 0.1);
   shapes += `<rect x="${jx}" width="${W * (0.05 + r() * 0.06)}" height="${H}" fill="${mix(ink, wallL, 0.25)}" opacity="0.85"/>`;

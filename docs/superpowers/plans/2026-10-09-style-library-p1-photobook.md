@@ -18,7 +18,7 @@
 - R4 font floor 16px; R16 export parity (no `transform`, single-layer shadow, uniform border, text slots without bg/border/shadow/padding).
 - Data roles (`kpi`, `bars`, `table`) use real, repo-verifiable numbers and carry a non-empty `data-source` text; bar width ∝ `data-value` (72 px per rule).
 - Core copy comes verbatim from `docs/golden-content.md`; two-line golden titles join into one line on pages that use the shared `pb-title` head (as the specimen's kpi does); cover / statement / image-text / closing keep two lines. Style voice (italic Latin line, mono labels, frame numbers) is G's own.
-- Golden imagery from `scripts/gen-art.mjs --palette … --format jpg` at 2× the layout box, alternating the two film palettes below; every `alt` starts with「示意图：」and every page that shows an image says 示意图 in its foot or caption. Images may be reused across pages (matrix contact sheet, closing strip) — the exporter bakes every `object-fit: cover` image to its own crop, so the aspect may differ.
+- Golden imagery from `scripts/gen-art.mjs --palette … --format jpg` at 2× the layout box, alternating the two film palettes below; every `alt` starts with「示意图：」and every page that shows an image says 示意图 in its foot or caption. Images may be reused across pages only when the cover-fit crop loses ≤45% (validator R13) — the closing strip qualifies (≈44%); the matrix contact sheet does not and uses dedicated 416×224 thumbnails `05-matrix-a…l.jpg` (ruling during Task 2). The exporter bakes every `object-fit: cover` image to its own crop.
   - `WARM="#e9e3d8,#9a8e7c,#c8742f,#1c1a17"`
   - `COOL="#dfe3e6,#7d8a94,#d9a066,#15191d"`
   - Alt wording by kind: light →「窗光落在暗墙上」/「墙面上的窗光」, horizon →「远山与低悬的太阳」/「远山与落日」, arch →「立板构成的空间」/「立板」, field →「色场」; prefix 暖色 / 冷色 by palette.
@@ -37,7 +37,7 @@ Same role order as A magazine. "bleed" = an image or video covering ≥25% of th
 | 02 | photobook/agenda | bleed | 02-agenda | 02 / 18 |
 | 03 | photobook/statement | `is-dark` | — | 03 / 18 |
 | 04 | photobook/section | bleed (full) | 04-section | 04 / 18 |
-| 05 | photobook/matrix | light | reuses 01-cover-1…5, 10-kpi-1…3, 13-process-1…4 | 05 / 18 |
+| 05 | photobook/matrix | light | 05-matrix-a…l (dedicated 416×224 thumbnails) | 05 / 18 |
 | 06 | photobook/compare | light | 06-compare-1, 06-compare-2 | 06 / 18 |
 | 07 | photobook/image-text | bleed (left half) | 07-feature | 07 / 18 |
 | 08 | photobook/image | bleed (plate) | 08-plate | 08 / 18 |
@@ -237,6 +237,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>"
 **Files:** `styles/photobook/{style.css, manifest.json, layouts.md}`, golden `index.html`, images `06-compare-1.jpg`, `06-compare-2.jpg`, `07-feature.jpg`, `08-plate.jpg`.
 
 **Interfaces:** Consumes `pb-title` / `pb-voice` / `pb-foot` / `pb-pageno`, `.pb-photo`, `.pb-ink`, the specimen and Task 1 images (matrix reuses twelve of them).
+
+> Amended during execution: the twelve frames use dedicated thumbnails `05-matrix-a…l.jpg` (416×224, seeds 201–212, WARM/COOL alternating) instead of reusing portrait images — reuse cropped 50–60% and tripped R13.
 
 - [ ] **Step 1: Images**
 
@@ -774,7 +776,7 @@ Pick one square → `styles/photobook/golden/assets/img/17-audio.jpg`（「示�
   - `photobook/video` —「视频暗房页。一行标题 + 斜体副题 → 左 864×486 视频（默认停在封面帧，点击播放）；右栏说明与等宽时长。`poster` 与 `aria-label` 必填，时长写真实值。」
   - `photobook/audio` —「音频页。一行标题 + 斜体副题 → 左 448 方图；右栏说明 → 细线 → 播放器：墨色圆点（`data-media="toggle"`，上面的 ▶ 不接收点击）、宋体音轨名、等宽元信息、进度线与时间。`<audio>` 必带 `controls` 与 `aria-label`，时长写真实值。」
 
-- [ ] **Step 6: Verify batch** (new slides 13 17) — plus: `unzip -l $G/deck.pptx | grep -E "media.*\.(mp4|mp3)"` lists both files; the audio wiring check (navigation follows the magazine plan; if the hash / present-mode entry differs, read `assets/runtime.js` and adapt the two navigation lines only):
+- [ ] **Step 6: Verify batch** (new slides 13 17) — plus: `unzip -l $G/deck.pptx | grep -E "media.*\.(mp4|mp3)"` lists both files; the audio wiring check (navigation follows the magazine plan; the runtime parses `#/N`; if present-mode entry differs, read `assets/runtime.js` and adapt the two navigation lines only):
 
 ```bash
 node -e '
@@ -782,7 +784,7 @@ const { chromium } = require("playwright");
 (async () => {
   const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1280, height: 720 } });
   try {
-    await p.goto("file://" + process.cwd() + "/styles/photobook/golden/index.html#17");
+    await p.goto("file://" + process.cwd() + "/styles/photobook/golden/index.html#/17");
     await p.keyboard.press("f").catch(() => {});
     await p.locator(".pbo-play").click(); await p.waitForTimeout(1500);
     const w = await p.locator(".pbo-progress").evaluate((e) => e.getBoundingClientRect().width);
