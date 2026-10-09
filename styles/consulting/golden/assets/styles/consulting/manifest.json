@@ -22,6 +22,10 @@
     "consulting/agenda": { "role": "agenda" },
     "consulting/statement": { "role": "statement" },
     "consulting/section": { "role": "section" },
+    "consulting/matrix": { "role": "matrix" },
+    "consulting/compare": { "role": "compare" },
+    "consulting/image-text": { "role": "image-text" },
+    "consulting/image": { "role": "image" },
     "consulting/kpi": { "role": "kpi" },
     "consulting/process": { "role": "process" }
   }

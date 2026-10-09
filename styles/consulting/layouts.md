@@ -1,6 +1,6 @@
 # 咨询 · 白皮书（consulting）版式注册表
 
-> 状态：draft · P1 制作中，已有 6 个版式；其余核心角色未完成前，交付请用其他风格。
+> 状态：draft · P1 制作中，已有 10 个版式；其余核心角色未完成前，交付请用其他风格。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/consulting/golden/`；金样文字来自 `docs/golden-content.md`。
 
@@ -105,6 +105,124 @@
   <p class="cs-num csx-n" style="top: 536px;">04</p>
   <p class="csx-i" style="top: 536px;">工作流</p>
   <p class="cs-pageno">4</p>
+</section>
+```
+
+## consulting/matrix · matrix
+
+分组盘点 + 总数。左：Inter 巨数字总数、标签与两行分组说明，竖细线隔开；右：每组一行「组名 / 2–4 个浅蓝标签块」（行距 72，块宽 148），当前项整块亮蓝。8–12 项，名称 ≤8 字。
+
+```html
+<section class="slide" data-layout="consulting/matrix" data-role="matrix">
+  <p class="cs-trk cs-tracker">风格库</p>
+  <h2 class="cs-semi cs-title" data-anim="rise">十二种风格，按场合挑一种。</h2>
+  <div class="cs-hair cs-head-rule" data-shape="rect"></div>
+  <p class="cs-semi cs-exhibit">图表 1 · 十二种风格，分五组</p>
+  <p class="cs-num csm-hero" data-anim="count">12</p>
+  <h3 class="cs-semi csm-label" data-merge="hero" data-anim="rise">种风格</h3>
+  <p class="cs-note csm-sub" data-merge="hero" data-anim="rise">分五组：编辑排印、商务理性、舞台冲击、影像叙事、东方人文</p>
+  <div class="csm-vr" data-shape="rect"></div>
+  <h3 class="cs-semi csm-group" style="top: 259px;">编辑排印</h3>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 576px; top: 248px;"></div>
+  <p class="cs-semi csm-name" style="left: 590px; top: 260px;">A 杂志 · 暖纸</p>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 740px; top: 248px;"></div>
+  <p class="cs-semi csm-name" style="left: 754px; top: 260px;">D 报刊 · 版面</p>
+  <h3 class="cs-semi csm-group" style="top: 331px;">商务理性</h3>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 576px; top: 320px;"></div>
+  <p class="cs-semi csm-name" style="left: 590px; top: 332px;">B 瑞士 · 网格</p>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 740px; top: 320px;"></div>
+  <p class="cs-semi csm-name" style="left: 754px; top: 332px;">F 柔和 · 产品</p>
+  <div class="cs-blue csm-chip" data-shape="rect" style="left: 904px; top: 320px;"></div>
+  <p class="cs-semi cs-on csm-name" style="left: 918px; top: 332px;">H 咨询 · 白皮书</p>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 1068px; top: 320px;"></div>
+  <p class="cs-semi csm-name" style="left: 1082px; top: 332px;">L 工程制图</p>
+  <h3 class="cs-semi csm-group" style="top: 403px;">舞台冲击</h3>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 576px; top: 392px;"></div>
+  <p class="cs-semi csm-name" style="left: 590px; top: 404px;">C 发布会 · 暗场</p>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 740px; top: 392px;"></div>
+  <p class="cs-semi csm-name" style="left: 754px; top: 404px;">E 大字报 · 粗野</p>
+  <h3 class="cs-semi csm-group" style="top: 475px;">影像叙事</h3>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 576px; top: 464px;"></div>
+  <p class="cs-semi csm-name" style="left: 590px; top: 476px;">G 摄影集 · 画册</p>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 740px; top: 464px;"></div>
+  <p class="cs-semi csm-name" style="left: 754px; top: 476px;">J 拼贴 · 手账</p>
+  <h3 class="cs-semi csm-group" style="top: 547px;">东方人文</h3>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 576px; top: 536px;"></div>
+  <p class="cs-semi csm-name" style="left: 590px; top: 548px;">I 日式 · 极简</p>
+  <div class="cs-tint csm-chip" data-shape="rect" style="left: 740px; top: 536px;"></div>
+  <p class="cs-semi csm-name" style="left: 754px; top: 548px;">K 新中式 · 东方</p>
+  <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
+  <p class="cs-source">来源：docs/superpowers/specs/2026-10-08-style-library-design.md §2</p>
+  <p class="cs-pageno">5</p>
+</section>
+```
+
+## consulting/compare · compare
+
+二元对比。两栏各 520 宽：顶部色条标「之前」（海军蓝灰）/「现在」（亮蓝），中缝一枚原生燕尾箭头；每栏「小标题 / 两行说明 / 细线 / Inter 数字 + 一句数字说明」。数字必须真实；结论一侧放亮蓝。
+
+```html
+<section class="slide" data-layout="consulting/compare" data-role="compare">
+  <p class="cs-trk cs-tracker">风格库</p>
+  <h2 class="cs-semi cs-title" data-anim="rise">换皮，不如换版面。</h2>
+  <div class="cs-hair cs-head-rule" data-shape="rect"></div>
+  <div class="cs-navy3 csv-head csv-l" data-shape="rect"></div>
+  <div class="cs-blue csv-head csv-r" data-shape="rect"></div>
+  <p class="cs-semi cs-on csv-hl csv-tl">之前</p>
+  <p class="cs-semi cs-on csv-hl csv-tr">现在</p>
+  <div class="cs-navy3 csv-arrow" data-shape="chevron" data-anim="fade"></div>
+  <h3 class="cs-semi csv-h csv-l" data-merge="l" data-anim="rise">通用版式，换主题即换色</h3>
+  <p class="cs-body csv-p csv-l" data-merge="l" data-anim="rise">三套设计系统共用 L01–L24，换一个主题文件整套换色，版面结构始终一样。</p>
+  <div class="cs-hair csv-hair csv-l" data-shape="rect"></div>
+  <p class="cs-num csv-num csv-l" data-anim="count">24</p>
+  <p class="cs-semi csv-nl csv-nll" data-anim="rise">个版式，三套系统共用</p>
+  <h3 class="cs-semi csv-h csv-r" data-merge="r" data-anim="rise">独立版式，选风格即选版面</h3>
+  <p class="cs-body csv-p csv-r" data-merge="r" data-anim="rise">十二种风格各有一套版式，按角色登记；校验与导出只认角色，不认风格。</p>
+  <div class="cs-hair csv-hair csv-r" data-shape="rect"></div>
+  <p class="cs-num csv-num csv-r" data-anim="count">12</p>
+  <p class="cs-semi csv-nl csv-nlr" data-anim="rise">种风格，各有一套版式</p>
+  <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
+  <p class="cs-source">来源：references/layouts.md（L01–L24）· 风格库 spec §1、§3.2</p>
+  <p class="cs-pageno">6</p>
+</section>
+```
+
+## consulting/image-text · image-text
+
+图文。页头带图表编号；左图 560×360，右栏两段正文（每段 ≤50 字，各带海军蓝方点）、细线与一行注脚。
+
+```html
+<section class="slide" data-layout="consulting/image-text" data-role="image-text">
+  <p class="cs-trk cs-tracker">测量与导出</p>
+  <h2 class="cs-semi cs-title" data-anim="rise">所见即所得，靠的是测量。</h2>
+  <div class="cs-hair cs-head-rule" data-shape="rect"></div>
+  <p class="cs-semi cs-exhibit">图表 2 · 示意图</p>
+  <img class="cs-photo csi-img" src="assets/img/07-feature.jpg" alt="示意图：浅灰立板与一块亮蓝立板">
+  <div class="cs-navy csi-dot" data-shape="rect" style="top: 254px;"></div>
+  <p class="csi-p" style="top: 240px; width: 528px;" data-merge="body" data-anim="rise">导出器先让浏览器把每一页排好，再逐个量出元素的位置、尺寸、字号与颜色，按同样的坐标写进 PPTX。</p>
+  <div class="cs-navy csi-dot" data-shape="rect" style="top: 366px;"></div>
+  <p class="csi-p" style="top: 352px;" data-merge="body" data-anim="rise">圆角、描边、阴影、旋转与竖排换成 PowerPoint 原生形状；画不出的装饰单独截图，文字始终可编辑。</p>
+  <div class="cs-hair csi-hair" data-shape="rect"></div>
+  <p class="cs-note csi-note">导出原语：圆角矩形 · 直线 · 燕尾 · 旋转 · 阴影 · 竖排</p>
+  <div class="cs-hair cs-foot-rule" data-shape="rect"></div>
+  <p class="cs-source">来源：scripts/export-pptx.mjs、scripts/lib/snapshot.mjs</p>
+  <p class="cs-pageno">7</p>
+</section>
+```
+
+## consulting/image · image
+
+满版图 + 底部 240px 海军蓝色带（页面挂 `is-dark`）：浅蓝短条、一句标题、一句说明，右侧图表编号与页码。图的看点放在上三分之二。
+
+```html
+<section class="slide is-dark" data-layout="consulting/image" data-role="image">
+  <img class="cs-photo csf-img" src="assets/img/08-image.jpg" alt="示意图：浅灰立板构成的空间">
+  <div class="cs-navy csf-band" data-shape="rect"></div>
+  <div class="cs-blue csf-bar" data-shape="rect" data-anim="draw"></div>
+  <h2 class="cs-semi csf-title" data-anim="rise">先选风格，再写内容</h2>
+  <p class="csf-p" data-anim="rise">风格决定版面，版面决定一页能放多少字。</p>
+  <p class="csf-cap">图表 3 · 示意图</p>
+  <p class="cs-pageno">8</p>
 </section>
 ```
 
