@@ -1,0 +1,117 @@
+/* ================================================================
+   Style H 「咨询 · 白皮书」 — consulting
+   白底 × 深海军蓝 × 一种亮蓝；每页标题是一句结论。
+   语法要点（详见 layouts.md）：追踪标签 → 结论标题 → 细线 → 图表编号
+   → 图表 / 要点 → 「要点」或「关键」结论条 → 出处与页码；亮蓝全页一处；
+   流程用 PowerPoint 原生燕尾箭头（--tip 等于高的一半）。
+   ================================================================ */
+
+@font-face {
+  font-family: 'Source Han Sans SC';
+  src: url('../../fonts/source-han-sans-sc.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../../fonts/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+:root {
+  --bg: #ffffff;
+  --surface: #eef2ff;
+  --text-1: #0b2545;
+  --text-2: #5b6573;
+  --accent: #2251ff;
+  --on-accent: #ffffff;
+  --mark: #2251ff;
+  --on-mark: #ffffff;
+  --hairline: #d5dae1;
+  /* navy ground and its two lighter steps (82% / 66% over white) for chevron runs */
+  --navy: #0b2545;
+  --navy-2: #374c66;
+  --navy-3: #5e6f84;
+  --on-navy: #c7d3e6;
+  --on-navy-key: #8fb0ff;
+
+  --font-display: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-num: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ---------- vocabulary ---------- */
+.cs-semi { font-family: var(--font-display); font-weight: 600; color: var(--text-1); }
+.cs-num { font-family: var(--font-num); font-weight: 600; line-height: 1; letter-spacing: -0.02em; color: var(--text-1); }
+/* tracker: the small blue label above every title */
+.cs-trk { font-family: var(--font-display); font-size: 16px; line-height: 1; font-weight: 600; letter-spacing: 2px; color: var(--accent); }
+.cs-body { font-size: 16px; line-height: 1.75; color: var(--text-1); }
+.cs-note { font-size: 16px; line-height: 1.6; color: var(--text-2); }
+.cs-ac { color: var(--accent); }
+.cs-on { color: var(--on-accent); }
+.cs-on2 { color: var(--on-navy); }
+.cs-key { color: var(--on-navy-key); }
+
+.cs-navy { background: var(--navy); }
+.cs-navy2 { background: var(--navy-2); }
+.cs-navy3 { background: var(--navy-3); }
+.cs-blue { background: var(--accent); }
+.cs-tint { background: var(--surface); }
+.cs-hair { background: var(--hairline); height: 1px; }
+
+/* running heads: tracker, conclusion title, rule, exhibit label; foot: rule, source, page */
+.cs-tracker { left: 64px; top: 48px; width: 800px; }
+.cs-title { left: 64px; top: 76px; width: 1152px; font-size: 32px; line-height: 1.4; }
+.cs-head-rule { left: 64px; top: 176px; width: 1152px; }
+.cs-exhibit { left: 64px; top: 204px; width: 1152px; font-size: 16px; line-height: 1.4; }
+.cs-foot-rule { left: 64px; top: 640px; width: 1152px; }
+.cs-source { left: 64px; top: 654px; width: 900px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.cs-pageno { left: 1016px; top: 654px; width: 200px; font-size: 16px; line-height: 1.5; text-align: right; color: var(--text-2); }
+
+/* ---------- consulting/cover ---------- */
+.csc-panel { left: 0; top: 0; width: 400px; height: 720px; }
+.csc-trk { left: 56px; top: 64px; width: 300px; }
+.csc-org { left: 56px; width: 300px; font-size: 16px; line-height: 1.7; }
+.csc-o1 { top: 604px; }
+.csc-o2 { top: 631px; }
+.csc-bar { left: 480px; top: 196px; width: 64px; height: 6px; }
+.csc-title { left: 480px; width: 736px; font-size: 56px; line-height: 1.25; }
+.csc-t1 { top: 228px; }
+.csc-t2 { top: 298px; }
+.csc-sub { left: 480px; top: 400px; width: 680px; font-size: 20px; line-height: 1.65; color: var(--text-2); }
+.csc-hair { left: 480px; top: 600px; width: 736px; }
+.csc-meta { left: 480px; top: 620px; width: 420px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.csc-date { left: 916px; top: 620px; width: 300px; font-size: 16px; line-height: 1.5; text-align: right; color: var(--text-2); }
+
+/* ---------- consulting/kpi ---------- */
+.csk-num { top: 248px; width: 344px; font-size: 96px; }
+.csk-label { top: 364px; width: 344px; font-size: 20px; line-height: 1.4; }
+.csk-desc { top: 400px; width: 356px; }
+.csk-c1 { left: 64px; }
+.csk-c2 { left: 456px; }
+.csk-c3 { left: 848px; }
+.csk-vr { top: 248px; width: 1px; height: 208px; background: var(--hairline); }
+.csk-v1 { left: 432px; }
+.csk-v2 { left: 824px; }
+.csk-box { left: 64px; top: 488px; width: 1152px; height: 112px; }
+.csk-edge { left: 64px; top: 488px; width: 4px; height: 112px; }
+.csk-key { left: 92px; top: 510px; width: 600px; font-size: 16px; line-height: 1.4; letter-spacing: 2px; }
+.csk-take { left: 92px; top: 542px; width: 1100px; font-size: 22px; line-height: 1.5; }
+
+/* ---------- consulting/process ---------- */
+/* four chevrons, 309 wide, overlapping by --tip less an 8px gap: lefts 64 / 345 / 626 / 907 */
+.csp-chev { top: 244px; width: 309px; height: 72px; --tip: 36px; }
+.csp-b1 { left: 64px; }
+.csp-b2 { left: 345px; }
+.csp-b3 { left: 626px; }
+.csp-b4 { left: 907px; }
+.csp-name { top: 264px; width: 210px; font-size: 22px; line-height: 1.4; }
+.csp-step { top: 344px; width: 230px; }
+.csp-desc { top: 372px; width: 230px; }
+.csp-c1 { left: 96px; }
+.csp-c2 { left: 397px; }
+.csp-c3 { left: 678px; }
+.csp-c4 { left: 959px; }
+.csp-bar { left: 64px; top: 480px; width: 1152px; height: 112px; }
+.csp-key { left: 96px; top: 504px; width: 600px; font-size: 16px; line-height: 1.4; letter-spacing: 2px; }
+.csp-take { left: 96px; top: 534px; width: 1088px; font-size: 24px; line-height: 1.4; }

@@ -1,0 +1,25 @@
+{
+  "id": "consulting",
+  "name": "咨询 · 白皮书",
+  "letter": "H",
+  "group": "商务理性",
+  "status": "draft",
+  "recommend": ["汇报", "提案", "尽调"],
+  "assets": [],
+  "fonts": {
+    "web": [
+      { "src": "SourceHanSansSC-VF.otf", "out": "source-han-sans-sc.woff2" },
+      { "src": "Inter-VF.ttf", "out": "inter.woff2" }
+    ],
+    "office": {
+      "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "Inter": { "regular": "Segoe UI", "light": "Segoe UI Light" },
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" }
+    }
+  },
+  "layouts": {
+    "consulting/cover": { "role": "cover" },
+    "consulting/kpi": { "role": "kpi" },
+    "consulting/process": { "role": "process" }
+  }
+}
