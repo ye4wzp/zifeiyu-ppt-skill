@@ -40,6 +40,18 @@
   --font-num: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 }
 
+/* navy page: statement, cycle, closing, and the image page under its band */
+.slide.is-dark {
+  --bg: #0b2545;
+  --surface: #163259;
+  --text-1: #ffffff;
+  --text-2: #c7d3e6;
+  --accent: #8fb0ff; /* bright blue drowns on navy; the pale step carries the one accent */
+  --on-accent: #0b2545;
+  --hairline: #374c66;
+}
+
+
 /* ---------- vocabulary ---------- */
 .cs-semi { font-family: var(--font-display); font-weight: 600; color: var(--text-1); }
 .cs-num { font-family: var(--font-num); font-weight: 600; line-height: 1; letter-spacing: -0.02em; color: var(--text-1); }
@@ -58,6 +70,7 @@
 .cs-blue { background: var(--accent); }
 .cs-tint { background: var(--surface); }
 .cs-hair { background: var(--hairline); height: 1px; }
+.cs-photo { object-fit: cover; }
 
 /* running heads: tracker, conclusion title, rule, exhibit label; foot: rule, source, page */
 .cs-tracker { left: 64px; top: 48px; width: 800px; }
@@ -115,3 +128,30 @@
 .csp-bar { left: 64px; top: 480px; width: 1152px; height: 112px; }
 .csp-key { left: 96px; top: 504px; width: 600px; font-size: 16px; line-height: 1.4; letter-spacing: 2px; }
 .csp-take { left: 96px; top: 534px; width: 1088px; font-size: 24px; line-height: 1.4; }
+
+/* ---------- consulting/agenda ---------- */
+/* four rows of 100px from 208, hairlines between; the foot rule closes the last row */
+.csa-num { left: 64px; width: 96px; font-size: 48px; }
+.csa-item { left: 192px; width: 320px; font-size: 28px; line-height: 1.4; }
+.csa-desc { left: 544px; width: 440px; font-size: 18px; line-height: 1.5; color: var(--text-2); }
+.csa-page { left: 1016px; width: 200px; font-size: 16px; line-height: 1.5; text-align: right; color: var(--text-2); }
+.csa-hair { left: 64px; width: 1152px; }
+
+/* ---------- consulting/statement ---------- */
+.csq-bar { left: 64px; top: 232px; width: 64px; height: 6px; }
+.csq-line { left: 64px; width: 1152px; font-size: 64px; line-height: 1.3; }
+.csq-l1 { top: 264px; }
+.csq-l2 { top: 347px; }
+.csq-by { left: 64px; top: 480px; width: 800px; font-size: 20px; line-height: 1.5; color: var(--text-2); }
+
+/* ---------- consulting/section ---------- */
+/* the cover's navy panel carries the chapter number; the right side repeats the agenda with this chapter lit */
+.csx-panel { left: 0; top: 0; width: 400px; height: 720px; }
+.csx-trk { left: 56px; top: 64px; width: 300px; }
+.csx-num { left: 50px; top: 424px; width: 320px; font-size: 200px; }
+.csx-title { left: 480px; top: 208px; width: 736px; font-size: 64px; line-height: 1.25; }
+.csx-hair { left: 480px; top: 344px; width: 736px; }
+.csx-mark { left: 464px; width: 4px; height: 28px; }
+.csx-n { left: 480px; width: 56px; font-size: 20px; line-height: 1.4; color: var(--text-2); }
+.csx-i { left: 552px; width: 400px; font-size: 20px; line-height: 1.4; color: var(--text-2); }
+.csx-now { color: var(--accent); }

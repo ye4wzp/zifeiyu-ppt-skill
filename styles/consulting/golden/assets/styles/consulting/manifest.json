@@ -19,6 +19,9 @@
   },
   "layouts": {
     "consulting/cover": { "role": "cover" },
+    "consulting/agenda": { "role": "agenda" },
+    "consulting/statement": { "role": "statement" },
+    "consulting/section": { "role": "section" },
     "consulting/kpi": { "role": "kpi" },
     "consulting/process": { "role": "process" }
   }
