@@ -13,7 +13,7 @@ const gen = (kind) => {
 };
 
 test('same seed -> identical pixels; different seeds differ', () => {
-  for (const kind of ['field', 'arch']) {
+  for (const kind of ['field', 'arch', 'light', 'horizon']) {
     const a = gen(kind), b = gen(kind);
     assert.equal(a.length, 2);
     assert.deepEqual(a, b);

@@ -1,11 +1,13 @@
 // Usage: node scripts/gen-art.mjs <out-dir> [--style <id> | --palette "#bg,#surface,#accent,#ink"]
-//                                [--kind field|arch] [--seed N] [--count K] [--size 1600x1000] [--format png|jpg]
+//                                [--kind field|arch|light|horizon] [--seed N] [--count K] [--size 1600x1000] [--format png|jpg]
 // Deterministic abstract imagery for golden decks (no stock, no
 // generation APIs, no licensing questions): a seeded PRNG lays out an SVG
 // composition in the style's own palette, Chromium rasterises it. Same
 // seed + size + palette -> identical pixels. Captions must say 示意图.
 //   field — soft colour fields with film grain (atmosphere, covers)
 //   arch  — overlapping lit planes, reads like an interior/architecture photo
+//   light — window light falling across a dim wall and floor
+//   horizon — hazy ridges under a graded sky with a low sun
 import { chromium } from 'playwright';
 import { mkdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
@@ -19,7 +21,7 @@ const opt = (n, d) => {
 };
 const out = args.find((a, i) => !a.startsWith('--') && !args[i - 1]?.startsWith('--'));
 if (!out) {
-  console.error('usage: node scripts/gen-art.mjs <out-dir> [--style <id> | --palette "#bg,#surface,#accent,#ink"] [--kind field|arch] [--seed N] [--count K] [--size WxH] [--format png|jpg]');
+  console.error('usage: node scripts/gen-art.mjs <out-dir> [--style <id> | --palette "#bg,#surface,#accent,#ink"] [--kind field|arch|light|horizon] [--seed N] [--count K] [--size WxH] [--format png|jpg]');
   process.exit(2);
 }
 const kind = opt('--kind', 'field');
@@ -69,7 +71,7 @@ const field = (r) => {
     defs += `<radialGradient id="g${i}"><stop offset="0" stop-color="${c}" stop-opacity="${0.55 + r() * 0.4}"/><stop offset="1" stop-color="${c}" stop-opacity="0"/></radialGradient>`;
     shapes += `<ellipse cx="${r() * W}" cy="${r() * H}" rx="${W * (0.25 + r() * 0.35)}" ry="${H * (0.25 + r() * 0.4)}" fill="url(#g${i})"/>`;
   }
-  return { defs, shapes, base: mix(bg, surface, 0.5) };
+  return { defs, shapes, base: mix(bg, surface, 0.5), blur: Math.round(W / 40) };
 };
 
 const arch = (r) => {
@@ -95,9 +97,66 @@ const arch = (r) => {
   return { defs, shapes, base: light };
 };
 
-const KINDS = { field, arch };
+const light = (r) => {
+  // a dim room: sun through a paned window lands as a skewed patch on wall and floor
+  const wallL = mix(surface, ink, 0.62), wallR = mix(surface, ink, 0.4), sun = mix(bg, accent, 0.3);
+  const horizon = H * (0.68 + r() * 0.12);
+  let defs = `<linearGradient id="wall" x1="0" y1="0" x2="1" y2="0.3"><stop offset="0" stop-color="${wallL}"/><stop offset="1" stop-color="${wallR}"/></linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(surface, ink, 0.5)}"/><stop offset="1" stop-color="${mix(surface, ink, 0.78)}"/></linearGradient>
+    <radialGradient id="glow"><stop offset="0" stop-color="${sun}" stop-opacity="0.45"/><stop offset="1" stop-color="${sun}" stop-opacity="0"/></radialGradient>`;
+  let shapes = `<rect width="${W}" height="${horizon}" fill="url(#wall)"/><rect y="${horizon}" width="${W}" height="${H - horizon}" fill="url(#floor)"/>`;
+  const cols = 2 + Math.floor(r() * 2), rows = 2 + Math.floor(r() * 2);
+  const x0 = W * (0.12 + r() * 0.4), y0 = horizon * (0.12 + r() * 0.25);
+  const pw = W * (0.07 + r() * 0.05), ph = horizon * (0.12 + r() * 0.06), skew = pw * (0.5 + r() * 0.6), gap = Math.max(4, W * 0.008);
+  shapes += `<ellipse cx="${x0 + cols * pw * 0.6 + skew}" cy="${y0 + rows * ph * 0.5}" rx="${cols * pw * 1.6}" ry="${rows * ph * 1.4}" fill="url(#glow)"/>`;
+  for (let c = 0; c < cols; c++) {
+    for (let w = 0; w < rows; w++) {
+      const x = x0 + c * (pw + gap) + w * skew * 0.35, y = y0 + w * (ph + gap);
+      const o = 0.62 + r() * 0.3;
+      shapes += `<polygon points="${x},${y} ${x + pw},${y} ${x + pw + skew * 0.35},${y + ph} ${x + skew * 0.35},${y + ph}" fill="${sun}" opacity="${o}"/>`;
+    }
+  }
+  // the same window again, stretched across the floor
+  const fx = x0 + skew * 1.4, fw = (cols * (pw + gap)) * 1.25;
+  shapes += `<polygon points="${fx},${horizon + 6} ${fx + fw},${horizon + 6} ${fx + fw + skew * 2.2},${H} ${fx + skew * 1.6},${H}" fill="${sun}" opacity="${0.35 + r() * 0.2}"/>`;
+  // a door jamb or column throwing a hard dark edge
+  const jx = r() < 0.5 ? W * (0.02 + r() * 0.08) : W * (0.82 + r() * 0.1);
+  shapes += `<rect x="${jx}" width="${W * (0.05 + r() * 0.06)}" height="${H}" fill="${mix(ink, wallL, 0.25)}" opacity="0.85"/>`;
+  return { defs, shapes, base: wallL, blur: Math.max(2, W / 260) };
+};
+
+const horizon = (r) => {
+  // landscape in haze: graded sky, a low sun, ridges darkening toward the viewer
+  const sky0 = mix(bg, accent, 0.12 + r() * 0.2), sky1 = mix(bg, '#ffffff', 0.4), line = H * (0.45 + r() * 0.15);
+  let defs = `<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(sky0, surface, 0.5)}"/><stop offset="1" stop-color="${sky1}"/></linearGradient>
+    <radialGradient id="sun"><stop offset="0" stop-color="${mix(accent, '#ffffff', 0.55)}"/><stop offset="0.35" stop-color="${mix(accent, '#ffffff', 0.3)}" stop-opacity="0.7"/><stop offset="1" stop-color="${accent}" stop-opacity="0"/></radialGradient>`;
+  const sr = W * (0.03 + r() * 0.03);
+  let shapes = `<rect width="${W}" height="${H}" fill="url(#sky)"/><circle cx="${W * (0.15 + r() * 0.7)}" cy="${line - sr * (0.5 + r() * 2)}" r="${sr * 5}" fill="url(#sun)"/>`;
+  const layers = 3 + Math.floor(r() * 3);
+  for (let i = 0; i < layers; i++) {
+    const t = (i + 1) / layers, base = line + (H - line) * 0.45 * (i / layers);
+    const amp = H * (0.04 + r() * 0.05), steps = 4 + Math.floor(r() * 3);
+    // random-walk ridge heights, joined through midpoints so the crest stays smooth
+    const pts = [];
+    let y = base - r() * amp;
+    for (let s = 0; s <= steps; s++) {
+      pts.push([(W * s) / steps, y]);
+      y = Math.min(base, Math.max(base - amp * 1.6, y + (r() - 0.5) * amp * 1.4));
+    }
+    let d = `M0,${H} L${pts[0][0]},${pts[0][1]}`;
+    for (let s = 1; s < pts.length; s++) {
+      const [x, py] = pts[s], [px0, py0] = pts[s - 1];
+      d += ` Q${px0},${py0} ${(px0 + x) / 2},${(py0 + py) / 2}`;
+    }
+    d += ` L${W},${pts[pts.length - 1][1]}`;
+    shapes += `<path d="${d} L${W},${H} Z" fill="${mix(mix(sky1, surface, 0.6), ink, 0.1 + t * 0.62)}"/>`;
+  }
+  return { defs, shapes, base: sky1, blur: 1.5 };
+};
+
+const KINDS = { field, arch, light, horizon };
 if (!KINDS[kind]) {
-  console.error(`unknown --kind "${kind}" (field|arch)`);
+  console.error(`unknown --kind "${kind}" (field|arch|light|horizon)`);
   process.exit(2);
 }
 
@@ -108,10 +167,10 @@ for (let n = 0; n < count; n++) {
   // canvases intermittently fails Page.captureScreenshot
   const page = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 });
   const r = mulberry32(seed0 + n);
-  const { defs, shapes, base } = KINDS[kind](r);
+  const { defs, shapes, base, blur = 1.2 } = KINDS[kind](r);
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
     <defs>${defs}${grain(r)}
-      <filter id="soft"><feGaussianBlur stdDeviation="${kind === 'field' ? Math.round(W / 40) : 1.2}"/></filter></defs>
+      <filter id="soft"><feGaussianBlur stdDeviation="${blur}"/></filter></defs>
     <rect width="${W}" height="${H}" fill="${base}"/>
     <g filter="url(#soft)">${shapes}</g>
     <rect width="${W}" height="${H}" filter="url(#grain)" opacity="0.14"/>
