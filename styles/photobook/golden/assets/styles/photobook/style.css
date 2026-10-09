@@ -210,3 +210,34 @@
 .pbd-v { left: 304px; width: 568px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
 .pbd-s { left: 904px; width: 312px; }
 .pbd-hair { left: 64px; width: 1152px; }
+
+/* ---------- photobook/timeline ---------- */
+/* a panorama over the line; five columns on the cover's 232px step */
+.pbl-img { left: 64px; top: 148px; width: 1152px; height: 220px; }
+.pbl-date { top: 396px; width: 208px; font-size: 40px; }
+.pbl-line { left: 64px; top: 452px; width: 1152px; height: 2px; }
+.pbl-node { top: 448px; width: 10px; height: 10px; }
+.pbl-h { top: 476px; width: 208px; font-size: 22px; line-height: 1.3; }
+.pbl-p { top: 512px; width: 208px; }
+.pbl-c1 { left: 64px; }
+.pbl-c2 { left: 296px; }
+.pbl-c3 { left: 528px; }
+.pbl-c4 { left: 760px; }
+.pbl-c5 { left: 992px; }
+
+/* ---------- photobook/gallery ---------- */
+.pbg-w1 { left: 64px; top: 148px; width: 680px; height: 492px; }
+.pbg-w2 { left: 760px; top: 148px; width: 456px; height: 238px; }
+.pbg-w3 { left: 760px; top: 402px; width: 456px; height: 238px; }
+
+/* ---------- photobook/closing ---------- */
+/* the cover's strip again, shorter, on the darkroom page */
+.pbe-img { top: 72px; width: 224px; height: 168px; }
+.pbe-fr { top: 252px; width: 224px; }
+.pbe-title { left: 0; width: 1280px; font-size: 48px; line-height: 1.25; text-align: center; }
+.pbe-t1 { top: 312px; }
+.pbe-t2 { top: 372px; }
+.pbe-label { left: 0; top: 472px; width: 1280px; text-align: center; }
+.pbe-cmd { left: 0; top: 504px; width: 1280px; font-family: var(--font-mono); font-size: 18px; line-height: 1.6; text-align: center; color: var(--text-1); }
+.pbe-p { left: 0; top: 548px; width: 1280px; text-align: center; }
+.pbe-meta { left: 0; top: 670px; width: 1280px; text-align: center; }

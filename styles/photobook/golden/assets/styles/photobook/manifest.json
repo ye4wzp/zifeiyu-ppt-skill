@@ -32,6 +32,9 @@
     "photobook/kpi": { "role": "kpi" },
     "photobook/bars": { "role": "bars" },
     "photobook/table": { "role": "table" },
-    "photobook/process": { "role": "process" }
+    "photobook/process": { "role": "process" },
+    "photobook/timeline": { "role": "timeline" },
+    "photobook/gallery": { "role": "gallery" },
+    "photobook/closing": { "role": "closing" }
   }
 }

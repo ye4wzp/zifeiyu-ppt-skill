@@ -372,3 +372,79 @@
   <p class="pb-mono pb-pageno">14 / 18</p>
 </section>
 ```
+
+## photobook/timeline · timeline
+
+时间线。一行标题 + 斜体副题 → 1152×220 全景照片 → 5 列（与封面胶片条同一列距 232px）：斜体日期 → 墨线与方形节点 → 宋体节点名 + 两行以内说明。
+
+```html
+<section class="slide" data-layout="photobook/timeline" data-role="timeline">
+  <h2 class="pb-serif pb-title" data-anim="rise">从一套版式，到一座风格库。</h2>
+  <p class="pb-it pb-voice" data-anim="rise">From one system to a library.</p>
+  <img class="pb-photo pbl-img" src="assets/img/15-timeline.jpg" alt="示意图：暖色远山与落日">
+  <p class="pb-num pbl-date pbl-c1" data-anim="rise">07.16</p>
+  <p class="pb-num pbl-date pbl-c2" data-anim="rise">07.18</p>
+  <p class="pb-num pbl-date pbl-c3" data-anim="rise">08.17</p>
+  <p class="pb-num pbl-date pbl-c4" data-anim="rise">08.18</p>
+  <p class="pb-num pbl-date pbl-c5" data-anim="rise">10.08</p>
+  <div class="pb-ink pbl-line" data-shape="rect" data-anim="draw"></div>
+  <div class="pb-ink pbl-node pbl-c1" data-shape="rect" data-anim="pop"></div>
+  <div class="pb-ink pbl-node pbl-c2" data-shape="rect" data-anim="pop"></div>
+  <div class="pb-ink pbl-node pbl-c3" data-shape="rect" data-anim="pop"></div>
+  <div class="pb-ink pbl-node pbl-c4" data-shape="rect" data-anim="pop"></div>
+  <div class="pb-ink pbl-node pbl-c5" data-shape="rect" data-anim="pop"></div>
+  <h3 class="pb-serif pbl-h pbl-c1" data-merge="c1" data-anim="rise">首版发布</h3>
+  <p class="pb-body pbl-p pbl-c1" data-merge="c1" data-anim="rise">锁定设计系统的网页 PPT，确定性导出。</p>
+  <h3 class="pb-serif pbl-h pbl-c2" data-merge="c2" data-anim="rise">墨韵衬线</h3>
+  <p class="pb-body pbl-p pbl-c2" data-merge="c2" data-anim="rise">第二套设计系统：思源宋、暖纸、朱砂。</p>
+  <h3 class="pb-serif pbl-h pbl-c3" data-merge="c3" data-anim="rise">校验全覆盖</h3>
+  <p class="pb-body pbl-p pbl-c3" data-merge="c3" data-anim="rise">规则覆盖全部元素，文字分段原生导出。</p>
+  <h3 class="pb-serif pbl-h pbl-c4" data-merge="c4" data-anim="rise">瑞士国际</h3>
+  <p class="pb-body pbl-p pbl-c4" data-merge="c4" data-anim="rise">第三套设计系统，加入数据叙事版式。</p>
+  <h3 class="pb-serif pbl-h pbl-c5" data-merge="c5" data-anim="rise">风格库</h3>
+  <p class="pb-body pbl-p pbl-c5" data-merge="c5" data-anim="rise">十二种风格，版式独立。</p>
+  <p class="pb-mono pb-foot">Source — git log · 2026-07-16 → 2026-10-08 · 图为示意图</p>
+  <p class="pb-mono pb-pageno">15 / 18</p>
+</section>
+```
+
+## photobook/gallery · gallery
+
+图集。一行标题 + 斜体副题 → 左大图 680×492 + 右两张 456×238 叠放，三张同高收边于 640；页脚写出处与「三幅均为示意图」。
+
+```html
+<section class="slide" data-layout="photobook/gallery" data-role="gallery">
+  <h2 class="pb-serif pb-title" data-anim="rise">配图由脚本生成，按风格取色。</h2>
+  <p class="pb-it pb-voice" data-anim="rise">Seeded, repeatable, on palette.</p>
+  <img class="pb-photo pbg-w1" src="assets/img/16-gallery-1.jpg" alt="示意图：冷灰立板构成的空间">
+  <img class="pb-photo pbg-w2" src="assets/img/16-gallery-2.jpg" alt="示意图：暖色色场">
+  <img class="pb-photo pbg-w3" src="assets/img/16-gallery-3.jpg" alt="示意图：冷色墙面上的窗光">
+  <p class="pb-mono pb-foot">Source — scripts/gen-art.mjs · 固定种子，输出可复现 · 三幅均为示意图</p>
+  <p class="pb-mono pb-pageno">16 / 18</p>
+</section>
+```
+
+## photobook/closing · closing
+
+结尾暗房页。封面胶片条再出现一次（5 张 224×168，同列距，帧号接着封面往下编）→ 两行宋体标题居中 → 等宽「START — 新建 DECK」+ 命令 → 风格画廊路径 → 底部一行等宽标签。
+
+```html
+<section class="slide is-dark" data-layout="photobook/closing" data-role="closing">
+  <img class="pb-photo pbe-img pbc-c1" src="assets/img/01-cover-1.jpg" alt="示意图：窗光落在暗墙上">
+  <img class="pb-photo pbe-img pbc-c2" src="assets/img/01-cover-2.jpg" alt="示意图：冷色远山与低悬的太阳">
+  <img class="pb-photo pbe-img pbc-c3" src="assets/img/01-cover-3.jpg" alt="示意图：暖灰立板与一块琥珀色">
+  <img class="pb-photo pbe-img pbc-c4" src="assets/img/01-cover-4.jpg" alt="示意图：冷色墙面上的窗光">
+  <img class="pb-photo pbe-img pbc-c5" src="assets/img/01-cover-5.jpg" alt="示意图：暖色远山与落日">
+  <p class="pb-mono pbe-fr pbc-c1">06A</p>
+  <p class="pb-mono pbe-fr pbc-c2">07A</p>
+  <p class="pb-mono pbe-fr pbc-c3">08A</p>
+  <p class="pb-mono pbe-fr pbc-c4">09A</p>
+  <p class="pb-mono pbe-fr pbc-c5">10A</p>
+  <h2 class="pb-serif pbe-title pbe-t1" data-merge="title" data-anim="rise">挑一种风格，</h2>
+  <h2 class="pb-serif pbe-title pbe-t2" data-merge="title" data-anim="rise">开始下一份。</h2>
+  <p class="pb-mono pbe-label">START — 新建 DECK</p>
+  <p class="pbe-cmd">node scripts/new-deck.mjs my-deck --style photobook</p>
+  <p class="pb-body pbe-p">风格画廊：docs/styles/index.html</p>
+  <p class="pb-mono pbe-meta">ZIFEIYU PPT SKILL · 风格 G 摄影集 · 画册 · 图均为示意图</p>
+</section>
+```
