@@ -10,7 +10,7 @@
 
 ## 风格库
 
-12 种风格、每种独立版式集，开场先挑风格；已交付：A 杂志 · 暖纸、B 瑞士 · 网格、H 咨询 · 白皮书、G 摄影集 · 画册，其余按 `docs/superpowers/specs/2026-10-08-style-library-design.md` 分期交付。
+12 种风格、每种独立版式集，开场先挑风格；已交付：A 杂志 · 暖纸、B 瑞士 · 网格、H 咨询 · 白皮书、G 摄影集 · 画册、C 发布会 · 暗场，其余按 `docs/superpowers/specs/2026-10-08-style-library-design.md` 分期交付。
 
 ![风格库](docs/styles/gallery.png)
 

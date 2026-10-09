@@ -3,7 +3,7 @@
   "name": "发布会 · 暗场",
   "letter": "C",
   "group": "舞台冲击",
-  "status": "draft",
+  "status": "ready",
   "recommend": ["路演", "发布", "大屏演讲"],
   "assets": [],
   "fonts": {

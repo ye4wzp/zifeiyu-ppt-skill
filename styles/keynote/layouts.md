@@ -1,6 +1,6 @@
 # 发布会 · 暗场（keynote）版式注册表
 
-> 状态：draft · P2 样张阶段，已有 cover / kpi / process；其余核心角色未完成前，交付请用其他风格。
+> 状态：ready · 18 个版式，覆盖全部 12 个核心角色 + matrix / bars / table / gallery / video / audio。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media / data-raster` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/keynote/golden/`；金样文字来自 `docs/golden-content.md`。
 
