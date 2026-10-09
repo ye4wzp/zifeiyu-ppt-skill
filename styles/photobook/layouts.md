@@ -6,12 +6,13 @@
 
 ## 版面语法
 
-1. **照片是主角**：内容页照片占版面一半以上；文字退到图注的位置，标题一行（`pb-serif pb-title`，44px，最多 14 字），右侧可配一行拉丁斜体副题（`pb-it pb-voice`）。
+1. **照片是主角**：除 statement / table 外每页都有照片，照片面积大于文字区；文字退到图注的位置，标题一行（`pb-serif pb-title`，44px，最多 14 字），右侧可配一行拉丁斜体副题（`pb-it pb-voice`）。
 2. **不用强调色**：界面只有墨色、灰与近白，颜色交给照片；不用 `is-accent` / `is-mark`。
 3. **压暗条**：照片上放字时，先铺一块 `pb-scrim`（`rgba(12,11,10,.55)`，导出为原生半透明矩形），字用 `pb-on` / `pb-on2`；不在没有压暗条的照片上直接放字。
 4. **页脚**：top 668 一行等宽字，左「Source — 出处 · 图为示意图」（`pb-mono pb-foot`，数据页加 `data-source`），右页码「NN / 总页数」（`pb-mono pb-pageno`）。
 5. **字体分工**：标题与小标题用思源宋 Bold（`pb-serif`，Office 里是宋体）；图注、编号与数字用 Playfair 斜体（`pb-it` / `pb-num`，等高数字，Office 里是 Times New Roman）；帧号与页脚用 JetBrains Mono（`pb-mono`，Office 里是 Consolas）；正文 `pb-body` 走系统字体。
 6. **配图**：金样配图由 `scripts/gen-art.mjs` 生成，冷暖两组胶片色调交替（`--palette`，见各条目），alt 与页脚都写「示意图」。
+7. **暗房页**：`slide is-dark` 近黑底给 statement / video / closing；暗房页上墨色与灰色 token 反相，`pb-ink` 变成近白。
 
 ## photobook/cover · cover
 
@@ -34,6 +35,70 @@
   <p class="pb-mono pbc-fr pbc-c5">05A</p>
   <p class="pbc-sub" data-anim="rise">浏览器里直接演示，再一键导出可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
   <p class="pb-mono pbc-meta">网页 PPT · 可编辑导出 · 图均为示意图</p>
+</section>
+```
+
+## photobook/agenda · agenda
+
+目录。一行标题「目录」+ 斜体副题 → 左 512×492 照片；右侧 4 行「斜体编号 / 宋体条目 + 一句说明 / 等宽页码」，行高 123px，每行下一条细线，最后一条与照片底边齐平。条目 ≤6 字，说明 ≤14 字。
+
+```html
+<section class="slide" data-layout="photobook/agenda" data-role="agenda">
+  <h2 class="pb-serif pb-title" data-anim="rise">目录</h2>
+  <p class="pb-it pb-voice" data-anim="rise">Contents.</p>
+  <img class="pb-photo pba-img" src="assets/img/02-agenda.jpg" alt="示意图：暖色墙面上的窗光">
+  <p class="pb-num pba-num" style="top: 172px;" data-anim="rise">01</p>
+  <h3 class="pb-serif pba-h" style="top: 170px;" data-merge="r1" data-anim="rise">风格库</h3>
+  <p class="pb-body pba-p" style="top: 212px;" data-merge="r1" data-anim="rise">十二种风格，开场先挑一种</p>
+  <p class="pb-mono pba-page" style="top: 182px;">P. 04</p>
+  <div class="pb-hair pba-hair" data-shape="rect" style="top: 271px;"></div>
+  <p class="pb-num pba-num" style="top: 295px;" data-anim="rise">02</p>
+  <h3 class="pb-serif pba-h" style="top: 293px;" data-merge="r2" data-anim="rise">测量与导出</h3>
+  <p class="pb-body pba-p" style="top: 335px;" data-merge="r2" data-anim="rise">先量后画，文字始终可编辑</p>
+  <p class="pb-mono pba-page" style="top: 305px;">P. 07</p>
+  <div class="pb-hair pba-hair" data-shape="rect" style="top: 394px;"></div>
+  <p class="pb-num pba-num" style="top: 418px;" data-anim="rise">03</p>
+  <h3 class="pb-serif pba-h" style="top: 416px;" data-merge="r3" data-anim="rise">质量门</h3>
+  <p class="pb-body pba-p" style="top: 458px;" data-merge="r3" data-anim="rise">十六条规则，错误清零才交付</p>
+  <p class="pb-mono pba-page" style="top: 428px;">P. 10</p>
+  <div class="pb-hair pba-hair" data-shape="rect" style="top: 517px;"></div>
+  <p class="pb-num pba-num" style="top: 541px;" data-anim="rise">04</p>
+  <h3 class="pb-serif pba-h" style="top: 539px;" data-merge="r4" data-anim="rise">工作流</h3>
+  <p class="pb-body pba-p" style="top: 581px;" data-merge="r4" data-anim="rise">从大纲到成稿的四步</p>
+  <p class="pb-mono pba-page" style="top: 551px;">P. 13</p>
+  <div class="pb-hair pba-hair" data-shape="rect" style="top: 640px;"></div>
+  <p class="pb-mono pb-foot">ZIFEIYU PPT SKILL · 图为示意图</p>
+  <p class="pb-mono pb-pageno">02 / 18</p>
+</section>
+```
+
+## photobook/statement · statement
+
+金句暗房页。两行 56px 宋体引文居中（每行一个 h2，每行 ≤12 字）→ 斜体英文一句 → 等宽出处；只有页码，不放照片。
+
+```html
+<section class="slide is-dark" data-layout="photobook/statement" data-role="statement">
+  <h2 class="pb-serif pbs-line pbs-l1" data-merge="quote" data-anim="rise">HTML 是唯一的源，</h2>
+  <h2 class="pb-serif pbs-line pbs-l2" data-merge="quote" data-anim="rise">其余都是衍生物。</h2>
+  <p class="pb-it pbs-it" data-anim="rise">One source of truth.</p>
+  <p class="pb-mono pbs-by">— SKILL.md · 设计原则</p>
+  <p class="pb-mono pb-pageno">03 / 18</p>
+</section>
+```
+
+## photobook/section · section
+
+章节页。满版照片，底部 264px 压暗条上：斜体大章节号 + 宋体章节名 + 斜体一句；页脚等宽「CHAPTER NN · 图为示意图」与页码也在压暗条上。
+
+```html
+<section class="slide" data-layout="photobook/section" data-role="section">
+  <img class="pb-photo pbx-img" src="assets/img/04-section.jpg" alt="示意图：冷色远山与低悬的太阳">
+  <div class="pb-scrim pbx-band" data-shape="rect"></div>
+  <p class="pb-num pb-on pbx-num" data-anim="rise">01</p>
+  <h2 class="pb-serif pb-on pbx-title" data-anim="rise">风格库</h2>
+  <p class="pb-it pb-on2 pbx-it" data-anim="rise">Twelve ways to set a page.</p>
+  <p class="pb-mono pb-on2 pb-foot">CHAPTER 01 · 图为示意图</p>
+  <p class="pb-mono pb-on2 pb-pageno">04 / 18</p>
 </section>
 ```
 
@@ -89,6 +154,6 @@
   <h3 class="pb-serif pbp-name pbp-c4" data-merge="s4" data-anim="rise">导出</h3>
   <p class="pb-body pbp-desc pbp-c4" data-merge="s4" data-anim="rise">一键得到可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
   <p class="pb-mono pb-foot">Source — SKILL.md 工作流 · 图为示意图</p>
-  <p class="pb-mono pb-pageno">13 / 18</p>
+  <p class="pb-mono pb-pageno">14 / 18</p>
 </section>
 ```

@@ -21,6 +21,9 @@
   },
   "layouts": {
     "photobook/cover": { "role": "cover" },
+    "photobook/agenda": { "role": "agenda" },
+    "photobook/statement": { "role": "statement" },
+    "photobook/section": { "role": "section" },
     "photobook/kpi": { "role": "kpi" },
     "photobook/process": { "role": "process" }
   }

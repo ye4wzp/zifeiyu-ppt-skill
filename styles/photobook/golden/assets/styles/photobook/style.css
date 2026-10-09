@@ -46,6 +46,19 @@
   --font-latin: 'Playfair Display', Georgia, serif;
 }
 
+/* darkroom page: statement, video, closing */
+.slide.is-dark {
+  --bg: #141311;
+  --surface: #24221e;
+  --text-1: #f3f0ea;
+  --text-2: #a39d93;
+  --accent: #f3f0ea;
+  --on-accent: #141311;
+  --mark: #f3f0ea;
+  --on-mark: #141311;
+  --hairline: #3a3732;
+}
+
 /* ---------- vocabulary ---------- */
 .pb-serif { font-family: var(--font-serif); font-weight: 700; color: var(--text-1); }
 /* lining figures: old-style 0 reads as o (failures.md #5); Office face is Times New Roman, also lining */
@@ -58,6 +71,7 @@
 .pb-photo { object-fit: cover; }
 .pb-scrim { background: var(--scrim); }
 .pb-hair { background: var(--hairline); height: 1px; }
+.pb-ink { background: var(--text-1); }
 
 /* running heads: one-line serif title + right italic voice; foot: mono source / caption + folio */
 .pb-title { left: 64px; top: 56px; width: 640px; font-size: 44px; line-height: 1.25; }
@@ -102,3 +116,27 @@
 .pbp-c2 { left: 356px; }
 .pbp-c3 { left: 648px; }
 .pbp-c4 { left: 940px; }
+
+/* ---------- photobook/agenda ---------- */
+/* photo left; four rows of 123px from 148 on the right, a hairline under each */
+.pba-img { left: 64px; top: 148px; width: 512px; height: 492px; }
+.pba-num { left: 640px; width: 64px; font-size: 40px; }
+.pba-h { left: 720px; width: 280px; font-size: 28px; line-height: 1.2; }
+.pba-p { left: 720px; width: 280px; }
+.pba-page { left: 1016px; width: 200px; text-align: right; }
+.pba-hair { left: 640px; width: 576px; }
+
+/* ---------- photobook/statement ---------- */
+.pbs-line { left: 0; width: 1280px; font-size: 56px; line-height: 1.25; text-align: center; }
+.pbs-l1 { top: 248px; }
+.pbs-l2 { top: 318px; }
+.pbs-it { left: 0; top: 428px; width: 1280px; font-size: 26px; text-align: center; }
+.pbs-by { left: 0; top: 482px; width: 1280px; text-align: center; }
+
+/* ---------- photobook/section ---------- */
+/* full-bleed photo; chapter number, name and voice on a scrim band across the foot */
+.pbx-img { left: 0; top: 0; width: 1280px; height: 720px; }
+.pbx-band { left: 0; top: 456px; width: 1280px; height: 264px; }
+.pbx-num { left: 60px; top: 488px; width: 180px; font-size: 128px; }
+.pbx-title { left: 248px; top: 500px; width: 900px; font-size: 48px; line-height: 1.25; }
+.pbx-it { left: 248px; top: 572px; width: 900px; font-size: 26px; }
