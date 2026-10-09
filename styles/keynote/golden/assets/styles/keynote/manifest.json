@@ -1,0 +1,25 @@
+{
+  "id": "keynote",
+  "name": "发布会 · 暗场",
+  "letter": "C",
+  "group": "舞台冲击",
+  "status": "draft",
+  "recommend": ["路演", "发布", "大屏演讲"],
+  "assets": [],
+  "fonts": {
+    "web": [
+      { "src": "SourceHanSansSC-VF.otf", "out": "source-han-sans-sc.woff2" },
+      { "src": "Inter-VF.ttf", "out": "inter.woff2" }
+    ],
+    "office": {
+      "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "Inter": { "regular": "Segoe UI", "light": "Segoe UI Light" },
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" }
+    }
+  },
+  "layouts": {
+    "keynote/cover": { "role": "cover" },
+    "keynote/kpi": { "role": "kpi" },
+    "keynote/process": { "role": "process" }
+  }
+}

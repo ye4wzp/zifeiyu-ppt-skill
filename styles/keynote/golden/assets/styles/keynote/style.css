@@ -1,0 +1,96 @@
+/* ================================================================
+   Style C 「发布会 · 暗场」 — keynote
+   近黑底 × 满版照片 × 一页一个重点，大字居中；暖黄全页只用一处。
+   语法要点（详见 layouts.md）：照片上的渐变压暗用 kn-fade（必须带
+   data-raster，导出时单独截图）；深色圆角卡片导出为原生圆角矩形；
+   页脚灰字固定在 672px。
+   ================================================================ */
+
+@font-face {
+  font-family: 'Source Han Sans SC';
+  src: url('../../fonts/source-han-sans-sc.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../../fonts/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+:root {
+  --bg: #0a0a0b;
+  --surface: #1c1c1e;
+  --text-1: #f5f5f7;
+  --text-2: #8e8e93;
+  --accent: #ffc21a;
+  --on-accent: #0a0a0b;
+  --mark: #ffc21a;
+  --on-mark: #0a0a0b;
+  --hairline: #2c2c2e;
+  --on-image: #f5f5f7;
+  --on-image-2: #c7c7cc;
+
+  --font-display: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-num: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* ---------- vocabulary ---------- */
+.kn-semi { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; color: var(--text-1); }
+.kn-num { font-family: var(--font-num); font-weight: 600; line-height: 1; letter-spacing: -0.04em; color: var(--text-1); }
+/* kicker: the small yellow label — counts as the page's one accent */
+.kn-kick { font-family: var(--font-display); font-size: 18px; line-height: 1; font-weight: 600; letter-spacing: 0.2em; color: var(--accent); }
+.kn-body { font-size: 18px; line-height: 1.6; color: var(--text-2); }
+.kn-note { font-size: 16px; line-height: 1.6; color: var(--text-2); }
+.kn-ac { color: var(--accent); }
+.kn-grey { color: var(--text-2); }
+.kn-on2 { color: var(--on-image-2); }
+.kn-card { background: var(--surface); border-radius: 24px; }
+.kn-scrim { background: rgba(10, 10, 11, 0.58); border-radius: 24px; }
+.kn-hair { background: var(--hairline); height: 1px; }
+.kn-photo { object-fit: cover; }
+/* photo fade: PowerPoint has no gradient fill for this — always pair with data-raster */
+.kn-fade { background: linear-gradient(to top, rgba(10, 10, 11, 0.92) 0%, rgba(10, 10, 11, 0.55) 45%, rgba(10, 10, 11, 0.05) 80%); }
+
+/* foot: grey source left, page number right */
+.kn-source { left: 64px; top: 672px; width: 800px; }
+.kn-pageno { left: 1016px; top: 672px; width: 200px; text-align: right; }
+
+/* ---------- keynote/cover ---------- */
+.knc-img { left: 0; top: 0; width: 1280px; height: 720px; }
+.knc-fade { left: 0; top: 0; width: 1280px; height: 720px; }
+.knc-kick { left: 80px; top: 352px; width: 800px; }
+.knc-title { left: 74px; width: 1000px; font-size: 100px; line-height: 1.1; }
+.knc-t1 { top: 384px; }
+.knc-t2 { top: 494px; }
+.knc-sub { left: 80px; top: 628px; width: 1000px; font-size: 22px; line-height: 1.5; }
+
+/* ---------- keynote/kpi ---------- */
+/* one number owns the page; two supporting figures under a short rule */
+.knk-kick { left: 0; top: 80px; width: 1280px; text-align: center; letter-spacing: 0.12em; font-size: 22px; }
+.knk-hero { left: 0; top: 124px; width: 1280px; font-size: 288px; text-align: center; }
+.knk-label { left: 0; top: 432px; width: 1280px; font-size: 32px; line-height: 1.4; text-align: center; }
+.knk-desc { left: 0; top: 486px; width: 1280px; font-size: 20px; text-align: center; }
+.knk-hair { left: 440px; top: 552px; width: 400px; }
+.knk-num { top: 572px; width: 190px; font-size: 32px; text-align: center; }
+.knk-sub { top: 612px; width: 190px; font-size: 18px; text-align: center; }
+.knk-c1 { left: 440px; }
+.knk-c2 { left: 650px; }
+
+/* ---------- keynote/process ---------- */
+/* four dark cards; the last step carries the photo and the page's one accent */
+.knp-title { left: 0; top: 72px; width: 1280px; font-size: 56px; line-height: 1.2; text-align: center; }
+.knp-sub { left: 0; top: 156px; width: 1280px; font-size: 22px; text-align: center; }
+.knp-card { top: 236px; width: 276px; height: 388px; }
+.knp-num { top: 268px; width: 212px; font-size: 24px; }
+.knp-name { top: 480px; width: 212px; font-size: 38px; line-height: 1.2; }
+.knp-desc { top: 536px; width: 212px; }
+.knp-b1 { left: 64px; }
+.knp-b2 { left: 356px; }
+.knp-b3 { left: 648px; }
+.knp-b4 { left: 940px; }
+.knp-c1 { left: 96px; }
+.knp-c2 { left: 388px; }
+.knp-c3 { left: 680px; }
+.knp-c4 { left: 972px; }
