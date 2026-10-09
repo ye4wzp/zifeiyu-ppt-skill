@@ -32,6 +32,10 @@
     "swiss/bars": { "role": "bars" },
     "swiss/table": { "role": "table" },
     "swiss/kpi": { "role": "kpi" },
-    "swiss/process": { "role": "process" }
+    "swiss/process": { "role": "process" },
+    "swiss/timeline": { "role": "timeline" },
+    "swiss/cycle": { "role": "cycle" },
+    "swiss/system": { "role": "system" },
+    "swiss/closing": { "role": "closing" }
   }
 }

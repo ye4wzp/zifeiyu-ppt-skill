@@ -241,3 +241,69 @@
 .swd-v { left: 260px; width: 564px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
 .swd-s { left: 848px; width: 368px; }
 .swd-hair { left: 64px; width: 1152px; }
+
+/* ---------- swiss/timeline ---------- */
+/* five equal columns, pitch 230 — the one place the 12-column grid yields to a 5-up rhythm */
+.swl-date { top: 336px; width: 206px; font-size: 64px; letter-spacing: 0; }
+.swl-rule { left: 64px; top: 432px; width: 1152px; }
+.swl-tick { top: 427px; }
+.swl-h { top: 464px; width: 206px; font-size: 24px; }
+.swl-p { top: 504px; width: 206px; }
+.swl-c1 { left: 64px; }
+.swl-c2 { left: 294px; }
+.swl-c3 { left: 524px; }
+.swl-c4 { left: 754px; }
+.swl-c5 { left: 984px; }
+
+/* ---------- swiss/cycle ---------- */
+/* ring centre (332, 412), radius 176; square nodes sit on N / E / S / W */
+.swy-ring { left: 156px; top: 236px; width: 352px; height: 352px; border: 2px solid var(--text-2); }
+.swy-node { width: 16px; height: 16px; background: var(--text-1); }
+.swy-on { background: var(--accent); }
+.swy-n1 { left: 324px; top: 228px; }
+.swy-n2 { left: 500px; top: 404px; }
+.swy-n3 { left: 324px; top: 580px; }
+.swy-n4 { left: 148px; top: 404px; }
+.swy-mark { width: 40px; }
+.swy-m1 { left: 316px; top: 196px; text-align: center; }
+.swy-m2 { left: 532px; top: 404px; }
+.swy-m3 { left: 316px; top: 604px; text-align: center; }
+.swy-m4 { left: 92px; top: 404px; text-align: right; }
+.swy-core { left: 252px; top: 340px; width: 160px; font-size: 96px; text-align: center; }
+.swy-core-l { left: 252px; top: 448px; width: 160px; text-align: center; }
+.swy-num { left: 652px; width: 48px; }
+.swy-h { left: 716px; width: 500px; font-size: 32px; }
+.swy-hair { left: 652px; width: 564px; }
+.swy-back { left: 716px; top: 588px; width: 500px; }
+
+/* ---------- swiss/system ---------- */
+/* nested squares on columns 0–3; the innermost is the page's blue */
+.swz-sq1 { left: 64px; top: 216px; width: 368px; height: 368px; }
+.swz-sq2 { left: 128px; top: 280px; width: 240px; height: 240px; background: var(--surface-2); }
+.swz-sq3 { left: 192px; top: 344px; width: 112px; height: 112px; }
+.swz-l1 { left: 80px; top: 232px; width: 240px; }
+.swz-l2 { left: 144px; top: 296px; width: 200px; }
+.swz-l3 { left: 208px; top: 360px; width: 80px; }
+.swz-tag { left: 554px; width: 662px; }
+.swz-h { left: 554px; width: 662px; font-size: 28px; }
+.swz-p { left: 554px; width: 662px; }
+.swz-hair { left: 554px; width: 662px; }
+
+/* ---------- swiss/closing ---------- */
+/* mirror of the cover: photo left, blue panel right */
+.swe-img { left: 0; top: 0; width: 512px; height: 720px; }
+.swe-cap { left: 32px; top: 656px; width: 448px; color: var(--text-1); }
+.swe-panel { left: 512px; top: 0; width: 768px; height: 720px; }
+.swe-kicker { left: 576px; top: 48px; width: 400px; }
+.swe-title { left: 570px; width: 640px; font-size: 96px; }
+.swe-t1 { top: 160px; }
+.swe-t2 { top: 264px; }
+.swe-label { left: 576px; top: 432px; width: 640px; }
+.swe-cmd { left: 576px; top: 464px; width: 640px; font-family: var(--font-mono); font-size: 20px; line-height: 1.5; }
+.swe-p { left: 576px; top: 520px; width: 640px; }
+.swe-tick { top: 600px; }
+.swe-k1 { left: 576px; }
+.swe-k2 { left: 594px; }
+.swe-k3 { left: 612px; }
+.swe-k4 { left: 630px; }
+.swe-meta { left: 576px; top: 656px; width: 640px; }

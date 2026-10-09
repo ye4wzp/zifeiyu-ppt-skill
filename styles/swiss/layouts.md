@@ -1,6 +1,6 @@
 # 瑞士 · 网格（swiss）版式注册表
 
-> 状态：draft · P1 重做中，已有 13 个版式；其余核心角色未完成前，交付请用其他风格。
+> 状态：draft · P1 重做中，已有 17 个版式；其余核心角色未完成前，交付请用其他风格。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/swiss/golden/`；金样文字来自 `docs/golden-content.md`。
 
@@ -379,5 +379,134 @@
   <p class="sw-body sw-on2 swp-p swp-c4" data-merge="s4" data-anim="rise">一键得到可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
   <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
   <p class="sw-mono sw-foot">ZIFEIYU PPT SKILL · STYLE B — SWISS</p>
+</section>
+```
+
+## swiss/timeline · timeline
+
+时间线（4–5 个节点，5 等分列，列距 230）。两行标题（`sw-head` + `sw-head2`），极细日期在黑细线上方，线上方块刻度（最新节点 `is-on` 上蓝），线下「节点名 / 两行说明」。说明 ≤18 字。
+
+```html
+<section class="slide" data-layout="swiss/timeline" data-role="timeline">
+  <p class="sw-mono sw-folio">04 — CHRONICLE</p>
+  <p class="sw-mono sw-pageno">14 / 17</p>
+  <h2 class="sw-title sw-head" data-merge="title" data-anim="rise">从一套版式，</h2>
+  <h2 class="sw-title sw-head2" data-merge="title" data-anim="rise">到一座风格库。</h2>
+  <p class="sw-num swl-date swl-c1" data-anim="rise">07.16</p>
+  <p class="sw-num swl-date swl-c2" data-anim="rise">07.18</p>
+  <p class="sw-num swl-date swl-c3" data-anim="rise">08.17</p>
+  <p class="sw-num swl-date swl-c4" data-anim="rise">08.18</p>
+  <p class="sw-num swl-date swl-c5" data-anim="rise">10.08</p>
+  <div class="sw-rule swl-rule" data-shape="rect" data-anim="draw"></div>
+  <div class="sw-tick swl-tick swl-c1" data-shape="rect"></div>
+  <div class="sw-tick swl-tick swl-c2" data-shape="rect"></div>
+  <div class="sw-tick swl-tick swl-c3" data-shape="rect"></div>
+  <div class="sw-tick swl-tick swl-c4" data-shape="rect"></div>
+  <div class="sw-tick is-on swl-tick swl-c5" data-shape="rect"></div>
+  <h3 class="sw-h swl-h swl-c1" data-merge="c1" data-anim="rise">首版发布</h3>
+  <p class="sw-body swl-p swl-c1" data-merge="c1" data-anim="rise">锁定设计系统的网页 PPT，确定性导出。</p>
+  <h3 class="sw-h swl-h swl-c2" data-merge="c2" data-anim="rise">墨韵衬线</h3>
+  <p class="sw-body swl-p swl-c2" data-merge="c2" data-anim="rise">第二套设计系统：思源宋、暖纸、朱砂。</p>
+  <h3 class="sw-h swl-h swl-c3" data-merge="c3" data-anim="rise">校验全覆盖</h3>
+  <p class="sw-body swl-p swl-c3" data-merge="c3" data-anim="rise">规则覆盖全部元素，文字分段原生导出。</p>
+  <h3 class="sw-h swl-h swl-c4" data-merge="c4" data-anim="rise">瑞士国际</h3>
+  <p class="sw-body swl-p swl-c4" data-merge="c4" data-anim="rise">第三套设计系统，加入数据叙事版式。</p>
+  <h3 class="sw-h swl-h swl-c5" data-merge="c5" data-anim="rise">风格库</h3>
+  <p class="sw-body swl-p swl-c5" data-merge="c5" data-anim="rise">十二种风格，版式独立。</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">SOURCE — git log · 2026-07-16 → 2026-10-08</p>
+</section>
+```
+
+## swiss/cycle · cycle
+
+闭环墨页（有回路才用）。左：描边圆环 + N/E/S/W 四个方块节点（起点上蓝）、等宽编号、环心巨数字；右：四行「编号 / 步骤名」+ 一句回到起点。步骤名 ≤5 字。
+
+```html
+<section class="slide is-dark" data-layout="swiss/cycle" data-role="cycle">
+  <p class="sw-mono sw-folio">04 — LOOP</p>
+  <p class="sw-mono sw-pageno">15 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">每次改动，都绕这一圈</h2>
+  <div class="swy-ring" data-shape="ellipse" data-anim="fade"></div>
+  <div class="swy-node swy-on swy-n1" data-shape="rect" data-anim="pop"></div>
+  <div class="swy-node swy-n2" data-shape="rect" data-anim="pop"></div>
+  <div class="swy-node swy-n3" data-shape="rect" data-anim="pop"></div>
+  <div class="swy-node swy-n4" data-shape="rect" data-anim="pop"></div>
+  <p class="sw-mono swy-mark swy-m1">01</p>
+  <p class="sw-mono swy-mark swy-m2">02</p>
+  <p class="sw-mono swy-mark swy-m3">03</p>
+  <p class="sw-mono swy-mark swy-m4">04</p>
+  <p class="sw-num swy-core" data-anim="count">4</p>
+  <p class="sw-mono swy-core-l">STEPS · LOOP</p>
+  <p class="sw-mono swy-num" style="top: 248px;">01</p>
+  <h3 class="sw-h swy-h" style="top: 236px;" data-anim="rise">改版式</h3>
+  <div class="sw-hair swy-hair" data-shape="rect" style="top: 300px;"></div>
+  <p class="sw-mono swy-num" style="top: 336px;">02</p>
+  <h3 class="sw-h swy-h" style="top: 324px;" data-anim="rise">过校验</h3>
+  <div class="sw-hair swy-hair" data-shape="rect" style="top: 388px;"></div>
+  <p class="sw-mono swy-num" style="top: 424px;">03</p>
+  <h3 class="sw-h swy-h" style="top: 412px;" data-anim="rise">渲染比对</h3>
+  <div class="sw-hair swy-hair" data-shape="rect" style="top: 476px;"></div>
+  <p class="sw-mono swy-num" style="top: 512px;">04</p>
+  <h3 class="sw-h swy-h" style="top: 500px;" data-anim="rise">记基线</h3>
+  <div class="sw-hair swy-hair" data-shape="rect" style="top: 564px;"></div>
+  <p class="sw-lede swy-back" data-anim="rise">再回到改版式</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">SOURCE — scripts/baseline.mjs（基线前先过 check-style 与 validate）</p>
+</section>
+```
+
+## swiss/system · system
+
+层级嵌套。左：三层嵌套方块（外灰、中深灰、内蓝），各带等宽层名；右：三行「等宽层级标签 / 名称 / 一行说明」。
+
+```html
+<section class="slide" data-layout="swiss/system" data-role="system">
+  <p class="sw-mono sw-folio">04 — THREE LAYERS</p>
+  <p class="sw-mono sw-pageno">16 / 17</p>
+  <h2 class="sw-title sw-head" data-anim="rise">三层样式，各管一层</h2>
+  <div class="sw-grey swz-sq1" data-shape="rect" data-anim="scale"></div>
+  <div class="swz-sq2" data-shape="rect" data-anim="scale"></div>
+  <div class="sw-accent swz-sq3" data-shape="rect" data-anim="scale"></div>
+  <p class="sw-mono swz-l1">BASE.CSS</p>
+  <p class="sw-mono swz-l2">STYLE.CSS</p>
+  <p class="sw-mono sw-on swz-l3">BRAND</p>
+  <p class="sw-mono swz-tag" style="top: 216px;" data-merge="r1" data-anim="rise">OUTER — 外层</p>
+  <h3 class="sw-h swz-h" style="top: 248px;" data-merge="r1" data-anim="rise">base.css</h3>
+  <p class="sw-body swz-p" style="top: 292px;" data-merge="r1" data-anim="rise">画布、元素契约、形状原语</p>
+  <div class="sw-hair swz-hair" data-shape="rect" style="top: 328px;"></div>
+  <p class="sw-mono swz-tag" style="top: 340px;" data-merge="r2" data-anim="rise">MIDDLE — 中层</p>
+  <h3 class="sw-h swz-h" style="top: 372px;" data-merge="r2" data-anim="rise">style.css</h3>
+  <p class="sw-body swz-p" style="top: 416px;" data-merge="r2" data-anim="rise">风格的 token、字体与全部版式</p>
+  <div class="sw-hair swz-hair" data-shape="rect" style="top: 452px;"></div>
+  <p class="sw-mono swz-tag" style="top: 464px;" data-merge="r3" data-anim="rise">INNER — 内层</p>
+  <h3 class="sw-h swz-h" style="top: 496px;" data-merge="r3" data-anim="rise">brand.css</h3>
+  <p class="sw-body swz-p" style="top: 540px;" data-merge="r3" data-anim="rise">只改 token 的品牌色</p>
+  <div class="sw-hair sw-foot-rule" data-shape="rect"></div>
+  <p class="sw-mono sw-foot">SOURCE — 风格库 spec §3.1</p>
+</section>
+```
+
+## swiss/closing · closing
+
+结尾，与封面镜像：左 512px 照片（深色图注），右 768px 克莱因蓝色块：两行极细巨字、等宽命令、一句说明、方块刻度（最后一格 `is-on`）。
+
+```html
+<section class="slide" data-layout="swiss/closing" data-role="closing">
+  <img class="sw-photo swe-img" src="assets/img/17-closing.jpg" alt="示意图：灰白立板之间的一块克莱因蓝">
+  <p class="sw-mono swe-cap">FIG. 05 — 示意图</p>
+  <div class="sw-accent swe-panel" data-shape="rect"></div>
+  <p class="sw-mono sw-on2 swe-kicker">ZIFEIYU PPT SKILL</p>
+  <p class="sw-mono sw-on2 sw-pageno">17 / 17</p>
+  <h2 class="sw-giant sw-on swe-title swe-t1" data-merge="title" data-anim="rise">挑一种风格，</h2>
+  <h2 class="sw-giant sw-on swe-title swe-t2" data-merge="title" data-anim="rise">开始下一份。</h2>
+  <p class="sw-mono sw-on2 swe-label">START — 新建 DECK</p>
+  <p class="sw-on swe-cmd">node scripts/new-deck.mjs my-deck --style swiss</p>
+  <p class="sw-body sw-on2 swe-p">风格画廊：docs/styles/index.html</p>
+  <div class="sw-tick sw-on swe-tick swe-k1" data-shape="rect"></div>
+  <div class="sw-tick sw-on swe-tick swe-k2" data-shape="rect"></div>
+  <div class="sw-tick sw-on swe-tick swe-k3" data-shape="rect"></div>
+  <div class="sw-tick sw-on is-on swe-tick swe-k4" data-shape="rect"></div>
+  <p class="sw-mono sw-on swe-meta">STYLE B — SWISS · END</p>
 </section>
 ```
