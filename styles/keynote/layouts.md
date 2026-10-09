@@ -348,3 +348,71 @@
   <p class="kn-note kn-pageno">14</p>
 </section>
 ```
+
+## keynote/timeline · timeline
+
+时间线。共用页头 → 5 列（left 64 起，列距 232px）：Inter 日期 → 细线与白色圆点 → 粗体节点名 + 两行以内说明（≤20 字）；最后一个日期是全页唯一的暖黄。
+
+```html
+<section class="slide" data-layout="keynote/timeline" data-role="timeline">
+  <h2 class="kn-semi kn-title" data-anim="rise">从一套版式，到一座风格库。</h2>
+  <p class="kn-sub" data-anim="rise">From one system to a library.</p>
+  <p class="kn-num knl-date knl-c1" data-anim="rise">07.16</p>
+  <p class="kn-num knl-date knl-c2" data-anim="rise">07.18</p>
+  <p class="kn-num knl-date knl-c3" data-anim="rise">08.17</p>
+  <p class="kn-num knl-date knl-c4" data-anim="rise">08.18</p>
+  <p class="kn-num kn-ac knl-date knl-c5" data-anim="rise">10.08</p>
+  <div class="knl-line" data-shape="rect" data-anim="draw"></div>
+  <div class="kn-fill knl-node knl-c1" data-shape="ellipse" data-anim="pop"></div>
+  <div class="kn-fill knl-node knl-c2" data-shape="ellipse" data-anim="pop"></div>
+  <div class="kn-fill knl-node knl-c3" data-shape="ellipse" data-anim="pop"></div>
+  <div class="kn-fill knl-node knl-c4" data-shape="ellipse" data-anim="pop"></div>
+  <div class="kn-fill knl-node knl-c5" data-shape="ellipse" data-anim="pop"></div>
+  <h3 class="kn-semi knl-h knl-c1" data-merge="c1" data-anim="rise">首版发布</h3>
+  <p class="kn-note knl-p knl-c1" data-merge="c1" data-anim="rise">锁定设计系统的网页 PPT，确定性导出。</p>
+  <h3 class="kn-semi knl-h knl-c2" data-merge="c2" data-anim="rise">墨韵衬线</h3>
+  <p class="kn-note knl-p knl-c2" data-merge="c2" data-anim="rise">第二套设计系统：思源宋、暖纸、朱砂。</p>
+  <h3 class="kn-semi knl-h knl-c3" data-merge="c3" data-anim="rise">校验全覆盖</h3>
+  <p class="kn-note knl-p knl-c3" data-merge="c3" data-anim="rise">规则覆盖全部元素，文字分段原生导出。</p>
+  <h3 class="kn-semi knl-h knl-c4" data-merge="c4" data-anim="rise">瑞士国际</h3>
+  <p class="kn-note knl-p knl-c4" data-merge="c4" data-anim="rise">第三套设计系统，加入数据叙事版式。</p>
+  <h3 class="kn-semi knl-h knl-c5" data-merge="c5" data-anim="rise">风格库</h3>
+  <p class="kn-note knl-p knl-c5" data-merge="c5" data-anim="rise">十二种风格，版式独立。</p>
+  <p class="kn-note kn-source">来源：git log（2026-07-16 → 2026-10-08）</p>
+  <p class="kn-note kn-pageno">15</p>
+</section>
+```
+
+## keynote/gallery · gallery
+
+图集。共用页头 → 左大图 752×388 + 右两张 384×186 叠放，都是圆角，上下边与大图对齐（236 / 624）；页脚写出处与「三幅均为示意图」。
+
+```html
+<section class="slide" data-layout="keynote/gallery" data-role="gallery">
+  <h2 class="kn-semi kn-title" data-anim="rise">配图由脚本生成，按风格取色。</h2>
+  <p class="kn-sub" data-anim="rise">Seeded, repeatable, on palette.</p>
+  <img class="kn-photo kn-card kng-w1" src="assets/img/16-gallery-1.jpg" alt="示意图：暗色远山与低悬的太阳">
+  <img class="kn-photo kn-card kng-w2" src="assets/img/16-gallery-2.jpg" alt="示意图：暗场里的暖色光晕">
+  <img class="kn-photo kn-card kng-w3" src="assets/img/16-gallery-3.jpg" alt="示意图：暗色立板与一块暖黄">
+  <p class="kn-note kn-source">来源：scripts/gen-art.mjs · 固定种子，输出可复现 · 三幅均为示意图</p>
+  <p class="kn-note kn-pageno">16</p>
+</section>
+```
+
+## keynote/closing · closing
+
+结尾。满版照片 + 渐变压暗；左下暖黄「下一步」→ 两行 88px 标题（每行一个 h2）→ 深色圆角条里一行命令 → 风格画廊路径；图注移到右下，不放页码。
+
+```html
+<section class="slide" data-layout="keynote/closing" data-role="closing">
+  <img class="kn-photo kne-img" src="assets/img/18-closing.jpg" alt="示意图：暗墙上的一束窗光">
+  <div class="kn-fade kne-fade" data-shape="rect" data-raster></div>
+  <p class="kn-kick kne-kick" data-anim="rise">下一步</p>
+  <h2 class="kn-semi kne-title kne-t1" data-merge="title" data-anim="rise">挑一种风格，</h2>
+  <h2 class="kn-semi kne-title kne-t2" data-merge="title" data-anim="rise">开始下一份。</h2>
+  <div class="kn-card kne-card" data-shape="rect"></div>
+  <p class="kne-cmd">node scripts/new-deck.mjs my-deck --style keynote</p>
+  <p class="kn-body kne-p">风格画廊：docs/styles/index.html</p>
+  <p class="kn-note kne-cap">图为示意图</p>
+</section>
+```

@@ -202,3 +202,34 @@
 .knd-k { left: 96px; width: 200px; font-size: 20px; line-height: 1.4; }
 .knd-v { left: 320px; width: 560px; font-size: 18px; line-height: 1.5; color: var(--text-1); }
 .knd-s { left: 912px; width: 272px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+
+/* ---------- keynote/timeline ---------- */
+/* five columns on a 232px step; dates over a thin line with round nodes */
+.knl-date { top: 332px; width: 208px; font-size: 44px; }
+.knl-line { left: 64px; top: 412px; width: 1152px; height: 2px; background: var(--hairline); }
+.knl-node { top: 405px; width: 16px; height: 16px; }
+.knl-h { top: 444px; width: 208px; font-size: 26px; line-height: 1.3; }
+.knl-p { top: 488px; width: 208px; }
+.knl-c1 { left: 64px; }
+.knl-c2 { left: 296px; }
+.knl-c3 { left: 528px; }
+.knl-c4 { left: 760px; }
+.knl-c5 { left: 992px; }
+
+/* ---------- keynote/gallery ---------- */
+.kng-w1 { left: 64px; top: 236px; width: 752px; height: 388px; }
+.kng-w2 { left: 832px; top: 236px; width: 384px; height: 186px; }
+.kng-w3 { left: 832px; top: 438px; width: 384px; height: 186px; }
+
+/* ---------- keynote/closing ---------- */
+.kne-img { left: 0; top: 0; width: 1280px; height: 720px; }
+.kne-fade { left: 0; top: 0; width: 1280px; height: 720px; }
+.kne-kick { left: 80px; top: 290px; width: 800px; }
+.kne-title { left: 74px; width: 1000px; font-size: 88px; line-height: 1.1; }
+.kne-t1 { top: 330px; }
+.kne-t2 { top: 427px; }
+.kne-card { left: 80px; top: 552px; width: 640px; height: 56px; }
+.kne-cmd { left: 104px; top: 566px; width: 600px; font-family: var(--font-num); font-size: 20px; line-height: 1.4; color: var(--text-1); }
+.kne-p { left: 80px; top: 628px; width: 800px; }
+/* the gallery path takes the bottom-left, so the caption moves to the right edge */
+.kne-cap { left: 900px; top: 672px; width: 316px; text-align: right; }
