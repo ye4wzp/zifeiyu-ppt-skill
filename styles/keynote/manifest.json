@@ -22,6 +22,10 @@
     "keynote/agenda": { "role": "agenda" },
     "keynote/statement": { "role": "statement" },
     "keynote/section": { "role": "section" },
+    "keynote/matrix": { "role": "matrix" },
+    "keynote/compare": { "role": "compare" },
+    "keynote/image-text": { "role": "image-text" },
+    "keynote/image": { "role": "image" },
     "keynote/kpi": { "role": "kpi" },
     "keynote/process": { "role": "process" }
   }

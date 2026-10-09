@@ -87,6 +87,115 @@
 </section>
 ```
 
+## keynote/matrix · matrix
+
+矩阵盘点（8–12 项，名称 ≤7 字）。共用页头，副题写总数与分组 → 12 张 276×116 深色圆角卡片（列 left 64 / 356 / 648 / 940，行 top 236 / 368 / 500）：灰色 Inter 字母 + 粗体名称；当前项那张是黄卡片（`kn-card kn-acbg`，字用 `kn-on`）。
+
+```html
+<section class="slide" data-layout="keynote/matrix" data-role="matrix">
+  <h2 class="kn-semi kn-title" data-anim="rise">十二种风格，按场合挑一种。</h2>
+  <p class="kn-sub" data-anim="rise">12 种风格 · 分五组：编辑排印、商务理性、舞台冲击、影像叙事、东方人文</p>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 64px; top: 236px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 356px; top: 236px;"></div>
+  <div class="kn-card kn-acbg knm-card" data-shape="rect" style="left: 648px; top: 236px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 940px; top: 236px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 64px; top: 368px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 356px; top: 368px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 648px; top: 368px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 940px; top: 368px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 64px; top: 500px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 356px; top: 500px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 648px; top: 500px;"></div>
+  <div class="kn-card knm-card" data-shape="rect" style="left: 940px; top: 500px;"></div>
+  <p class="kn-num kn-grey knm-key" style="left: 88px; top: 260px;">A</p>
+  <p class="kn-semi knm-name" style="left: 88px; top: 300px;">杂志 · 暖纸</p>
+  <p class="kn-num kn-grey knm-key" style="left: 380px; top: 260px;">B</p>
+  <p class="kn-semi knm-name" style="left: 380px; top: 300px;">瑞士 · 网格</p>
+  <p class="kn-num kn-on knm-key" style="left: 672px; top: 260px;">C</p>
+  <p class="kn-semi kn-on knm-name" style="left: 672px; top: 300px;">发布会 · 暗场</p>
+  <p class="kn-num kn-grey knm-key" style="left: 964px; top: 260px;">D</p>
+  <p class="kn-semi knm-name" style="left: 964px; top: 300px;">报刊 · 版面</p>
+  <p class="kn-num kn-grey knm-key" style="left: 88px; top: 392px;">E</p>
+  <p class="kn-semi knm-name" style="left: 88px; top: 432px;">大字报 · 粗野</p>
+  <p class="kn-num kn-grey knm-key" style="left: 380px; top: 392px;">F</p>
+  <p class="kn-semi knm-name" style="left: 380px; top: 432px;">柔和 · 产品</p>
+  <p class="kn-num kn-grey knm-key" style="left: 672px; top: 392px;">G</p>
+  <p class="kn-semi knm-name" style="left: 672px; top: 432px;">摄影集 · 画册</p>
+  <p class="kn-num kn-grey knm-key" style="left: 964px; top: 392px;">H</p>
+  <p class="kn-semi knm-name" style="left: 964px; top: 432px;">咨询 · 白皮书</p>
+  <p class="kn-num kn-grey knm-key" style="left: 88px; top: 524px;">I</p>
+  <p class="kn-semi knm-name" style="left: 88px; top: 564px;">日式 · 极简</p>
+  <p class="kn-num kn-grey knm-key" style="left: 380px; top: 524px;">J</p>
+  <p class="kn-semi knm-name" style="left: 380px; top: 564px;">拼贴 · 手账</p>
+  <p class="kn-num kn-grey knm-key" style="left: 672px; top: 524px;">K</p>
+  <p class="kn-semi knm-name" style="left: 672px; top: 564px;">新中式 · 东方</p>
+  <p class="kn-num kn-grey knm-key" style="left: 964px; top: 524px;">L</p>
+  <p class="kn-semi knm-name" style="left: 964px; top: 564px;">工程制图</p>
+  <p class="kn-note kn-source">来源：风格库 spec §2</p>
+  <p class="kn-note kn-pageno">5</p>
+</section>
+```
+
+## keynote/compare · compare
+
+对比。共用页头 → 左右两张 568×388 深色圆角卡片：灰色小标签「之前 / 现在」→ 粗体小标题（≤14 字）→ 两行以内说明（≤70 字）→ 96px 大数字 + 一句单位（≤12 字）；右边的数字是全页唯一的暖黄。
+
+```html
+<section class="slide" data-layout="keynote/compare" data-role="compare">
+  <h2 class="kn-semi kn-title" data-anim="rise">换皮，不如换版面。</h2>
+  <p class="kn-sub" data-anim="rise">Same content, new pages.</p>
+  <div class="kn-card knv-card knv-l" data-shape="rect" data-anim="rise"></div>
+  <div class="kn-card knv-card knv-r" data-shape="rect" data-anim="rise"></div>
+  <p class="kn-semi knv-label knv-tl">之前</p>
+  <h3 class="kn-semi knv-h knv-tl" data-merge="l" data-anim="rise">通用版式，换主题即换色</h3>
+  <p class="kn-body knv-p knv-tl" data-merge="l" data-anim="rise">三套设计系统共用 L01–L24，换一个主题文件整套换色，版面结构始终一样。</p>
+  <p class="kn-num knv-num knv-tl" data-anim="count">24</p>
+  <p class="kn-grey knv-unit knv-ul" data-anim="rise">个版式，三套系统共用</p>
+  <p class="kn-semi knv-label knv-tr">现在</p>
+  <h3 class="kn-semi knv-h knv-tr" data-merge="r" data-anim="rise">独立版式，选风格即选版面</h3>
+  <p class="kn-body knv-p knv-tr" data-merge="r" data-anim="rise">十二种风格各有一套版式，按角色登记；校验与导出只认角色，不认风格。</p>
+  <p class="kn-num kn-ac knv-num knv-tr" data-anim="count">12</p>
+  <p class="kn-grey knv-unit knv-ur" data-anim="rise">种风格，各有一套版式</p>
+  <p class="kn-note kn-source">来源：references/layouts.md（L01–L24）· 风格库 spec §1、§3.2</p>
+  <p class="kn-note kn-pageno">6</p>
+</section>
+```
+
+## keynote/image-text · image-text
+
+图文。左半版满高照片；右栏暖黄小标签 → 两行 56px 标题（每行一个 h2）→ 两段正文（每段 ≤50 字）→ 细线 → 一行灰色注记；页脚「图为示意图」在右栏。
+
+```html
+<section class="slide" data-layout="keynote/image-text" data-role="image-text">
+  <img class="kn-photo kni-img" src="assets/img/07-feature.jpg" alt="示意图：暗墙上的一束窗光">
+  <p class="kn-kick kni-kick" data-anim="rise">测量与导出</p>
+  <h2 class="kn-semi kni-title kni-t1" data-merge="title" data-anim="rise">所见即所得，</h2>
+  <h2 class="kn-semi kni-title kni-t2" data-merge="title" data-anim="rise">靠的是测量。</h2>
+  <p class="kn-body kni-p kni-p1" data-merge="body" data-anim="rise">导出器先让浏览器把每一页排好，再逐个量出元素的位置、尺寸、字号与颜色，按同样的坐标写进 PPTX。</p>
+  <p class="kn-body kni-p kni-p2" data-merge="body" data-anim="rise">圆角、描边、阴影、旋转与竖排换成 PowerPoint 原生形状；画不出的装饰单独截图，文字始终可编辑。</p>
+  <div class="kn-hair kni-hair" data-shape="rect" data-anim="draw"></div>
+  <p class="kn-note kni-note">导出原语：圆角矩形 · 直线 · 燕尾 · 旋转 · 阴影 · 竖排</p>
+  <p class="kn-note kni-cap">图为示意图</p>
+  <p class="kn-note kn-pageno">7</p>
+</section>
+```
+
+## keynote/image · image
+
+大图。满版照片 + 渐变压暗；左下暖黄小标签 → 56px 标题 → 一行说明；左下图注与页码。
+
+```html
+<section class="slide" data-layout="keynote/image" data-role="image">
+  <img class="kn-photo knf-img" src="assets/img/08-image.jpg" alt="示意图：暗场里的暖色光晕">
+  <div class="kn-fade knf-fade" data-shape="rect" data-raster></div>
+  <p class="kn-kick knf-kick" data-anim="rise">第 1 步</p>
+  <h2 class="kn-semi knf-title" data-anim="rise">先选风格，再写内容</h2>
+  <p class="kn-on2 knf-p" data-anim="rise">风格决定版面，版面决定一页能放多少字。</p>
+  <p class="kn-note kn-capl">图为示意图</p>
+  <p class="kn-note kn-pageno">8</p>
+</section>
+```
+
 ## keynote/kpi · kpi
 
 数据页，一个数撑满一页。暖黄小标题居中 → 288px 巨大数字 → 粗体标签 + 一句说明 → 短细线 → 并排两个辅助数字与标签 → 页脚出处（`data-source`）与页码。三个数都必须真实；巨大数字 ≤3 位。
