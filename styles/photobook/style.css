@@ -183,3 +183,30 @@
 .pbf-title { left: 64px; top: 608px; width: 720px; font-size: 28px; line-height: 1.25; }
 .pbf-p { left: 64px; top: 652px; width: 720px; }
 .pbf-cap { left: 816px; top: 616px; width: 400px; text-align: right; }
+
+/* ---------- photobook/points ---------- */
+/* text left, the photo bleeds off the right edge */
+.pbt-img { left: 768px; top: 0; width: 512px; height: 720px; }
+.pbt-it { left: 64px; top: 124px; width: 640px; font-size: 26px; }
+.pbt-no { left: 64px; width: 640px; font-size: 22px; }
+.pbt-h { left: 64px; width: 640px; font-size: 28px; line-height: 1.2; }
+.pbt-p { left: 64px; width: 640px; }
+.pbt-hair { left: 64px; width: 640px; }
+.pbt-foot { left: 64px; top: 668px; width: 440px; }
+.pbt-pageno { left: 504px; top: 668px; width: 200px; text-align: right; }
+
+/* ---------- photobook/bars ---------- */
+/* photo left; six bars at 72px per rule: label / bar / value / rule ids */
+.pbb-img { left: 64px; top: 148px; width: 376px; height: 492px; }
+.pbb-label { left: 488px; width: 120px; font-size: 18px; line-height: 1.3; text-align: right; }
+.pbb-bar { left: 624px; height: 24px; }
+.pbb-val { width: 32px; font-size: 32px; }
+.pbb-ids { width: 240px; }
+
+/* ---------- photobook/table ---------- */
+.pbd-head { top: 164px; width: 200px; }
+.pbd-ink { left: 64px; top: 192px; width: 1152px; height: 2px; }
+.pbd-k { left: 64px; width: 216px; font-size: 20px; line-height: 1.3; }
+.pbd-v { left: 304px; width: 568px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
+.pbd-s { left: 904px; width: 312px; }
+.pbd-hair { left: 64px; width: 1152px; }

@@ -28,7 +28,10 @@
     "photobook/compare": { "role": "compare" },
     "photobook/image-text": { "role": "image-text" },
     "photobook/image": { "role": "image" },
+    "photobook/points": { "role": "points" },
     "photobook/kpi": { "role": "kpi" },
+    "photobook/bars": { "role": "bars" },
+    "photobook/table": { "role": "table" },
     "photobook/process": { "role": "process" }
   }
 }

@@ -213,6 +213,31 @@
 </section>
 ```
 
+## photobook/points · points
+
+三点并列。左栏一行标题 → 斜体副题 → 三行「斜体 No. N / 宋体小标题 / 一行说明」，行间细线；照片从右边出血占满高（512×720）。页脚与页码收在左栏（`pbt-foot` / `pbt-pageno`）。每条说明 ≤30 字。
+
+```html
+<section class="slide" data-layout="photobook/points" data-role="points">
+  <img class="pb-photo pbt-img" src="assets/img/09-points.jpg" alt="示意图：冷色墙面上的窗光">
+  <h2 class="pb-serif pb-title" data-anim="rise">三件事，件件可验证。</h2>
+  <p class="pb-it pbt-it" data-anim="rise">Three promises, all checkable.</p>
+  <p class="pb-it pbt-no" style="top: 196px;" data-merge="c1" data-anim="rise">No. 1</p>
+  <h3 class="pb-serif pbt-h" style="top: 228px;" data-merge="c1" data-anim="rise">浏览器里演示</h3>
+  <p class="pb-body pbt-p" style="top: 270px;" data-merge="c1" data-anim="rise">方向键翻页，F 全屏，S 打开演讲者控制台，讲稿只给自己看。</p>
+  <div class="pb-hair pbt-hair" data-shape="rect" style="top: 328px;"></div>
+  <p class="pb-it pbt-no" style="top: 344px;" data-merge="c2" data-anim="rise">No. 2</p>
+  <h3 class="pb-serif pbt-h" style="top: 376px;" data-merge="c2" data-anim="rise">可编辑的 PPTX</h3>
+  <p class="pb-body pbt-p" style="top: 418px;" data-merge="c2" data-anim="rise">文字是原生文本框，形状是原生形状，交给同事也能接着改。</p>
+  <div class="pb-hair pbt-hair" data-shape="rect" style="top: 476px;"></div>
+  <p class="pb-it pbt-no" style="top: 492px;" data-merge="c3" data-anim="rise">No. 3</p>
+  <h3 class="pb-serif pbt-h" style="top: 524px;" data-merge="c3" data-anim="rise">机器先把关</h3>
+  <p class="pb-body pbt-p" style="top: 566px;" data-merge="c3" data-anim="rise">十六条规则查版式、字号、出处与导出一致性，错误清零才交付。</p>
+  <p class="pb-mono pbt-foot">Source — SKILL.md 第 6、8 步 · 图为示意图</p>
+  <p class="pb-mono pbt-pageno">09 / 18</p>
+</section>
+```
+
 ## photobook/kpi · kpi
 
 数据页。一行标题 → 3 张 376×492 高幅照片并排，每张底部一块压暗条，条上斜体大数字 + 宋体标签 + 一句说明（≤22 字，最多两行）→ 页脚出处（`data-source`）与页码。三个数都必须真实。
@@ -237,6 +262,85 @@
   <p class="pb-on2 pbk-desc pbk-i3" data-merge="c3" data-anim="rise">PPTX · PDF · PNG，HTML 是唯一的源</p>
   <p class="pb-mono pb-foot" data-source>Source — scripts/validate.mjs · scripts/lib/roles.mjs · 图为示意图</p>
   <p class="pb-mono pb-pageno">10 / 18</p>
+</section>
+```
+
+## photobook/bars · bars
+
+条形对比。一行标题 + 斜体副题 → 左 376×492 照片；右侧 6 行「宋体标签（右对齐）/ 墨色条 / 斜体数值 / 等宽规则号」，条长每单位 72px（`data-value` × 72）。来源写 `data-source`；`--native-charts` 时整组换成 PowerPoint 原生条形图。
+
+```html
+<section class="slide" data-layout="photobook/bars" data-role="bars">
+  <h2 class="pb-serif pb-title" data-anim="rise">十六条规则，各管一摊。</h2>
+  <p class="pb-it pb-voice" data-anim="rise">Sixteen rules, six concerns.</p>
+  <img class="pb-photo pbb-img" src="assets/img/11-bars.jpg" alt="示意图：暖色远山与落日">
+  <p class="pb-serif pbb-label" style="top: 184px;" data-chart>排版与几何</p>
+  <div class="pb-ink pbb-bar" data-shape="rect" data-value="4" data-label="排版与几何" data-anim="grow-x" style="top: 184px; width: 288px;"></div>
+  <p class="pb-num pbb-val" style="top: 180px; left: 928px;" data-chart>4</p>
+  <p class="pb-mono pbb-ids" style="top: 188px; left: 968px;" data-chart>R3 · R4 · R7 · R9</p>
+  <p class="pb-serif pbb-label" style="top: 264px;" data-chart>版式与样式</p>
+  <div class="pb-ink pbb-bar" data-shape="rect" data-value="4" data-label="版式与样式" data-anim="grow-x" style="top: 264px; width: 288px;"></div>
+  <p class="pb-num pbb-val" style="top: 260px; left: 928px;" data-chart>4</p>
+  <p class="pb-mono pbb-ids" style="top: 268px; left: 968px;" data-chart>R1 · R2 · R6 · R12</p>
+  <p class="pb-serif pbb-label" style="top: 344px;" data-chart>内容与数据</p>
+  <div class="pb-ink pbb-bar" data-shape="rect" data-value="3" data-label="内容与数据" data-anim="grow-x" style="top: 344px; width: 216px;"></div>
+  <p class="pb-num pbb-val" style="top: 340px; left: 856px;" data-chart>3</p>
+  <p class="pb-mono pbb-ids" style="top: 348px; left: 896px;" data-chart>R5 · R8 · R14</p>
+  <p class="pb-serif pbb-label" style="top: 424px;" data-chart>可访问与媒体</p>
+  <div class="pb-ink pbb-bar" data-shape="rect" data-value="3" data-label="可访问与媒体" data-anim="grow-x" style="top: 424px; width: 216px;"></div>
+  <p class="pb-num pbb-val" style="top: 420px; left: 856px;" data-chart>3</p>
+  <p class="pb-mono pbb-ids" style="top: 428px; left: 896px;" data-chart>R10 · R11 · R13</p>
+  <p class="pb-serif pbb-label" style="top: 504px;" data-chart>节奏</p>
+  <div class="pb-ink pbb-bar" data-shape="rect" data-value="1" data-label="节奏" data-anim="grow-x" style="top: 504px; width: 72px;"></div>
+  <p class="pb-num pbb-val" style="top: 500px; left: 712px;" data-chart>1</p>
+  <p class="pb-mono pbb-ids" style="top: 508px; left: 752px;" data-chart>R15</p>
+  <p class="pb-serif pbb-label" style="top: 584px;" data-chart>导出一致</p>
+  <div class="pb-ink pbb-bar" data-shape="rect" data-value="1" data-label="导出一致" data-anim="grow-x" style="top: 584px; width: 72px;"></div>
+  <p class="pb-num pbb-val" style="top: 580px; left: 712px;" data-chart>1</p>
+  <p class="pb-mono pbb-ids" style="top: 588px; left: 752px;" data-chart>R16</p>
+  <p class="pb-mono pb-foot" data-source>Source — scripts/validate.mjs 规则注释（R1–R16），按守护对象分组 · 图为示意图</p>
+  <p class="pb-mono pb-pageno">11 / 18</p>
+</section>
+```
+
+## photobook/table · table
+
+规格表。一行标题 + 斜体副题 → 等宽表头 ITEM / SPEC / SOURCE + 2px 墨线 → 6 行，行高 64px、行间细线。表格页不放照片。来源写 `data-source`。
+
+```html
+<section class="slide" data-layout="photobook/table" data-role="table">
+  <h2 class="pb-serif pb-title" data-anim="rise">一页纸，看懂规格。</h2>
+  <p class="pb-it pb-voice" data-anim="rise">The fine print.</p>
+  <p class="pb-mono pbd-head" style="left: 64px;">ITEM</p>
+  <p class="pb-mono pbd-head" style="left: 304px;">SPEC</p>
+  <p class="pb-mono pbd-head" style="left: 904px;">SOURCE</p>
+  <div class="pb-ink pbd-ink" data-shape="rect" data-anim="draw"></div>
+  <p class="pb-serif pbd-k" style="top: 214px;">画布</p>
+  <p class="pbd-v" style="top: 215px;">1280 × 720 px，导出时 px × 0.75 换算为 pt</p>
+  <p class="pb-mono pbd-s" style="top: 219px;">assets/base.css</p>
+  <div class="pb-hair pbd-hair" data-shape="rect" style="top: 258px;"></div>
+  <p class="pb-serif pbd-k" style="top: 278px;">字号下限</p>
+  <p class="pbd-v" style="top: 279px;">16 px，溢出先删字、再换版式</p>
+  <p class="pb-mono pbd-s" style="top: 283px;">validate.mjs · R4</p>
+  <div class="pb-hair pbd-hair" data-shape="rect" style="top: 322px;"></div>
+  <p class="pb-serif pbd-k" style="top: 342px;">校验规则</p>
+  <p class="pbd-v" style="top: 343px;">R1–R16，错误清零才能交付</p>
+  <p class="pb-mono pbd-s" style="top: 347px;">validate.mjs</p>
+  <div class="pb-hair pbd-hair" data-shape="rect" style="top: 386px;"></div>
+  <p class="pb-serif pbd-k" style="top: 406px;">导出格式</p>
+  <p class="pbd-v" style="top: 407px;">PPTX · PDF · PNG，HTML 是唯一的源</p>
+  <p class="pb-mono pbd-s" style="top: 411px;">SKILL.md</p>
+  <div class="pb-hair pbd-hair" data-shape="rect" style="top: 450px;"></div>
+  <p class="pb-serif pbd-k" style="top: 470px;">页面角色</p>
+  <p class="pbd-v" style="top: 471px;">20 个，其中 12 个核心角色</p>
+  <p class="pb-mono pbd-s" style="top: 475px;">lib/roles.mjs</p>
+  <div class="pb-hair pbd-hair" data-shape="rect" style="top: 514px;"></div>
+  <p class="pb-serif pbd-k" style="top: 534px;">字体</p>
+  <p class="pbd-v" style="top: 535px;">SIL OFL 开源字体，按 deck 用字子集化</p>
+  <p class="pb-mono pbd-s" style="top: 539px;">fetch-fonts.mjs</p>
+  <div class="pb-hair pbd-hair" data-shape="rect" style="top: 578px;"></div>
+  <p class="pb-mono pb-foot" data-source>Source — 表内 SOURCE 列（本仓库文件）</p>
+  <p class="pb-mono pb-pageno">12 / 18</p>
 </section>
 ```
 
