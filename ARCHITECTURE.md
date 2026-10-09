@@ -219,6 +219,7 @@ PPTX 导出后重新截图与 HTML 逐页比对，字体回退导致的溢出逐
 - **M11 · 风格 A 杂志（P1）**：第一个 ready 风格，18 个版式覆盖 12 个核心角色 + matrix / bars / table / gallery / video / audio；12 种风格共用的金样文字 `docs/golden-content.md`；数字改用 Playfair 等高数字（Office 映射 Times New Roman）；导出器补上整段斜体；gen-art 支持 JPEG 输出（金样配图从 MB 级降到几十 KB）。
 - **M12 · 风格 B 瑞士重做（P1）**：swiss 按确认样张重做为 17 个版式（12 栏网格、单一克莱因蓝、极细巨字、方块刻度），覆盖 12 个核心角色 + matrix / bars / table / cycle / system，新增蓝页 / 墨页两种页面状态；Inter 进字体源（Office 映射 Segoe UI）；旧 legacy `swiss` 设计系统随之退役。
 - **M13 · 风格 H 咨询（P1）**：17 个版式覆盖 12 个核心角色 + matrix / bars / table / cycle / system；每页「追踪标签 → 结论标题 → 图表编号 → 出处」，深海军蓝 + 一处亮蓝，海军蓝页状态；流程与对比用原生燕尾箭头，条形图可导出为原生图表（`--native-charts` 进 CI）。
+- **M14 · 风格 G 摄影集（P1）**：18 个版式覆盖 12 个核心角色 + matrix / bars / table / gallery / video / audio；照片占满版面、文字退到图注，界面不用强调色，数字压在照片的半透明压暗条上（原生透明度），暗房页给金句 / 视频 / 结尾；gen-art 新增 light / horizon 两种图类，金样冷暖两组胶片色调交替。P1 四种风格至此全部交付。
 
 ## 9. 风险与对策
 

@@ -9,7 +9,7 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），从风�
 
 ## 风格库现状（过渡期，先读）
 
-- 已交付的风格以风格画廊为准：`docs/styles/index.html`（`node scripts/style-gallery.mjs` 重新生成，`docs/styles/gallery.png` 可直接发给用户看）。当前：**A 杂志 · 暖纸**（`magazine`，ready，18 个版式）· **B 瑞士 · 网格**（`swiss`，ready，17 个版式） · **H 咨询 · 白皮书**（`consulting`，ready，17 个版式）。
+- 已交付的风格以风格画廊为准：`docs/styles/index.html`（`node scripts/style-gallery.mjs` 重新生成，`docs/styles/gallery.png` 可直接发给用户看）。当前：**A 杂志 · 暖纸**（`magazine`，ready，18 个版式）· **B 瑞士 · 网格**（`swiss`，ready，17 个版式） · **H 咨询 · 白皮书**（`consulting`，ready，17 个版式） · **G 摄影集 · 画册**（`photobook`，ready，18 个版式）。
 - 其余风格按 `docs/superpowers/specs/2026-10-08-style-library-design.md` 分期交付。用户选中的风格尚未交付时，走 **legacy 主题**：`--theme paper|graphite|forest` + `references/layouts.md` 的 L01–L24（见文末「Legacy 主题」）。
 - 校验器与导出器按 deck 链接的样式表自动区分 style 模式与 legacy 模式，规则各自生效。
 
