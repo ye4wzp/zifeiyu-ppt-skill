@@ -8,7 +8,7 @@ The one-line difference from similar projects: beautiful HTML decks usually can'
 
 ## Style library
 
-12 styles, each with its own layout set — pick one at intake. Shipped: A Magazine; the rest follow the phased spec (`docs/superpowers/specs/2026-10-08-style-library-design.md`).
+12 styles, each with its own layout set — pick one at intake. Shipped: A Magazine, B Swiss; the rest follow the phased spec (`docs/superpowers/specs/2026-10-08-style-library-design.md`).
 
 ![style library](docs/styles/gallery.png)
 

@@ -1,6 +1,6 @@
 # 瑞士 · 网格（swiss）版式注册表
 
-> 状态：draft · P1 重做中，已有 17 个版式；其余核心角色未完成前，交付请用其他风格。
+> 状态：ready · 17 个版式，覆盖全部 12 个核心角色 + matrix / bars / table / cycle / system。
 
 规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart / data-media` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/swiss/golden/`；金样文字来自 `docs/golden-content.md`。
 
