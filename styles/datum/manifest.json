@@ -1,0 +1,41 @@
+{
+  "id": "datum",
+  "name": "工程制图",
+  "letter": "L",
+  "group": "商务理性",
+  "status": "ready",
+  "recommend": ["技术汇报", "工程评审", "架构设计"],
+  "assets": [],
+  "fonts": {
+    "web": [
+      { "src": "SourceHanSansSC-VF.otf", "out": "source-han-sans-sc.woff2" },
+      { "src": "Inter-VF.ttf", "out": "inter.woff2" },
+      { "src": "JetBrainsMono-Regular.ttf", "out": "jetbrains-mono.woff2" }
+    ],
+    "office": {
+      "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "Inter": { "regular": "Segoe UI", "light": "Segoe UI Light" },
+      "JetBrains Mono": "Consolas",
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" }
+    }
+  },
+  "layouts": {
+    "datum/cover": { "role": "cover" },
+    "datum/agenda": { "role": "agenda" },
+    "datum/statement": { "role": "statement" },
+    "datum/section": { "role": "section" },
+    "datum/matrix": { "role": "matrix" },
+    "datum/compare": { "role": "compare" },
+    "datum/image-text": { "role": "image-text" },
+    "datum/image": { "role": "image" },
+    "datum/points": { "role": "points" },
+    "datum/kpi": { "role": "kpi" },
+    "datum/bars": { "role": "bars" },
+    "datum/table": { "role": "table" },
+    "datum/process": { "role": "process" },
+    "datum/timeline": { "role": "timeline" },
+    "datum/cycle": { "role": "cycle" },
+    "datum/system": { "role": "system" },
+    "datum/closing": { "role": "closing" }
+  }
+}

@@ -6,9 +6,9 @@
 
 The one-line difference from similar projects: beautiful HTML decks usually can't become editable `.pptx` files, and generic HTML→PPTX translators are too fragile. This skill achieves both through **independent style packages + measurement-driven mapping**: every slide declares a registered `data-layout` and `data-role`, and the exporter measures actual rendered geometry in Chromium to emit deterministic `pptxgenjs` calls (1280×720 px → 960×540 pt) that are regression-tested against golden baselines.
 
-## Style Library (8 `ready` styles · 139 registered layouts)
+## Style Library (All 12 `ready` styles · 207 registered layouts)
 
-12 styles are delivered in phases ([style library spec](docs/superpowers/specs/2026-10-08-style-library-design.md)). **P1 + P2 (8 full styles)** are shipped and verified `ready`, each with its own independent layout geometry and typography. Browse, filter, and compare all styles side by side in the interactive gallery at [docs/styles/index.html](docs/styles/index.html):
+All **12 styles (A–L across 5 groups)** specified in the [style library spec](docs/superpowers/specs/2026-10-08-style-library-design.md) are shipped and verified `ready`, each with its own independent layout geometry and typography. Browse, filter, and compare all styles side by side in the interactive gallery at [docs/styles/index.html](docs/styles/index.html):
 
 | Style | ID | Group | Layouts | Visual DNA | Best For |
 |---|---|---|---|---|---|
@@ -20,6 +20,10 @@ The one-line difference from similar projects: beautiful HTML decks usually can'
 | **F Soft** | `soft` | Rational | 17 | Soft gray ground, white rounded cards, warm orange accent, floating stat cards, connected step dots | Product intros, proposals |
 | **G Photobook** | `photobook` | Visual | 18 | Photography-first layouts, filmstrip cover, captions over translucent dark bands | Spaces, annual reviews, lookbooks |
 | **H Consulting** | `consulting` | Rational | 17 | Tracker label + takeaway title + numbered exhibits + sources, deep navy + bright blue, chevron flows | Consulting, strategy, due diligence |
+| **I Zen** | `zen` | Eastern | 17 | Washi whitespace, vertical Source Han Serif Light CJK, single vermilion dot, ultra-light Inter figures | Brand, culture, design talks |
+| **J Scrapbook** | `scrapbook` | Visual | 17 | Kraft paper, tilted Polaroids, translucent washi tape, sticky notes, LXGW WenKai handwritten headings | Communities, recaps, lifestyle |
+| **K Oriental** | `oriental` | Eastern | 17 | Xuan rice paper, double-line scroll frames, vertical heavy Songti + Kaiti, cinnabar seals, muted imagery | Cultural tourism, heritage, festivals |
+| **L Datum** | `datum` | Rational | 17 | Engineering drafting frame + crop ticks, 3-cell title block, blueprint blue callouts, bottom-anchored balance | Technical reviews, architecture |
 
 ![style library gallery](docs/styles/gallery.png)
 
@@ -28,7 +32,7 @@ The one-line difference from similar projects: beautiful HTML decks usually can'
 - **Style packages × 20 semantic roles** — 12 mandatory core roles (`cover`, `agenda`, `section`, `statement`, `kpi`, `compare`, `points`, `process`, `timeline`, `image`, `image-text`, `closing`) plus 8 specialized roles (`bars`, `table`, `gallery`, `cycle`, `matrix`, `system`, `video`, `audio`). Validators, exporters, and animations read role/data declarations instead of style-specific class names.
 - **Four-format delivery chain** — HTML presentation → editable PPTX (`--native-charts` for native bar charts, experimental `--embed-fonts`) → vector PDF → per-slide PNG, with HTML as the single source of truth.
 - **Three machine quality gates** — Playwright validator **R1–R16** (layout registry, class whitelist, overflow with graduated fix hints, 16px font floor, text collision, sourced data & bar proportionality, contrast floor, media contracts, rhythm, PPTX export fidelity); `check-style` for style package integrity; `check-pptx` OOXML artifact verification; plus golden pixel regression (`npm run regress`).
-- **Deterministic font subsets** — Source Han Sans VF, Source Han Serif, Inter, Playfair Display, and JetBrains Mono are sliced to each deck's exact glyphs as `.woff2` files that travel with the deck (`file://` ready).
+- **Deterministic font subsets** — Source Han Sans VF, Source Han Serif (Light–Heavy), LXGW WenKai, Inter, Playfair Display, and JetBrains Mono are sliced to each deck's exact glyphs as `.woff2` files that travel with the deck (`file://` ready).
 - **Video & audio as first-class citizens** — `<video>` / `<audio>` are measured, validated, animated, and embedded natively into PPTX (with poster-locked frames for PDF and PNG renders).
 - **Interactive style gallery** — [docs/styles/index.html](docs/styles/index.html) supports group/occasion filtering, one-click command copy, multi-slide golden lightbox previews, and cross-style same-role comparison.
 - **Presenter console & post-delivery edits** — press `S` for a dual-window BroadcastChannel presenter console; open `index.html?edit=1` to edit text in place with layout lock; extract brand tokens from any corporate `.pptx` via `import-theme.mjs`.

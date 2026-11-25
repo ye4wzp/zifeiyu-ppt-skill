@@ -8,9 +8,9 @@
 
 一句话说清楚它和同类项目的区别：**别人的网页 PPT 很美但导不出 .pptx，通用 HTML→PPTX 翻译又太脆——这里用「风格库独立版式注册制 + 浏览器实测驱动映射」同时拿到两者**：每页声明封闭集合内的 `data-layout` 与 `data-role`，导出器在浏览器里实测渲染几何后按固定比例（1280×720 → 960×540pt）写进 pptxgenjs，结果可预期、可回归测试。
 
-## 风格库（已交付 8 套 `ready` 风格 · 共 139 个注册版式）
+## 风格库（全 12 套 `ready` 风格 · 共 207 个注册版式）
 
-12 种风格分期交付（见 [风格库设计稿](docs/superpowers/specs/2026-10-08-style-library-design.md)），P1 + P2 共 **8 套风格**已全部 `ready`，每种拥有完全独立的版式几何与视觉语言，开场先打开交互式风格画廊 [docs/styles/index.html](docs/styles/index.html) 筛选、对比、选定一种：
+按 [风格库设计稿](docs/superpowers/specs/2026-10-08-style-library-design.md) 规划的全部 **12 套风格（A–L，覆盖 5 大分组）** 已全量交付并全部验证 `ready`，每种拥有完全独立的版式几何与视觉语言，开场先打开交互式风格画廊 [docs/styles/index.html](docs/styles/index.html) 筛选、对比、选定一种：
 
 | 风格 | ID | 分组 | 版式数 | 视觉特征 | 推荐场合 |
 |---|---|---|---|---|---|
@@ -22,8 +22,12 @@
 | **F 柔和 · 产品** | `soft` | 商务理性 | 17 | 浅灰底白色圆角卡片、暖橙强调、悬浮数据投影卡、连线步骤点 | 产品介绍、合作提案、企业沟通 |
 | **G 摄影集 · 画册** | `photobook` | 影像叙事 | 18 | 照片为主角、文字退到图注、胶片条封面、半透明压暗数字条 | 空间/活动宣传、年度回顾、画册 |
 | **H 咨询 · 白皮书** | `consulting` | 商务理性 | 17 | 追踪标签 + 结论式标题 + 编号图表 + 出处、深海军蓝、燕尾流程 | 汇报、提案、尽调 |
+| **I 日式 · 极简** | `zen` | 东方人文 | 17 | 和纸大留白、思源宋体 Light 竖排、全页单粒朱砂圆点、Inter 超细数字 | 品牌、文化、设计分享 |
+| **J 拼贴 · 手账** | `scrapbook` | 影像叙事 | 17 | 牛皮纸底、倾斜拍立得、彩色半透明和纸胶带、便利贴、霞鹜文楷 | 社群、活动回顾、校园、生活方式 |
+| **K 新中式 · 东方** | `oriental` | 东方人文 | 17 | 宣纸米色、双边细线书框、极粗宋体竖排 + 霞鹜文楷、朱砂印章、去饱和影像 | 文旅、政务、传统文化、节庆 |
+| **L 工程制图** | `datum` | 商务理性 | 17 | 工程图纸框与裁切角标、三格图签栏、克莱因蓝标注、底部锚定、足量配图 | 技术汇报、工程评审、架构设计 |
 
-> 其余 P3 风格（I 日式 · 极简 / J 拼贴 · 手账 / K 新中式 · 东方 / L 工程制图）按 spec 分期推进；过渡期仍完整保留 legacy 24 版式 × 3 主题。
+> 注：金样图集使用确定性抽象配图（`gen-art.mjs`）；实际演示中 `photobook` / `scrapbook` / `oriental` 等风格置入真实照片后质感更佳。旧版 legacy 24 版式 × 3 主题保留作向后兼容。
 
 ![风格库画廊](docs/styles/gallery.png)
 
@@ -35,7 +39,7 @@
   - `validate.mjs` 执行 **R1–R16** 量化规则（版式注册、类名白名单、画布溢出分档建议、字号下限 16px、文本碰撞、数据出处与条形比例诚实、对比度下限、媒体契约、占位符拦截、节奏控制、PPTX 导出一致性），error 即阻断交付；
   - `check-style.mjs` 守住风格包完整性（核心角色覆盖、金样↔注册表一致、骨架 class 全定义）；
   - `check-pptx.mjs` 在导出后检查 OOXML 包结构、关系与图表 XML；`npm run regress` 守住全部金样的像素回归基线。
-- **确定性字体子集**：思源黑 VF / 思源宋 / Inter / Playfair Display / JetBrains Mono 按 deck 实际用字裁切为 `.woff2` 随目录分发，`file://` 直接可用、三端渲染一致。
+- **确定性字体子集**：思源黑 VF / 思源宋（Light–Heavy）/ 霞鹜文楷（LXGW WenKai）/ Inter / Playfair Display / JetBrains Mono 按 deck 实际用字裁切为 `.woff2` 随目录分发，`file://` 直接可用、三端渲染一致。
 - **视频与音频一等公民**：`<video>` / `<audio>` 进入测量/校验/导出全链路，poster 锁定静止帧，PPTX 原生嵌入媒体。
 - **交互式风格画廊**：打开 [docs/styles/index.html](docs/styles/index.html) 支持按分组/场合筛选、一键复制建稿命令、点击卡片查看多页金样灯箱，以及「同内容跨风格对比」。
 - **演讲者模式 & 交付后微调**：演示按 `S` 开双窗演讲台（当前页 + 下页预览 + 计时器 + 讲稿高亮）；浏览器打开 `index.html?edit=1` 可就地改字并导出新 HTML；`import-theme.mjs` 一键从企业 `.pptx` 提取品牌 token。
@@ -60,7 +64,7 @@ cd ~/.claude/skills/zifeiyu-ppt-skill && npm install
 常用命令：
 
 ```bash
-node scripts/new-deck.mjs <deck-dir> --style soft            # 从风格库建 deck（magazine/swiss/keynote/broadsheet/poster/soft/photobook/consulting）
+node scripts/new-deck.mjs <deck-dir> --style soft            # 从 12 套风格库任选建稿（magazine/swiss/keynote/broadsheet/poster/soft/photobook/consulting/zen/scrapbook/oriental/datum）
 node scripts/subset-fonts.mjs <deck-dir>                     # 生成 deck 内字体子集（改字后重跑）
 node scripts/validate.mjs <deck-dir> [--office]              # 机器校验 R1–R16
 node scripts/render-png.mjs <deck-dir>                       # 逐页渲染截图

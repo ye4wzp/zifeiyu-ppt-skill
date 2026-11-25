@@ -1,0 +1,42 @@
+{
+  "id": "oriental",
+  "name": "新中式 · 东方",
+  "letter": "K",
+  "group": "东方人文",
+  "status": "ready",
+  "recommend": ["文旅", "政务", "传统文化", "节庆"],
+  "assets": [],
+  "fonts": {
+    "web": [
+      { "src": "SourceHanSerifSC-Heavy.otf", "out": "source-han-serif-sc-heavy.woff2" },
+      { "src": "SourceHanSerifSC-Bold.otf", "out": "source-han-serif-sc-bold.woff2" },
+      { "src": "LXGWWenKai-Regular.ttf", "out": "lxgw-wenkai-regular.woff2" },
+      { "src": "SourceHanSansSC-VF.otf", "out": "source-han-sans-sc.woff2" }
+    ],
+    "office": {
+      "Source Han Serif SC": "SimSun",
+      "LXGW WenKai": "KaiTi",
+      "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" }
+    }
+  },
+  "layouts": {
+    "oriental/cover": { "role": "cover" },
+    "oriental/agenda": { "role": "agenda" },
+    "oriental/statement": { "role": "statement" },
+    "oriental/section": { "role": "section" },
+    "oriental/matrix": { "role": "matrix" },
+    "oriental/compare": { "role": "compare" },
+    "oriental/image-text": { "role": "image-text" },
+    "oriental/image": { "role": "image" },
+    "oriental/points": { "role": "points" },
+    "oriental/kpi": { "role": "kpi" },
+    "oriental/bars": { "role": "bars" },
+    "oriental/table": { "role": "table" },
+    "oriental/process": { "role": "process" },
+    "oriental/timeline": { "role": "timeline" },
+    "oriental/cycle": { "role": "cycle" },
+    "oriental/system": { "role": "system" },
+    "oriental/closing": { "role": "closing" }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "zen",
+  "name": "日式 · 极简",
+  "letter": "I",
+  "group": "东方人文",
+  "status": "ready",
+  "recommend": ["品牌", "文化", "设计分享"],
+  "assets": [],
+  "fonts": {
+    "web": [
+      { "src": "SourceHanSerifSC-Light.otf", "out": "source-han-serif-sc-light.woff2" },
+      { "src": "SourceHanSerifSC-Regular.otf", "out": "source-han-serif-sc-regular.woff2" },
+      { "src": "Inter-VF.ttf", "out": "inter.woff2" },
+      { "src": "SourceHanSansSC-VF.otf", "out": "source-han-sans-sc.woff2" }
+    ],
+    "office": {
+      "Source Han Serif SC": "SimSun",
+      "Inter": { "regular": "Segoe UI", "light": "Segoe UI Light" },
+      "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" }
+    }
+  },
+  "layouts": {
+    "zen/cover": { "role": "cover" },
+    "zen/agenda": { "role": "agenda" },
+    "zen/statement": { "role": "statement" },
+    "zen/section": { "role": "section" },
+    "zen/matrix": { "role": "matrix" },
+    "zen/compare": { "role": "compare" },
+    "zen/image-text": { "role": "image-text" },
+    "zen/image": { "role": "image" },
+    "zen/points": { "role": "points" },
+    "zen/kpi": { "role": "kpi" },
+    "zen/bars": { "role": "bars" },
+    "zen/table": { "role": "table" },
+    "zen/process": { "role": "process" },
+    "zen/timeline": { "role": "timeline" },
+    "zen/cycle": { "role": "cycle" },
+    "zen/system": { "role": "system" },
+    "zen/closing": { "role": "closing" }
+  }
+}

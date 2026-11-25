@@ -1,0 +1,42 @@
+{
+  "id": "scrapbook",
+  "name": "拼贴 · 手账",
+  "letter": "J",
+  "group": "影像叙事",
+  "status": "ready",
+  "recommend": ["社群", "活动回顾", "校园", "生活方式"],
+  "assets": [],
+  "fonts": {
+    "web": [
+      { "src": "LXGWWenKai-Regular.ttf", "out": "lxgw-wenkai-regular.woff2" },
+      { "src": "LXGWWenKai-Medium.ttf", "out": "lxgw-wenkai-medium.woff2" },
+      { "src": "SourceHanSansSC-VF.otf", "out": "source-han-sans-sc.woff2" },
+      { "src": "Inter-VF.ttf", "out": "inter.woff2" }
+    ],
+    "office": {
+      "LXGW WenKai": "KaiTi",
+      "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "Inter": { "regular": "Segoe UI", "light": "Segoe UI Light" },
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" }
+    }
+  },
+  "layouts": {
+    "scrapbook/cover": { "role": "cover" },
+    "scrapbook/agenda": { "role": "agenda" },
+    "scrapbook/statement": { "role": "statement" },
+    "scrapbook/section": { "role": "section" },
+    "scrapbook/matrix": { "role": "matrix" },
+    "scrapbook/compare": { "role": "compare" },
+    "scrapbook/image-text": { "role": "image-text" },
+    "scrapbook/image": { "role": "image" },
+    "scrapbook/points": { "role": "points" },
+    "scrapbook/kpi": { "role": "kpi" },
+    "scrapbook/bars": { "role": "bars" },
+    "scrapbook/table": { "role": "table" },
+    "scrapbook/process": { "role": "process" },
+    "scrapbook/timeline": { "role": "timeline" },
+    "scrapbook/cycle": { "role": "cycle" },
+    "scrapbook/system": { "role": "system" },
+    "scrapbook/closing": { "role": "closing" }
+  }
+}

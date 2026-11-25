@@ -1,0 +1,536 @@
+/* ================================================================
+   Style J 「拼贴 · 手账」 — scrapbook
+   暖牛皮纸底 × 倾斜拍立得白边相框 × 半透明彩色胶带 × 粉彩便利贴 ×
+   霞鹜文楷手写大字 × 荧光笔划重点。温度最高、最有手工拼贴感；
+   夜间手账页（statement / image / cycle / closing）翻转为深褐黑板底，
+   拉开整份 deck 的明暗节奏。
+   ================================================================ */
+
+@font-face {
+  font-family: 'LXGW WenKai';
+  src: url('../../fonts/lxgw-wenkai-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+@font-face {
+  font-family: 'LXGW WenKai';
+  src: url('../../fonts/lxgw-wenkai-medium.woff2') format('woff2');
+  font-weight: 700;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Source Han Sans SC';
+  src: url('../../fonts/source-han-sans-sc.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../../fonts/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+:root {
+  --bg: #efe6d6;
+  --surface: #ffffff;
+  --text-1: #2a2620;
+  --text-2: #5c5346;
+  --accent: #a65210;
+  --on-accent: #ffffff;
+  --mark: #ffd966;
+  --on-mark: #2a2620;
+  --hairline: #c9bca6;
+
+  --hi-yellow: #ffd966;
+  --note-yellow: #fff3a8;
+  --note-green: #cdeccf;
+  --note-peach: #ffd9cf;
+  --note-blue: #d3e9f2;
+  --kraft-deep: #e2d5be;
+  --zebra: #faf5ea;
+
+  --tape-y: rgba(255, 214, 90, 0.72);
+  --tape-b: rgba(140, 200, 220, 0.70);
+  --tape-p: rgba(240, 150, 150, 0.65);
+  --tape-g: rgba(154, 206, 158, 0.68);
+
+  --bar-1: #4a3f35;
+  --bar-2: #6e5f4f;
+  --bar-3: #6c8c69;
+  --bar-4: #568396;
+  --bar-5: #bf765c;
+  --bar-6: #a65210;
+
+  --font-hand: 'LXGW WenKai', 'KaiTi', 'STKaiti', serif;
+  --font-sans: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-ui: 'Inter', 'Source Han Sans SC', sans-serif;
+  --font-cjk: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-num: 'Inter', 'Source Han Sans SC', sans-serif;
+  --font-display: 'LXGW WenKai', 'KaiTi', serif;
+  --font-mono: 'Inter', 'Source Han Sans SC', sans-serif;
+}
+
+/* evening chalkboard journal: statement, image, cycle, closing */
+.slide.is-dark {
+  --bg: #26221d;
+  --surface: #352f28;
+  --text-1: #f6efe2;
+  --text-2: #c4b9a8;
+  --accent: #ffcf56;
+  --on-accent: #26221d;
+  --mark: #ffcf56;
+  --on-mark: #26221d;
+  --hairline: #4e463c;
+  --kraft-deep: #3d362e;
+}
+
+/* ---------- typography vocabulary ---------- */
+.sb-hand { font-family: var(--font-hand); font-weight: 700; color: var(--text-1); }
+.sb-hand-reg { font-family: var(--font-hand); font-weight: 400; color: var(--text-1); }
+.sb-sans { font-family: var(--font-sans); font-weight: 400; color: var(--text-1); }
+.sb-sans-b { font-family: var(--font-sans); font-weight: 700; color: var(--text-1); }
+.sb-ui { font-family: var(--font-ui); font-weight: 600; color: var(--text-1); }
+.sb-num { font-family: var(--font-hand); font-weight: 700; line-height: 1; color: var(--text-1); }
+.sb-meta { font-family: var(--font-ui); font-weight: 500; font-size: 16px; line-height: 1.3; letter-spacing: 0.03em; color: var(--text-2); }
+.sb-body { font-family: var(--font-sans); font-size: 18px; line-height: 1.7; color: var(--text-1); }
+.sb-sub { font-family: var(--font-sans); font-size: 16px; line-height: 1.6; color: var(--text-2); }
+.sb-ac { color: var(--accent); }
+.sb-on { color: var(--on-accent); }
+
+/* light-paper ink: always readable on white/pastel notes even on .is-dark slides */
+.sb-ink { color: #2a2620; }
+.sb-ink-sub { color: #5c5346; }
+.sb-ink-ac { color: #9c4a0c; }
+.sb-paper-on { color: #f6efe2; }
+
+/* ---------- tactile scrapbook shapes ---------- */
+.sb-pol {
+  background: #ffffff;
+  border-radius: 2px;
+  box-shadow: 0 8px 18px rgba(60, 40, 10, 0.18);
+}
+.sb-photo { object-fit: cover; }
+.sb-pol-cap {
+  font-family: var(--font-hand);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.25;
+  color: #5c5346;
+}
+
+.sb-note-y { background: var(--note-yellow); border-radius: 3px; box-shadow: 0 6px 15px rgba(60, 40, 10, 0.16); }
+.sb-note-g { background: var(--note-green); border-radius: 3px; box-shadow: 0 6px 15px rgba(60, 40, 10, 0.16); }
+.sb-note-p { background: var(--note-peach); border-radius: 3px; box-shadow: 0 6px 15px rgba(60, 40, 10, 0.16); }
+.sb-note-b { background: var(--note-blue); border-radius: 3px; box-shadow: 0 6px 15px rgba(60, 40, 10, 0.16); }
+.sb-note-w { background: #ffffff; border-radius: 4px; box-shadow: 0 6px 16px rgba(60, 40, 10, 0.14); }
+.sb-note-k { background: var(--kraft-deep); border-radius: 4px; box-shadow: 0 6px 14px rgba(60, 40, 10, 0.13); }
+.sb-card-dark { background: var(--surface); border: 1.5px dashed var(--hairline); border-radius: 6px; }
+.sb-card-dash { background: #ffffff; border: 1.5px dashed var(--hairline); border-radius: 6px; box-shadow: 0 6px 16px rgba(60, 40, 10, 0.12); }
+
+.sb-tape-y { background: var(--tape-y); }
+.sb-tape-b { background: var(--tape-b); }
+.sb-tape-p { background: var(--tape-p); }
+.sb-tape-g { background: var(--tape-g); }
+
+.sb-hi { background: var(--hi-yellow); border-radius: 2px; }
+.sb-rule { background: var(--hairline); height: 1px; }
+.sb-ink-rule { background: var(--text-1); height: 2px; }
+.sb-ink-bg { background: #2a2620; border-radius: 4px; }
+.sb-ac-bg { background: var(--accent); }
+.sb-zebra { background: var(--zebra); }
+.sb-dot-y { background: var(--note-yellow); border: 1.5px solid #d4b84a; }
+.sb-dot-g { background: var(--note-green); border: 1.5px solid #8eb892; }
+.sb-dot-p { background: var(--note-peach); border: 1.5px solid #d99f8e; }
+.sb-dot-b { background: var(--note-blue); border: 1.5px solid #8cb7c9; }
+.sb-dot-ink { background: #2a2620; }
+.sb-dot-ac { background: var(--accent); }
+
+.sb-bar-1 { background: var(--bar-1); border-radius: 4px; }
+.sb-bar-2 { background: var(--bar-2); border-radius: 4px; }
+.sb-bar-3 { background: var(--bar-3); border-radius: 4px; }
+.sb-bar-4 { background: var(--bar-4); border-radius: 4px; }
+.sb-bar-5 { background: var(--bar-5); border-radius: 4px; }
+.sb-bar-6 { background: var(--bar-6); border-radius: 4px; }
+
+/* ---------- running journal chrome: 64..1216 (1152px measure) ---------- */
+.sb-hd-l { left: 64px; top: 26px; width: 560px; }
+.sb-hd-r { left: 656px; top: 26px; width: 560px; text-align: right; }
+.sb-hd-rule { left: 64px; top: 54px; width: 1152px; }
+.sb-title { left: 64px; top: 72px; width: 1152px; font-size: 48px; line-height: 1.24; }
+.sb-deck { left: 64px; top: 138px; width: 1152px; font-size: 18px; line-height: 1.45; color: var(--text-2); }
+.sb-ft-rule { left: 64px; top: 656px; width: 1152px; }
+.sb-ft-l { left: 64px; top: 670px; width: 920px; }
+.sb-ft-r { left: 1016px; top: 670px; width: 200px; text-align: right; }
+
+/* ---------- 01 scrapbook/cover ---------- */
+.sbc-tag-bg { left: 78px; top: 82px; width: 224px; height: 34px; rotate: -1deg; }
+.sbc-tag { left: 94px; top: 88px; width: 200px; font-size: 16px; line-height: 1.3; rotate: -1deg; }
+.sbc-hi { left: 74px; top: 206px; width: 410px; height: 32px; rotate: -1deg; }
+.sbc-t1 { left: 78px; top: 146px; width: 470px; font-size: 80px; line-height: 1.15; }
+.sbc-t2 { left: 78px; top: 244px; width: 470px; font-size: 80px; line-height: 1.15; }
+.sbc-note { left: 82px; top: 378px; width: 432px; height: 184px; rotate: -2deg; }
+.sbc-note-tape { left: 242px; top: 362px; width: 114px; height: 30px; rotate: 3deg; }
+.sbc-desc { left: 108px; top: 412px; width: 382px; font-size: 20px; line-height: 1.62; rotate: -2deg; }
+.sbc-sig { left: 112px; top: 516px; width: 348px; font-size: 16px; line-height: 1.3; rotate: -2deg; }
+.sbc-foot { left: 78px; top: 646px; width: 496px; }
+
+.sbc-p1 { left: 610px; top: 76px; width: 344px; height: 286px; rotate: -4deg; }
+.sbc-i1 { left: 623px; top: 90px; width: 316px; height: 228px; rotate: -4deg; }
+.sbc-c1 { left: 632px; top: 332px; width: 240px; rotate: -4deg; }
+.sbc-tp1 { left: 718px; top: 62px; width: 118px; height: 30px; rotate: -9deg; }
+
+.sbc-p2 { left: 904px; top: 218px; width: 316px; height: 264px; rotate: 3.5deg; }
+.sbc-i2 { left: 918px; top: 231px; width: 290px; height: 209px; rotate: 3.5deg; }
+.sbc-c2 { left: 925px; top: 451px; width: 260px; rotate: 3.5deg; }
+.sbc-tp2 { left: 1006px; top: 204px; width: 112px; height: 30px; rotate: 7deg; }
+
+.sbc-p3 { left: 600px; top: 422px; width: 292px; height: 244px; rotate: -2deg; }
+.sbc-i3 { left: 612px; top: 434px; width: 268px; height: 192px; rotate: -2deg; }
+.sbc-c3 { left: 620px; top: 636px; width: 260px; rotate: -2deg; }
+.sbc-tp3 { left: 690px; top: 408px; width: 108px; height: 30px; rotate: -6deg; }
+
+/* ---------- 02 scrapbook/agenda ---------- */
+.sba-hi { left: 62px; top: 112px; width: 202px; height: 20px; rotate: -0.8deg; }
+.sba-title { left: 64px; top: 72px; width: 420px; font-size: 48px; line-height: 1.24; }
+.sba-deck { left: 484px; top: 96px; width: 732px; font-size: 18px; line-height: 1.4; text-align: right; color: var(--text-2); }
+.sba-pol { left: 72px; top: 184px; width: 356px; height: 304px; rotate: -2.5deg; }
+.sba-img { left: 85px; top: 198px; width: 328px; height: 244px; rotate: -2.5deg; }
+.sba-cap { left: 106px; top: 455px; width: 300px; rotate: -2.5deg; }
+.sba-tp { left: 190px; top: 168px; width: 116px; height: 30px; rotate: 4deg; }
+.sba-note { left: 84px; top: 522px; width: 332px; height: 108px; rotate: 1.5deg; }
+.sba-note-t { left: 104px; top: 548px; width: 292px; font-size: 16px; line-height: 1.65; rotate: 1.5deg; }
+
+.sba-card { left: 484px; width: 732px; height: 96px; }
+.sba-tab { left: 484px; width: 14px; height: 96px; border-radius: 4px; }
+.sba-dot { left: 520px; width: 48px; height: 48px; }
+.sba-num { left: 520px; width: 48px; text-align: center; font-size: 20px; line-height: 1.2; }
+.sba-item { left: 590px; width: 460px; font-size: 28px; line-height: 1.25; }
+.sba-desc { left: 590px; width: 500px; font-size: 17px; line-height: 1.45; color: #5c5346; }
+.sba-pg { left: 1096px; width: 96px; text-align: right; font-size: 16px; }
+.sba-tp-r1 { left: 1126px; top: 158px; width: 92px; height: 26px; rotate: 14deg; }
+.sba-tp-r2 { left: 1120px; top: 598px; width: 96px; height: 26px; rotate: -12deg; }
+
+/* ---------- 03 scrapbook/statement (is-dark) ---------- */
+.sbq-frame { left: 64px; top: 82px; width: 1152px; height: 552px; background: var(--surface); border: 1.5px dashed var(--hairline); border-radius: 8px; }
+.sbq-tp1 { left: 44px; top: 76px; width: 112px; height: 30px; rotate: -22deg; }
+.sbq-tp2 { left: 1124px; top: 610px; width: 112px; height: 30px; rotate: -20deg; }
+.sbq-kicker { left: 118px; top: 136px; width: 520px; font-size: 20px; line-height: 1.3; }
+.sbq-l1 { left: 118px; top: 214px; width: 1044px; font-size: 72px; line-height: 1.25; }
+.sbq-l2 { left: 118px; top: 318px; width: 1044px; font-size: 72px; line-height: 1.25; }
+.sbq-rule { left: 118px; top: 454px; width: 1044px; }
+.sbq-by { left: 118px; top: 492px; width: 460px; font-size: 22px; line-height: 1.45; }
+.sbq-note { left: 616px; top: 486px; width: 540px; height: 104px; rotate: -1deg; }
+.sbq-note-tp { left: 830px; top: 472px; width: 106px; height: 26px; rotate: 3deg; }
+.sbq-note-t { left: 642px; top: 512px; width: 488px; font-size: 18px; line-height: 1.55; rotate: -1deg; }
+
+/* ---------- 04 scrapbook/section ---------- */
+.sbx-note { left: 84px; top: 128px; width: 422px; height: 432px; rotate: -2.8deg; }
+.sbx-tp { left: 224px; top: 110px; width: 142px; height: 34px; rotate: 5deg; }
+.sbx-kicker { left: 124px; top: 170px; width: 280px; font-size: 18px; line-height: 1.3; rotate: -2.8deg; }
+.sbx-num { left: 116px; top: 214px; width: 320px; font-size: 180px; line-height: 1; rotate: -2.8deg; }
+.sbx-sub { left: 128px; top: 446px; width: 332px; font-size: 19px; line-height: 1.6; rotate: -2.8deg; }
+.sbx-hi { left: 576px; top: 214px; width: 420px; height: 32px; rotate: -0.8deg; }
+.sbx-title { left: 580px; top: 152px; width: 636px; font-size: 76px; line-height: 1.18; }
+.sbx-row { left: 580px; width: 636px; height: 64px; }
+.sbx-dot { left: 604px; width: 32px; height: 32px; }
+.sbx-rn { left: 604px; width: 32px; text-align: center; font-size: 16px; line-height: 1.2; }
+.sbx-ri { left: 656px; width: 360px; font-size: 22px; line-height: 1.3; }
+.sbx-rp { left: 1056px; width: 136px; text-align: right; font-size: 16px; }
+
+/* ---------- 05 scrapbook/matrix ---------- */
+.sbm-hi { left: 62px; top: 108px; width: 238px; height: 20px; rotate: -0.6deg; }
+.sbm-hero-card { left: 64px; top: 168px; width: 244px; height: 462px; rotate: -1.4deg; }
+.sbm-hero-tp { left: 132px; top: 152px; width: 108px; height: 28px; rotate: 5deg; }
+.sbm-hero-k { left: 90px; top: 206px; width: 190px; font-size: 16px; rotate: -1.4deg; }
+.sbm-hero-n { left: 86px; top: 244px; width: 196px; font-size: 116px; line-height: 1; rotate: -1.4deg; }
+.sbm-hero-l { left: 90px; top: 374px; width: 190px; font-size: 30px; line-height: 1.25; rotate: -1.4deg; }
+.sbm-hero-d { left: 90px; top: 444px; width: 192px; font-size: 17px; line-height: 1.7; rotate: -1.4deg; }
+
+.sbm-card { width: 278px; height: 102px; }
+.sbm-c1 { left: 336px; }
+.sbm-c2 { left: 637px; }
+.sbm-c3 { left: 938px; }
+.sbm-act { left: 336px; top: 528px; width: 278px; height: 102px; rotate: -1.4deg; }
+.sbm-act-tp { left: 438px; top: 514px; width: 76px; height: 22px; rotate: -4deg; }
+
+.sbm-let { width: 48px; font-size: 26px; line-height: 1.15; }
+.sbm-grp { width: 170px; text-align: right; font-size: 16px; line-height: 1.3; }
+.sbm-nm { width: 238px; font-size: 24px; line-height: 1.25; }
+.sbm-l1 { left: 356px; }
+.sbm-l2 { left: 657px; }
+.sbm-l3 { left: 958px; }
+.sbm-g1 { left: 424px; }
+.sbm-g2 { left: 725px; }
+.sbm-g3 { left: 1026px; }
+
+/* ---------- 06 scrapbook/compare ---------- */
+.sbv-lcard { left: 72px; top: 178px; width: 540px; height: 444px; rotate: -1.4deg; }
+.sbv-ltp { left: 282px; top: 162px; width: 118px; height: 30px; rotate: 4deg; }
+.sbv-rcard { left: 668px; top: 174px; width: 540px; height: 444px; rotate: 1.4deg; }
+.sbv-rtp { left: 878px; top: 158px; width: 118px; height: 30px; rotate: -5deg; }
+
+.sbv-vs { left: 612px; top: 368px; width: 56px; height: 56px; }
+.sbv-vst { left: 612px; top: 382px; width: 56px; text-align: center; font-size: 20px; line-height: 1.2; }
+
+.sbv-lt { left: 112px; width: 460px; rotate: -1.4deg; }
+.sbv-rt { left: 708px; width: 460px; rotate: 1.4deg; }
+.sbv-tag { top: 214px; font-size: 18px; line-height: 1.3; }
+.sbv-h { top: 256px; font-size: 32px; line-height: 1.28; }
+.sbv-p { top: 320px; font-size: 19px; line-height: 1.7; }
+.sbv-div-l { left: 112px; top: 468px; width: 456px; rotate: -1.4deg; }
+.sbv-div-r { left: 708px; top: 466px; width: 456px; rotate: 1.4deg; }
+.sbv-num { top: 494px; width: 120px; font-size: 76px; line-height: 1; }
+.sbv-nl { left: 236px; top: 504px; width: 336px; font-size: 22px; line-height: 1.35; rotate: -1.4deg; }
+.sbv-nsl { left: 236px; top: 544px; width: 336px; font-size: 16px; line-height: 1.4; rotate: -1.4deg; }
+.sbv-nr { left: 832px; top: 502px; width: 336px; font-size: 22px; line-height: 1.35; rotate: 1.4deg; }
+.sbv-nsr { left: 832px; top: 542px; width: 336px; font-size: 16px; line-height: 1.4; rotate: 1.4deg; }
+
+/* ---------- 07 scrapbook/image-text ---------- */
+.sbi-pol { left: 72px; top: 176px; width: 532px; height: 436px; rotate: -2deg; }
+.sbi-img { left: 87px; top: 192px; width: 500px; height: 368px; rotate: -2deg; }
+.sbi-cap { left: 115px; top: 576px; width: 460px; rotate: -2deg; }
+.sbi-tp1 { left: 274px; top: 160px; width: 128px; height: 32px; rotate: -5deg; }
+.sbi-tp2 { left: 534px; top: 580px; width: 92px; height: 28px; rotate: -22deg; }
+
+.sbi-card { left: 656px; top: 176px; width: 560px; height: 440px; }
+.sbi-tp3 { left: 1126px; top: 162px; width: 96px; height: 28px; rotate: 14deg; }
+.sbi-kicker { left: 696px; top: 212px; width: 480px; font-size: 22px; line-height: 1.3; }
+.sbi-p1 { left: 696px; top: 264px; width: 480px; font-size: 20px; line-height: 1.72; }
+.sbi-p2 { left: 696px; top: 386px; width: 480px; font-size: 20px; line-height: 1.72; }
+.sbi-strip { left: 696px; top: 522px; width: 480px; height: 64px; }
+.sbi-st { left: 720px; top: 542px; width: 432px; font-size: 17px; line-height: 1.4; }
+
+/* ---------- 08 scrapbook/image (is-dark) ---------- */
+.sbf-pol { left: 86px; top: 102px; width: 736px; height: 526px; rotate: -1.5deg; }
+.sbf-img { left: 103px; top: 120px; width: 700px; height: 448px; rotate: -1.5deg; }
+.sbf-cap { left: 140px; top: 587px; width: 640px; rotate: -1.5deg; }
+.sbf-tp1 { left: 386px; top: 84px; width: 136px; height: 34px; rotate: 3deg; }
+.sbf-tp2 { left: 734px; top: 586px; width: 108px; height: 30px; rotate: -26deg; }
+
+.sbf-kicker { left: 882px; top: 128px; width: 334px; font-size: 18px; line-height: 1.3; }
+.sbf-t1 { left: 882px; top: 180px; width: 334px; font-size: 56px; line-height: 1.22; }
+.sbf-t2 { left: 882px; top: 254px; width: 334px; font-size: 56px; line-height: 1.22; }
+.sbf-note { left: 886px; top: 374px; width: 322px; height: 164px; rotate: 2.2deg; }
+.sbf-ntp { left: 996px; top: 358px; width: 104px; height: 28px; rotate: -4deg; }
+.sbf-desc { left: 914px; top: 414px; width: 268px; font-size: 22px; line-height: 1.55; rotate: 2.2deg; }
+.sbf-src { left: 882px; top: 576px; width: 256px; font-size: 16px; line-height: 1.55; }
+
+/* ---------- 09 scrapbook/points ---------- */
+.sbp-c1 { left: 72px; top: 192px; width: 352px; height: 422px; rotate: -1.5deg; }
+.sbp-c2 { left: 464px; top: 182px; width: 352px; height: 422px; rotate: 1.2deg; }
+.sbp-c3 { left: 856px; top: 194px; width: 352px; height: 422px; rotate: -1.2deg; }
+.sbp-tp1 { left: 194px; top: 176px; width: 108px; height: 30px; rotate: -5deg; }
+.sbp-tp2 { left: 586px; top: 166px; width: 108px; height: 30px; rotate: 4deg; }
+.sbp-tp3 { left: 978px; top: 178px; width: 108px; height: 30px; rotate: -4deg; }
+
+.sbp-d1 { left: 104px; top: 234px; width: 54px; height: 54px; }
+.sbp-d2 { left: 498px; top: 224px; width: 54px; height: 54px; }
+.sbp-d3 { left: 888px; top: 236px; width: 54px; height: 54px; }
+.sbp-n1 { left: 104px; top: 248px; width: 54px; text-align: center; font-size: 22px; }
+.sbp-n2 { left: 498px; top: 238px; width: 54px; text-align: center; font-size: 22px; }
+.sbp-n3 { left: 888px; top: 250px; width: 54px; text-align: center; font-size: 22px; }
+
+.sbp-h1 { left: 104px; top: 314px; width: 288px; font-size: 30px; line-height: 1.3; rotate: -1.5deg; }
+.sbp-h2 { left: 496px; top: 304px; width: 288px; font-size: 30px; line-height: 1.3; rotate: 1.2deg; }
+.sbp-h3 { left: 888px; top: 316px; width: 288px; font-size: 30px; line-height: 1.3; rotate: -1.2deg; }
+
+.sbp-p1 { left: 102px; top: 374px; width: 292px; font-size: 18px; line-height: 1.75; rotate: -1.5deg; }
+.sbp-p2 { left: 494px; top: 364px; width: 292px; font-size: 18px; line-height: 1.75; rotate: 1.2deg; }
+.sbp-p3 { left: 886px; top: 376px; width: 292px; font-size: 18px; line-height: 1.75; rotate: -1.2deg; }
+
+.sbp-tg1 { left: 108px; top: 552px; width: 280px; font-size: 16px; rotate: -1.5deg; }
+.sbp-tg2 { left: 496px; top: 542px; width: 280px; font-size: 16px; rotate: 1.2deg; }
+.sbp-tg3 { left: 892px; top: 554px; width: 280px; font-size: 16px; rotate: -1.2deg; }
+
+/* ---------- 10 scrapbook/kpi (iconic 3 pastel sticky notes) ---------- */
+.sbk-n1 { left: 82px; top: 196px; width: 342px; height: 388px; rotate: -2.6deg; }
+.sbk-n2 { left: 468px; top: 212px; width: 342px; height: 388px; rotate: 2.2deg; }
+.sbk-n3 { left: 854px; top: 192px; width: 342px; height: 388px; rotate: -1.8deg; }
+
+.sbk-tp1 { left: 196px; top: 178px; width: 114px; height: 32px; rotate: -7deg; }
+.sbk-tp2 { left: 582px; top: 194px; width: 114px; height: 32px; rotate: 5deg; }
+.sbk-tp3 { left: 968px; top: 174px; width: 114px; height: 32px; rotate: -4deg; }
+
+.sbk-v1 { left: 118px; top: 248px; width: 270px; font-size: 114px; rotate: -2.6deg; }
+.sbk-v2 { left: 504px; top: 264px; width: 270px; font-size: 114px; rotate: 2.2deg; }
+.sbk-v3 { left: 890px; top: 244px; width: 270px; font-size: 114px; rotate: -1.8deg; }
+
+.sbk-l1 { left: 122px; top: 388px; width: 266px; font-size: 30px; line-height: 1.3; rotate: -2.6deg; }
+.sbk-l2 { left: 504px; top: 404px; width: 266px; font-size: 30px; line-height: 1.3; rotate: 2.2deg; }
+.sbk-l3 { left: 892px; top: 384px; width: 266px; font-size: 30px; line-height: 1.3; rotate: -1.8deg; }
+
+.sbk-d1 { left: 126px; top: 446px; width: 260px; font-size: 18px; line-height: 1.65; rotate: -2.6deg; }
+.sbk-d2 { left: 502px; top: 462px; width: 260px; font-size: 18px; line-height: 1.65; rotate: 2.2deg; }
+.sbk-d3 { left: 894px; top: 442px; width: 260px; font-size: 18px; line-height: 1.65; rotate: -1.8deg; }
+
+/* ---------- 11 scrapbook/bars ---------- */
+.sbb-sheet { left: 64px; top: 184px; width: 824px; height: 446px; }
+.sbb-tp1 { left: 46px; top: 178px; width: 96px; height: 28px; rotate: -22deg; }
+.sbb-tp2 { left: 804px; top: 174px; width: 96px; height: 28px; rotate: 20deg; }
+
+.sbb-lbl { left: 86px; width: 156px; text-align: right; font-size: 20px; line-height: 1.3; }
+.sbb-bar { left: 264px; height: 34px; }
+.sbb-val { width: 48px; font-size: 22px; line-height: 1.25; }
+
+.sbb-note { left: 922px; top: 196px; width: 294px; height: 422px; rotate: 1.8deg; }
+.sbb-ntp { left: 1016px; top: 180px; width: 106px; height: 28px; rotate: -4deg; }
+.sbb-nh { left: 950px; top: 230px; width: 240px; font-size: 22px; line-height: 1.3; rotate: 1.8deg; }
+.sbb-ni { left: 950px; width: 242px; font-size: 16px; line-height: 1.35; rotate: 1.8deg; }
+.sbb-nf { left: 944px; top: 562px; width: 242px; font-size: 16px; line-height: 1.4; rotate: 1.8deg; }
+
+/* ---------- 12 scrapbook/table ---------- */
+.sbt-sheet { left: 64px; top: 162px; width: 1152px; height: 470px; }
+.sbt-tp1 { left: 48px; top: 156px; width: 102px; height: 28px; rotate: -20deg; }
+.sbt-tp2 { left: 1130px; top: 156px; width: 102px; height: 28px; rotate: 20deg; }
+.sbt-head { left: 88px; top: 184px; width: 1104px; height: 48px; }
+.sbt-band { left: 88px; width: 1104px; height: 62px; }
+.sbt-hr { left: 88px; width: 1104px; }
+
+.sbt-th { top: 196px; font-size: 20px; line-height: 1.25; }
+.sbt-k { left: 112px; width: 184px; font-size: 20px; line-height: 1.35; }
+.sbt-v { left: 320px; width: 576px; font-size: 18px; line-height: 1.4; }
+.sbt-s { left: 916px; width: 252px; text-align: right; font-size: 16px; line-height: 1.4; }
+
+/* ---------- 13 scrapbook/process (iconic 4-polaroid strip) ---------- */
+.sbw-title { left: 64px; top: 72px; width: 580px; font-size: 48px; line-height: 1.24; }
+.sbw-sub { left: 656px; top: 96px; width: 560px; text-align: right; font-size: 20px; line-height: 1.4; color: var(--text-2); }
+
+.sbw-p1 { left: 68px; top: 168px; width: 248px; height: 214px; rotate: -2.5deg; }
+.sbw-i1 { left: 79px; top: 180px; width: 224px; height: 162px; rotate: -2.5deg; }
+.sbw-c1 { left: 91px; top: 352px; width: 210px; rotate: -2.5deg; }
+.sbw-tp1 { left: 142px; top: 152px; width: 96px; height: 28px; rotate: -6deg; }
+
+.sbw-p2 { left: 364px; top: 178px; width: 248px; height: 214px; rotate: 2deg; }
+.sbw-i2 { left: 377px; top: 190px; width: 224px; height: 162px; rotate: 2deg; }
+.sbw-c2 { left: 380px; top: 362px; width: 210px; rotate: 2deg; }
+.sbw-tp2 { left: 440px; top: 162px; width: 96px; height: 28px; rotate: 5deg; }
+
+.sbw-p3 { left: 660px; top: 164px; width: 248px; height: 214px; rotate: -1.8deg; }
+.sbw-i3 { left: 672px; top: 176px; width: 224px; height: 162px; rotate: -1.8deg; }
+.sbw-c3 { left: 682px; top: 348px; width: 210px; rotate: -1.8deg; }
+.sbw-tp3 { left: 736px; top: 148px; width: 96px; height: 28px; rotate: -5deg; }
+
+.sbw-p4 { left: 956px; top: 176px; width: 248px; height: 214px; rotate: 2.5deg; }
+.sbw-i4 { left: 969px; top: 188px; width: 224px; height: 162px; rotate: 2.5deg; }
+.sbw-c4 { left: 971px; top: 360px; width: 210px; rotate: 2.5deg; }
+.sbw-tp4 { left: 1032px; top: 160px; width: 96px; height: 28px; rotate: 6deg; }
+
+.sbw-arr { top: 254px; width: 38px; text-align: center; font-size: 34px; line-height: 1; }
+.sbw-a1 { left: 320px; }
+.sbw-a2 { left: 616px; }
+.sbw-a3 { left: 912px; }
+
+.sbw-h { top: 422px; width: 252px; font-size: 32px; line-height: 1.3; }
+.sbw-p { top: 478px; width: 252px; font-size: 17px; line-height: 1.7; color: var(--text-2); }
+.sbw-x1 { left: 68px; }
+.sbw-x2 { left: 364px; }
+.sbw-x3 { left: 660px; }
+.sbw-x4 { left: 956px; }
+
+/* ---------- 14 scrapbook/timeline ---------- */
+.sbl-line { left: 64px; top: 266px; width: 1152px; height: 3px; }
+.sbl-pin { top: 256px; width: 22px; height: 22px; }
+.sbl-date { top: 198px; width: 190px; font-size: 36px; line-height: 1.15; }
+.sbl-tp { top: 277px; width: 30px; height: 56px; }
+.sbl-card { top: 316px; width: 210px; height: 298px; }
+.sbl-idx { top: 348px; width: 176px; font-size: 16px; line-height: 1.3; }
+.sbl-h { top: 386px; width: 176px; font-size: 24px; line-height: 1.3; }
+.sbl-p { top: 436px; width: 176px; font-size: 16px; line-height: 1.7; }
+
+.sbl-c1 { left: 68px; }
+.sbl-c2 { left: 302px; }
+.sbl-c3 { left: 536px; }
+.sbl-c4 { left: 770px; }
+.sbl-c5 { left: 1004px; }
+
+.sbl-p1 { left: 162px; }
+.sbl-p2 { left: 396px; }
+.sbl-p3 { left: 630px; }
+.sbl-p4 { left: 864px; }
+.sbl-p5 { left: 1098px; }
+
+.sbl-t1 { left: 158px; rotate: -5deg; }
+.sbl-t2 { left: 392px; rotate: 4deg; }
+.sbl-t3 { left: 626px; rotate: -3deg; }
+.sbl-t4 { left: 860px; rotate: 5deg; }
+.sbl-t5 { left: 1094px; rotate: -4deg; }
+
+.sbl-in1 { left: 87px; rotate: -1.4deg; }
+.sbl-in2 { left: 321px; rotate: 1.2deg; }
+.sbl-in3 { left: 555px; rotate: -1deg; }
+.sbl-in4 { left: 789px; rotate: 1.4deg; }
+.sbl-in5 { left: 1023px; rotate: -1.4deg; }
+
+.sbl-r1 { rotate: -1.4deg; }
+.sbl-r2 { rotate: 1.2deg; }
+.sbl-r3 { rotate: -1deg; }
+.sbl-r4 { rotate: 1.4deg; }
+.sbl-r5 { rotate: -1.4deg; }
+
+/* ---------- 15 scrapbook/cycle (is-dark) ---------- */
+.sby-ring { left: 176px; top: 224px; width: 360px; height: 360px; border: 2px dashed #6b6154; background: transparent; }
+.sby-core-n { left: 286px; top: 342px; width: 140px; text-align: center; font-size: 84px; line-height: 1; }
+.sby-core-l { left: 276px; top: 434px; width: 160px; text-align: center; font-size: 18px; line-height: 1.3; }
+
+.sby-node { width: 144px; height: 78px; }
+.sby-n1 { left: 284px; top: 184px; rotate: -2deg; }
+.sby-n2 { left: 468px; top: 364px; rotate: 2deg; }
+.sby-n3 { left: 284px; top: 546px; rotate: -1.5deg; }
+.sby-n4 { left: 100px; top: 364px; rotate: 1.8deg; }
+
+.sby-nt { width: 124px; text-align: center; font-size: 22px; line-height: 1.25; }
+.sby-nt1 { left: 294px; top: 208px; rotate: -2deg; }
+.sby-nt2 { left: 478px; top: 388px; rotate: 2deg; }
+.sby-nt3 { left: 294px; top: 570px; rotate: -1.5deg; }
+.sby-nt4 { left: 110px; top: 388px; rotate: 1.8deg; }
+
+.sby-ar { width: 32px; text-align: center; font-size: 26px; line-height: 1; }
+.sby-ar1 { left: 467px; top: 264px; }
+.sby-ar2 { left: 467px; top: 518px; }
+.sby-ar3 { left: 213px; top: 518px; }
+.sby-ar4 { left: 213px; top: 264px; }
+
+.sby-panel { left: 676px; top: 184px; width: 540px; height: 438px; }
+.sby-tp { left: 1126px; top: 170px; width: 96px; height: 28px; rotate: 14deg; }
+.sby-ph { left: 712px; top: 214px; width: 468px; font-size: 22px; line-height: 1.3; }
+.sby-rn { left: 712px; width: 44px; font-size: 22px; line-height: 1.3; }
+.sby-rh { left: 764px; width: 140px; font-size: 24px; line-height: 1.3; }
+.sby-rd { left: 912px; width: 274px; font-size: 17px; line-height: 1.45; color: var(--text-2); }
+.sby-hr { left: 712px; width: 468px; }
+.sby-back { left: 712px; top: 568px; width: 468px; font-size: 18px; line-height: 1.3; }
+
+/* ---------- 16 scrapbook/system ---------- */
+.sbs-m1 { left: 72px; top: 176px; width: 520px; height: 448px; background: var(--kraft-deep); border: 1.5px dashed #9e8f77; border-radius: 6px; }
+.sbs-m2 { left: 118px; top: 248px; width: 428px; height: 344px; }
+.sbs-m3 { left: 174px; top: 336px; width: 316px; height: 218px; rotate: -1.5deg; }
+.sbs-tp1 { left: 54px; top: 170px; width: 98px; height: 28px; rotate: -22deg; }
+.sbs-tp2 { left: 282px; top: 320px; width: 102px; height: 28px; rotate: 4deg; }
+
+.sbs-l1 { left: 118px; top: 202px; width: 320px; font-size: 18px; line-height: 1.3; }
+.sbs-l2 { left: 146px; top: 274px; width: 300px; font-size: 18px; line-height: 1.3; }
+.sbs-l3 { left: 204px; top: 378px; width: 256px; font-size: 18px; line-height: 1.3; rotate: -1.5deg; }
+.sbs-l3b { left: 204px; top: 420px; width: 256px; font-size: 28px; line-height: 1.35; rotate: -1.5deg; }
+
+.sbs-card { left: 644px; width: 572px; height: 126px; }
+.sbs-tag { left: 676px; width: 220px; font-size: 16px; line-height: 1.3; }
+.sbs-ch { left: 676px; width: 240px; font-size: 30px; line-height: 1.25; }
+.sbs-cp { left: 910px; width: 276px; font-size: 18px; line-height: 1.55; }
+
+/* ---------- 17 scrapbook/closing (is-dark) ---------- */
+.sbe-frame { left: 64px; top: 80px; width: 1152px; height: 556px; background: var(--surface); border: 1.5px dashed var(--hairline); border-radius: 8px; }
+.sbe-tp1 { left: 46px; top: 74px; width: 110px; height: 30px; rotate: -22deg; }
+.sbe-tp2 { left: 1126px; top: 612px; width: 110px; height: 30px; rotate: -20deg; }
+
+.sbe-kicker { left: 112px; top: 132px; width: 520px; font-size: 20px; line-height: 1.3; }
+.sbe-t1 { left: 112px; top: 186px; width: 640px; font-size: 74px; line-height: 1.2; }
+.sbe-t2 { left: 112px; top: 282px; width: 640px; font-size: 74px; line-height: 1.2; }
+.sbe-cmd-box { left: 112px; top: 416px; width: 644px; height: 76px; background: #26221d; border: 1.5px solid #5e5447; border-radius: 6px; }
+.sbe-cmd { left: 134px; top: 441px; width: 600px; font-size: 19px; line-height: 1.3; }
+.sbe-gal { left: 112px; top: 522px; width: 600px; font-size: 20px; line-height: 1.4; }
+.sbe-tag { left: 112px; top: 564px; width: 600px; font-size: 16px; line-height: 1.4; }
+
+.sbe-note { left: 806px; top: 162px; width: 364px; height: 408px; rotate: 2.2deg; }
+.sbe-ntp { left: 936px; top: 146px; width: 108px; height: 30px; rotate: -5deg; }
+.sbe-nh { left: 832px; top: 206px; width: 316px; font-size: 24px; line-height: 1.3; rotate: 2.2deg; }
+.sbe-nd { left: 832px; width: 318px; font-size: 16px; line-height: 1.65; rotate: 2.2deg; }

@@ -66,14 +66,14 @@
   <header>
     <div>
       <h1>风格画廊</h1>
-      <p class="lead">8 套已交付风格 · 每种风格一套独立版式 · 选定后执行 <code>node scripts/new-deck.mjs &lt;deck&gt; --style &lt;id&gt;</code></p>
+      <p class="lead">12 套已交付风格 · 每种风格一套独立版式 · 选定后执行 <code>node scripts/new-deck.mjs &lt;deck&gt; --style &lt;id&gt;</code></p>
     </div>
   </header>
 
   <div class="toolbar">
     <div class="pills" id="groupPills">
-      <button class="pill active" type="button" data-filter="all">全部 (8)</button>
-      <button class="pill" type="button" data-filter="编辑排印">编辑排印</button><button class="pill" type="button" data-filter="商务理性">商务理性</button><button class="pill" type="button" data-filter="舞台冲击">舞台冲击</button><button class="pill" type="button" data-filter="影像叙事">影像叙事</button>
+      <button class="pill active" type="button" data-filter="all">全部 (12)</button>
+      <button class="pill" type="button" data-filter="编辑排印">编辑排印</button><button class="pill" type="button" data-filter="商务理性">商务理性</button><button class="pill" type="button" data-filter="舞台冲击">舞台冲击</button><button class="pill" type="button" data-filter="影像叙事">影像叙事</button><button class="pill" type="button" data-filter="东方人文">东方人文</button>
     </div>
     <div class="controls">
       <input class="search" id="searchInput" type="search" placeholder="按场合或名称筛选（如 汇报 / 路演）">
@@ -122,7 +122,7 @@
       </div>
     </section>
     <section class="group-section" data-group="商务理性">
-      <h2>商务理性 <span class="g-count">3</span></h2>
+      <h2>商务理性 <span class="g-count">4</span></h2>
       <div class="grid">
       <figure class="card" data-id="swiss" data-group="商务理性" data-search="b swiss 瑞士 · 网格 商务理性 数据 / 发布 / 技术">
         <div class="thumb" data-open="swiss" title="点击预览多页金样">
@@ -175,6 +175,23 @@
           </div>
         </figcaption>
       </figure>
+      <figure class="card" data-id="datum" data-group="商务理性" data-search="l datum 工程制图 商务理性 技术汇报 / 工程评审 / 架构设计">
+        <div class="thumb" data-open="datum" title="点击预览多页金样">
+          <img src="datum.png" alt="工程制图 封面" loading="lazy">
+          <span class="thumb-hint">查看多页金样 ↗</span>
+        </div>
+        <figcaption>
+          <div class="card-top">
+            <p class="name"><b>L</b>工程制图</p>
+            <span class="count">17 版式</span>
+          </div>
+          <p class="meta">技术汇报 / 工程评审 / 架构设计</p>
+          <div class="cmd-row">
+            <code>--style datum</code>
+            <button class="copy-btn" type="button" data-copy="node scripts/new-deck.mjs my-deck --style datum">复制命令</button>
+          </div>
+        </figcaption>
+      </figure>
       </div>
     </section>
     <section class="group-section" data-group="舞台冲击">
@@ -217,7 +234,7 @@
       </div>
     </section>
     <section class="group-section" data-group="影像叙事">
-      <h2>影像叙事 <span class="g-count">1</span></h2>
+      <h2>影像叙事 <span class="g-count">2</span></h2>
       <div class="grid">
       <figure class="card" data-id="photobook" data-group="影像叙事" data-search="g photobook 摄影集 · 画册 影像叙事 空间与活动宣传 / 年度回顾 / 画册">
         <div class="thumb" data-open="photobook" title="点击预览多页金样">
@@ -233,6 +250,62 @@
           <div class="cmd-row">
             <code>--style photobook</code>
             <button class="copy-btn" type="button" data-copy="node scripts/new-deck.mjs my-deck --style photobook">复制命令</button>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="card" data-id="scrapbook" data-group="影像叙事" data-search="j scrapbook 拼贴 · 手账 影像叙事 社群 / 活动回顾 / 校园 / 生活方式">
+        <div class="thumb" data-open="scrapbook" title="点击预览多页金样">
+          <img src="scrapbook.png" alt="拼贴 · 手账 封面" loading="lazy">
+          <span class="thumb-hint">查看多页金样 ↗</span>
+        </div>
+        <figcaption>
+          <div class="card-top">
+            <p class="name"><b>J</b>拼贴 · 手账</p>
+            <span class="count">17 版式</span>
+          </div>
+          <p class="meta">社群 / 活动回顾 / 校园 / 生活方式</p>
+          <div class="cmd-row">
+            <code>--style scrapbook</code>
+            <button class="copy-btn" type="button" data-copy="node scripts/new-deck.mjs my-deck --style scrapbook">复制命令</button>
+          </div>
+        </figcaption>
+      </figure>
+      </div>
+    </section>
+    <section class="group-section" data-group="东方人文">
+      <h2>东方人文 <span class="g-count">2</span></h2>
+      <div class="grid">
+      <figure class="card" data-id="zen" data-group="东方人文" data-search="i zen 日式 · 极简 东方人文 品牌 / 文化 / 设计分享">
+        <div class="thumb" data-open="zen" title="点击预览多页金样">
+          <img src="zen.png" alt="日式 · 极简 封面" loading="lazy">
+          <span class="thumb-hint">查看多页金样 ↗</span>
+        </div>
+        <figcaption>
+          <div class="card-top">
+            <p class="name"><b>I</b>日式 · 极简</p>
+            <span class="count">17 版式</span>
+          </div>
+          <p class="meta">品牌 / 文化 / 设计分享</p>
+          <div class="cmd-row">
+            <code>--style zen</code>
+            <button class="copy-btn" type="button" data-copy="node scripts/new-deck.mjs my-deck --style zen">复制命令</button>
+          </div>
+        </figcaption>
+      </figure>
+      <figure class="card" data-id="oriental" data-group="东方人文" data-search="k oriental 新中式 · 东方 东方人文 文旅 / 政务 / 传统文化 / 节庆">
+        <div class="thumb" data-open="oriental" title="点击预览多页金样">
+          <img src="oriental.png" alt="新中式 · 东方 封面" loading="lazy">
+          <span class="thumb-hint">查看多页金样 ↗</span>
+        </div>
+        <figcaption>
+          <div class="card-top">
+            <p class="name"><b>K</b>新中式 · 东方</p>
+            <span class="count">17 版式</span>
+          </div>
+          <p class="meta">文旅 / 政务 / 传统文化 / 节庆</p>
+          <div class="cmd-row">
+            <code>--style oriental</code>
+            <button class="copy-btn" type="button" data-copy="node scripts/new-deck.mjs my-deck --style oriental">复制命令</button>
           </div>
         </figcaption>
       </figure>
@@ -264,7 +337,7 @@
   </div>
 
 <script>
-const STYLES = [{"id":"magazine","letter":"A","name":"杂志 · 暖纸","group":"编辑排印","status":"ready","recommend":["分享","宣传","人文"],"layoutCount":18,"roles":["cover","agenda","statement","section","kpi","process","matrix","compare","image-text","image","points","bars","table","timeline","gallery","closing","video","audio"],"previews":{"cover":"previews/magazine-cover.jpg","kpi":"previews/magazine-kpi.jpg","process":"previews/magazine-process.jpg","bars":"previews/magazine-bars.jpg","closing":"previews/magazine-closing.jpg"}},{"id":"swiss","letter":"B","name":"瑞士 · 网格","group":"商务理性","status":"ready","recommend":["数据","发布","技术"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","bars","table","kpi","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/swiss-cover.jpg","kpi":"previews/swiss-kpi.jpg","process":"previews/swiss-process.jpg","bars":"previews/swiss-bars.jpg","closing":"previews/swiss-closing.jpg"}},{"id":"keynote","letter":"C","name":"发布会 · 暗场","group":"舞台冲击","status":"ready","recommend":["路演","发布","大屏演讲"],"layoutCount":18,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","video","process","timeline","gallery","audio","closing"],"previews":{"cover":"previews/keynote-cover.jpg","kpi":"previews/keynote-kpi.jpg","process":"previews/keynote-process.jpg","bars":"previews/keynote-bars.jpg","closing":"previews/keynote-closing.jpg"}},{"id":"broadsheet","letter":"D","name":"报刊 · 版面","group":"编辑排印","status":"ready","recommend":["工作汇报","机构材料","高密度内容"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/broadsheet-cover.jpg","kpi":"previews/broadsheet-kpi.jpg","process":"previews/broadsheet-process.jpg","bars":"previews/broadsheet-bars.jpg","closing":"previews/broadsheet-closing.jpg"}},{"id":"poster","letter":"E","name":"大字报 · 粗野","group":"舞台冲击","status":"ready","recommend":["招募","活动宣传","社群分享"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","gallery","cycle","closing"],"previews":{"cover":"previews/poster-cover.jpg","kpi":"previews/poster-kpi.jpg","process":"previews/poster-process.jpg","bars":"previews/poster-bars.jpg","closing":"previews/poster-closing.jpg"}},{"id":"soft","letter":"F","name":"柔和 · 产品","group":"商务理性","status":"ready","recommend":["产品介绍","合作提案","企业沟通"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/soft-cover.jpg","kpi":"previews/soft-kpi.jpg","process":"previews/soft-process.jpg","bars":"previews/soft-bars.jpg","closing":"previews/soft-closing.jpg"}},{"id":"photobook","letter":"G","name":"摄影集 · 画册","group":"影像叙事","status":"ready","recommend":["空间与活动宣传","年度回顾","画册"],"layoutCount":18,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","video","process","timeline","gallery","audio","closing"],"previews":{"cover":"previews/photobook-cover.jpg","kpi":"previews/photobook-kpi.jpg","process":"previews/photobook-process.jpg","bars":"previews/photobook-bars.jpg","closing":"previews/photobook-closing.jpg"}},{"id":"consulting","letter":"H","name":"咨询 · 白皮书","group":"商务理性","status":"ready","recommend":["汇报","提案","尽调"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/consulting-cover.jpg","kpi":"previews/consulting-kpi.jpg","process":"previews/consulting-process.jpg","bars":"previews/consulting-bars.jpg","closing":"previews/consulting-closing.jpg"}}];
+const STYLES = [{"id":"magazine","letter":"A","name":"杂志 · 暖纸","group":"编辑排印","status":"ready","recommend":["分享","宣传","人文"],"layoutCount":18,"roles":["cover","agenda","statement","section","kpi","process","matrix","compare","image-text","image","points","bars","table","timeline","gallery","closing","video","audio"],"previews":{"cover":"previews/magazine-cover.jpg","kpi":"previews/magazine-kpi.jpg","process":"previews/magazine-process.jpg","bars":"previews/magazine-bars.jpg","closing":"previews/magazine-closing.jpg"}},{"id":"swiss","letter":"B","name":"瑞士 · 网格","group":"商务理性","status":"ready","recommend":["数据","发布","技术"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","bars","table","kpi","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/swiss-cover.jpg","kpi":"previews/swiss-kpi.jpg","process":"previews/swiss-process.jpg","bars":"previews/swiss-bars.jpg","closing":"previews/swiss-closing.jpg"}},{"id":"keynote","letter":"C","name":"发布会 · 暗场","group":"舞台冲击","status":"ready","recommend":["路演","发布","大屏演讲"],"layoutCount":18,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","video","process","timeline","gallery","audio","closing"],"previews":{"cover":"previews/keynote-cover.jpg","kpi":"previews/keynote-kpi.jpg","process":"previews/keynote-process.jpg","bars":"previews/keynote-bars.jpg","closing":"previews/keynote-closing.jpg"}},{"id":"broadsheet","letter":"D","name":"报刊 · 版面","group":"编辑排印","status":"ready","recommend":["工作汇报","机构材料","高密度内容"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/broadsheet-cover.jpg","kpi":"previews/broadsheet-kpi.jpg","process":"previews/broadsheet-process.jpg","bars":"previews/broadsheet-bars.jpg","closing":"previews/broadsheet-closing.jpg"}},{"id":"poster","letter":"E","name":"大字报 · 粗野","group":"舞台冲击","status":"ready","recommend":["招募","活动宣传","社群分享"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","gallery","cycle","closing"],"previews":{"cover":"previews/poster-cover.jpg","kpi":"previews/poster-kpi.jpg","process":"previews/poster-process.jpg","bars":"previews/poster-bars.jpg","closing":"previews/poster-closing.jpg"}},{"id":"soft","letter":"F","name":"柔和 · 产品","group":"商务理性","status":"ready","recommend":["产品介绍","合作提案","企业沟通"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/soft-cover.jpg","kpi":"previews/soft-kpi.jpg","process":"previews/soft-process.jpg","bars":"previews/soft-bars.jpg","closing":"previews/soft-closing.jpg"}},{"id":"photobook","letter":"G","name":"摄影集 · 画册","group":"影像叙事","status":"ready","recommend":["空间与活动宣传","年度回顾","画册"],"layoutCount":18,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","video","process","timeline","gallery","audio","closing"],"previews":{"cover":"previews/photobook-cover.jpg","kpi":"previews/photobook-kpi.jpg","process":"previews/photobook-process.jpg","bars":"previews/photobook-bars.jpg","closing":"previews/photobook-closing.jpg"}},{"id":"consulting","letter":"H","name":"咨询 · 白皮书","group":"商务理性","status":"ready","recommend":["汇报","提案","尽调"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/consulting-cover.jpg","kpi":"previews/consulting-kpi.jpg","process":"previews/consulting-process.jpg","bars":"previews/consulting-bars.jpg","closing":"previews/consulting-closing.jpg"}},{"id":"zen","letter":"I","name":"日式 · 极简","group":"东方人文","status":"ready","recommend":["品牌","文化","设计分享"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/zen-cover.jpg","kpi":"previews/zen-kpi.jpg","process":"previews/zen-process.jpg","bars":"previews/zen-bars.jpg","closing":"previews/zen-closing.jpg"}},{"id":"scrapbook","letter":"J","name":"拼贴 · 手账","group":"影像叙事","status":"ready","recommend":["社群","活动回顾","校园","生活方式"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/scrapbook-cover.jpg","kpi":"previews/scrapbook-kpi.jpg","process":"previews/scrapbook-process.jpg","bars":"previews/scrapbook-bars.jpg","closing":"previews/scrapbook-closing.jpg"}},{"id":"oriental","letter":"K","name":"新中式 · 东方","group":"东方人文","status":"ready","recommend":["文旅","政务","传统文化","节庆"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/oriental-cover.jpg","kpi":"previews/oriental-kpi.jpg","process":"previews/oriental-process.jpg","bars":"previews/oriental-bars.jpg","closing":"previews/oriental-closing.jpg"}},{"id":"datum","letter":"L","name":"工程制图","group":"商务理性","status":"ready","recommend":["技术汇报","工程评审","架构设计"],"layoutCount":17,"roles":["cover","agenda","statement","section","matrix","compare","image-text","image","points","kpi","bars","table","process","timeline","cycle","system","closing"],"previews":{"cover":"previews/datum-cover.jpg","kpi":"previews/datum-kpi.jpg","process":"previews/datum-process.jpg","bars":"previews/datum-bars.jpg","closing":"previews/datum-closing.jpg"}}];
 const ROLES = [{"role":"cover","label":"封面"},{"role":"kpi","label":"数据大字"},{"role":"process","label":"流程步骤"},{"role":"bars","label":"条形对比"},{"role":"closing","label":"结尾收束"}];
 if (new URLSearchParams(location.search).get('snapshot') === '1') document.body.classList.add('is-snapshot');
 

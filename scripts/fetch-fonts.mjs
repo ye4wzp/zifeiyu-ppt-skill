@@ -1,7 +1,7 @@
 // Usage: node scripts/fetch-fonts.mjs
 // One-time download of the full source fonts (gitignored, ~55MB) that
 // subset-fonts.mjs slices into tiny per-deck woff2 files.
-// Licenses: Source Han Sans/Serif, JetBrains Mono, Playfair Display and Inter are all SIL OFL 1.1 —
+// Licenses: Source Han Sans/Serif, JetBrains Mono, Playfair Display, Inter and LXGW WenKai are all SIL OFL 1.1 —
 // subsetting and embedding are permitted.
 import { createWriteStream, existsSync, mkdirSync } from 'node:fs';
 import { Readable } from 'node:stream';
@@ -16,6 +16,7 @@ mkdirSync(dir, { recursive: true });
 // wasm heap during subsetting, the ~25MB static faces do not
 const FILES = {
   'SourceHanSansSC-VF.otf': 'https://raw.githubusercontent.com/adobe-fonts/source-han-sans/release/Variable/OTF/SourceHanSansSC-VF.otf',
+  'SourceHanSerifSC-Light.otf': 'https://raw.githubusercontent.com/adobe-fonts/source-han-serif/release/OTF/SimplifiedChinese/SourceHanSerifSC-Light.otf',
   'SourceHanSerifSC-Regular.otf': 'https://raw.githubusercontent.com/adobe-fonts/source-han-serif/release/OTF/SimplifiedChinese/SourceHanSerifSC-Regular.otf',
   'SourceHanSerifSC-Bold.otf': 'https://raw.githubusercontent.com/adobe-fonts/source-han-serif/release/OTF/SimplifiedChinese/SourceHanSerifSC-Bold.otf',
   'SourceHanSerifSC-Heavy.otf': 'https://raw.githubusercontent.com/adobe-fonts/source-han-serif/release/OTF/SimplifiedChinese/SourceHanSerifSC-Heavy.otf',
@@ -23,10 +24,13 @@ const FILES = {
   'PlayfairDisplay-VF.ttf': 'https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf',
   'PlayfairDisplay-Italic-VF.ttf': 'https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/PlayfairDisplay-Italic%5Bwght%5D.ttf',
   'Inter-VF.ttf': 'https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz,wght%5D.ttf',
+  'LXGWWenKai-Regular.ttf': 'https://raw.githubusercontent.com/lxgw/LxgwWenKai/main/fonts/TTF/LXGWWenKai-Regular.ttf',
+  'LXGWWenKai-Medium.ttf': 'https://raw.githubusercontent.com/lxgw/LxgwWenKai/main/fonts/TTF/LXGWWenKai-Medium.ttf',
   'LICENSE-SourceHan.txt': 'https://raw.githubusercontent.com/adobe-fonts/source-han-sans/release/LICENSE.txt',
   'LICENSE-JetBrainsMono.txt': 'https://raw.githubusercontent.com/JetBrains/JetBrainsMono/master/OFL.txt',
   'LICENSE-PlayfairDisplay.txt': 'https://raw.githubusercontent.com/google/fonts/main/ofl/playfairdisplay/OFL.txt',
   'LICENSE-Inter.txt': 'https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt',
+  'LICENSE-LXGWWenKai.txt': 'https://raw.githubusercontent.com/lxgw/LxgwWenKai/main/OFL.txt',
 };
 
 for (const [name, url] of Object.entries(FILES)) {

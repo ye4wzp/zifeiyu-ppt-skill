@@ -7,10 +7,15 @@ description: 生成锁定设计系统的网页 PPT（1280×720 HTML），从风�
 
 风格库：每种风格一套独立版式。先选风格，再把内容装进这个风格的注册版式，产出单目录网页 PPT；HTML 是唯一的源，PPTX / PDF / PNG 是一键衍生物。
 
-## 风格库现状（过渡期，先读）
+## 风格库（全 12 套 `ready` · 207 个注册版式）
 
-- 已交付的风格以风格画廊为准：`docs/styles/index.html`（`node scripts/style-gallery.mjs` 重新生成，`docs/styles/gallery.png` 可直接发给用户看）。当前 8 套全部 `ready`（P1 + P2 交付完毕，共 139 个注册版式）：**A 杂志 · 暖纸**（`magazine`，18 版式）· **B 瑞士 · 网格**（`swiss`，17 版式）· **C 发布会 · 暗场**（`keynote`，18 版式）· **D 报刊 · 版面**（`broadsheet`，17 版式）· **E 大字报 · 粗野**（`poster`，17 版式）· **F 柔和 · 产品**（`soft`，17 版式）· **G 摄影集 · 画册**（`photobook`，18 版式）· **H 咨询 · 白皮书**（`consulting`，17 版式）。
-- 其余风格按 `docs/superpowers/specs/2026-10-08-style-library-design.md` 分期交付。用户选中的风格尚未交付时，走 **legacy 主题**：`--theme paper|graphite|forest` + `references/layouts.md` 的 L01–L24（见文末「Legacy 主题」）。
+- 12 套风格已按 `docs/superpowers/specs/2026-10-08-style-library-design.md` 全量交付（全部 `status: ready`，共 207 个注册版式），覆盖全部 5 个风格分组，开场展示交互画廊 `docs/styles/index.html`（`node scripts/style-gallery.mjs` 重新生成，`docs/styles/gallery.png` 可直接发给用户看）：
+  - **编辑排印**：**A 杂志 · 暖纸**（`magazine`，18 版式）· **D 报刊 · 版面**（`broadsheet`，17 版式）
+  - **商务理性**：**B 瑞士 · 网格**（`swiss`，17 版式）· **F 柔和 · 产品**（`soft`，17 版式）· **H 咨询 · 白皮书**（`consulting`，17 版式）· **L 工程制图**（`datum`，17 版式）
+  - **舞台冲击**：**C 发布会 · 暗场**（`keynote`，18 版式）· **E 大字报 · 粗野**（`poster`，17 版式）
+  - **影像叙事**：**G 摄影集 · 画册**（`photobook`，18 版式）· **J 拼贴 · 手账**（`scrapbook`，17 版式）
+  - **东方人文**：**I 日式 · 极简**（`zen`，17 版式）· **K 新中式 · 东方**（`oriental`，17 版式）
+- 旧版 **legacy 主题**（`--theme paper|graphite|forest` + `references/layouts.md` 的 L01–L24）仅作向后兼容保留；新建 deck 一律优先使用 `--style <id>`。
 - 校验器与导出器按 deck 链接的样式表自动区分 style 模式与 legacy 模式，规则各自生效。
 
 ## 硬约束（违反任何一条即返工）

@@ -53,6 +53,14 @@ jobs:
           node scripts/check-pptx.mjs /tmp/poster.pptx --expect-slides 17
           node scripts/export-pptx.mjs styles/soft/golden --out /tmp/soft.pptx --native-charts
           node scripts/check-pptx.mjs /tmp/soft.pptx --expect-slides 17
+          node scripts/export-pptx.mjs styles/zen/golden --out /tmp/zen.pptx --native-charts
+          node scripts/check-pptx.mjs /tmp/zen.pptx --expect-slides 17
+          node scripts/export-pptx.mjs styles/scrapbook/golden --out /tmp/scrapbook.pptx --native-charts
+          node scripts/check-pptx.mjs /tmp/scrapbook.pptx --expect-slides 17
+          node scripts/export-pptx.mjs styles/oriental/golden --out /tmp/oriental.pptx --native-charts
+          node scripts/check-pptx.mjs /tmp/oriental.pptx --expect-slides 17
+          node scripts/export-pptx.mjs styles/datum/golden --out /tmp/datum.pptx --native-charts
+          node scripts/check-pptx.mjs /tmp/datum.pptx --expect-slides 17
           node scripts/export-pptx.mjs styles/magazine/golden --out /tmp/magazine.pptx
           unzip -l /tmp/magazine.pptx | grep -q "media-.*\.mp4"
           node scripts/check-pptx.mjs /tmp/magazine.pptx --expect-slides 18

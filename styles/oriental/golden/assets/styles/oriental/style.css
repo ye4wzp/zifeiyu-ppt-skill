@@ -1,0 +1,400 @@
+/* ================================================================
+   Style K 「新中式 · 东方」 — oriental
+   米色宣纸底 × 细双线书框 × 思源宋体极粗竖排/大字 × 霞鹜文楷题注
+   × 朱砂方圆印章 × 轻微去饱和雅致影像。东方、庄重、现代博物馆气息，
+   不堆砌祥云与回纹；statement / image / cycle / closing 翻转为墨漆
+   暗卷，形成宣纸与漆墨交错的阅读节奏。
+   ================================================================ */
+
+@font-face {
+  font-family: 'Source Han Serif SC';
+  src: url('../../fonts/source-han-serif-sc-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Source Han Serif SC';
+  src: url('../../fonts/source-han-serif-sc-heavy.woff2') format('woff2');
+  font-weight: 900;
+  font-display: block;
+}
+@font-face {
+  font-family: 'LXGW WenKai';
+  src: url('../../fonts/lxgw-wenkai-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Source Han Sans SC';
+  src: url('../../fonts/source-han-sans-sc.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+:root {
+  --bg: #f2ece0;
+  --surface: #e7dfd0;
+  --text-1: #1d1d1b;
+  --text-2: #5c554a;
+  --accent: #b83a2b;
+  --on-accent: #f2ece0;
+  --mark: #b83a2b;
+  --on-mark: #f2ece0;
+  --hairline: #1d1d1b;
+  --hairline-soft: #9e9586;
+
+  --font-serif: 'Source Han Serif SC', 'Songti SC', 'STSong', serif;
+  --font-kai: 'LXGW WenKai', 'Kaiti SC', 'STKaiti', 'KaiTi', serif;
+  --font-sans: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-cjk: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* ink-lacquer dark scroll: statement, image, cycle, closing */
+.slide.is-dark {
+  --bg: #1b1a18;
+  --surface: #282623;
+  --text-1: #f2ece0;
+  --text-2: #b8b0a2;
+  --accent: #d95544;
+  --on-accent: #f2ece0;
+  --mark: #d95544;
+  --on-mark: #f2ece0;
+  --hairline: #575148;
+  --hairline-soft: #3d3932;
+}
+
+/* ---------- typographic & surface vocabulary ---------- */
+.or-heavy { font-family: var(--font-serif); font-weight: 900; color: var(--text-1); font-feature-settings: 'halt' 1; }
+.or-serif { font-family: var(--font-serif); font-weight: 700; color: var(--text-1); font-feature-settings: 'halt' 1; }
+.or-kai { font-family: var(--font-kai); font-weight: 400; color: var(--text-1); }
+.or-sans { font-family: var(--font-sans); font-weight: 400; color: var(--text-1); }
+.or-num { font-family: var(--font-serif); font-weight: 900; line-height: 1; letter-spacing: -0.02em; color: var(--text-1); }
+.or-vt { writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap; }
+.or-body { font-family: var(--font-sans); font-size: 16px; line-height: 1.8; text-align: justify; color: var(--text-1); }
+.or-note { font-family: var(--font-sans); font-size: 16px; line-height: 1.65; color: var(--text-2); }
+.or-ac { color: var(--accent); }
+.or-muted { color: var(--text-2); }
+.or-on { color: var(--on-accent); }
+
+.or-ink { background: var(--text-1); }
+.or-tint { background: var(--surface); }
+.or-red { background: var(--accent); }
+.or-r1 { background: var(--hairline); height: 1px; }
+.or-r1s { background: var(--hairline-soft); height: 1px; }
+.or-vr { background: var(--hairline-soft); width: 1px; }
+.or-vr-ac { background: var(--accent); width: 1px; }
+.or-photo { object-fit: cover; filter: saturate(0.55) sepia(0.12); }
+
+/* double-line woodblock scroll frame (四周双边) */
+.or-frame-o { left: 30px; top: 26px; width: 1220px; height: 668px; border: 1px solid var(--hairline); }
+.or-frame-i { left: 36px; top: 32px; width: 1208px; height: 656px; border: 1px solid var(--hairline-soft); }
+
+/* cinnabar & ink seal primitives (shape + sibling text, never text inside div) */
+.or-seal { background: var(--accent); border-radius: 4px; }
+.or-seal-ink { background: var(--text-1); border-radius: 4px; }
+.or-seal-tx { font-family: var(--font-kai); font-weight: 400; color: var(--on-accent); text-align: center; line-height: 1; }
+.or-seal-vt { font-family: var(--font-kai); font-weight: 400; color: var(--on-accent); writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap; line-height: 1.22; }
+
+/* running header & footer: measure x 72..1208 (1136px) */
+.or-kicker { left: 72px; top: 50px; width: 520px; font-size: 16px; line-height: 1.25; letter-spacing: 0.16em; color: var(--text-2); }
+.or-mark { left: 740px; top: 50px; width: 468px; font-size: 16px; line-height: 1.25; letter-spacing: 0.16em; text-align: right; color: var(--accent); }
+.or-title { left: 72px; top: 82px; width: 1136px; font-size: 46px; line-height: 1.22; letter-spacing: 0.04em; }
+.or-sub { left: 72px; top: 142px; width: 1136px; font-size: 18px; line-height: 1.4; letter-spacing: 0.04em; color: var(--text-2); }
+.or-drule-a { left: 72px; top: 184px; width: 1136px; }
+.or-drule-b { left: 72px; top: 188px; width: 1136px; }
+.or-srule-a { left: 72px; top: 152px; width: 1136px; }
+.or-srule-b { left: 72px; top: 156px; width: 1136px; }
+.or-brule { left: 72px; top: 626px; width: 1136px; }
+.or-foot { left: 72px; top: 642px; width: 880px; font-size: 16px; line-height: 1.25; letter-spacing: 0.06em; color: var(--text-2); }
+.or-pageno { left: 988px; top: 642px; width: 220px; font-size: 16px; line-height: 1.25; letter-spacing: 0.18em; text-align: right; color: var(--accent); }
+
+/* ---------- oriental/cover ---------- */
+.orc-img { left: 0; top: 0; width: 512px; height: 720px; }
+.orc-frame-o { left: 542px; top: 26px; width: 708px; height: 668px; border: 1px solid var(--hairline); }
+.orc-frame-i { left: 548px; top: 32px; width: 696px; height: 656px; border: 1px solid var(--hairline-soft); }
+.orc-ta { left: 584px; top: 74px; width: 624px; }
+.orc-tb { left: 584px; top: 78px; width: 624px; }
+.orc-ba { left: 584px; top: 636px; width: 624px; }
+.orc-bb { left: 584px; top: 640px; width: 624px; }
+.orc-t1 { left: 1076px; top: 108px; font-size: 90px; line-height: 1.45; letter-spacing: 0.08em; }
+.orc-t2 { left: 966px; top: 112px; font-size: 66px; line-height: 1.45; letter-spacing: 0.14em; }
+.orc-seal { left: 984px; top: 472px; width: 72px; height: 72px; }
+.orc-seal-r { left: 1021px; top: 483px; font-size: 24px; letter-spacing: 0.12em; }
+.orc-seal-l { left: 991px; top: 483px; font-size: 24px; letter-spacing: 0.12em; }
+.orc-vr { left: 924px; top: 108px; height: 496px; }
+.orc-tag { left: 584px; top: 116px; width: 308px; font-size: 20px; line-height: 1.4; letter-spacing: 0.14em; color: var(--accent); }
+.orc-bar { left: 584px; top: 158px; width: 56px; height: 2px; }
+.orc-desc { left: 584px; top: 184px; width: 304px; font-size: 19px; line-height: 1.95; color: var(--text-2); }
+.orc-cap { left: 584px; top: 536px; width: 304px; font-size: 16px; line-height: 1.4; letter-spacing: 0.1em; color: var(--text-2); }
+.orc-colophon { left: 584px; top: 576px; width: 304px; font-size: 19px; line-height: 1.4; letter-spacing: 0.18em; color: var(--accent); }
+.orc-page { left: 960px; top: 652px; width: 248px; font-size: 16px; line-height: 1.25; letter-spacing: 0.16em; text-align: right; color: var(--text-2); }
+
+/* ---------- oriental/agenda ---------- */
+.ora-img { left: 72px; top: 214px; width: 340px; height: 316px; }
+.ora-cap { left: 72px; top: 544px; width: 340px; font-size: 16px; line-height: 1.35; letter-spacing: 0.08em; color: var(--text-2); }
+.ora-note { left: 72px; top: 576px; width: 340px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.ora-vr { left: 444px; top: 214px; height: 388px; }
+.ora-seal { left: 476px; width: 42px; height: 42px; }
+.ora-seal-tx { left: 476px; width: 42px; font-size: 22px; }
+.ora-num { left: 536px; width: 64px; font-size: 38px; }
+.ora-item { left: 612px; width: 440px; font-size: 26px; line-height: 1.3; }
+.ora-desc { left: 612px; width: 460px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.ora-page { left: 1088px; width: 120px; font-size: 16px; line-height: 1.3; letter-spacing: 0.12em; text-align: right; color: var(--text-2); }
+.ora-hair { left: 476px; width: 732px; }
+
+/* ---------- oriental/statement ---------- */
+.orq-vt-title { left: 1112px; top: 96px; font-size: 52px; line-height: 1.45; letter-spacing: 0.22em; }
+.orq-vt-sub { left: 1058px; top: 102px; font-size: 20px; line-height: 1.25; letter-spacing: 0.26em; color: var(--text-2); }
+.orq-seal { left: 1044px; top: 248px; width: 52px; height: 52px; }
+.orq-seal-tx { left: 1044px; top: 261px; width: 52px; font-size: 26px; }
+.orq-vr { left: 996px; top: 96px; height: 496px; }
+.orq-bar { left: 96px; top: 172px; width: 64px; height: 4px; }
+.orq-line { left: 96px; width: 860px; font-size: 62px; line-height: 1.24; letter-spacing: 0.02em; }
+.orq-l1 { top: 214px; }
+.orq-l2 { top: 308px; }
+.orq-da { left: 96px; top: 432px; width: 856px; }
+.orq-db { left: 96px; top: 436px; width: 856px; }
+.orq-by { left: 96px; top: 462px; width: 640px; font-size: 22px; line-height: 1.4; letter-spacing: 0.1em; color: var(--accent); }
+.orq-note { left: 96px; top: 510px; width: 820px; font-size: 17px; line-height: 1.75; color: var(--text-2); }
+
+/* ---------- oriental/section ---------- */
+.orx-panel { left: 72px; top: 72px; width: 416px; height: 528px; }
+.orx-kicker { left: 108px; top: 104px; width: 344px; font-size: 20px; line-height: 1.3; letter-spacing: 0.16em; color: var(--accent); }
+.orx-num { left: 100px; top: 152px; width: 352px; font-size: 164px; }
+.orx-chap { left: 108px; top: 342px; width: 344px; font-size: 28px; line-height: 1.3; }
+.orx-lrule { left: 108px; top: 394px; width: 344px; }
+.orx-desc { left: 108px; top: 418px; width: 344px; font-size: 16px; line-height: 1.85; color: var(--text-2); }
+.orx-vt-title { left: 1006px; top: 104px; font-size: 114px; line-height: 1.45; letter-spacing: 0.16em; }
+.orx-seal { left: 1061px; top: 522px; width: 56px; height: 56px; }
+.orx-seal-tx { left: 1061px; top: 536px; width: 56px; font-size: 28px; }
+.orx-vr { left: 964px; top: 104px; height: 484px; }
+.orx-idx-hd { left: 540px; top: 112px; width: 384px; font-size: 18px; line-height: 1.3; letter-spacing: 0.16em; color: var(--text-2); }
+.orx-da { left: 540px; top: 150px; width: 384px; }
+.orx-db { left: 540px; top: 154px; width: 384px; }
+.orx-mark { left: 540px; width: 4px; height: 34px; }
+.orx-n { left: 560px; width: 56px; font-size: 24px; line-height: 1.3; color: var(--text-2); }
+.orx-i { left: 628px; width: 200px; font-size: 24px; line-height: 1.3; color: var(--text-2); }
+.orx-p { left: 828px; width: 96px; font-size: 16px; line-height: 1.3; letter-spacing: 0.1em; text-align: right; color: var(--text-2); }
+.orx-now { color: var(--accent); }
+.orx-hair { left: 540px; width: 384px; }
+
+/* ---------- oriental/matrix ---------- */
+.orm-title { left: 72px; top: 82px; width: 620px; font-size: 42px; line-height: 1.22; letter-spacing: 0.04em; }
+.orm-deck { left: 704px; top: 98px; width: 504px; font-size: 16px; line-height: 1.45; text-align: right; color: var(--text-2); }
+.orm-seal { left: 72px; top: 184px; width: 44px; height: 44px; }
+.orm-seal-tx { left: 72px; top: 195px; width: 44px; font-size: 22px; }
+.orm-rubric { left: 130px; top: 194px; width: 200px; font-size: 20px; line-height: 1.25; letter-spacing: 0.12em; color: var(--accent); }
+.orm-hero { left: 66px; top: 248px; width: 264px; font-size: 136px; }
+.orm-label { left: 72px; top: 396px; width: 260px; font-size: 26px; line-height: 1.3; }
+.orm-lrule { left: 72px; top: 442px; width: 260px; }
+.orm-sub { left: 72px; top: 462px; width: 260px; }
+.orm-vr { top: 180px; height: 424px; }
+.orm-v0 { left: 356px; }
+.orm-v1 { left: 644px; }
+.orm-v2 { left: 928px; }
+.orm-hair { left: 380px; width: 828px; }
+.orm-active { left: 660px; top: 506px; width: 256px; height: 94px; }
+.orm-abar { left: 660px; top: 506px; width: 4px; height: 94px; }
+.orm-let { width: 34px; font-size: 26px; }
+.orm-grp { width: 188px; font-size: 16px; line-height: 1.3; letter-spacing: 0.08em; color: var(--text-2); }
+.orm-name { width: 236px; font-size: 21px; line-height: 1.3; }
+.orm-c1 { left: 392px; }
+.orm-c1g { left: 434px; }
+.orm-c2 { left: 676px; }
+.orm-c2g { left: 718px; }
+.orm-c3 { left: 960px; }
+.orm-c3g { left: 1002px; }
+
+/* ---------- oriental/compare ---------- */
+.orv-vr { left: 640px; top: 186px; height: 416px; }
+.orv-head { top: 186px; width: 536px; height: 48px; }
+.orv-bar { left: 672px; top: 186px; width: 6px; height: 48px; }
+.orv-hl { top: 197px; width: 480px; font-size: 20px; line-height: 1.3; letter-spacing: 0.08em; }
+.orv-h { top: 260px; width: 536px; font-size: 29px; line-height: 1.3; }
+.orv-p { top: 314px; width: 528px; font-size: 18px; line-height: 1.8; }
+.orv-rule { top: 418px; width: 536px; }
+.orv-num { top: 452px; width: 148px; font-size: 100px; }
+.orv-nl { top: 470px; width: 372px; font-size: 22px; line-height: 1.35; }
+.orv-sub { top: 514px; width: 372px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.orv-l { left: 72px; }
+.orv-r { left: 672px; }
+.orv-tl { left: 94px; }
+.orv-tr { left: 698px; }
+.orv-nll { left: 228px; }
+.orv-nlr { left: 828px; }
+
+/* ---------- oriental/image-text ---------- */
+.ori-img { left: 72px; top: 184px; width: 588px; height: 400px; }
+.ori-cap { left: 72px; top: 594px; width: 588px; font-size: 16px; line-height: 1.3; letter-spacing: 0.06em; color: var(--text-2); }
+.ori-vr { left: 684px; top: 184px; height: 422px; }
+.ori-rubric { left: 712px; top: 184px; width: 496px; font-size: 22px; line-height: 1.3; letter-spacing: 0.12em; color: var(--accent); }
+.ori-p { left: 712px; width: 496px; font-size: 17px; line-height: 1.85; }
+.ori-p1 { top: 226px; }
+.ori-p2 { top: 334px; }
+.ori-box { left: 712px; top: 462px; width: 496px; height: 140px; border: 1px solid var(--hairline-soft); }
+.ori-edge { left: 712px; top: 462px; width: 4px; height: 140px; }
+.ori-key { left: 736px; top: 482px; width: 448px; font-size: 19px; line-height: 1.3; letter-spacing: 0.08em; color: var(--accent); }
+.ori-note { left: 736px; top: 518px; width: 448px; }
+
+/* ---------- oriental/image ---------- */
+.orf-img { left: 0; top: 0; width: 1280px; height: 720px; }
+.orf-plate { left: 0; top: 474px; width: 1280px; height: 246px; background: var(--bg); }
+.orf-da { left: 64px; top: 494px; width: 1152px; }
+.orf-db { left: 64px; top: 498px; width: 1152px; }
+.orf-seal { left: 64px; top: 526px; width: 48px; height: 48px; }
+.orf-seal-tx { left: 64px; top: 538px; width: 48px; font-size: 24px; }
+.orf-title { left: 132px; top: 518px; width: 652px; font-size: 44px; line-height: 1.2; letter-spacing: 0.04em; }
+.orf-p { left: 132px; top: 582px; width: 652px; font-size: 20px; line-height: 1.4; color: var(--text-2); }
+.orf-vr { left: 806px; top: 520px; height: 100px; }
+.orf-cap { left: 830px; top: 522px; width: 386px; font-size: 18px; line-height: 1.35; letter-spacing: 0.1em; color: var(--accent); }
+.orf-src { left: 830px; top: 558px; width: 386px; }
+.orf-brule { left: 64px; top: 644px; width: 1152px; }
+.orf-foot { left: 64px; top: 660px; width: 880px; font-size: 16px; line-height: 1.25; letter-spacing: 0.08em; color: var(--text-2); }
+.orf-pageno { left: 996px; top: 660px; width: 220px; font-size: 16px; line-height: 1.25; letter-spacing: 0.18em; text-align: right; color: var(--accent); }
+
+/* ---------- oriental/points ---------- */
+.ort-vr { top: 190px; height: 408px; }
+.ort-v1 { left: 444px; }
+.ort-v2 { left: 836px; }
+.ort-seal { top: 198px; width: 44px; height: 44px; }
+.ort-seal-tx { top: 209px; width: 44px; font-size: 22px; }
+.ort-rubric { top: 208px; width: 280px; font-size: 20px; line-height: 1.3; letter-spacing: 0.14em; color: var(--accent); }
+.ort-num { top: 266px; width: 344px; font-size: 64px; }
+.ort-h { top: 346px; width: 344px; font-size: 28px; line-height: 1.3; }
+.ort-r1 { top: 396px; width: 344px; }
+.ort-p { top: 414px; width: 344px; font-size: 17px; line-height: 1.8; }
+.ort-box { top: 538px; width: 344px; height: 54px; border: 1px solid var(--hairline-soft); }
+.ort-tag { top: 554px; width: 316px; font-size: 16px; line-height: 1.3; letter-spacing: 0.06em; color: var(--text-2); }
+.ort-c1 { left: 72px; }
+.ort-c2 { left: 468px; }
+.ort-c3 { left: 864px; }
+.ort-r1x { left: 130px; }
+.ort-r2x { left: 526px; }
+.ort-r3x { left: 922px; }
+.ort-i1 { left: 88px; }
+.ort-i2 { left: 484px; }
+.ort-i3 { left: 880px; }
+
+/* ---------- oriental/kpi ---------- */
+.ork-vr { top: 228px; height: 368px; }
+.ork-v1 { left: 444px; }
+.ork-v2 { left: 836px; }
+.ork-seal { top: 236px; width: 48px; height: 48px; }
+.ork-seal-tx { top: 248px; width: 48px; font-size: 24px; }
+.ork-num { top: 312px; width: 344px; font-size: 128px; }
+.ork-label { top: 466px; width: 344px; font-size: 26px; line-height: 1.3; }
+.ork-desc { top: 512px; width: 344px; font-size: 16px; line-height: 1.75; color: var(--text-2); }
+.ork-c1 { left: 72px; }
+.ork-c2 { left: 468px; }
+.ork-c3 { left: 864px; }
+
+/* ---------- oriental/bars ---------- */
+/* bar width = value × 116px from x 268 (max 4 → 464px); value 16px after bar end.
+   No axis line inside chart area so --native-charts cleanly replaces bars + labels + values. */
+.orb-label { left: 72px; width: 176px; font-size: 18px; line-height: 1.4; text-align: right; }
+.orb-bar { left: 268px; height: 32px; }
+.orb-val { width: 48px; font-size: 24px; }
+.orb-vr { left: 848px; top: 206px; height: 396px; }
+.orb-rubric { left: 876px; top: 206px; width: 332px; font-size: 20px; line-height: 1.3; letter-spacing: 0.12em; color: var(--accent); }
+.orb-srule { left: 876px; width: 332px; }
+.orb-ids { left: 876px; width: 332px; font-size: 16px; line-height: 1.35; color: var(--text-2); }
+.orb-foot { left: 876px; top: 586px; width: 332px; font-size: 16px; line-height: 1.3; letter-spacing: 0.08em; color: var(--text-2); }
+
+/* ---------- oriental/table ---------- */
+.ord-head { left: 72px; top: 184px; width: 1136px; height: 46px; }
+.ord-band { left: 72px; width: 1136px; height: 60px; }
+.ord-hr { left: 72px; width: 1136px; }
+.ord-vr { top: 230px; height: 360px; }
+.ord-v1 { left: 268px; }
+.ord-v2 { left: 884px; }
+.ord-k { left: 92px; width: 160px; font-size: 18px; line-height: 1.4; }
+.ord-v { left: 288px; width: 576px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
+.ord-s { left: 904px; width: 288px; font-size: 16px; line-height: 1.4; color: var(--text-2); }
+.ord-th { top: 196px; font-size: 17px; line-height: 1.3; letter-spacing: 0.12em; color: var(--on-accent); }
+
+/* ---------- oriental/process ---------- */
+.orp-spine { left: 144px; top: 292px; width: 840px; }
+.orp-circ { top: 244px; width: 96px; height: 96px; }
+.orp-char { top: 267px; width: 96px; font-size: 50px; }
+.orp-idx { top: 364px; width: 244px; font-size: 17px; line-height: 1.3; letter-spacing: 0.14em; color: var(--text-2); }
+.orp-name { top: 392px; width: 244px; font-size: 30px; line-height: 1.25; }
+.orp-r1 { top: 440px; width: 48px; }
+.orp-p { top: 458px; width: 244px; font-size: 16px; line-height: 1.85; color: var(--text-2); }
+.orp-c1 { left: 96px; }
+.orp-c2 { left: 376px; }
+.orp-c3 { left: 656px; }
+.orp-c4 { left: 936px; }
+
+/* ---------- oriental/timeline ---------- */
+.orl-vr { top: 210px; height: 392px; }
+.orl-v1 { left: 292px; }
+.orl-v2 { left: 524px; }
+.orl-v3 { left: 756px; }
+.orl-v4 { left: 988px; }
+.orl-spine { left: 72px; top: 342px; width: 1136px; height: 2px; }
+.orl-yr { top: 222px; width: 204px; font-size: 16px; line-height: 1.3; letter-spacing: 0.14em; color: var(--text-2); }
+.orl-date { top: 260px; width: 204px; font-size: 50px; letter-spacing: 0; }
+.orl-node { top: 336px; width: 14px; height: 14px; border-radius: 2px; }
+.orl-h { top: 374px; width: 204px; font-size: 24px; line-height: 1.3; }
+.orl-r1 { top: 416px; width: 204px; }
+.orl-p { top: 434px; width: 204px; }
+.orl-c1 { left: 72px; }
+.orl-c2 { left: 308px; }
+.orl-c3 { left: 540px; }
+.orl-c4 { left: 772px; }
+.orl-c5 { left: 1004px; }
+
+/* ---------- oriental/cycle ---------- */
+/* dark lacquer scroll: concentric rings centered at (316, 398) */
+.ory-ring-o { left: 148px; top: 230px; width: 336px; height: 336px; border: 1px solid var(--hairline); }
+.ory-ring-i { left: 158px; top: 240px; width: 316px; height: 316px; border: 1px solid var(--hairline-soft); }
+.ory-node { width: 48px; height: 48px; border-radius: 4px; }
+.ory-box { background: var(--surface); border: 1px solid var(--hairline); }
+.ory-n1 { left: 292px; top: 206px; }
+.ory-n2 { left: 460px; top: 374px; }
+.ory-n3 { left: 292px; top: 542px; }
+.ory-n4 { left: 124px; top: 374px; }
+.ory-k { width: 48px; font-size: 24px; }
+.ory-core { left: 236px; top: 342px; width: 160px; font-size: 84px; text-align: center; }
+.ory-core-l { left: 216px; top: 438px; width: 200px; font-size: 18px; line-height: 1.3; letter-spacing: 0.16em; text-align: center; color: var(--text-2); }
+.ory-vr { left: 592px; top: 186px; height: 416px; }
+.ory-rubric { left: 624px; top: 188px; width: 584px; font-size: 20px; line-height: 1.3; letter-spacing: 0.14em; color: var(--accent); }
+.ory-n { left: 624px; width: 56px; font-size: 34px; }
+.ory-h { left: 696px; width: 200px; font-size: 26px; line-height: 1.3; }
+.ory-d { left: 912px; width: 296px; }
+.ory-hair { left: 624px; width: 584px; }
+.ory-back { left: 624px; top: 580px; width: 584px; font-size: 18px; line-height: 1.3; letter-spacing: 0.1em; color: var(--accent); }
+
+/* ---------- oriental/system ---------- */
+.orz-p1 { left: 72px; top: 196px; width: 400px; height: 400px; border: 1px solid var(--hairline); }
+.orz-p2 { left: 128px; top: 268px; width: 288px; height: 288px; }
+.orz-p3 { left: 184px; top: 340px; width: 176px; height: 176px; border-radius: 4px; }
+.orz-l1 { left: 92px; top: 216px; width: 240px; font-size: 17px; line-height: 1.3; letter-spacing: 0.08em; color: var(--text-1); }
+.orz-l2 { left: 148px; top: 288px; width: 220px; font-size: 17px; line-height: 1.3; letter-spacing: 0.08em; color: var(--on-accent); }
+.orz-l3-ch { left: 184px; top: 382px; width: 176px; font-size: 46px; }
+.orz-l3 { left: 184px; top: 446px; width: 176px; font-size: 17px; line-height: 1.3; letter-spacing: 0.08em; text-align: center; color: var(--on-accent); }
+.orz-vr { left: 512px; top: 188px; height: 416px; }
+.orz-tag { left: 544px; width: 664px; font-size: 18px; line-height: 1.3; letter-spacing: 0.12em; color: var(--accent); }
+.orz-h { left: 544px; width: 664px; font-size: 30px; line-height: 1.3; }
+.orz-p { left: 544px; width: 664px; font-size: 18px; line-height: 1.5; color: var(--text-2); }
+.orz-hair { left: 544px; width: 664px; }
+
+/* ---------- oriental/closing ---------- */
+.ore-t1 { left: 1078px; top: 100px; font-size: 70px; line-height: 1.45; letter-spacing: 0.1em; }
+.ore-t2 { left: 966px; top: 124px; font-size: 70px; line-height: 1.45; letter-spacing: 0.1em; }
+.ore-seal { left: 880px; top: 484px; width: 68px; height: 68px; }
+.ore-seal-r { left: 915px; top: 495px; font-size: 22px; letter-spacing: 0.12em; }
+.ore-seal-l { left: 887px; top: 495px; font-size: 22px; letter-spacing: 0.12em; }
+.ore-vr { left: 836px; top: 96px; height: 496px; }
+.ore-rubric { left: 84px; top: 102px; width: 712px; font-size: 20px; line-height: 1.3; letter-spacing: 0.16em; color: var(--accent); }
+.ore-da { left: 84px; top: 146px; width: 712px; }
+.ore-db { left: 84px; top: 150px; width: 712px; }
+.ore-label { left: 84px; top: 186px; width: 712px; font-size: 16px; line-height: 1.3; letter-spacing: 0.14em; color: var(--text-2); }
+.ore-box { left: 84px; top: 220px; width: 712px; height: 76px; border: 1px solid var(--hairline); }
+.ore-edge { left: 84px; top: 220px; width: 6px; height: 76px; }
+.ore-cmd { left: 112px; top: 245px; width: 668px; font-family: var(--font-sans); font-size: 20px; line-height: 1.3; letter-spacing: 0.02em; color: var(--text-1); }
+.ore-p { left: 84px; top: 326px; width: 712px; font-size: 20px; line-height: 1.4; letter-spacing: 0.06em; color: var(--text-1); }
+.ore-tag { left: 84px; top: 368px; width: 712px; font-size: 16px; line-height: 1.4; letter-spacing: 0.1em; color: var(--text-2); }
+.ore-hair { left: 84px; top: 422px; width: 712px; }
+.ore-crubric { left: 84px; top: 446px; width: 712px; font-size: 18px; line-height: 1.3; letter-spacing: 0.14em; color: var(--accent); }
+.ore-citem { left: 84px; width: 712px; }
