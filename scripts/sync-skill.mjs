@@ -1,8 +1,10 @@
 // Usage: node scripts/sync-skill.mjs [--check] [--dest <dir>]
-// Mirrors the skill's shipping set into the installed copy. --check
-// reports drift (exit 1) without writing — run it before releases so the
-// project dir and ~/.claude/skills never silently diverge.
-import { cpSync, existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+// Mirrors the skill's shipping set into installed copies.
+// Without --dest, syncs/checks ~/.claude/skills/zifeiyu-ppt-skill and
+// ~/.agents/skills/zifeiyu-ppt-skill (whenever ~/.agents/skills exists).
+// --check reports drift (exit 1) without writing — run before releases so
+// project dir and installed skills never silently diverge.
+import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { homedir } from 'node:os';
 import { dirname, join, relative, resolve } from 'node:path';
@@ -12,7 +14,16 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const check = args.includes('--check');
 const di = args.indexOf('--dest');
-const dest = resolve(di >= 0 ? args[di + 1] : join(homedir(), '.claude/skills/zifeiyu-ppt-skill'));
+
+function resolveDestinations() {
+  if (di >= 0 && args[di + 1]) return [resolve(args[di + 1])];
+  const targets = [join(homedir(), '.claude/skills/zifeiyu-ppt-skill')];
+  const agentsRoot = join(homedir(), '.agents/skills');
+  if (existsSync(agentsRoot)) {
+    targets.push(join(agentsRoot, 'zifeiyu-ppt-skill'));
+  }
+  return targets;
+}
 
 const SHIP = ['SKILL.md', 'README.md', 'README.en.md', 'package.json', 'assets', 'references', 'scripts', 'templates', 'examples', 'styles', 'docs/styles'];
 const EXCLUDE = /(^|\/)(node_modules|\.DS_Store|deck\.pptx|deck\.pdf|deck-web\.pdf|renders|renders-pptx|\.export-crops|\.regress)(\/|$)/;
@@ -37,17 +48,30 @@ const files = SHIP.flatMap((s) => {
   return statSync(p).isDirectory() ? walk(p).map((f) => join(s, f)) : [s];
 });
 
+const dests = resolveDestinations();
+
 if (check) {
-  const drift = [];
-  for (const f of files) {
-    const target = join(dest, f);
-    if (!existsSync(target)) drift.push(`missing  ${f}`);
-    else if (digest(join(root, f)) !== digest(target)) drift.push(`differs  ${f}`);
+  let totalDrifted = 0;
+  for (const dest of dests) {
+    const drift = [];
+    for (const f of files) {
+      const target = join(dest, f);
+      if (!existsSync(target)) drift.push(`missing  ${f}`);
+      else if (digest(join(root, f)) !== digest(target)) drift.push(`differs  ${f}`);
+    }
+    if (drift.length) {
+      console.log(`=== ${dest} ===`);
+      for (const d of drift.slice(0, 40)) console.log(d);
+      if (drift.length > 40) console.log(`... and ${drift.length - 40} more`);
+    }
+    console.log(`${dest}: ${files.length} files checked, ${drift.length} drifted`);
+    totalDrifted += drift.length;
   }
-  for (const d of drift) console.log(d);
-  console.log(`\n${files.length} files checked: ${drift.length} drifted`);
-  process.exit(drift.length ? 1 : 0);
+  process.exit(totalDrifted ? 1 : 0);
 }
 
-for (const f of files) cpSync(join(root, f), join(dest, f));
-console.log(`${files.length} files synced to ${dest}`);
+for (const dest of dests) {
+  mkdirSync(dest, { recursive: true });
+  for (const f of files) cpSync(join(root, f), join(dest, f));
+  console.log(`${files.length} files synced to ${dest}`);
+}

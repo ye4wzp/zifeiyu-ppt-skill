@@ -1,0 +1,341 @@
+/* ================================================================
+   Style F 「柔和 · 产品」 — soft
+   浅灰底 × 白色圆角卡片 × 暖橙强调；亲和、现代，像产品官网或发布页。
+   语法要点（详见 layouts.md）：80–1200 版心（宽 1120，栏距 20）；
+   浅灰画布上铺 22px 圆角白卡，暖橙用于徽章、主卡、重点步骤与描边；
+   胶囊标签和指标 chip 均由底层 shape + 顶层文字组成（满足 R16 导出一致）；
+   深灰蓝页（is-dark）用于 statement / image / cycle / closing，打破节奏。
+   ================================================================ */
+
+@font-face {
+  font-family: 'Source Han Sans SC';
+  src: url('../../fonts/source-han-sans-sc.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../../fonts/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+
+:root {
+  --bg: #f3f4f6;
+  --surface: #ffffff;
+  --text-1: #111827;
+  --text-2: #6b7280;
+  --accent: #ff6b2c;
+  --on-accent: #ffffff;
+  --accent-soft: #ffe9df;
+  --accent-tint: #fff6f1;
+  --accent-ink: #e8561a;
+  --on-accent-2: #ffe9df;
+  --mark: #ff6b2c;
+  --on-mark: #ffffff;
+  --hairline: #e5e7eb;
+  --slate-bar: #374151;
+
+  --font-display: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-num: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* dark page: statement, image, cycle, closing */
+.slide.is-dark {
+  --bg: #111827;
+  --surface: #1f2937;
+  --text-1: #f9fafb;
+  --text-2: #9ca3af;
+  --accent: #ff7a45;
+  --on-accent: #111827;
+  --accent-soft: #3b231b;
+  --accent-tint: #2b1d19;
+  --accent-ink: #ff7a45;
+  --on-accent-2: #374151;
+  --hairline: #374151;
+  --slate-bar: #6b7280;
+}
+
+/* ---------- vocabulary ---------- */
+.sf-semi { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.01em; color: var(--text-1); }
+.sf-num { font-family: var(--font-num); font-weight: 600; line-height: 1; letter-spacing: -0.03em; color: var(--text-1); }
+.sf-body { font-size: 18px; line-height: 1.65; color: var(--text-2); }
+.sf-body-ink { font-size: 18px; line-height: 1.65; color: var(--text-1); }
+.sf-note { font-size: 16px; line-height: 1.55; color: var(--text-2); }
+.sf-note-ink { font-size: 16px; line-height: 1.55; color: var(--text-1); }
+
+/* surfaces & shapes */
+.sf-card { background: var(--surface); border: 1px solid var(--hairline); border-radius: 22px; }
+.sf-card-float { background: var(--surface); border-radius: 22px; box-shadow: 0 12px 28px rgba(17, 24, 39, 0.12); }
+.sf-card-accent { background: var(--accent-ink); border-radius: 22px; }
+.sf-card-tint { background: var(--accent-tint); border: 2px solid var(--accent); border-radius: 22px; }
+.sf-pill-bg { background: var(--accent-soft); border-radius: 999px; height: 36px; }
+.sf-pill-muted { background: var(--bg); border-radius: 999px; height: 36px; }
+.sf-pill-solid { background: var(--accent-ink); border-radius: 999px; height: 36px; }
+.sf-pill-white { background: var(--surface); border-radius: 999px; height: 36px; }
+.sf-pill-txt { font-family: var(--font-display); font-size: 16px; line-height: 1; font-weight: 600; letter-spacing: 0.06em; text-align: center; color: var(--accent-ink); }
+/* color overrides — placed after text roles so utility color always wins */
+.sf-ink { color: var(--text-1); }
+.sf-ac { color: var(--accent-ink); }
+.sf-on { color: var(--on-accent); }
+.sf-on2 { color: var(--on-accent-2); }
+.sf-chip-bg { background: var(--surface); border: 1px solid var(--hairline); border-radius: 14px; }
+.sf-chip-accent { background: var(--accent-ink); border-radius: 14px; }
+.sf-dot-soft { background: var(--accent-soft); }
+.sf-dot-glass { background: rgba(255, 255, 255, 0.22); }
+.sf-dot-ring { background: var(--surface); border: 2px solid var(--accent); }
+.sf-dot-solid { background: var(--accent-ink); }
+.sf-dot-surf { background: var(--surface); border: 1px solid var(--hairline); }
+.sf-line { background: var(--hairline); height: 2px; }
+.sf-hair { background: var(--hairline); height: 1px; }
+.sf-bar-ac { background: var(--accent); }
+.sf-bar-slate { background: var(--slate-bar); }
+.sf-tint-strip { background: var(--accent-tint); border-radius: 12px; }
+.sf-muted-strip { background: var(--bg); border-radius: 12px; }
+.sf-photo { object-fit: cover; }
+.sf-photo-r { object-fit: cover; border-radius: 28px; }
+.sf-photo-card { object-fit: cover; border-radius: 22px; }
+
+/* shared running heads & footers (80–1200 measure) */
+.sf-kicker { left: 80px; top: 52px; width: 640px; font-family: var(--font-display); font-size: 16px; line-height: 1; font-weight: 600; letter-spacing: 0.08em; color: var(--accent-ink); }
+.sf-title { left: 80px; top: 82px; width: 1120px; font-size: 40px; line-height: 1.25; }
+.sf-sub { left: 80px; top: 142px; width: 1000px; font-size: 18px; line-height: 1.5; color: var(--text-2); }
+.sf-source { left: 80px; top: 668px; width: 960px; font-size: 16px; line-height: 1.4; color: var(--text-2); }
+.sf-pageno { left: 1060px; top: 668px; width: 140px; font-family: var(--font-num); font-size: 16px; line-height: 1.4; font-weight: 600; text-align: right; color: var(--text-2); }
+
+/* ---------- soft/cover ---------- */
+.sfc-pill { left: 80px; top: 144px; width: 244px; }
+.sfc-pill-t { left: 80px; top: 154px; width: 244px; }
+.sfc-title { left: 76px; width: 520px; font-size: 72px; line-height: 1.15; }
+.sfc-t1 { top: 208px; }
+.sfc-t2 { top: 294px; }
+.sfc-sub { left: 80px; top: 400px; width: 492px; font-size: 20px; line-height: 1.65; color: var(--text-2); }
+.sfc-chip { top: 504px; height: 48px; }
+.sfc-ch1 { left: 80px; width: 204px; }
+.sfc-ch2 { left: 300px; width: 212px; }
+.sfc-chtxt { top: 517px; font-size: 17px; line-height: 1.3; text-align: center; }
+.sfc-cht1 { left: 80px; width: 204px; }
+.sfc-cht2 { left: 300px; width: 212px; }
+.sfc-meta { left: 80px; top: 608px; width: 492px; }
+.sfc-img { left: 680px; top: 80px; width: 536px; height: 560px; }
+.sfc-float { left: 604px; top: 492px; width: 260px; height: 116px; }
+.sfc-fnum { left: 632px; top: 512px; width: 204px; font-size: 44px; }
+.sfc-fcap { left: 632px; top: 568px; width: 212px; }
+
+/* ---------- soft/agenda ---------- */
+/* four rounded row cards, pitch 108 from 208 */
+.sfa-card { left: 80px; width: 1120px; height: 92px; }
+.sfa-dot { left: 104px; width: 48px; height: 48px; }
+.sfa-num { left: 104px; width: 48px; font-size: 18px; line-height: 20px; text-align: center; }
+.sfa-item { left: 176px; width: 280px; font-size: 26px; line-height: 1.3; }
+.sfa-desc { left: 480px; width: 480px; font-size: 18px; line-height: 1.5; color: var(--text-2); }
+.sfa-page { left: 1000px; width: 172px; font-size: 16px; line-height: 1.5; text-align: right; color: var(--text-2); }
+
+/* ---------- soft/statement ---------- */
+.sfq-pill { left: 80px; top: 176px; width: 120px; }
+.sfq-pill-t { left: 80px; top: 186px; width: 120px; }
+.sfq-bar { left: 80px; top: 244px; width: 64px; height: 6px; border-radius: 3px; }
+.sfq-line { left: 80px; width: 1120px; font-size: 64px; line-height: 1.25; }
+.sfq-l1 { top: 276px; }
+.sfq-l2 { top: 364px; }
+.sfq-by { left: 80px; top: 484px; width: 800px; font-size: 20px; line-height: 1.5; color: var(--text-2); }
+
+/* ---------- soft/section ---------- */
+.sfx-left { left: 80px; top: 80px; width: 460px; height: 560px; }
+.sfx-pill { left: 120px; top: 124px; width: 124px; }
+.sfx-pill-t { left: 120px; top: 134px; width: 124px; }
+.sfx-num { left: 112px; top: 276px; width: 380px; font-size: 168px; }
+.sfx-title { left: 120px; top: 472px; width: 380px; font-size: 48px; line-height: 1.2; }
+.sfx-sub { left: 120px; top: 548px; width: 380px; font-size: 18px; line-height: 1.5; }
+.sfx-right { left: 560px; top: 80px; width: 640px; height: 560px; }
+.sfx-kicker { left: 604px; top: 128px; width: 400px; font-family: var(--font-display); font-size: 16px; line-height: 1; font-weight: 600; letter-spacing: 0.08em; color: var(--accent-ink); }
+.sfx-hi { left: 600px; top: 176px; width: 560px; height: 80px; border-radius: 16px; }
+.sfx-dot { left: 620px; width: 36px; height: 36px; }
+.sfx-dn { left: 620px; width: 36px; font-size: 16px; line-height: 18px; text-align: center; }
+.sfx-ri { left: 676px; width: 460px; font-size: 22px; line-height: 1.35; }
+.sfx-hair { left: 604px; width: 552px; }
+
+/* ---------- soft/matrix ---------- */
+.sfm-card { left: 80px; top: 184px; width: 320px; height: 452px; }
+.sfm-dot { left: 112px; top: 216px; width: 44px; height: 44px; }
+.sfm-hero { left: 108px; top: 300px; width: 260px; font-size: 132px; }
+.sfm-label { left: 112px; top: 452px; width: 256px; font-size: 26px; line-height: 1.3; }
+.sfm-sub { left: 112px; top: 496px; width: 256px; }
+.sfm-group { left: 428px; width: 112px; font-size: 18px; line-height: 1.4; }
+.sfm-chip { width: 152px; height: 56px; }
+.sfm-name { width: 136px; font-size: 16px; line-height: 1.4; text-align: center; }
+.sfm-hair { left: 428px; width: 772px; }
+
+/* ---------- soft/compare ---------- */
+.sfv-card { top: 188px; width: 550px; height: 448px; }
+.sfv-l { left: 80px; }
+.sfv-r { left: 650px; }
+.sfv-pill { top: 224px; width: 88px; }
+.sfv-pl { left: 116px; }
+.sfv-pr { left: 686px; }
+.sfv-pt { top: 234px; width: 88px; }
+.sfv-h { top: 286px; width: 478px; font-size: 26px; line-height: 1.35; }
+.sfv-p { top: 336px; width: 478px; }
+.sfv-hair { top: 456px; width: 478px; }
+.sfv-num { top: 488px; width: 120px; font-size: 84px; }
+.sfv-unit { top: 520px; width: 348px; font-size: 20px; line-height: 1.4; }
+.sfv-tl { left: 116px; }
+.sfv-tr { left: 686px; }
+.sfv-ul { left: 244px; }
+.sfv-ur { left: 814px; }
+
+/* ---------- soft/image-text ---------- */
+.sfi-img { left: 80px; top: 188px; width: 544px; height: 448px; }
+.sfi-cap-bg { left: 100px; top: 574px; width: 184px; height: 42px; border-radius: 12px; }
+.sfi-cap { left: 100px; top: 583px; width: 184px; text-align: center; }
+.sfi-card { left: 644px; top: 188px; width: 556px; height: 448px; }
+.sfi-dot { left: 680px; width: 36px; height: 36px; }
+.sfi-dn { left: 680px; width: 36px; font-size: 16px; line-height: 18px; text-align: center; }
+.sfi-p { left: 732px; width: 432px; }
+.sfi-hair { left: 680px; top: 516px; width: 484px; }
+.sfi-note { left: 680px; top: 538px; width: 484px; }
+
+/* ---------- soft/image ---------- */
+.sff-img { left: 0; top: 0; width: 1280px; height: 720px; }
+.sff-card { left: 64px; top: 444px; width: 700px; height: 212px; background: var(--bg); border-radius: 24px; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28); }
+.sff-pill { left: 100px; top: 476px; width: 108px; }
+.sff-pill-t { left: 100px; top: 486px; width: 108px; }
+.sff-title { left: 100px; top: 528px; width: 628px; font-size: 40px; line-height: 1.25; }
+.sff-p { left: 100px; top: 590px; width: 628px; font-size: 18px; line-height: 1.5; color: var(--text-2); }
+.sff-pbox { left: 1148px; top: 616px; width: 68px; height: 40px; background: var(--bg); border-radius: 999px; }
+.sff-pageno { left: 1148px; top: 625px; width: 68px; font-family: var(--font-num); font-size: 16px; line-height: 1.4; font-weight: 600; text-align: center; color: var(--text-2); }
+
+/* ---------- soft/points ---------- */
+.sft-card { top: 216px; width: 360px; height: 412px; }
+.sft-dot { top: 252px; width: 52px; height: 52px; }
+.sft-num { top: 268px; width: 52px; font-size: 20px; line-height: 20px; text-align: center; }
+.sft-h { top: 344px; width: 296px; font-size: 28px; line-height: 1.3; }
+.sft-p { top: 404px; width: 296px; }
+.sft-c1 { left: 80px; }
+.sft-c2 { left: 460px; }
+.sft-c3 { left: 840px; }
+.sft-i1 { left: 112px; }
+.sft-i2 { left: 492px; }
+.sft-i3 { left: 872px; }
+
+/* ---------- soft/kpi ---------- */
+/* three 360x376 rounded cards matching the confirmed specimen; card 1 solid warm orange */
+.sfk-card { top: 224px; width: 360px; height: 376px; }
+.sfk-dot { top: 256px; width: 44px; height: 44px; }
+.sfk-num { top: 368px; width: 300px; font-size: 88px; }
+.sfk-label { top: 478px; width: 296px; font-size: 22px; line-height: 1.35; }
+.sfk-desc { top: 516px; width: 272px; }
+.sfk-c1 { left: 80px; }
+.sfk-c2 { left: 460px; }
+.sfk-c3 { left: 840px; }
+.sfk-i1 { left: 112px; }
+.sfk-i2 { left: 492px; }
+.sfk-i3 { left: 872px; }
+.sfk-n1 { left: 110px; }
+.sfk-n2 { left: 490px; }
+.sfk-n3 { left: 870px; }
+
+/* ---------- soft/bars ---------- */
+/* bar width = value * 112px from x 276 (max 4 -> 448px); chart hull stays disjoint from right card */
+.sfb-label { left: 80px; width: 176px; font-size: 18px; line-height: 1.4; text-align: right; }
+.sfb-bar { left: 276px; height: 36px; border-radius: 10px; }
+.sfb-val { width: 48px; font-size: 22px; }
+.sfb-card { left: 840px; top: 204px; width: 360px; height: 416px; }
+.sfb-ctitle { left: 872px; top: 224px; width: 296px; font-family: var(--font-display); font-size: 16px; line-height: 1; font-weight: 600; letter-spacing: 0.08em; color: var(--accent-ink); }
+.sfb-ids { left: 872px; width: 296px; }
+
+/* ---------- soft/table ---------- */
+.sfd-card { left: 80px; top: 192px; width: 1120px; height: 444px; }
+.sfd-head { left: 96px; top: 208px; width: 1088px; height: 44px; }
+.sfd-hi { left: 96px; top: 382px; width: 1088px; height: 56px; }
+.sfd-th { top: 218px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.sfd-k { left: 120px; width: 180px; font-size: 18px; line-height: 1.4; }
+.sfd-v { left: 320px; width: 560px; font-size: 18px; line-height: 1.4; color: var(--text-1); }
+.sfd-s { left: 904px; width: 260px; }
+.sfd-hair { left: 112px; width: 1056px; }
+
+/* ---------- soft/process ---------- */
+/* connector line + four 40px step dots above four 262x268 rounded cards (card 4 tinted with orange border) */
+.sfp-line { left: 211px; top: 299px; width: 858px; }
+.sfp-dot { top: 280px; width: 40px; height: 40px; }
+.sfp-dn { top: 292px; width: 40px; font-size: 16px; line-height: 16px; text-align: center; }
+.sfp-d1 { left: 191px; }
+.sfp-d2 { left: 477px; }
+.sfp-d3 { left: 763px; }
+.sfp-d4 { left: 1049px; }
+.sfp-card { top: 348px; width: 262px; height: 268px; }
+.sfp-b1 { left: 80px; }
+.sfp-b2 { left: 366px; }
+.sfp-b3 { left: 652px; }
+.sfp-b4 { left: 938px; }
+.sfp-name { top: 382px; width: 214px; font-size: 28px; line-height: 1.3; }
+.sfp-desc { top: 436px; width: 214px; }
+.sfp-c1 { left: 104px; }
+.sfp-c2 { left: 390px; }
+.sfp-c3 { left: 676px; }
+.sfp-c4 { left: 962px; }
+
+/* ---------- soft/timeline ---------- */
+/* five columns 80..1200, width 208, gap 20 */
+.sfl-date { top: 244px; width: 208px; font-size: 40px; letter-spacing: -0.02em; }
+.sfl-line { left: 80px; top: 320px; width: 1120px; }
+.sfl-node { top: 311px; width: 20px; height: 20px; }
+.sfl-card { top: 356px; width: 208px; height: 256px; }
+.sfl-h { top: 384px; width: 176px; font-size: 22px; line-height: 1.35; }
+.sfl-p { top: 428px; width: 176px; }
+.sfl-c1 { left: 80px; }
+.sfl-c2 { left: 308px; }
+.sfl-c3 { left: 536px; }
+.sfl-c4 { left: 764px; }
+.sfl-c5 { left: 992px; }
+.sfl-i1 { left: 98px; }
+.sfl-i2 { left: 326px; }
+.sfl-i3 { left: 554px; }
+.sfl-i4 { left: 782px; }
+.sfl-i5 { left: 1010px; }
+
+/* ---------- soft/cycle ---------- */
+/* dark page; ring centre (284, 408), radius 172; four round step nodes on N / E / S / W */
+.sfy-ring { left: 112px; top: 236px; width: 344px; height: 344px; border: 2px solid var(--hairline); }
+.sfy-node { width: 48px; height: 48px; }
+.sfy-n1 { left: 260px; top: 212px; }
+.sfy-n2 { left: 432px; top: 384px; }
+.sfy-n3 { left: 260px; top: 556px; }
+.sfy-n4 { left: 88px; top: 384px; }
+.sfy-k { width: 48px; font-size: 16px; line-height: 20px; text-align: center; }
+.sfy-core { left: 204px; top: 356px; width: 160px; font-size: 72px; text-align: center; }
+.sfy-core-l { left: 204px; top: 438px; width: 160px; text-align: center; }
+.sfy-card { left: 560px; width: 640px; height: 76px; border-radius: 18px; }
+.sfy-dot { left: 584px; width: 40px; height: 40px; }
+.sfy-dn { left: 584px; width: 40px; font-size: 16px; line-height: 18px; text-align: center; }
+.sfy-h { left: 644px; width: 520px; font-size: 24px; line-height: 1.35; }
+.sfy-back { left: 560px; top: 584px; width: 640px; font-size: 18px; line-height: 1.4; }
+
+/* ---------- soft/system ---------- */
+/* three concentric discs centred (264, 412) + three stacked layer cards on right */
+.sfz-d1 { left: 80px; top: 228px; width: 368px; height: 368px; }
+.sfz-d2 { left: 144px; top: 292px; width: 240px; height: 240px; }
+.sfz-d3 { left: 204px; top: 352px; width: 120px; height: 120px; }
+.sfz-lab { font-size: 16px; line-height: 1.4; text-align: center; }
+.sfz-l1 { left: 164px; top: 252px; width: 200px; }
+.sfz-l2 { left: 164px; top: 314px; width: 200px; }
+.sfz-l3 { left: 204px; top: 400px; width: 120px; }
+.sfz-card { left: 512px; width: 688px; height: 112px; }
+.sfz-pill { left: 544px; width: 80px; height: 32px; border-radius: 999px; }
+.sfz-pt { left: 544px; width: 80px; font-size: 16px; line-height: 16px; text-align: center; }
+.sfz-h { left: 644px; width: 520px; font-size: 24px; line-height: 1.35; }
+.sfz-p { left: 644px; width: 520px; }
+
+/* ---------- soft/closing ---------- */
+.sfe-pill { left: 80px; top: 120px; width: 112px; }
+.sfe-pill-t { left: 80px; top: 130px; width: 112px; }
+.sfe-title { left: 80px; width: 1120px; font-size: 64px; line-height: 1.2; }
+.sfe-t1 { top: 184px; }
+.sfe-t2 { top: 268px; }
+.sfe-card { left: 80px; top: 392px; width: 760px; height: 112px; }
+.sfe-label { left: 112px; top: 414px; width: 600px; font-size: 16px; line-height: 1; letter-spacing: 0.08em; }
+.sfe-cmd { left: 112px; top: 450px; width: 696px; font-family: var(--font-num); font-size: 20px; line-height: 1.4; color: var(--text-1); }
+.sfe-p { left: 80px; top: 536px; width: 760px; font-size: 18px; line-height: 1.5; color: var(--text-2); }
+.sfe-hair { left: 80px; top: 616px; width: 1120px; }
+.sfe-meta { left: 80px; top: 642px; width: 640px; font-size: 16px; line-height: 1.5; color: var(--text-2); }
+.sfe-date { left: 900px; top: 642px; width: 300px; font-size: 16px; line-height: 1.5; text-align: right; color: var(--text-2); }

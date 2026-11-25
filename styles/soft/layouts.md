@@ -1,0 +1,560 @@
+# 柔和 · 产品（soft）版式注册表
+
+> 状态：ready · 17 个版式，覆盖全部 12 个核心角色 + matrix / bars / table / cycle / system。
+
+规则：整块复制骨架，只替换文字与图片路径；不得增删结构、不得改类名。骨架上的 `data-layout / data-role / data-merge / data-anim / data-source / data-value / data-label / data-chart` 是导出与动画的声明，原样保留（说明见 `references/roles.md`）。金样：`styles/soft/golden/`；金样文字来自 `docs/golden-content.md`。
+
+## 版面语法
+
+1. **浅灰画布 + 圆角白卡**：默认画布 `#f3f4f6`，内容装在 `border-radius: 22px`、1px 细描边的白色圆角卡片（`sf-card`）里；版心固定 `80–1200`（宽 1120，栏距 20）。
+2. **暖橙强调分工**：装饰性线条、描边与柱条用 `--accent`（`#ff6b2c`）；浅底橙字与承托白字的实心橙卡/圆点用 `--accent-ink`（`#e8561a`，对比度 ≥3.1:1 满足 R11）；浅橙徽章底用 `--accent-soft`（`#ffe9df`），重点卡片底用 `--accent-tint`（`#fff6f1` + 2px 橙色描边）。
+3. **形状与文字分离（R16）**：胶囊标签（`sf-pill-bg` + `sf-pill-txt`）、指标 chip（`sf-chip-bg` + 文字）、圆点编号均由底层 `[data-shape]` 与顶层文字叠放，绝不在 `<p>`/`<h3>` 上直接写背景、描边、阴影或内边距。
+4. **单层轻投影**：仅用于悬浮数据卡（封面悬浮卡、图注浮卡、`image` 页暗色浮卡），单层 `box-shadow` 映射为 PowerPoint 原生 outer shadow。
+5. **页头与页脚**：内容页左上角橙色短标签（`sf-kicker`，top 52）→ 40px 粗体标题（`sf-title`，top 82）→ 18px 灰字副题（`sf-sub`，top 142）；页脚 668px 左出处（数据页加 `data-source`）、右 Inter 页码。
+6. **深色节奏页**：`slide is-dark` 深灰蓝底（`#111827`）配亮暖橙（`#ff7a45`）用于 statement / image / cycle / closing，打破长段浅色页的平淡。
+7. **字体分工**：中文标题与小标题用思源黑 600（`sf-semi`，Office 映射微软雅黑粗体）；数字与命令用 Inter 600（`sf-num`，Office 映射 Segoe UI 粗体）；正文字号下限 16px。
+
+## soft/cover · cover
+
+封面。左：暖橙浅底胶囊标签 → 两行 72px 粗体标题（每行一个 h1）→ 副题 → 两枚白色圆角指标 chip → 底部元信息；右：536×560 大圆角配图（28px 圆角）+ 压在图片左下角边缘的悬浮白色数据卡（单层投影）。
+
+```html
+<section class="slide" data-layout="soft/cover" data-role="cover">
+  <div class="sf-pill-bg sfc-pill" data-shape="rect"></div>
+  <p class="sf-pill-txt sfc-pill-t">ZIFEIYU PPT SKILL</p>
+  <h1 class="sf-semi sfc-title sfc-t1" data-merge="title" data-anim="rise">一份源文件</h1>
+  <h1 class="sf-semi sfc-title sfc-t2" data-merge="title" data-anim="rise">三种交付</h1>
+  <p class="sfc-sub" data-anim="rise">浏览器里直接演示，再一键导出可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
+  <div class="sf-chip-bg sfc-chip sfc-ch1" data-shape="rect" data-anim="rise"></div>
+  <p class="sf-semi sfc-chtxt sfc-cht1" data-anim="rise"><span class="sf-ac">12</span> 种独立风格</p>
+  <div class="sf-chip-bg sfc-chip sfc-ch2" data-shape="rect" data-anim="rise"></div>
+  <p class="sf-semi sfc-chtxt sfc-cht2" data-anim="rise"><span class="sf-ac">16</span> 条校验规则</p>
+  <p class="sf-note sfc-meta">网页 PPT · 可编辑导出 · 风格 F 柔和 · 产品</p>
+  <img class="sf-photo-r sfc-img" src="assets/img/01-cover.jpg" alt="示意图：暖橙窗光落在灰调建筑墙面与地面">
+  <div class="sf-card-float sfc-float" data-shape="rect" data-anim="rise"></div>
+  <p class="sf-num sfc-fnum" data-anim="count">3<span class="sf-ac"> 种</span></p>
+  <p class="sf-note sfc-fcap">PPTX · PDF · PNG 一键导出</p>
+</section>
+```
+
+## soft/agenda · agenda
+
+目录。4 条圆角白卡横排卡片（行距 108），左圆点编号（首条实心暖橙，其余浅橙底）、条目名、一句说明与右对齐页码。条目 ≤6 字，说明 ≤14 字。
+
+```html
+<section class="slide" data-layout="soft/agenda" data-role="agenda">
+  <p class="sf-kicker">ZIFEIYU PPT SKILL</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">目录</h2>
+  <p class="sf-sub">四个章节，从风格库一路走到交付工作流</p>
+  <div class="sf-card sfa-card" data-shape="rect" style="top: 208px;" data-anim="rise"></div>
+  <div class="sf-dot-solid sfa-dot" data-shape="ellipse" style="top: 230px;" data-anim="pop"></div>
+  <p class="sf-num sf-on sfa-num" style="top: 244px;">01</p>
+  <h3 class="sf-semi sfa-item" style="top: 237px;" data-anim="rise">风格库</h3>
+  <p class="sfa-desc" style="top: 241px;" data-anim="rise">十二种风格，开场先挑一种</p>
+  <p class="sfa-page" style="top: 242px;">第 4 页</p>
+  <div class="sf-card sfa-card" data-shape="rect" style="top: 316px;" data-anim="rise"></div>
+  <div class="sf-dot-soft sfa-dot" data-shape="ellipse" style="top: 338px;" data-anim="pop"></div>
+  <p class="sf-num sf-ac sfa-num" style="top: 352px;">02</p>
+  <h3 class="sf-semi sfa-item" style="top: 345px;" data-anim="rise">测量与导出</h3>
+  <p class="sfa-desc" style="top: 349px;" data-anim="rise">先量后画，文字始终可编辑</p>
+  <p class="sfa-page" style="top: 350px;">第 7 页</p>
+  <div class="sf-card sfa-card" data-shape="rect" style="top: 424px;" data-anim="rise"></div>
+  <div class="sf-dot-soft sfa-dot" data-shape="ellipse" style="top: 446px;" data-anim="pop"></div>
+  <p class="sf-num sf-ac sfa-num" style="top: 460px;">03</p>
+  <h3 class="sf-semi sfa-item" style="top: 453px;" data-anim="rise">质量门</h3>
+  <p class="sfa-desc" style="top: 457px;" data-anim="rise">十六条规则，错误清零才交付</p>
+  <p class="sfa-page" style="top: 458px;">第 10 页</p>
+  <div class="sf-card sfa-card" data-shape="rect" style="top: 532px;" data-anim="rise"></div>
+  <div class="sf-dot-soft sfa-dot" data-shape="ellipse" style="top: 554px;" data-anim="pop"></div>
+  <p class="sf-num sf-ac sfa-num" style="top: 568px;">04</p>
+  <h3 class="sf-semi sfa-item" style="top: 561px;" data-anim="rise">工作流</h3>
+  <p class="sfa-desc" style="top: 565px;" data-anim="rise">从大纲到成稿的四步</p>
+  <p class="sfa-page" style="top: 566px;">第 13 页</p>
+  <p class="sf-pageno">2</p>
+</section>
+```
+
+## soft/statement · statement
+
+金句深灰蓝页（`is-dark`）。暖橙胶囊标签 → 短横条 → 两行 64px 粗体引文（每行一个 h2，每行 ≤12 字）→ 出处。
+
+```html
+<section class="slide is-dark" data-layout="soft/statement" data-role="statement">
+  <div class="sf-pill-bg sfq-pill" data-shape="rect"></div>
+  <p class="sf-pill-txt sfq-pill-t">设计原则</p>
+  <div class="sf-bar-ac sfq-bar" data-shape="rect" data-anim="draw"></div>
+  <h2 class="sf-semi sfq-line sfq-l1" data-merge="quote" data-anim="rise">HTML 是唯一的源，</h2>
+  <h2 class="sf-semi sfq-line sfq-l2" data-merge="quote" data-anim="rise">其余都是衍生物。</h2>
+  <p class="sfq-by">— SKILL.md · 设计原则</p>
+  <p class="sf-pageno">3</p>
+</section>
+```
+
+## soft/section · section
+
+章节页。左：实心暖橙圆角大卡（白底胶囊「第 N 部分」、168px 白色大编号、章节名与一句说明）；右：白色圆角大卡，列出全套目录四行，本章以浅橙描边高亮卡标出。
+
+```html
+<section class="slide" data-layout="soft/section" data-role="section">
+  <div class="sf-card-accent sfx-left" data-shape="rect"></div>
+  <div class="sf-pill-white sfx-pill" data-shape="rect"></div>
+  <p class="sf-pill-txt sfx-pill-t">第 1 部分</p>
+  <p class="sf-num sf-on sfx-num" data-anim="rise">01</p>
+  <h2 class="sf-semi sf-on sfx-title" data-anim="rise">风格库</h2>
+  <p class="sf-on2 sfx-sub">十二种风格，开场先挑一种</p>
+  <div class="sf-card sfx-right" data-shape="rect"></div>
+  <p class="sfx-kicker">本章位置</p>
+  <div class="sf-card-tint sfx-hi" data-shape="rect" data-anim="fade"></div>
+  <div class="sf-dot-solid sfx-dot" data-shape="ellipse" style="top: 198px;"></div>
+  <p class="sf-num sf-on sfx-dn" style="top: 207px;">01</p>
+  <p class="sf-semi sf-ac sfx-ri" style="top: 201px;">风格库</p>
+  <div class="sf-dot-soft sfx-dot" data-shape="ellipse" style="top: 300px;"></div>
+  <p class="sf-num sf-ac sfx-dn" style="top: 309px;">02</p>
+  <p class="sf-body sfx-ri" style="top: 303px;">测量与导出</p>
+  <div class="sf-hair sfx-hair" data-shape="rect" style="top: 368px;"></div>
+  <div class="sf-dot-soft sfx-dot" data-shape="ellipse" style="top: 400px;"></div>
+  <p class="sf-num sf-ac sfx-dn" style="top: 409px;">03</p>
+  <p class="sf-body sfx-ri" style="top: 403px;">质量门</p>
+  <div class="sf-hair sfx-hair" data-shape="rect" style="top: 468px;"></div>
+  <div class="sf-dot-soft sfx-dot" data-shape="ellipse" style="top: 500px;"></div>
+  <p class="sf-num sf-ac sfx-dn" style="top: 509px;">04</p>
+  <p class="sf-body sfx-ri" style="top: 503px;">工作流</p>
+  <p class="sf-pageno">4</p>
+</section>
+```
+
+## soft/matrix · matrix
+
+分组盘点 + 总数。左：白色圆角总览卡（浅橙圆点 + 132px 暖橙总数 + 说明）；右：五组分组行（行距 94），每组 2–4 个圆角白卡标签，当前风格用实心暖橙高亮。8–12 项，名称 ≤8 字。
+
+```html
+<section class="slide" data-layout="soft/matrix" data-role="matrix">
+  <p class="sf-kicker">风格库</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">十二种风格，按场合挑一种。</h2>
+  <p class="sf-sub">五组十二种独立版式体系，开场先定视觉语言</p>
+  <div class="sf-card sfm-card" data-shape="rect"></div>
+  <div class="sf-dot-soft sfm-dot" data-shape="ellipse"></div>
+  <p class="sf-num sf-ac sfm-hero" data-anim="count">12</p>
+  <h3 class="sf-semi sfm-label" data-merge="hero" data-anim="rise">种风格</h3>
+  <p class="sf-note sfm-sub" data-merge="hero" data-anim="rise">分五组：编辑排印、商务理性、舞台冲击、影像叙事、东方人文</p>
+  <h3 class="sf-semi sfm-group" style="top: 204px;">编辑排印</h3>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 556px; top: 188px;"></div>
+  <p class="sf-semi sfm-name" style="left: 564px; top: 205px;">A 杂志 · 暖纸</p>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 720px; top: 188px;"></div>
+  <p class="sf-semi sfm-name" style="left: 728px; top: 205px;">D 报刊 · 版面</p>
+  <div class="sf-hair sfm-hair" data-shape="rect" style="top: 263px;"></div>
+  <h3 class="sf-semi sfm-group" style="top: 298px;">商务理性</h3>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 556px; top: 282px;"></div>
+  <p class="sf-semi sfm-name" style="left: 564px; top: 299px;">B 瑞士 · 网格</p>
+  <div class="sf-chip-accent sfm-chip" data-shape="rect" style="left: 720px; top: 282px;"></div>
+  <p class="sf-semi sf-on sfm-name" style="left: 728px; top: 299px;">F 柔和 · 产品</p>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 884px; top: 282px;"></div>
+  <p class="sf-semi sfm-name" style="left: 892px; top: 299px;">H 咨询 · 白皮书</p>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 1048px; top: 282px;"></div>
+  <p class="sf-semi sfm-name" style="left: 1056px; top: 299px;">L 工程制图</p>
+  <div class="sf-hair sfm-hair" data-shape="rect" style="top: 357px;"></div>
+  <h3 class="sf-semi sfm-group" style="top: 392px;">舞台冲击</h3>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 556px; top: 376px;"></div>
+  <p class="sf-semi sfm-name" style="left: 564px; top: 393px;">C 发布会 · 暗场</p>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 720px; top: 376px;"></div>
+  <p class="sf-semi sfm-name" style="left: 728px; top: 393px;">E 大字报 · 粗野</p>
+  <div class="sf-hair sfm-hair" data-shape="rect" style="top: 451px;"></div>
+  <h3 class="sf-semi sfm-group" style="top: 486px;">影像叙事</h3>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 556px; top: 470px;"></div>
+  <p class="sf-semi sfm-name" style="left: 564px; top: 487px;">G 摄影集 · 画册</p>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 720px; top: 470px;"></div>
+  <p class="sf-semi sfm-name" style="left: 728px; top: 487px;">J 拼贴 · 手账</p>
+  <div class="sf-hair sfm-hair" data-shape="rect" style="top: 545px;"></div>
+  <h3 class="sf-semi sfm-group" style="top: 580px;">东方人文</h3>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 556px; top: 564px;"></div>
+  <p class="sf-semi sfm-name" style="left: 564px; top: 581px;">I 日式 · 极简</p>
+  <div class="sf-chip-bg sfm-chip" data-shape="rect" style="left: 720px; top: 564px;"></div>
+  <p class="sf-semi sfm-name" style="left: 728px; top: 581px;">K 新中式 · 东方</p>
+  <p class="sf-source">来源：docs/superpowers/specs/2026-10-08-style-library-design.md §2</p>
+  <p class="sf-pageno">5</p>
+</section>
+```
+
+## soft/compare · compare
+
+二元对比。两张并排 550×448 圆角大卡：左卡白底灰胶囊标「之前」，右卡浅橙底 + 2px 橙色描边 + 实心橙胶囊标「现在」；每卡包含小标题、两行说明、细线与底部 Inter 关键数字。
+
+```html
+<section class="slide" data-layout="soft/compare" data-role="compare">
+  <p class="sf-kicker">风格库</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">换皮，不如换版面。</h2>
+  <p class="sf-sub">从共用一套版式，升级为按风格独立的版式体系</p>
+  <div class="sf-card sfv-card sfv-l" data-shape="rect"></div>
+  <div class="sf-pill-muted sfv-pill sfv-pl" data-shape="rect"></div>
+  <p class="sf-pill-txt sf-ink sfv-pt sfv-pl">之前</p>
+  <h3 class="sf-semi sfv-h sfv-tl" data-merge="l" data-anim="rise">通用版式，换主题即换色</h3>
+  <p class="sf-body sfv-p sfv-tl" data-merge="l" data-anim="rise">三套设计系统共用 L01–L24，换一个主题文件整套换色，版面结构始终一样。</p>
+  <div class="sf-hair sfv-hair sfv-tl" data-shape="rect"></div>
+  <p class="sf-num sfv-num sfv-tl" data-anim="count">24</p>
+  <p class="sf-semi sfv-unit sfv-ul" data-anim="rise">个版式，三套系统共用</p>
+  <div class="sf-card-tint sfv-card sfv-r" data-shape="rect"></div>
+  <div class="sf-pill-solid sfv-pill sfv-pr" data-shape="rect"></div>
+  <p class="sf-pill-txt sf-on sfv-pt sfv-pr">现在</p>
+  <h3 class="sf-semi sfv-h sfv-tr" data-merge="r" data-anim="rise">独立版式，选风格即选版面</h3>
+  <p class="sf-body-ink sfv-p sfv-tr" data-merge="r" data-anim="rise">十二种风格各有一套版式，按角色登记；校验与导出只认角色，不认风格。</p>
+  <div class="sf-hair sfv-hair sfv-tr" data-shape="rect"></div>
+  <p class="sf-num sf-ac sfv-num sfv-tr" data-anim="count">12</p>
+  <p class="sf-semi sfv-unit sfv-ur" data-anim="rise">种风格，各有一套版式</p>
+  <p class="sf-source">来源：references/layouts.md（L01–L24）· 风格库 spec §1、§3.2</p>
+  <p class="sf-pageno">6</p>
+</section>
+```
+
+## soft/image-text · image-text
+
+图文。左：544×448 圆角配图 + 左下角悬浮白色图注浮卡；右：556×448 圆角白卡，内含两条带浅橙圆点编号的正文（每段 ≤50 字）、细线与底部导出原语注脚。
+
+```html
+<section class="slide" data-layout="soft/image-text" data-role="image-text">
+  <p class="sf-kicker">测量与导出</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">所见即所得，靠的是测量。</h2>
+  <p class="sf-sub">先由浏览器排布再逐项测量，让 HTML 与 PPTX 保持一致</p>
+  <img class="sf-photo-card sfi-img" src="assets/img/07-feature.jpg" alt="示意图：浅灰与暖橙平面构成的测量示意">
+  <div class="sf-card-float sfi-cap-bg" data-shape="rect"></div>
+  <p class="sf-semi sf-note-ink sfi-cap">图表 2 · 示意图</p>
+  <div class="sf-card sfi-card" data-shape="rect"></div>
+  <div class="sf-dot-soft sfi-dot" data-shape="ellipse" style="top: 232px;"></div>
+  <p class="sf-num sf-ac sfi-dn" style="top: 241px;">01</p>
+  <p class="sf-body-ink sfi-p" style="top: 228px;" data-merge="body" data-anim="rise">导出器先让浏览器把每一页排好，再逐个量出元素的位置、尺寸、字号与颜色，按同样的坐标写进 PPTX。</p>
+  <div class="sf-dot-soft sfi-dot" data-shape="ellipse" style="top: 368px;"></div>
+  <p class="sf-num sf-ac sfi-dn" style="top: 377px;">02</p>
+  <p class="sf-body-ink sfi-p" style="top: 364px;" data-merge="body" data-anim="rise">圆角、描边、阴影、旋转与竖排换成 PowerPoint 原生形状；画不出的装饰单独截图，文字始终可编辑。</p>
+  <div class="sf-hair sfi-hair" data-shape="rect"></div>
+  <p class="sf-note sfi-note">导出原语：圆角矩形 · 直线 · 燕尾 · 旋转 · 阴影 · 竖排</p>
+  <p class="sf-source">来源：scripts/export-pptx.mjs、scripts/lib/snapshot.mjs</p>
+  <p class="sf-pageno">7</p>
+</section>
+```
+
+## soft/image · image
+
+满版图深色浮卡页（`is-dark`）。全幅 1280×720 画面，左下角悬浮一张深灰蓝圆角卡片承载暖橙胶囊、标题与一句说明，右下角深色圆角胶囊承托页码。
+
+```html
+<section class="slide is-dark" data-layout="soft/image" data-role="image">
+  <img class="sf-photo sff-img" src="assets/img/08-image.jpg" alt="示意图：光影与柔和色彩构成的空间画面">
+  <div class="sff-card" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-pill-bg sff-pill" data-shape="rect"></div>
+  <p class="sf-pill-txt sff-pill-t">示意图</p>
+  <h2 class="sf-semi sff-title" data-anim="rise">先选风格，再写内容</h2>
+  <p class="sff-p" data-anim="rise">风格决定版面，版面决定一页能放多少字。</p>
+  <div class="sff-pbox" data-shape="rect"></div>
+  <p class="sff-pageno">8</p>
+</section>
+```
+
+## soft/points · points
+
+三个并列要点（80 / 460 / 840 三列 360×412 圆角卡片）：前两张白卡配浅橙圆点，第三张浅橙描边卡配实心暖橙圆点；每卡包含编号、小标题（≤7 字）与说明（≤30 字）。
+
+```html
+<section class="slide" data-layout="soft/points" data-role="points">
+  <p class="sf-kicker">测量与导出</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">三件事，件件可验证。</h2>
+  <p class="sf-sub">从演示体验到二次编辑与质量门，每项能力都可直接核验</p>
+  <div class="sf-card sft-card sft-c1" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-dot-soft sft-dot sft-i1" data-shape="ellipse" data-anim="pop"></div>
+  <p class="sf-num sf-ac sft-num sft-i1">01</p>
+  <h3 class="sf-semi sft-h sft-i1" data-merge="p1" data-anim="rise">浏览器里演示</h3>
+  <p class="sf-body sft-p sft-i1" data-merge="p1" data-anim="rise">方向键翻页，F 全屏，S 打开演讲者控制台，讲稿只给自己看。</p>
+  <div class="sf-card sft-card sft-c2" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-dot-soft sft-dot sft-i2" data-shape="ellipse" data-anim="pop"></div>
+  <p class="sf-num sf-ac sft-num sft-i2">02</p>
+  <h3 class="sf-semi sft-h sft-i2" data-merge="p2" data-anim="rise">可编辑的 PPTX</h3>
+  <p class="sf-body sft-p sft-i2" data-merge="p2" data-anim="rise">文字是原生文本框，形状是原生形状，交给同事也能接着改。</p>
+  <div class="sf-card-tint sft-card sft-c3" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-dot-solid sft-dot sft-i3" data-shape="ellipse" data-anim="pop"></div>
+  <p class="sf-num sf-on sft-num sft-i3">03</p>
+  <h3 class="sf-semi sft-h sft-i3" data-merge="p3" data-anim="rise">机器先把关</h3>
+  <p class="sf-body-ink sft-p sft-i3" data-merge="p3" data-anim="rise">十六条规则查版式、字号、出处与导出一致性，错误清零才交付。</p>
+  <p class="sf-source">来源：SKILL.md 第 6、8 步</p>
+  <p class="sf-pageno">9</p>
+</section>
+```
+
+## soft/kpi · kpi
+
+数据大字页。三张 360×376 圆角卡：首张实心暖橙配白色文字与半透明装饰圆徽，后两张白色卡片配浅橙装饰圆徽与 88px Inter 粗体数字。三个数必须真实，页脚 `data-source` 必填。
+
+```html
+<section class="slide" data-layout="soft/kpi" data-role="kpi">
+  <p class="sf-kicker">质量门</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">导出之前，先过十六道检查。</h2>
+  <p class="sf-sub">十六条规则，错误清零才交付</p>
+  <div class="sf-card-accent sfk-card sfk-c1" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-dot-glass sfk-dot sfk-i1" data-shape="ellipse"></div>
+  <p class="sf-num sf-on sfk-num sfk-n1" data-anim="count">16</p>
+  <h3 class="sf-semi sf-on sfk-label sfk-i1" data-merge="c1" data-anim="rise">条校验规则</h3>
+  <p class="sf-note sf-on2 sfk-desc sfk-i1" data-merge="c1" data-anim="rise">R1–R16，从版式注册一路查到 PPTX 导出一致性</p>
+  <div class="sf-card sfk-card sfk-c2" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-dot-soft sfk-dot sfk-i2" data-shape="ellipse"></div>
+  <p class="sf-num sfk-num sfk-n2" data-anim="count">20</p>
+  <h3 class="sf-semi sfk-label sfk-i2" data-merge="c2" data-anim="rise">页面角色</h3>
+  <p class="sf-note sfk-desc sfk-i2" data-merge="c2" data-anim="rise">其中 12 个是每种风格必须覆盖的核心角色</p>
+  <div class="sf-card sfk-card sfk-c3" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-dot-soft sfk-dot sfk-i3" data-shape="ellipse"></div>
+  <p class="sf-num sfk-num sfk-n3" data-anim="count">3</p>
+  <h3 class="sf-semi sfk-label sfk-i3" data-merge="c3" data-anim="rise">导出格式</h3>
+  <p class="sf-note sfk-desc sfk-i3" data-merge="c3" data-anim="rise">PPTX · PDF · PNG，HTML 是唯一的源</p>
+  <p class="sf-source" data-source>来源：scripts/validate.mjs · scripts/lib/roles.mjs</p>
+  <p class="sf-pageno">10</p>
+</section>
+```
+
+## soft/bars · bars
+
+条形对比（3–6 行，行距 60）。左侧为直接落于浅灰画布的圆角水平条（条宽 = 数值 × 112px，最大值 4 时满长 448px；不铺底卡，确保 `--native-charts` 替换成原生图表时无遮挡），仅焦点条用暖橙；右侧独立白卡放规则编号注释。页脚 `data-source` 必填。
+
+```html
+<section class="slide" data-layout="soft/bars" data-role="bars">
+  <p class="sf-kicker">质量门</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">十六条规则，各管一摊。</h2>
+  <p class="sf-sub">各类规则的条数（条），按守护对象分组</p>
+  <div class="sf-card sfb-card" data-shape="rect"></div>
+  <p class="sfb-ctitle">对应规则编号</p>
+  <h3 class="sf-semi sfb-label" style="top: 264px;" data-chart>排版与几何</h3>
+  <div class="sf-bar-slate sfb-bar" data-shape="rect" data-value="4" data-label="排版与几何" data-anim="grow-x" style="top: 258px; width: 448px;"></div>
+  <p class="sf-num sfb-val" style="top: 265px; left: 740px;" data-chart>4</p>
+  <p class="sf-note sfb-ids" style="top: 264px;">R3 · R4 · R7 · R9</p>
+  <h3 class="sf-semi sfb-label" style="top: 324px;" data-chart>版式与样式</h3>
+  <div class="sf-bar-slate sfb-bar" data-shape="rect" data-value="4" data-label="版式与样式" data-anim="grow-x" style="top: 318px; width: 448px;"></div>
+  <p class="sf-num sfb-val" style="top: 325px; left: 740px;" data-chart>4</p>
+  <p class="sf-note sfb-ids" style="top: 324px;">R1 · R2 · R6 · R12</p>
+  <h3 class="sf-semi sfb-label" style="top: 384px;" data-chart>内容与数据</h3>
+  <div class="sf-bar-slate sfb-bar" data-shape="rect" data-value="3" data-label="内容与数据" data-anim="grow-x" style="top: 378px; width: 336px;"></div>
+  <p class="sf-num sfb-val" style="top: 385px; left: 628px;" data-chart>3</p>
+  <p class="sf-note sfb-ids" style="top: 384px;">R5 · R8 · R14</p>
+  <h3 class="sf-semi sfb-label" style="top: 444px;" data-chart>可访问与媒体</h3>
+  <div class="sf-bar-slate sfb-bar" data-shape="rect" data-value="3" data-label="可访问与媒体" data-anim="grow-x" style="top: 438px; width: 336px;"></div>
+  <p class="sf-num sfb-val" style="top: 445px; left: 628px;" data-chart>3</p>
+  <p class="sf-note sfb-ids" style="top: 444px;">R10 · R11 · R13</p>
+  <h3 class="sf-semi sfb-label" style="top: 504px;" data-chart>节奏</h3>
+  <div class="sf-bar-slate sfb-bar" data-shape="rect" data-value="1" data-label="节奏" data-anim="grow-x" style="top: 498px; width: 112px;"></div>
+  <p class="sf-num sfb-val" style="top: 505px; left: 404px;" data-chart>1</p>
+  <p class="sf-note sfb-ids" style="top: 504px;">R15</p>
+  <h3 class="sf-semi sfb-label" style="top: 564px;" data-chart>导出一致</h3>
+  <div class="sf-bar-ac sfb-bar" data-shape="rect" data-value="1" data-label="导出一致" data-anim="grow-x" style="top: 558px; width: 112px;"></div>
+  <p class="sf-num sf-ac sfb-val" style="top: 565px; left: 404px;" data-chart>1</p>
+  <p class="sf-semi sf-ac sf-note sfb-ids" style="top: 564px;">R16</p>
+  <p class="sf-source" data-source>来源：scripts/validate.mjs 规则注释（R1–R16），按守护对象分组</p>
+  <p class="sf-pageno">11</p>
+</section>
+```
+
+## soft/table · table
+
+规格表（4–6 行，行高 60）。整张 1120×444 圆角白卡容器，顶部浅灰表头条，重点行铺浅橙色带并加一处暖橙强调。规格 ≤30 字，页脚 `data-source` 必填。
+
+```html
+<section class="slide" data-layout="soft/table" data-role="table">
+  <p class="sf-kicker">质量门</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">一页纸，看懂规格。</h2>
+  <p class="sf-sub">画布、字体、校验与导出格式的核心约束一览</p>
+  <div class="sf-card sfd-card" data-shape="rect"></div>
+  <div class="sf-muted-strip sfd-head" data-shape="rect"></div>
+  <p class="sf-semi sfd-k sfd-th">项目</p>
+  <p class="sf-semi sfd-v sfd-th">规格</p>
+  <p class="sf-semi sfd-s sfd-th">出处</p>
+  <h3 class="sf-semi sfd-k" style="top: 278px;">画布</h3>
+  <p class="sfd-v" style="top: 278px;">1280 × 720 px，导出时 px × 0.75 换算为 pt</p>
+  <p class="sf-note sfd-s" style="top: 278px;">assets/base.css</p>
+  <div class="sf-hair sfd-hair" data-shape="rect" style="top: 320px;"></div>
+  <h3 class="sf-semi sfd-k" style="top: 338px;">字号下限</h3>
+  <p class="sfd-v" style="top: 338px;">16 px，溢出先删字、再换版式</p>
+  <p class="sf-note sfd-s" style="top: 338px;">validate.mjs · R4</p>
+  <div class="sf-tint-strip sfd-hi" data-shape="rect"></div>
+  <h3 class="sf-semi sf-ac sfd-k" style="top: 398px;">校验规则</h3>
+  <p class="sfd-v" style="top: 398px;">R1–R16，<strong class="sf-ac">错误清零</strong>才能交付</p>
+  <p class="sf-note sfd-s" style="top: 398px;">validate.mjs</p>
+  <h3 class="sf-semi sfd-k" style="top: 458px;">导出格式</h3>
+  <p class="sfd-v" style="top: 458px;">PPTX · PDF · PNG，HTML 是唯一的源</p>
+  <p class="sf-note sfd-s" style="top: 458px;">SKILL.md</p>
+  <div class="sf-hair sfd-hair" data-shape="rect" style="top: 500px;"></div>
+  <h3 class="sf-semi sfd-k" style="top: 518px;">页面角色</h3>
+  <p class="sfd-v" style="top: 518px;">20 个，其中 12 个核心角色</p>
+  <p class="sf-note sfd-s" style="top: 518px;">lib/roles.mjs</p>
+  <div class="sf-hair sfd-hair" data-shape="rect" style="top: 560px;"></div>
+  <h3 class="sf-semi sfd-k" style="top: 578px;">字体</h3>
+  <p class="sfd-v" style="top: 578px;">SIL OFL 开源字体，按 deck 用字子集化</p>
+  <p class="sf-note sfd-s" style="top: 578px;">fetch-fonts.mjs</p>
+  <p class="sf-source" data-source>来源：表内「出处」列（本仓库文件）</p>
+  <p class="sf-pageno">12</p>
+</section>
+```
+
+## soft/process · process
+
+流程步骤。水平灰线串联 4 个 40px 圆点（1–3 步白底 2px 橙边，第 4 步实心暖橙配白字），下方 4 张 262×268 圆角卡片（第 4 张浅橙底 + 2px 橙边）。步骤名 ≤4 字，说明 ≤28 字。
+
+```html
+<section class="slide" data-layout="soft/process" data-role="process">
+  <p class="sf-kicker">工作流</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">从大纲到成稿，四步</h2>
+  <p class="sf-sub">先选风格，再写内容：风格决定版面，版面决定一页能放多少字</p>
+  <div class="sf-line sfp-line" data-shape="rect" data-anim="draw"></div>
+  <div class="sf-dot-ring sfp-dot sfp-d1" data-shape="ellipse" data-anim="pop"></div>
+  <div class="sf-dot-ring sfp-dot sfp-d2" data-shape="ellipse" data-anim="pop"></div>
+  <div class="sf-dot-ring sfp-dot sfp-d3" data-shape="ellipse" data-anim="pop"></div>
+  <div class="sf-dot-solid sfp-dot sfp-d4" data-shape="ellipse" data-anim="pop"></div>
+  <p class="sf-num sf-ac sfp-dn sfp-d1">1</p>
+  <p class="sf-num sf-ac sfp-dn sfp-d2">2</p>
+  <p class="sf-num sf-ac sfp-dn sfp-d3">3</p>
+  <p class="sf-num sf-on sfp-dn sfp-d4">4</p>
+  <div class="sf-card sfp-card sfp-b1" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-card sfp-card sfp-b2" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-card sfp-card sfp-b3" data-shape="rect" data-anim="rise"></div>
+  <div class="sf-card-tint sfp-card sfp-b4" data-shape="rect" data-anim="rise"></div>
+  <h3 class="sf-semi sfp-name sfp-c1" data-merge="s1" data-anim="rise">选风格</h3>
+  <p class="sf-note sfp-desc sfp-c1" data-merge="s1" data-anim="rise">看风格画廊，按场合挑一种，整份 deck 只用这一种。</p>
+  <h3 class="sf-semi sfp-name sfp-c2" data-merge="s2" data-anim="rise">填版式</h3>
+  <p class="sf-note sfp-desc sfp-c2" data-merge="s2" data-anim="rise">按内容形状找角色，复制版式骨架，只换文字和图片。</p>
+  <h3 class="sf-semi sfp-name sfp-c3" data-merge="s3" data-anim="rise">过校验</h3>
+  <p class="sf-note sfp-desc sfp-c3" data-merge="s3" data-anim="rise">查类名、字号、出处与导出一致性，错误必须清零。</p>
+  <h3 class="sf-semi sfp-name sfp-c4" data-merge="s4" data-anim="rise">导出</h3>
+  <p class="sf-note-ink sfp-desc sfp-c4" data-merge="s4" data-anim="rise">一键得到可编辑 PPTX、矢量 PDF 与逐页 PNG。</p>
+  <p class="sf-source">来源：SKILL.md 工作流</p>
+  <p class="sf-pageno">13</p>
+</section>
+```
+
+## soft/timeline · timeline
+
+时间线（5 个等宽节点列，每列宽 208、栏距 20）。上方 Inter 日期，中线串 5 枚圆点（最新里程碑实心暖橙），下方 5 张圆角卡片（最新一张浅橙描边）。说明 ≤18 字。
+
+```html
+<section class="slide" data-layout="soft/timeline" data-role="timeline">
+  <p class="sf-kicker">工作流</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">从一套版式，到一座风格库。</h2>
+  <p class="sf-sub">版本里程碑（2026 年）</p>
+  <div class="sf-line sfl-line" data-shape="rect" data-anim="draw"></div>
+  <p class="sf-num sfl-date sfl-c1" data-anim="rise">07.16</p>
+  <div class="sf-dot-ring sfl-node sfl-c1" data-shape="ellipse" data-anim="pop"></div>
+  <div class="sf-card sfl-card sfl-c1" data-shape="rect" data-anim="rise"></div>
+  <h3 class="sf-semi sfl-h sfl-i1" data-merge="c1" data-anim="rise">首版发布</h3>
+  <p class="sf-note sfl-p sfl-i1" data-merge="c1" data-anim="rise">锁定设计系统的网页 PPT，确定性导出。</p>
+  <p class="sf-num sfl-date sfl-c2" data-anim="rise">07.18</p>
+  <div class="sf-dot-ring sfl-node sfl-c2" data-shape="ellipse" data-anim="pop"></div>
+  <div class="sf-card sfl-card sfl-c2" data-shape="rect" data-anim="rise"></div>
+  <h3 class="sf-semi sfl-h sfl-i2" data-merge="c2" data-anim="rise">墨韵衬线</h3>
+  <p class="sf-note sfl-p sfl-i2" data-merge="c2" data-anim="rise">第二套设计系统：思源宋、暖纸、朱砂。</p>
+  <p class="sf-num sfl-date sfl-c3" data-anim="rise">08.17</p>
+  <div class="sf-dot-ring sfl-node sfl-c3" data-shape="ellipse" data-anim="pop"></div>
+  <div class="sf-card sfl-card sfl-c3" data-shape="rect" data-anim="rise"></div>
+  <h3 class="sf-semi sfl-h sfl-i3" data-merge="c3" data-anim="rise">校验全覆盖</h3>
+  <p class="sf-note sfl-p sfl-i3" data-merge="c3" data-anim="rise">规则覆盖全部元素，文字分段原生导出。</p>
+  <p class="sf-num sfl-date sfl-c4" data-anim="rise">08.18</p>
+  <div class="sf-dot-ring sfl-node sfl-c4" data-shape="ellipse" data-anim="pop"></div>
+  <div class="sf-card sfl-card sfl-c4" data-shape="rect" data-anim="rise"></div>
+  <h3 class="sf-semi sfl-h sfl-i4" data-merge="c4" data-anim="rise">瑞士国际</h3>
+  <p class="sf-note sfl-p sfl-i4" data-merge="c4" data-anim="rise">第三套设计系统，加入数据叙事版式。</p>
+  <p class="sf-num sf-ac sfl-date sfl-c5" data-anim="rise">10.08</p>
+  <div class="sf-dot-solid sfl-node sfl-c5" data-shape="ellipse" data-anim="pop"></div>
+  <div class="sf-card-tint sfl-card sfl-c5" data-shape="rect" data-anim="rise"></div>
+  <h3 class="sf-semi sfl-h sfl-i5" data-merge="c5" data-anim="rise">风格库</h3>
+  <p class="sf-note-ink sfl-p sfl-i5" data-merge="c5" data-anim="rise">十二种风格，版式独立。</p>
+  <p class="sf-source">来源：git log（2026-07-16 → 2026-10-08）</p>
+  <p class="sf-pageno">14</p>
+</section>
+```
+
+## soft/cycle · cycle
+
+闭环深灰蓝页（`is-dark`，有回路才用）。左：圆环轨道 + N/E/S/W 四枚圆形步骤点（起点亮暖橙）、环心总步数；右：四张圆角步骤条卡 + 回到起点提示。步骤名 ≤5 字。
+
+```html
+<section class="slide is-dark" data-layout="soft/cycle" data-role="cycle">
+  <p class="sf-kicker">工作流</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">每次改动，都绕这一圈</h2>
+  <p class="sf-sub">每次迭代先过风格自检与规则校验，再做渲染比对与基线记录</p>
+  <div class="sfy-ring" data-shape="ellipse" data-anim="fade"></div>
+  <div class="sf-dot-solid sfy-node sfy-n1" data-shape="ellipse" data-anim="ring"></div>
+  <div class="sf-dot-surf sfy-node sfy-n2" data-shape="ellipse" data-anim="ring"></div>
+  <div class="sf-dot-surf sfy-node sfy-n3" data-shape="ellipse" data-anim="ring"></div>
+  <div class="sf-dot-surf sfy-node sfy-n4" data-shape="ellipse" data-anim="ring"></div>
+  <p class="sf-num sf-on sfy-k" style="left: 260px; top: 226px;">01</p>
+  <p class="sf-num sfy-k" style="left: 432px; top: 398px;">02</p>
+  <p class="sf-num sfy-k" style="left: 260px; top: 570px;">03</p>
+  <p class="sf-num sfy-k" style="left: 88px; top: 398px;">04</p>
+  <p class="sf-num sfy-core" data-anim="count">4</p>
+  <p class="sf-note sfy-core-l">个步骤，一圈</p>
+  <div class="sf-card-tint sfy-card" data-shape="rect" style="top: 224px;" data-anim="rise"></div>
+  <div class="sf-dot-solid sfy-dot" data-shape="ellipse" style="top: 242px;"></div>
+  <p class="sf-num sf-on sfy-dn" style="top: 253px;">01</p>
+  <h3 class="sf-semi sfy-h" style="top: 246px;" data-anim="rise">改版式</h3>
+  <div class="sf-card sfy-card" data-shape="rect" style="top: 312px;" data-anim="rise"></div>
+  <div class="sf-dot-soft sfy-dot" data-shape="ellipse" style="top: 330px;"></div>
+  <p class="sf-num sf-ac sfy-dn" style="top: 341px;">02</p>
+  <h3 class="sf-semi sfy-h" style="top: 334px;" data-anim="rise">过校验</h3>
+  <div class="sf-card sfy-card" data-shape="rect" style="top: 400px;" data-anim="rise"></div>
+  <div class="sf-dot-soft sfy-dot" data-shape="ellipse" style="top: 418px;"></div>
+  <p class="sf-num sf-ac sfy-dn" style="top: 429px;">03</p>
+  <h3 class="sf-semi sfy-h" style="top: 422px;" data-anim="rise">渲染比对</h3>
+  <div class="sf-card sfy-card" data-shape="rect" style="top: 488px;" data-anim="rise"></div>
+  <div class="sf-dot-soft sfy-dot" data-shape="ellipse" style="top: 506px;"></div>
+  <p class="sf-num sf-ac sfy-dn" style="top: 517px;">04</p>
+  <h3 class="sf-semi sfy-h" style="top: 510px;" data-anim="rise">记基线</h3>
+  <p class="sf-semi sf-ac sfy-back">→ 回到改版式</p>
+  <p class="sf-source">来源：scripts/baseline.mjs（基线前先过 check-style 与 validate）</p>
+  <p class="sf-pageno">15</p>
+</section>
+```
+
+## soft/system · system
+
+层级嵌套。左：三层同心圆（外白卡描边圆、中浅橙圆、内实心暖橙圆），圆内标层名；右：三张堆叠圆角卡片，逐层展示层级胶囊、文件名与职责说明。
+
+```html
+<section class="slide" data-layout="soft/system" data-role="system">
+  <p class="sf-kicker">工作流</p>
+  <h2 class="sf-semi sf-title" data-anim="rise">三层样式，各管一层</h2>
+  <p class="sf-sub">底座、风格包与品牌色分层解耦，独立维护不相互覆盖</p>
+  <div class="sf-card sfz-d1" data-shape="ellipse" data-anim="scale"></div>
+  <div class="sf-dot-soft sfz-d2" data-shape="ellipse" data-anim="scale"></div>
+  <div class="sf-dot-solid sfz-d3" data-shape="ellipse" data-anim="scale"></div>
+  <p class="sf-semi sfz-lab sfz-l1">base.css</p>
+  <p class="sf-semi sf-ac sfz-lab sfz-l2">style.css</p>
+  <p class="sf-semi sf-on sfz-lab sfz-l3">brand.css</p>
+  <div class="sf-card sfz-card" data-shape="rect" style="top: 228px;" data-anim="rise"></div>
+  <div class="sf-pill-muted sfz-pill" data-shape="rect" style="top: 268px;"></div>
+  <p class="sf-semi sfz-pt" style="top: 276px;">外层</p>
+  <h3 class="sf-semi sfz-h" style="top: 252px;" data-merge="o" data-anim="rise">base.css</h3>
+  <p class="sf-note sfz-p" style="top: 292px;" data-merge="o" data-anim="rise">画布、元素契约、形状原语</p>
+  <div class="sf-card sfz-card" data-shape="rect" style="top: 356px;" data-anim="rise"></div>
+  <div class="sf-pill-bg sfz-pill" data-shape="rect" style="top: 396px;"></div>
+  <p class="sf-semi sf-ac sfz-pt" style="top: 404px;">中层</p>
+  <h3 class="sf-semi sfz-h" style="top: 380px;" data-merge="m" data-anim="rise">style.css</h3>
+  <p class="sf-note sfz-p" style="top: 420px;" data-merge="m" data-anim="rise">风格的 token、字体与全部版式</p>
+  <div class="sf-card-tint sfz-card" data-shape="rect" style="top: 484px;" data-anim="rise"></div>
+  <div class="sf-pill-solid sfz-pill" data-shape="rect" style="top: 524px;"></div>
+  <p class="sf-semi sf-on sfz-pt" style="top: 532px;">内层</p>
+  <h3 class="sf-semi sfz-h" style="top: 508px;" data-merge="i" data-anim="rise">brand.css</h3>
+  <p class="sf-note-ink sfz-p" style="top: 548px;" data-merge="i" data-anim="rise">只改 token 的品牌色</p>
+  <p class="sf-source">来源：风格库 spec §3.1</p>
+  <p class="sf-pageno">16</p>
+</section>
+```
+
+## soft/closing · closing
+
+结尾深灰蓝页（`is-dark`）。暖橙胶囊「下一步」→ 两行 64px 粗体收束标题 → 圆角深色命令卡（Inter 命令）→ 风格画廊地址 → 底线与元信息。
+
+```html
+<section class="slide is-dark" data-layout="soft/closing" data-role="closing">
+  <div class="sf-pill-bg sfe-pill" data-shape="rect"></div>
+  <p class="sf-pill-txt sfe-pill-t">下一步</p>
+  <h2 class="sf-semi sfe-title sfe-t1" data-merge="title" data-anim="rise">挑一种风格，</h2>
+  <h2 class="sf-semi sfe-title sfe-t2" data-merge="title" data-anim="rise">开始下一份。</h2>
+  <div class="sf-card sfe-card" data-shape="rect" data-anim="rise"></div>
+  <p class="sf-semi sf-ac sfe-label">新建 DECK</p>
+  <p class="sfe-cmd">node scripts/new-deck.mjs my-deck --style soft</p>
+  <p class="sfe-p">风格画廊：docs/styles/index.html</p>
+  <div class="sf-hair sfe-hair" data-shape="rect"></div>
+  <p class="sfe-meta">ZIFEIYU PPT SKILL · 风格 F 柔和 · 产品</p>
+  <p class="sfe-date">2026 年 10 月</p>
+</section>
+```

@@ -1,0 +1,335 @@
+/* ================================================================
+   Style E 「大字报 · 粗野」 — poster
+   荧光绿 #d6ff3a × 纯黑 #0b0b0b × 米白 #f5f5f0 三色高冲撞粗野大字报。
+   语法要点（详见 layouts.md）：全直角零圆角，粗黑巨字负字距撑满版面；
+   照片与强调块统一垫实色硬偏移阴影色块（data-shape="rect"），100% 原生
+   导出；米白底绝不用荧光绿字（只用纯黑字压荧光绿块，或荧光绿字压纯黑底）；
+   三态节奏：is-accent（整页荧光绿）、默认（米白 + 3px 黑线）、is-dark（纯黑）。
+   ================================================================ */
+
+@font-face {
+  font-family: 'Source Han Sans SC';
+  src: url('../../fonts/source-han-sans-sc.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../../fonts/inter.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: block;
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('../../fonts/jetbrains-mono.woff2') format('woff2');
+  font-weight: 400;
+  font-display: block;
+}
+
+:root {
+  --bg: #f5f5f0;
+  --surface: #e8e8e0;
+  --text-1: #0b0b0b;
+  --text-2: #4a4a4a;
+  --accent: #d6ff3a;
+  --on-accent: #0b0b0b;
+  --mark: #d6ff3a;
+  --on-mark: #0b0b0b;
+  --hairline: #0b0b0b;
+  --ink: #0b0b0b;
+  --on-dark: #f5f5f0;
+
+  --font-display: 'Source Han Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-num: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace;
+}
+
+/* acid-lime page: cover / statement / section */
+.slide.is-accent {
+  --bg: #d6ff3a;
+  --surface: #0b0b0b;
+  --text-1: #0b0b0b;
+  --text-2: #222222;
+  --accent: #0b0b0b;
+  --on-accent: #d6ff3a;
+  --hairline: #0b0b0b;
+}
+
+/* pitch-black page: kpi / image / cycle / closing */
+.slide.is-dark {
+  --bg: #0b0b0b;
+  --surface: #181818;
+  --text-1: #f5f5f0;
+  --text-2: #a0a09a;
+  --accent: #d6ff3a;
+  --on-accent: #0b0b0b;
+  --hairline: #333333;
+}
+
+/* ---------- vocabulary ---------- */
+.ps-heavy { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.04em; line-height: 1.06; color: var(--text-1); }
+.ps-bold { font-family: var(--font-num); font-weight: 700; letter-spacing: -0.05em; line-height: 0.94; color: var(--text-1); }
+.ps-mono { font-family: var(--font-mono); font-size: 16px; line-height: 1.2; letter-spacing: 0.08em; color: var(--text-2); }
+.ps-body { font-size: 19px; line-height: 1.55; color: var(--text-1); }
+.ps-note { font-size: 16px; line-height: 1.5; color: var(--text-2); }
+
+/* color modifiers (strict R11 contrast: never lime text on light off-white) */
+.ps-ink { color: var(--text-1); }
+.ps-muted { color: var(--text-2); }
+.ps-ac { color: var(--accent); }
+.ps-on { color: var(--on-accent); }
+.ps-on-dark { color: var(--on-dark); }
+.ps-strong { font-weight: 700; }
+
+/* brutalist sharp-corner primitives (0px radius, 100% native PPTX) */
+.ps-blk { background: var(--ink); }
+.ps-lime { background: #d6ff3a; }
+.ps-lime-box { background: #d6ff3a; border: 3px solid var(--ink); }
+.ps-paper { background: var(--bg); border: 3px solid var(--ink); }
+.ps-stone { background: var(--surface); border: 3px solid var(--ink); }
+.ps-surf { background: var(--surface); }
+.ps-dark-box { background: var(--surface); border: 3px solid var(--accent); }
+.ps-rule { background: var(--hairline); height: 3px; }
+.ps-rule-thick { background: var(--ink); height: 6px; }
+.ps-acbar { background: var(--accent); height: 4px; }
+.ps-photo { object-fit: cover; }
+
+/* shared running heads & footers */
+.ps-top-l { left: 64px; top: 40px; width: 780px; }
+.ps-top-r { left: 916px; top: 40px; width: 300px; text-align: right; }
+.ps-head { left: 60px; top: 74px; width: 1156px; font-size: 64px; line-height: 1.08; }
+.ps-head-rule { left: 64px; top: 158px; width: 1152px; }
+.ps-source { left: 64px; top: 664px; width: 920px; }
+.ps-pageno { left: 1016px; top: 664px; width: 200px; text-align: right; color: var(--text-1); }
+
+/* ---------- poster/cover ---------- */
+/* acid-lime ground, giant tight-tracked title left, hard-shadow photo right, pure-black bottom band */
+.psc-top-l { left: 64px; top: 44px; width: 640px; color: var(--text-1); }
+.psc-top-r { left: 916px; top: 44px; width: 300px; text-align: right; color: var(--text-1); }
+.psc-title { left: 54px; width: 680px; font-size: 124px; line-height: 1.02; }
+.psc-t1 { top: 124px; }
+.psc-t2 { top: 256px; }
+.psc-rule { left: 64px; top: 414px; width: 120px; height: 6px; }
+.psc-sub { left: 64px; top: 444px; width: 576px; font-size: 22px; line-height: 1.55; color: var(--text-1); }
+.psc-shd { left: 780px; top: 124px; width: 436px; height: 440px; }
+.psc-img { left: 764px; top: 108px; width: 436px; height: 440px; }
+.psc-band { left: 0; top: 624px; width: 1280px; height: 96px; }
+.psc-tick-l { left: 64px; top: 662px; width: 760px; color: var(--on-accent); }
+.psc-tick-r { left: 880px; top: 662px; width: 336px; text-align: right; color: var(--on-accent); }
+
+/* ---------- poster/agenda ---------- */
+/* giant heading + 4 full-width brutalist rows; row 01 highlighted on a full-bleed acid-lime strip */
+.psa-title { left: 58px; top: 76px; width: 480px; font-size: 84px; line-height: 1.04; }
+.psa-sub { left: 640px; top: 118px; width: 576px; text-align: right; color: var(--text-2); }
+.psa-strip { left: 0; top: 204px; width: 1280px; height: 100px; }
+.psa-rule { left: 64px; width: 1152px; }
+.psa-full-rule { left: 0; width: 1280px; }
+.psa-num { left: 64px; width: 112px; font-size: 56px; }
+.psa-item { left: 200px; width: 356px; font-size: 42px; line-height: 1.15; }
+.psa-desc { left: 576px; width: 500px; font-size: 20px; line-height: 1.45; }
+.psa-pg { left: 1096px; width: 120px; text-align: right; color: var(--text-1); }
+
+/* ---------- poster/statement ---------- */
+/* full acid-lime poster manifesto framed by thick black bars */
+.psq-bar-t { left: 64px; top: 136px; width: 1152px; height: 8px; }
+.psq-line { left: 56px; width: 1168px; font-size: 108px; line-height: 1.06; }
+.psq-l1 { top: 196px; }
+.psq-l2 { top: 324px; }
+.psq-badge { left: 64px; top: 500px; width: 420px; height: 56px; }
+.psq-by { left: 84px; top: 519px; width: 380px; color: var(--on-accent); }
+.psq-bar-b { left: 64px; top: 616px; width: 1152px; height: 4px; }
+
+/* ---------- poster/section ---------- */
+/* acid-lime ground + monumental black chapter numeral left + black monolith right */
+.psx-num { left: 44px; top: 128px; width: 560px; font-size: 320px; }
+.psx-rule { left: 64px; top: 616px; width: 536px; height: 6px; }
+.psx-panel { left: 640px; top: 108px; width: 576px; height: 514px; }
+.psx-tag { left: 688px; top: 158px; width: 480px; color: var(--on-accent); }
+.psx-title { left: 684px; top: 214px; width: 488px; font-size: 96px; line-height: 1.06; color: var(--on-accent); }
+.psx-acbar { left: 688px; top: 348px; width: 120px; height: 6px; background: var(--on-accent); }
+.psx-desc { left: 688px; top: 384px; width: 432px; font-size: 22px; line-height: 1.55; color: var(--on-dark); }
+.psx-meta { left: 688px; top: 560px; width: 468px; color: var(--on-accent); }
+
+/* ---------- poster/matrix ---------- */
+/* left count column + right 3x4 brutalist framed grid; current style E is acid-lime with hard black shadow */
+.psm-t1 { left: 60px; top: 88px; width: 356px; font-size: 52px; line-height: 1.12; }
+.psm-t2 { left: 60px; top: 150px; width: 356px; font-size: 52px; line-height: 1.12; }
+.psm-hero { left: 52px; top: 244px; width: 356px; font-size: 184px; }
+.psm-rule { left: 64px; top: 438px; width: 120px; height: 6px; }
+.psm-label { left: 64px; top: 462px; width: 348px; font-size: 24px; line-height: 1.3; }
+.psm-sub { left: 64px; top: 500px; width: 312px; font-size: 18px; line-height: 1.6; color: var(--text-2); }
+.psm-card { width: 244px; height: 118px; }
+.psm-shd { left: 718px; top: 238px; width: 244px; height: 118px; }
+.psm-key { width: 208px; font-size: 36px; }
+.psm-name { width: 208px; font-size: 22px; line-height: 1.25; }
+
+/* ---------- poster/compare ---------- */
+/* left stone framed block vs right acid-lime framed block with hard black shadow */
+.psv-box { top: 184px; width: 556px; height: 444px; }
+.psv-l { left: 64px; }
+.psv-r { left: 656px; }
+.psv-shd { left: 668px; top: 196px; width: 556px; height: 444px; }
+.psv-tagbox { top: 184px; width: 184px; height: 48px; }
+.psv-tag { top: 199px; width: 152px; }
+.psv-h { top: 260px; width: 492px; font-size: 32px; line-height: 1.25; }
+.psv-p { top: 316px; width: 488px; font-size: 19px; line-height: 1.6; }
+.psv-rule { top: 434px; width: 492px; }
+.psv-num { top: 462px; width: 184px; font-size: 128px; }
+.psv-unit { top: 506px; width: 304px; font-size: 22px; line-height: 1.45; }
+.psv-tl { left: 96px; }
+.psv-tr { left: 688px; }
+.psv-tag-l { left: 80px; }
+.psv-tag-r { left: 672px; }
+.psv-nl { left: 90px; }
+.psv-nr { left: 682px; }
+.psv-ul { left: 280px; }
+.psv-ur { left: 872px; }
+
+/* ---------- poster/image-text ---------- */
+/* left hard-shadow photo + lime caption bar; right giant two-line title + two body paragraphs */
+.psi-shd { left: 78px; top: 118px; width: 544px; height: 456px; }
+.psi-img { left: 64px; top: 104px; width: 544px; height: 456px; }
+.psi-capbox { left: 64px; top: 590px; width: 544px; height: 40px; }
+.psi-cap { left: 80px; top: 601px; width: 512px; color: var(--text-1); }
+.psi-title { left: 664px; width: 552px; font-size: 64px; line-height: 1.08; }
+.psi-t1 { top: 100px; }
+.psi-t2 { top: 174px; }
+.psi-rule1 { left: 668px; top: 266px; width: 548px; height: 4px; }
+.psi-p { left: 668px; width: 548px; font-size: 20px; line-height: 1.65; }
+.psi-p1 { top: 294px; }
+.psi-p2 { top: 416px; }
+.psi-rule2 { left: 668px; top: 548px; width: 548px; }
+.psi-note { left: 668px; top: 568px; width: 548px; line-height: 1.5; }
+
+/* ---------- poster/image ---------- */
+/* pitch-black ground, wide photo with acid-lime hard offset shadow, giant title below */
+.psf-shd { left: 78px; top: 98px; width: 1138px; height: 364px; }
+.psf-img { left: 64px; top: 84px; width: 1138px; height: 364px; }
+.psf-title { left: 60px; top: 484px; width: 1156px; font-size: 72px; line-height: 1.08; }
+.psf-bar { left: 64px; top: 584px; width: 96px; height: 4px; }
+.psf-p { left: 184px; top: 572px; width: 1032px; font-size: 22px; line-height: 1.5; color: var(--text-2); }
+
+/* ---------- poster/points ---------- */
+/* 3 columns: hard-shadow photo above, 3px framed card below; 3rd card is acid-lime */
+.pst-shd { top: 188px; width: 344px; height: 184px; }
+.pst-img { top: 176px; width: 344px; height: 184px; }
+.pst-box { top: 394px; width: 356px; height: 230px; }
+.pst-num { top: 414px; width: 308px; font-size: 44px; }
+.pst-h { top: 470px; width: 308px; font-size: 28px; line-height: 1.25; }
+.pst-p { top: 514px; width: 308px; font-size: 17px; line-height: 1.55; }
+.pst-c1 { left: 64px; }
+.pst-c2 { left: 456px; }
+.pst-c3 { left: 848px; }
+.pst-s1 { left: 76px; }
+.pst-s2 { left: 468px; }
+.pst-s3 { left: 860px; }
+.pst-i1 { left: 88px; }
+.pst-i2 { left: 480px; }
+.pst-i3 { left: 872px; }
+
+/* ---------- poster/kpi ---------- */
+/* pitch-black ground, giant acid-lime hero numeral left, 2 stacked stats with 4px lime bars right */
+.psk-hero { left: 48px; top: 116px; width: 680px; font-size: 280px; line-height: 0.92; }
+.psk-label { left: 64px; top: 422px; width: 680px; font-size: 56px; line-height: 1.1; }
+.psk-desc { left: 64px; top: 498px; width: 680px; font-size: 22px; line-height: 1.55; color: var(--text-2); }
+.psk-bar { left: 800px; width: 416px; }
+.psk-b1 { top: 132px; }
+.psk-b2 { top: 392px; }
+.psk-num { left: 794px; width: 422px; font-size: 120px; }
+.psk-n1 { top: 156px; }
+.psk-n2 { top: 416px; }
+.psk-sub { left: 800px; width: 416px; font-size: 26px; line-height: 1.25; }
+.psk-s1 { top: 282px; }
+.psk-s2 { top: 542px; }
+.psk-d { left: 800px; width: 416px; font-size: 18px; line-height: 1.5; color: var(--text-2); }
+.psk-d1 { top: 318px; }
+.psk-d2 { top: 578px; }
+
+/* ---------- poster/bars ---------- */
+/* 6 rows of 68px from 204; bar width = value x 120px (max 4 -> 480px); R16 bar is framed acid-lime.
+   No loose shapes inside y 204..590 so --native-charts swaps cleanly into a PowerPoint bar chart. */
+.psb-label { left: 64px; width: 224px; font-size: 22px; line-height: 1.4; text-align: right; }
+.psb-bar { left: 312px; height: 44px; }
+.psb-val { width: 56px; font-size: 38px; }
+.psb-ids { width: 280px; color: var(--text-2); }
+.psb-foot-rule { left: 64px; top: 628px; width: 1152px; }
+
+/* ---------- poster/table ---------- */
+/* pure-black header band with lime labels; 6 rows of 64px with 3px black dividers */
+.psd-head { left: 64px; top: 176px; width: 1152px; height: 52px; }
+.psd-th { top: 193px; color: #d6ff3a; }
+.psd-band { left: 64px; width: 1152px; height: 64px; }
+.psd-rule { left: 64px; width: 1152px; }
+.psd-k { left: 88px; width: 184px; font-size: 22px; line-height: 1.3; }
+.psd-v { left: 296px; width: 580px; font-size: 19px; line-height: 1.45; }
+.psd-s { left: 900px; width: 292px; color: var(--text-2); }
+
+/* ---------- poster/process ---------- */
+/* specimen signature: giant 80px heading left + subtitle right, 4 rows with 3px black rules,
+   final step 04 sits on a full-bleed 1280px acid-lime highlight strip */
+.psp-title { left: 58px; top: 82px; width: 780px; font-size: 80px; line-height: 1.04; }
+.psp-sub { left: 848px; top: 112px; width: 368px; font-size: 20px; line-height: 1.5; text-align: right; color: var(--text-2); }
+.psp-rule { left: 64px; width: 1152px; }
+.psp-strip { left: 0; top: 518px; width: 1280px; height: 106px; }
+.psp-strip-rule { left: 0; width: 1280px; }
+.psp-num { left: 64px; width: 64px; color: var(--text-1); }
+.psp-name { left: 140px; width: 340px; font-size: 56px; line-height: 1.05; }
+.psp-desc { left: 520px; width: 696px; font-size: 20px; line-height: 1.5; }
+
+/* ---------- poster/timeline ---------- */
+/* 5 columns on 234px step; thick 6px track with square nodes; latest milestone framed in acid-lime */
+.psl-line { left: 64px; top: 344px; width: 920px; height: 6px; }
+.psl-shd { left: 994px; top: 234px; width: 222px; height: 388px; }
+.psl-card { left: 984px; top: 224px; width: 222px; height: 388px; }
+.psl-date { top: 256px; width: 208px; font-size: 56px; letter-spacing: -0.04em; }
+.psl-node { top: 335px; width: 24px; height: 24px; }
+.psl-h { top: 392px; width: 208px; font-size: 28px; line-height: 1.25; }
+.psl-p { top: 438px; width: 204px; font-size: 17px; line-height: 1.55; color: var(--text-2); }
+.psl-c1 { left: 64px; }
+.psl-c2 { left: 298px; }
+.psl-c3 { left: 532px; }
+.psl-c4 { left: 766px; }
+.psl-c5 { left: 1002px; }
+.psl-t5 { width: 192px; }
+
+/* ---------- poster/gallery ---------- */
+/* hero left photo + 2 stacked right photos, all with +14px hard black offset shadows + lime stamp */
+.psg-s1 { left: 78px; top: 198px; width: 716px; height: 420px; }
+.psg-w1 { left: 64px; top: 184px; width: 716px; height: 420px; }
+.psg-s2 { left: 838px; top: 198px; width: 378px; height: 192px; }
+.psg-w2 { left: 824px; top: 184px; width: 378px; height: 192px; }
+.psg-s3 { left: 838px; top: 426px; width: 378px; height: 192px; }
+.psg-w3 { left: 824px; top: 412px; width: 378px; height: 192px; }
+.psg-badge { left: 64px; top: 184px; width: 240px; height: 42px; }
+.psg-btxt { left: 80px; top: 196px; width: 208px; color: var(--text-1); }
+
+/* ---------- poster/cycle ---------- */
+/* pitch-black ground; thick acid-lime ring with 4 square nodes left, 4 heavy rows + lime loop bar right */
+.psy-ring { left: 140px; top: 248px; width: 328px; height: 328px; border: 4px solid var(--accent); }
+.psy-node { width: 56px; height: 56px; }
+.psy-n1 { left: 276px; top: 220px; }
+.psy-n2 { left: 440px; top: 384px; }
+.psy-n3 { left: 276px; top: 548px; }
+.psy-n4 { left: 112px; top: 384px; }
+.psy-k { width: 56px; font-size: 20px; line-height: 24px; text-align: center; }
+.psy-core { left: 216px; top: 338px; width: 176px; font-size: 112px; text-align: center; color: var(--accent); }
+.psy-core-l { left: 216px; top: 458px; width: 176px; text-align: center; color: var(--text-1); }
+.psy-mark { left: 600px; top: 224px; width: 8px; height: 44px; }
+.psy-num { left: 628px; width: 72px; font-size: 36px; }
+.psy-h { left: 716px; width: 500px; font-size: 40px; line-height: 1.15; }
+.psy-rule { left: 600px; width: 616px; }
+.psy-backbox { left: 600px; top: 568px; width: 616px; height: 52px; }
+.psy-back { left: 620px; top: 585px; width: 576px; color: var(--on-accent); }
+
+/* ---------- poster/closing ---------- */
+/* pitch-black finale echoing the cover: giant two-line display, lime-shadowed CLI box, full-width lime bottom band */
+.pse-title { left: 54px; width: 1168px; font-size: 112px; line-height: 1.04; }
+.pse-t1 { top: 116px; }
+.pse-t2 { top: 238px; }
+.pse-shd { left: 74px; top: 412px; width: 820px; height: 72px; }
+.pse-box { left: 64px; top: 402px; width: 820px; height: 72px; }
+.pse-cmd { left: 92px; top: 426px; width: 764px; font-family: var(--font-mono); font-size: 20px; line-height: 1.2; color: var(--text-1); }
+.pse-p { left: 64px; top: 514px; width: 820px; font-size: 22px; line-height: 1.5; color: var(--text-2); }
+.pse-band { left: 0; top: 624px; width: 1280px; height: 96px; }
+.pse-tick-l { left: 64px; top: 662px; width: 760px; color: var(--on-accent); }
+.pse-tick-r { left: 880px; top: 662px; width: 336px; text-align: right; color: var(--on-accent); }

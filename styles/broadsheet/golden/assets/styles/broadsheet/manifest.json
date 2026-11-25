@@ -1,0 +1,42 @@
+{
+  "id": "broadsheet",
+  "name": "报刊 · 版面",
+  "letter": "D",
+  "group": "编辑排印",
+  "status": "ready",
+  "recommend": ["工作汇报", "机构材料", "高密度内容"],
+  "assets": [],
+  "fonts": {
+    "web": [
+      { "src": "SourceHanSerifSC-Bold.otf", "out": "source-han-serif-sc-bold.woff2" },
+      { "src": "SourceHanSerifSC-Heavy.otf", "out": "source-han-serif-sc-heavy.woff2" },
+      { "src": "SourceHanSansSC-VF.otf", "out": "source-han-sans-sc.woff2" },
+      { "src": "JetBrainsMono-Regular.ttf", "out": "jetbrains-mono.woff2" }
+    ],
+    "office": {
+      "Source Han Serif SC": "SimSun",
+      "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "JetBrains Mono": "Consolas"
+    }
+  },
+  "layouts": {
+    "broadsheet/cover": { "role": "cover" },
+    "broadsheet/agenda": { "role": "agenda" },
+    "broadsheet/statement": { "role": "statement" },
+    "broadsheet/section": { "role": "section" },
+    "broadsheet/matrix": { "role": "matrix" },
+    "broadsheet/compare": { "role": "compare" },
+    "broadsheet/image-text": { "role": "image-text" },
+    "broadsheet/image": { "role": "image" },
+    "broadsheet/points": { "role": "points" },
+    "broadsheet/kpi": { "role": "kpi" },
+    "broadsheet/bars": { "role": "bars" },
+    "broadsheet/table": { "role": "table" },
+    "broadsheet/process": { "role": "process" },
+    "broadsheet/timeline": { "role": "timeline" },
+    "broadsheet/cycle": { "role": "cycle" },
+    "broadsheet/system": { "role": "system" },
+    "broadsheet/closing": { "role": "closing" }
+  }
+}

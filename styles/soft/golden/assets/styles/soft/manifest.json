@@ -1,0 +1,39 @@
+{
+  "id": "soft",
+  "name": "柔和 · 产品",
+  "letter": "F",
+  "group": "商务理性",
+  "status": "ready",
+  "recommend": ["产品介绍", "合作提案", "企业沟通"],
+  "assets": [],
+  "fonts": {
+    "web": [
+      { "src": "SourceHanSansSC-VF.otf", "out": "source-han-sans-sc.woff2" },
+      { "src": "Inter-VF.ttf", "out": "inter.woff2" }
+    ],
+    "office": {
+      "Source Han Sans SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" },
+      "Inter": { "regular": "Segoe UI", "light": "Segoe UI Light" },
+      "PingFang SC": { "regular": "Microsoft YaHei", "light": "Microsoft YaHei Light" }
+    }
+  },
+  "layouts": {
+    "soft/cover": { "role": "cover" },
+    "soft/agenda": { "role": "agenda" },
+    "soft/statement": { "role": "statement" },
+    "soft/section": { "role": "section" },
+    "soft/matrix": { "role": "matrix" },
+    "soft/compare": { "role": "compare" },
+    "soft/image-text": { "role": "image-text" },
+    "soft/image": { "role": "image" },
+    "soft/points": { "role": "points" },
+    "soft/kpi": { "role": "kpi" },
+    "soft/bars": { "role": "bars" },
+    "soft/table": { "role": "table" },
+    "soft/process": { "role": "process" },
+    "soft/timeline": { "role": "timeline" },
+    "soft/cycle": { "role": "cycle" },
+    "soft/system": { "role": "system" },
+    "soft/closing": { "role": "closing" }
+  }
+}

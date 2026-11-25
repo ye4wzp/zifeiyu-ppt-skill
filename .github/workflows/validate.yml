@@ -47,6 +47,12 @@ jobs:
           node scripts/export-pptx.mjs styles/keynote/golden --out /tmp/keynote.pptx --native-charts
           unzip -l /tmp/keynote.pptx | grep -q "media-.*\.mp4"
           node scripts/check-pptx.mjs /tmp/keynote.pptx --expect-slides 18
+          node scripts/export-pptx.mjs styles/broadsheet/golden --out /tmp/broadsheet.pptx --native-charts
+          node scripts/check-pptx.mjs /tmp/broadsheet.pptx --expect-slides 17
+          node scripts/export-pptx.mjs styles/poster/golden --out /tmp/poster.pptx --native-charts
+          node scripts/check-pptx.mjs /tmp/poster.pptx --expect-slides 17
+          node scripts/export-pptx.mjs styles/soft/golden --out /tmp/soft.pptx --native-charts
+          node scripts/check-pptx.mjs /tmp/soft.pptx --expect-slides 17
           node scripts/export-pptx.mjs styles/magazine/golden --out /tmp/magazine.pptx
           unzip -l /tmp/magazine.pptx | grep -q "media-.*\.mp4"
           node scripts/check-pptx.mjs /tmp/magazine.pptx --expect-slides 18
