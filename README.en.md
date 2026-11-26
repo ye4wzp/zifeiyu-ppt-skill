@@ -1,8 +1,14 @@
 # zifeiyu-ppt-skill
 
+[![▶ Live Style Gallery](https://img.shields.io/badge/▶_Live_Gallery-12_Design_Styles-2563EB?style=for-the-badge)](https://ye4wzp.github.io/zifeiyu-ppt-skill/)
+
+[![validate](https://github.com/ye4wzp/zifeiyu-ppt-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/ye4wzp/zifeiyu-ppt-skill/actions/workflows/validate.yml)
+[![Release](https://img.shields.io/github/v/release/ye4wzp/zifeiyu-ppt-skill?style=flat-square)](https://github.com/ye4wzp/zifeiyu-ppt-skill/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-64748B?style=flat-square)](LICENSE)
+
 > Design-locked HTML slide decks with **deterministic export to editable PPTX** — an agent skill for Claude Code, Codex, and other file-capable coding agents.
 >
-> [中文文档](README.md)
+> **English** · [中文文档](README.md) · [Interactive Style Gallery](https://ye4wzp.github.io/zifeiyu-ppt-skill/)
 
 The one-line difference from similar projects: beautiful HTML decks usually can't become editable `.pptx` files, and generic HTML→PPTX translators are too fragile. This skill achieves both through **independent style packages + measurement-driven mapping**: every slide declares a registered `data-layout` and `data-role`, and the exporter measures actual rendered geometry in Chromium to emit deterministic `pptxgenjs` calls (1280×720 px → 960×540 pt) that are regression-tested against golden baselines.
 
@@ -40,9 +46,15 @@ All **12 styles (A–L across 5 groups)** specified in the [style library spec](
 ## Install
 
 ```bash
+# Option 1: skills CLI (recommended)
 npx skills add https://github.com/ye4wzp/zifeiyu-ppt-skill --skill zifeiyu-ppt-skill
-# or
-git clone https://github.com/ye4wzp/zifeiyu-ppt-skill ~/.claude/skills/zifeiyu-ppt-skill
+
+# Option 2: Lightweight runtime zip from Releases (< 500 KB, excludes 50MB+ regression baselines & gallery assets)
+# Unzip zifeiyu-ppt-skill-v1.0.0-runtime.zip into ~/.claude/skills/zifeiyu-ppt-skill
+cd ~/.claude/skills/zifeiyu-ppt-skill && npm install
+
+# Option 3: Full repository (includes golden decks & pixel regression baselines)
+git clone --depth 1 https://github.com/ye4wzp/zifeiyu-ppt-skill ~/.claude/skills/zifeiyu-ppt-skill
 cd ~/.claude/skills/zifeiyu-ppt-skill && npm install
 ```
 

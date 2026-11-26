@@ -1,8 +1,14 @@
 # zifeiyu-ppt-skill
 
+[![▶ 在线风格画廊](https://img.shields.io/badge/▶_在线浏览-12套风格交互式画廊-2563EB?style=for-the-badge)](https://ye4wzp.github.io/zifeiyu-ppt-skill/)
+
+[![validate](https://github.com/ye4wzp/zifeiyu-ppt-skill/actions/workflows/validate.yml/badge.svg)](https://github.com/ye4wzp/zifeiyu-ppt-skill/actions/workflows/validate.yml)
+[![Release](https://img.shields.io/github/v/release/ye4wzp/zifeiyu-ppt-skill?style=flat-square)](https://github.com/ye4wzp/zifeiyu-ppt-skill/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-64748B?style=flat-square)](LICENSE)
+
 > 生成锁定设计系统的网页 PPT，并**确定性导出可编辑 PPTX** 的 Agent Skill。
 >
-> English: [README.en.md](README.en.md)
+> **中文** · [English](README.en.md) · [在线交互式风格画廊](https://ye4wzp.github.io/zifeiyu-ppt-skill/)
 >
 > An agent skill that generates design-locked HTML slide decks and deterministically exports them to editable PPTX. Works with Claude Code, Codex, and other file-capable coding agents.
 
@@ -10,7 +16,7 @@
 
 ## 风格库（全 12 套 `ready` 风格 · 共 207 个注册版式）
 
-按 [风格库设计稿](docs/superpowers/specs/2026-10-08-style-library-design.md) 规划的全部 **12 套风格（A–L，覆盖 5 大分组）** 已全量交付并全部验证 `ready`，每种拥有完全独立的版式几何与视觉语言，开场先打开交互式风格画廊 [docs/styles/index.html](docs/styles/index.html) 筛选、对比、选定一种：
+按 [风格库设计稿](docs/superpowers/specs/2026-10-08-style-library-design.md) 规划的全部 **12 套风格（A–L，覆盖 5 大分组）** 已全量交付并全部验证 `ready`，每种拥有完全独立的版式几何与视觉语言，开场先打开 **[在线交互式风格画廊](https://ye4wzp.github.io/zifeiyu-ppt-skill/)**（本地文件 [docs/styles/index.html](docs/styles/index.html)）筛选、对比、选定一种：
 
 | 风格 | ID | 分组 | 版式数 | 视觉特征 | 推荐场合 |
 |---|---|---|---|---|---|
@@ -47,11 +53,15 @@
 ## 安装
 
 ```bash
-# 方式一：skills CLI
+# 方式一：skills CLI（推荐）
 npx skills add https://github.com/ye4wzp/zifeiyu-ppt-skill --skill zifeiyu-ppt-skill
 
-# 方式二：手动克隆
-git clone https://github.com/ye4wzp/zifeiyu-ppt-skill ~/.claude/skills/zifeiyu-ppt-skill
+# 方式二：下载 Release 轻量运行时包（< 500 KB，跳过 50MB+ 回归基线与画廊大图）
+# 从 Releases 下载 zifeiyu-ppt-skill-v1.0.0-runtime.zip 解压至 ~/.claude/skills/zifeiyu-ppt-skill
+cd ~/.claude/skills/zifeiyu-ppt-skill && npm install
+
+# 方式三：克隆完整源码仓库（含 12 套风格金样与视觉回归基线）
+git clone --depth 1 https://github.com/ye4wzp/zifeiyu-ppt-skill ~/.claude/skills/zifeiyu-ppt-skill
 cd ~/.claude/skills/zifeiyu-ppt-skill && npm install
 ```
 
