@@ -10,6 +10,8 @@
 >
 > **English** · [中文文档](README.md) · [Interactive Style Gallery](https://ye4wzp.github.io/zifeiyu-ppt-skill/)
 
+<p align="center"><img src="docs/media/hero-cover.png" alt="zifeiyu PPT — HTML → PPTX" width="860"></p>
+
 The one-line difference from similar projects: beautiful HTML decks usually can't become editable `.pptx` files, and generic HTML→PPTX translators are too fragile. This skill achieves both through **independent style packages + measurement-driven mapping**: every slide declares a registered `data-layout` and `data-role`, and the exporter measures actual rendered geometry in Chromium to emit deterministic `pptxgenjs` calls (1280×720 px → 960×540 pt) that are regression-tested against golden baselines.
 
 ## Style Library (All 12 `ready` styles · 207 registered layouts)

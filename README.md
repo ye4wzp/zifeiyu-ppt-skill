@@ -12,6 +12,8 @@
 >
 > An agent skill that generates design-locked HTML slide decks and deterministically exports them to editable PPTX. Works with Claude Code, Codex, and other file-capable coding agents.
 
+<p align="center"><img src="docs/media/hero-cover.png" alt="zifeiyu PPT — HTML → PPTX" width="860"></p>
+
 一句话说清楚它和同类项目的区别：**别人的网页 PPT 很美但导不出 .pptx，通用 HTML→PPTX 翻译又太脆——这里用「风格库独立版式注册制 + 浏览器实测驱动映射」同时拿到两者**：每页声明封闭集合内的 `data-layout` 与 `data-role`，导出器在浏览器里实测渲染几何后按固定比例（1280×720 → 960×540pt）写进 pptxgenjs，结果可预期、可回归测试。
 
 ## 风格库（全 12 套 `ready` 风格 · 共 207 个注册版式）
