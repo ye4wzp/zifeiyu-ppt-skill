@@ -206,9 +206,9 @@
 .swi-p1 { top: 272px; }
 .swi-p2 { top: 384px; }
 .swi-rule { left: 750px; top: 512px; width: 466px; }
-.swi-note { left: 750px; width: 466px; line-height: 1.6; }
+.swi-note { left: 750px; width: 466px; line-height: 1.6; letter-spacing: 1px; }
 .swi-n1 { top: 532px; }
-.swi-n2 { top: 558px; }
+.swi-n2 { top: 560px; }
 
 /* ---------- swiss/image ---------- */
 .swf-img { left: 0; top: 0; width: 1280px; height: 720px; }
